@@ -1,0 +1,571 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 226 42% 4%;
+    --foreground: 210 40% 98%;
+
+    --card: 226 42% 5%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 226 42% 3%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 100% 40%;
+    --primary-light: 210 100% 50%; 
+    --primary-dark: 210 100% 30%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 218 18% 12%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 220 13% 69%;
+    --muted-foreground: 220 14% 96%;
+
+    --accent: 184 95% 82%;
+    --accent-foreground: 224 71% 4%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 13% 25%;
+    --input: 218 18% 12%;
+    --ring: 185 66% 50%;
+
+    --radius: 0.5rem;
+
+    /* Accent colors */
+    --accent-teal: 174 80% 60%;
+    --accent-teal-muted: 174 70% 40%;
+    --accent-secondary: 280 80% 60%;
+    
+    /* Background colors */
+    --background-start: 222 47% 11%;
+    --background-end: 222 47% 8%;
+    
+    /* Status colors */
+    --success: 142 70% 45%;
+    --warning: 38 92% 50%;
+    --error: 358 70% 50%;
+
+    /* Font families */
+    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    
+    /* Type scale (1.25 ratio) */
+    --font-size-xs: 0.8rem;
+    --font-size-sm: 0.9rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.25rem;
+    --font-size-xl: 1.563rem;
+    --font-size-2xl: 1.953rem;
+    --font-size-3xl: 2.441rem;
+    --font-size-4xl: 3.052rem;
+    
+    /* Line heights */
+    --line-height-tight: 1.2;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+    
+    /* Letter spacing */
+    --letter-spacing-tight: -0.025em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: 0.025em;
+    
+    /* Font weights */
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /* Spacing scale (1.5 ratio) */
+    --space-1: 0.25rem;   /* 4px */
+    --space-2: 0.5rem;    /* 8px */
+    --space-3: 0.75rem;   /* 12px */
+    --space-4: 1rem;      /* 16px */
+    --space-5: 1.5rem;    /* 24px */
+    --space-6: 2rem;      /* 32px */
+    --space-7: 3rem;      /* 48px */
+    --space-8: 4rem;      /* 64px */
+    --space-9: 6rem;      /* 96px */
+    --space-10: 8rem;     /* 128px */
+    
+    /* Section spacing */
+    --section-padding-y: var(--space-8);
+    --section-spacing: var(--space-7);
+    --card-padding: var(--space-5);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-navy text-[#ccd6f6] overflow-x-hidden;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+    font-weight: var(--font-weight-normal);
+  }
+
+  /* Typography adjustments */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl font-semibold sm:text-5xl md:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl font-semibold sm:text-4xl;
+  }
+
+  h3 {
+    @apply text-2xl font-medium sm:text-3xl;
+  }
+}
+
+@layer components {
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+  
+  .nav-link {
+    @apply relative text-muted-foreground transition-colors duration-200 hover:text-white;
+  }
+  
+  .nav-link::after {
+    @apply absolute content-[''] bg-accent-teal w-0 h-[2px] left-0 -bottom-1 rounded-full transition-all duration-300;
+  }
+  
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    @apply w-full;
+  }
+  
+  .nav-link.active {
+    @apply text-white;
+  }
+
+  .filter-button {
+    @apply px-4 py-2 text-sm border border-muted rounded-md transition-all duration-200 hover:border-accent-teal hover:text-white;
+  }
+  
+  .filter-button.active {
+    @apply border-accent-teal text-white bg-secondary;
+  }
+
+  /* Gallery grid */
+  .gallery-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 auto-rows-auto;
+  }
+  
+  .gallery-item {
+    @apply relative overflow-hidden aspect-square rounded-md cursor-pointer transition-transform duration-300 hover:scale-[1.02];
+  }
+  
+  /* Lightbox styling */
+  .lightbox-overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center bg-black/90 opacity-0 pointer-events-none transition-opacity duration-300;
+  }
+  
+  .lightbox-overlay.active {
+    @apply opacity-100 pointer-events-auto;
+  }
+  
+  .lightbox-content {
+    @apply max-w-7xl max-h-[90vh] relative;
+  }
+  
+  .lightbox-image {
+    @apply max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl;
+  }
+  
+  .lightbox-close {
+    @apply absolute -top-12 right-0 text-white/80 hover:text-white transition-colors;
+  }
+  
+  .lightbox-caption {
+    @apply absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent text-white text-center;
+  }
+
+  /* Work experience cards - with smaller spacing */
+  .work-experience-card {
+    @apply border-l border-muted/30 pl-4 pb-4 relative;
+  }
+  
+  .work-experience-card::before {
+    @apply content-[''] absolute w-2.5 h-2.5 bg-accent-teal/80 rounded-full -left-[5px] top-1;
+  }
+  
+  .work-experience-card:last-child {
+    @apply pb-0;
+  }
+
+  /* Button styles */
+  .button-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-accent-teal text-navy font-medium rounded-md transition-all duration-300 hover:bg-accent-teal/90 hover:shadow-lg hover:shadow-accent-teal/20;
+  }
+  
+  .button-secondary {
+    @apply inline-flex items-center gap-2 px-6 py-3 border border-muted text-white font-medium rounded-md transition-all duration-300 hover:border-accent-teal hover:text-accent-teal;
+  }
+
+  /* Skill tags */
+  .skill-tag {
+    @apply inline-block px-3 py-1 text-sm bg-secondary rounded-full transition-all duration-300 hover:bg-accent-teal hover:text-navy-dark;
+  }
+}
+
+.image-reveal {
+  animation: reveal 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+@keyframes reveal {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Page transitions */
+.page-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 400ms, transform 400ms;
+}
+
+.page-exit {
+  opacity: 1;
+}
+
+.page-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+/* Fix for double scrollbar issues */
+html, body {
+  overflow-x: hidden;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+html::-webkit-scrollbar, 
+body::-webkit-scrollbar,
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+  width: 0;
+  height: 0;
+}
+
+/* Ensures content doesn't cause horizontal scrolling */
+#root {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Gradient utilities */
+.bg-gradient-page {
+  background: linear-gradient(to bottom, 
+    hsl(var(--background-start)), 
+    hsl(var(--background-end))
+  );
+}
+
+.bg-gradient-card {
+  background: linear-gradient(to bottom right, 
+    hsla(var(--primary), 0.05), 
+    hsla(var(--accent-teal), 0.05)
+  );
+  backdrop-filter: blur(8px);
+}
+
+/* Text color utilities */
+.text-accent {
+  color: hsl(var(--accent-teal));
+}
+
+.text-primary {
+  color: hsl(var(--primary));
+}
+
+.text-muted {
+  color: hsl(var(--muted));
+}
+
+/* Base typography */
+body {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-normal);
+}
+
+/* Heading styles */
+h1, .h1 {
+  font-size: var(--font-size-4xl);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 1.5rem;
+}
+
+h2, .h2 {
+  font-size: var(--font-size-3xl);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 1.25rem;
+}
+
+h3, .h3 {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 1rem;
+}
+
+h4, .h4 {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 0.75rem;
+}
+
+p, .body {
+  margin-bottom: 1rem;
+}
+
+.body-large {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+}
+
+.body-small {
+  font-size: var(--font-size-sm);
+}
+
+code, .code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+/* Section spacing utilities */
+.section {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-6);
+}
+
+/* Hero section specific spacing */
+#hero {
+  padding-top: var(--space-10) !important;
+  padding-bottom: var(--space-6);
+}
+
+/* Section dividers */
+.section.border-t {
+  border-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Grid system */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+  max-width: 1200px;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: var(--space-5);
+    padding-right: var(--space-5);
+  }
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.grid-cols-1 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .grid-cols-2-sm {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-cols-3-lg {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Background patterns */
+.bg-grid-pattern {
+  background-size: 20px 20px;
+  background-image: 
+    linear-gradient(to right, hsla(var(--primary), 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, hsla(var(--primary), 0.05) 1px, transparent 1px);
+}
+
+.bg-dot-pattern {
+  background-size: 20px 20px;
+  background-image: radial-gradient(
+    hsla(var(--primary), 0.1) 2px,
+    transparent 2px
+  );
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 640px) {
+  /* Font size adjustments for better mobile readability */
+  html {
+    font-size: 15px;
+  }
+  
+  h1, .h1 {
+    font-size: 2.5rem;
+  }
+  
+  h2, .h2 {
+    font-size: 1.875rem;
+  }
+  
+  h3, .h3 {
+    font-size: 1.5rem;
+  }
+  
+  /* Improve touch targets for better mobile interaction */
+  button, 
+  a,
+  .nav-link,
+  .touch-target,
+  input,
+  select,
+  textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Buttons with text should have good padding */
+  button:not(.icon-button),
+  a.btn {
+    padding: 0.5rem 1rem;
+  }
+  
+  /* Section spacing adjustment for mobile */
+  .section {
+    padding-top: var(--space-5);
+    padding-bottom: var(--space-5);
+  }
+  
+  /* Adjust container padding */
+  .container {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+  
+  /* Optimize grid layouts for mobile */
+  .grid {
+    gap: var(--space-4);
+  }
+  
+  /* Reduce animation intensity for better performance */
+  .reduce-motion-mobile {
+    transition-duration: 0.15s !important;
+    animation-duration: 0.15s !important;
+  }
+  
+  /* Only show scrollbars when needed on mobile */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+}
+
+/* Touch interaction improvements */
+@media (hover: none) {
+  /* Replace hover effects with active states for touch devices */
+  .hover-effect {
+    transition: none;
+  }
+  
+  /* Active state instead of hover */
+  .hover-effect:active {
+    transform: scale(0.97);
+    transition: transform 0.1s;
+  }
+  
+  /* Disable hover animations that don't work well on touch devices */
+  .hover-only {
+    display: none;
+  }
+}
+
+/* Safe area insets for modern mobile devices */
+@supports (padding: max(0px)) {
+  .fixed-bottom {
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+  
+  .fixed-top {
+    padding-top: max(0.5rem, env(safe-area-inset-top));
+  }
+}
+
+/* User preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Visual improvements for dates and key achievements */
+/* Date formatting for experience cards */
+.date-styling .date-display {
+  text-transform: capitalize;
+  opacity: 0.8;
+  font-size: 0.85rem;
+  color: rgba(94, 234, 212, 0.7);
+  letter-spacing: 0.02em;
+}
+
+/* Key achievements section styling */
+.key-achievements-highlight .work-experience-card h4 {
+  background-color: rgba(94, 234, 212, 0.05);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  display: inline-block;
+}

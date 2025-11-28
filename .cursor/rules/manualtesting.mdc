@@ -1,0 +1,8 @@
+---
+description: When asking the user to test or when something is ready for a visual or manual test
+globs: 
+alwaysApply: false
+---
+- Always give the details of what you have changed in plain English
+- Make sure you give clear instructions on what to test
+- Consider the person testing to be a not very technical Product Manager
