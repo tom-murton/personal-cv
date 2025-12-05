@@ -104,17 +104,45 @@ const AboutSection = memo(() => (
           >
             <h3 className="text-lg font-semibold mb-4 text-foreground">Highlights</h3>
             <ul className="space-y-3">
-              {aboutContent.highlights.map((highlight, index) => (
-                <motion.li 
-                  key={index}
-                  variants={fadeUp}
-                  custom={aboutContent.paragraphs.length + 2 + index}
-                  className="flex items-start text-muted-foreground"
-                >
-                  <span className="text-accent-teal mr-3 mt-1">•</span>
-                  <span>{highlight}</span>
-                </motion.li>
-              ))}
+              {aboutContent.highlights.map((highlight, index) => {
+                const parts: React.ReactNode[] = [];
+                let lastIndex = 0;
+                const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+                let match;
+                
+                while ((match = linkRegex.exec(highlight)) !== null) {
+                  if (match.index > lastIndex) {
+                    parts.push(highlight.slice(lastIndex, match.index));
+                  }
+                  parts.push(
+                    <a
+                      key={`link-${index}-${match.index}`}
+                      href={match[2]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent-teal hover:underline"
+                    >
+                      {match[1]}
+                    </a>
+                  );
+                  lastIndex = match.index + match[0].length;
+                }
+                if (lastIndex < highlight.length) {
+                  parts.push(highlight.slice(lastIndex));
+                }
+                
+                return (
+                  <motion.li 
+                    key={index}
+                    variants={fadeUp}
+                    custom={aboutContent.paragraphs.length + 2 + index}
+                    className="flex items-start text-muted-foreground"
+                  >
+                    <span className="text-accent-teal mr-3 mt-1">•</span>
+                    <span>{parts.length > 0 ? parts : highlight}</span>
+                  </motion.li>
+                );
+              })}
             </ul>
           </motion.div>
         )}
