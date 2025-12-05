@@ -17,7 +17,7 @@ export const aboutContent = {
     "Defined multi-tribe roadmaps for multiple tribes at MrQ, aligning engineering, compliance, and operations to deliver scalable tooling that supports complex workflows.",
     "Led discovery and prioritization for complex scheduling workflows at Skedulo, driving delivery across globally distributed teams (UK, US, AU, VN) in a fully asynchronous environment.",
     "Partnered with the CEO at Jigsaw to restructure the product delivery pipeline, unblocking a stagnant roadmap to ship the #1 customer-requested feature to beta in just 14 days.",
-    "Acting as CPO, Founder and solo builder for a native iOS app: Identified a gap in the photography market and used Swift and AI tooling to design, build, and launch a native app. This allowed me to test product-market fit and execute the full 0-1 lifecycle independently.",
+    "Acting as CPO, Founder and solo builder for LightScout.ai: Identified a gap in the photography market and built an AI-powered location discovery platform helping photographers find optimal shooting locations. Used Swift and AI tooling to design, build, and launch a native app, testing product-market fit and executing the full 0-1 lifecycle independently.",
     "Owned the full product lifecycle for NavCloud as Senior Product Owner at TomTom"
   ],
   skills: [
