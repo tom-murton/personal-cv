@@ -181,7 +181,25 @@ const Work = () => {
                       {aboutContent.highlights.map((highlight, index) => (
                         <li key={index} className="flex items-start">
                           <span className="text-accent-teal mr-3 mt-1">•</span>
-                          <span className="text-[#ccd6f6]">{highlight}</span>
+                          <span className="text-[#ccd6f6]">
+                            {highlight.split(/(\[[^\]]+\]\([^)]+\))/g).map((part, i) => {
+                              const linkMatch = part.match(/\[([^\]]+)\]\(([^)]+)\)/);
+                              if (linkMatch) {
+                                return (
+                                  <a
+                                    key={i}
+                                    href={linkMatch[2]}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-accent-teal hover:underline"
+                                  >
+                                    {linkMatch[1]}
+                                  </a>
+                                );
+                              }
+                              return part;
+                            })}
+                          </span>
                         </li>
                       ))}
                     </ul>
