@@ -178,30 +178,46 @@ const Work = () => {
                   <div className="mt-8">
                     <h4 className="text-base font-semibold mb-4 text-[#ccd6f6]">Highlights</h4>
                     <ul className="space-y-3">
-                      {aboutContent.highlights.map((highlight, index) => (
-                        <li key={index} className="flex items-start">
-                          <span className="text-accent-teal mr-3 mt-1">•</span>
-                          <span className="text-[#ccd6f6]">
-                            {highlight.split(/(\[[^\]]+\]\([^)]+\))/g).map((part, i) => {
-                              const linkMatch = part.match(/\[([^\]]+)\]\(([^)]+)\)/);
-                              if (linkMatch) {
-                                return (
-                                  <a
-                                    key={i}
-                                    href={linkMatch[2]}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-accent-teal hover:underline"
-                                  >
-                                    {linkMatch[1]}
-                                  </a>
-                                );
-                              }
-                              return part;
-                            })}
-                          </span>
-                        </li>
-                      ))}
+                      {aboutContent.highlights.map((highlight, index) => {
+                        // Parse markdown links [text](url)
+                        const parts = [];
+                        let lastIndex = 0;
+                        const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+                        let match;
+                        
+                        while ((match = linkRegex.exec(highlight)) !== null) {
+                          // Add text before the link
+                          if (match.index > lastIndex) {
+                            parts.push(highlight.slice(lastIndex, match.index));
+                          }
+                          // Add the link
+                          parts.push(
+                            <a
+                              key={match.index}
+                              href={match[2]}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-accent-teal hover:underline"
+                            >
+                              {match[1]}
+                            </a>
+                          );
+                          lastIndex = match.index + match[0].length;
+                        }
+                        // Add remaining text
+                        if (lastIndex < highlight.length) {
+                          parts.push(highlight.slice(lastIndex));
+                        }
+                        
+                        return (
+                          <li key={index} className="flex items-start">
+                            <span className="text-accent-teal mr-3 mt-1">•</span>
+                            <span className="text-[#ccd6f6]">
+                              {parts.length > 0 ? parts : highlight}
+                            </span>
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
                 )}
