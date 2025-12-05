@@ -180,20 +180,18 @@ const Work = () => {
                     <ul className="space-y-3">
                       {aboutContent.highlights.map((highlight, index) => {
                         // Parse markdown links [text](url)
-                        const parts = [];
+                        const parts: React.ReactNode[] = [];
                         let lastIndex = 0;
                         const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
                         let match;
                         
                         while ((match = linkRegex.exec(highlight)) !== null) {
-                          // Add text before the link
                           if (match.index > lastIndex) {
                             parts.push(highlight.slice(lastIndex, match.index));
                           }
-                          // Add the link
                           parts.push(
                             <a
-                              key={match.index}
+                              key={`link-${index}-${match.index}`}
                               href={match[2]}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -204,7 +202,6 @@ const Work = () => {
                           );
                           lastIndex = match.index + match[0].length;
                         }
-                        // Add remaining text
                         if (lastIndex < highlight.length) {
                           parts.push(highlight.slice(lastIndex));
                         }
