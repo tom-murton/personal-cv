@@ -2,8 +2,8 @@
 export const heroContent = {
   greeting: "Hi, my name is",
   name: "Tom Murton.",
-  tagline: "Product & Engineering Leader.",
-  description: "I'm passionate about building great engineering teams. Welcome to my personal website showcasing my professional journey."
+  tagline: "Product Lead with an engineering background.",
+  description: "I help teams build the right products faster, using my years in engineering leadership to bridge product, technology and the business."
 };
 
 export const featuredCards = [
