@@ -380,10 +380,15 @@ code, .code {
   padding-bottom: var(--space-6);
 }
 
+/* Allow anchored scroll to land below the floating button / header */
+section {
+  scroll-margin-top: 96px;
+}
+
 /* Hero section specific spacing */
 #hero {
   padding-top: var(--space-10) !important;
-  padding-bottom: var(--space-6);
+  padding-bottom: 10px;
 }
 
 /* Section dividers */

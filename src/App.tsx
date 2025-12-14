@@ -8,6 +8,7 @@ import LoadingSkeleton from "@/components/ui/LoadingSkeleton";
 const Index = lazy(() => import("@/pages/Index"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 const InstagramFeed = lazy(() => import("@/pages/InstagramFeed"));
+const Projects = lazy(() => import("@/pages/Projects"));
 
 // Page loading component with enhanced skeleton
 const PageLoading = () => (
@@ -43,6 +44,7 @@ function App() {
         <Suspense fallback={<PageLoading />}>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/projects" element={<Projects />} />
             <Route path="/instagram" element={<InstagramFeed />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -1,6 +1,8 @@
-import React, { memo, useMemo } from "react";
+import React, { memo, useMemo, useEffect } from "react";
+import { useLocation, Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import ArticleCard from "@/components/work/ArticleCard";
 import TalkCard from "@/components/work/TalkCard";
 import ExperienceCard from "@/components/work/ExperienceCard";
@@ -18,7 +20,7 @@ import { ScrollGuide } from "@/components/ui/ScrollGuide";
 
 // Memoized section components
 const HeroSection = memo(() => (
-  <section id="hero" className="section pt-32 pb-4 relative">
+  <section id="hero" className="section pt-32 relative">
     <CornerAccent position="top-right" variant="line" />
     
     <div className="max-w-4xl">
@@ -71,7 +73,11 @@ HeroSection.displayName = 'HeroSection';
 
 const AboutSection = memo(() => (
   <AnimateOnScroll>
-    <section id="about" className="section border-t border-[#1a1f2e] relative">
+    <section
+      id="about"
+      className="section border-t border-[#1a1f2e] relative"
+      style={{ paddingTop: "10px", paddingBottom: "10px" }}
+    >
       <CornerAccent position="top-left" variant="dot" size={60} />
       
       <motion.div className="mb-6" variants={fadeUp}>
@@ -79,9 +85,6 @@ const AboutSection = memo(() => (
           <span className="text-accent-teal mr-2 font-mono">02.</span>
           About Me
         </h2>
-        <p className="text-lg text-muted-foreground">
-          A brief introduction and background.
-        </p>
       </motion.div>
       
       <div className="max-w-4xl">
@@ -152,6 +155,49 @@ const AboutSection = memo(() => (
 ));
 AboutSection.displayName = 'AboutSection';
 
+const ProjectsSection = memo(() => (
+  <AnimateOnScroll>
+    <section
+      id="projects"
+      className="section border-t border-[#1a1f2e] relative"
+      style={{ paddingTop: "10px", paddingBottom: "10px" }}
+    >
+      <CornerAccent position="top-right" variant="square" size={70} />
+      
+      <motion.div className="mb-6" variants={fadeUp}>
+        <h2 className="text-2xl mb-4 flex items-center">
+          <span className="text-accent-teal mr-2 font-mono">03.</span>
+          Projects
+        </h2>
+      </motion.div>
+      
+      <div className="max-w-4xl">
+        <motion.p 
+          variants={fadeUp}
+          custom={1}
+          className="mb-6 text-lg text-muted-foreground"
+        >
+          A collection of projects I've built independently, from idea to launch.
+        </motion.p>
+        
+        <motion.div variants={fadeUp} custom={2}>
+          <Link
+            to="/projects"
+            className="inline-flex items-center gap-2 text-accent-teal hover:text-accent-teal/80 transition-colors group"
+          >
+            <span>View Projects</span>
+            <ArrowRight 
+              size={18} 
+              className="transition-transform duration-200 group-hover:translate-x-1" 
+            />
+          </Link>
+        </motion.div>
+      </div>
+    </section>
+  </AnimateOnScroll>
+));
+ProjectsSection.displayName = 'ProjectsSection';
+
 // Memoized Experience item to avoid recreating components for each experience
 const ExperienceItem = memo(({ experience, index }: { experience: typeof experiences[0], index: number }) => (
   <motion.div key={index} variants={fadeUp} custom={index}>
@@ -183,12 +229,9 @@ const ExperienceSection = memo(() => {
         
         <motion.div className="mb-6" variants={fadeUp}>
           <h2 className="text-2xl mb-4 flex items-center">
-            <span className="text-accent-teal mr-2 font-mono">03.</span>
+            <span className="text-accent-teal mr-2 font-mono">04.</span>
             Experience
           </h2>
-          <p className="text-lg text-muted-foreground">
-            My professional journey and work history.
-          </p>
         </motion.div>
         
         <motion.div 
@@ -232,7 +275,7 @@ const ArticlesSection = memo(() => {
         
         <motion.div className="mb-10" variants={fadeUp}>
           <h2 className="text-2xl mb-4 flex items-center">
-            <span className="text-accent-teal mr-2 font-mono">04.</span>
+            <span className="text-accent-teal mr-2 font-mono">05.</span>
             Articles
           </h2>
           <p className="text-lg text-muted-foreground">
@@ -273,7 +316,7 @@ const TalksSection = memo(() => {
         
         <motion.div className="mb-10" variants={fadeUp}>
           <h2 className="text-2xl mb-4 flex items-center">
-            <span className="text-accent-teal mr-2 font-mono">05.</span>
+            <span className="text-accent-teal mr-2 font-mono">06.</span>
             Talks
           </h2>
           <p className="text-lg text-muted-foreground">
@@ -292,16 +335,43 @@ TalksSection.displayName = 'TalksSection';
 
 // Main Index component using memoized section components
 const Index = () => {
+  const location = useLocation();
+
+  // Handle scroll to section when navigating from other pages
+  useEffect(() => {
+    const scrollToSection = location.state?.scrollTo as string | undefined;
+
+    if (scrollToSection) {
+      // Use setTimeout to ensure DOM is fully rendered
+      const timeoutId = setTimeout(() => {
+        const element = document.getElementById(scrollToSection);
+        if (element) {
+          const headerOffset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
+      }, 100);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [location.state?.scrollTo]);
+
   return (
     <Layout>
       {/* Background Elements */}
       <BackgroundPatterns variant="dots" opacity={0.05} />
       <GradientBlobs />
-      
+
       <main>
         <div className="container">
           <HeroSection />
           <AboutSection />
+          <ProjectsSection />
           <ExperienceSection />
           <ArticlesSection />
           <TalksSection />

@@ -19,7 +19,7 @@ const Footer = memo(() => {
               tm
             </Link>
             <p className="text-muted-foreground text-sm">
-              Engineering Leader & Photographer
+              Product and Engineering Leader
             </p>
           </div>
 

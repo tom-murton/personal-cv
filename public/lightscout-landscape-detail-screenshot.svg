@@ -1,0 +1,13 @@
+<svg width="1080" height="1920" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="1920" fill="#0a0e1a"/>
+  <text x="540" y="150" font-family="Arial" font-size="36" fill="#4a9eff" text-anchor="middle" font-weight="bold">Landscape</text>
+  <text x="540" y="220" font-family="Arial" font-size="24" fill="#a0a0a0" text-anchor="middle">AI Detailed Location Intelligence</text>
+  <rect x="50" y="300" width="980" height="1400" fill="#1a1f2e" rx="12"/>
+  <text x="540" y="400" font-family="Arial" font-size="28" fill="#a855f7" text-anchor="middle" font-weight="bold">Understanding the Location</text>
+  <text x="540" y="500" font-family="Arial" font-size="24" fill="#a855f7" text-anchor="middle" font-weight="bold">Vantage Points</text>
+  <text x="100" y="600" font-family="Arial" font-size="20" fill="white">• Mather Point for classic wide vistas.</text>
+  <text x="100" y="650" font-family="Arial" font-size="20" fill="white">• Yavapai Point for geological detail</text>
+  <text x="540" y="750" font-family="Arial" font-size="24" fill="#a855f7" text-anchor="middle" font-weight="bold">Points of Interest</text>
+  <text x="540" y="850" font-family="Arial" font-size="24" fill="#a855f7" text-anchor="middle" font-weight="bold">Photographic Insights</text>
+  <text x="100" y="950" font-family="Arial" font-size="18" fill="#a0a0a0">The Grand Canyon is all about scale and light...</text>
+</svg>

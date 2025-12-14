@@ -72,9 +72,10 @@ const Navbar: React.FC = () => {
   const navigationItems = React.useMemo(() => [
     { id: "hero", label: "Home", number: "01" },
     { id: "about", label: "About", number: "02" },
-    { id: "experience", label: "Experience", number: "03" },
-    { id: "articles", label: "Articles", number: "04" },
-    { id: "talks", label: "Talks", number: "05" }
+    { id: "projects", label: "Projects", number: "03" },
+    { id: "experience", label: "Experience", number: "04" },
+    { id: "articles", label: "Articles", number: "05" },
+    { id: "talks", label: "Talks", number: "06" }
   ], []);
 
   // Memoized scroll event handler
@@ -174,8 +175,8 @@ const Navbar: React.FC = () => {
             </Link>
           </motion.div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation - hidden to remove top menu bar */}
+          <nav className="hidden">
             {navigationItems.map((item, index) => (
               <NavItem 
                 key={item.id}

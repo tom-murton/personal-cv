@@ -51,15 +51,15 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
     >
       <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4">
         <div>
-          <h3 className="text-lg sm:text-xl font-semibold transition-colors duration-200">
+          <h2 className="text-[20px] sm:text-[20px] font-semibold transition-colors duration-200 mb-[2px]">
             {title}
-          </h3>
+          </h2>
           {companyLink ? (
             <motion.a
               href={companyLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-lg text-accent-teal hover:text-accent-teal/80 inline-flex items-center mt-1 gap-1 focus:outline-none focus:ring-2 focus:ring-accent-teal/50 focus:ring-offset-1 focus:ring-offset-background rounded"
+              className="text-lg text-accent-teal hover:text-accent-teal/80 inline-flex items-center mt-0.5 gap-1 focus:outline-none focus:ring-2 focus:ring-accent-teal/50 focus:ring-offset-1 focus:ring-offset-background rounded"
               whileHover={{ x: 2 }}
               transition={{ duration: 0.2 }}
             >
@@ -75,7 +75,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
             <p className="text-lg text-accent-teal mt-1">{company}</p>
           )}
         </div>
-        <p className="text-muted-foreground font-mono text-sm mt-2 sm:mt-0 transition-colors duration-200 date-display">
+        <p className="text-muted-foreground font-mono text-[15px] mt-[2px] sm:mt-[2px] mb-[2px] transition-colors duration-200 date-display">
           {period}
         </p>
       </div>

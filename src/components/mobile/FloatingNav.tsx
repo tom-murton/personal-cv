@@ -1,31 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronUp, Menu, X } from "lucide-react";
 
-interface FloatingNavLinkProps {
-  href: string;
-  label: string;
-  onClick: () => void;
-}
-
-const FloatingNavLink: React.FC<FloatingNavLinkProps> = ({ href, label, onClick }) => {
-  return (
-    <a
-      href={href}
-      className="block py-3 px-4 text-muted-foreground hover:text-white transition-colors"
-      onClick={(e) => {
-        if (href === "#top") {
-          e.preventDefault();
-        }
-        onClick();
-      }}
-    >
-      {label}
-    </a>
-  );
-};
-
 const FloatingNav: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isNearBottom, setIsNearBottom] = useState(false);
   
@@ -50,18 +30,51 @@ const FloatingNav: React.FC = () => {
   
   // Navigation items
   const navItems = [
-    { href: "#hero", label: "Home" },
-    { href: "#about", label: "About" },
-    { href: "#experience", label: "Experience" },
-    { href: "#articles", label: "Articles" },
-    { href: "#talks", label: "Talks" },
-    { href: "#top", label: "Back to Top" }
+    { id: "hero", label: "Home", isRoute: false },
+    { id: "about", label: "About", isRoute: false },
+    { id: "projects", label: "Projects", isRoute: true },
+    { id: "experience", label: "Experience", isRoute: false },
+    { id: "articles", label: "Articles", isRoute: false },
+    { id: "talks", label: "Talks", isRoute: false },
+    { id: "top", label: "Back to Top", isRoute: false }
   ];
-  
-  // Handle clicking "Back to Top"
-  const handleBackToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = 60; // Smaller offset for mobile
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
+  const handleNavigation = (item: typeof navItems[0]) => {
+    // Close menu first to prevent animation interference
     setIsOpen(false);
+
+    // Special handling for "Back to Top"
+    if (item.id === "top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (item.isRoute) {
+      // Regular route navigation
+      navigate(`/${item.id}`);
+    } else if (location.pathname === '/') {
+      // On home page - scroll after menu closes (150ms delay for animation)
+      setTimeout(() => {
+        scrollToSection(item.id);
+      }, 150);
+    } else {
+      // On other page - navigate to home with section state
+      navigate('/', { state: { scrollTo: item.id } });
+    }
   };
   
   return (
@@ -71,7 +84,7 @@ const FloatingNav: React.FC = () => {
         {isNearBottom ? (
           <motion.button
             key="backtotop"
-            onClick={handleBackToTop}
+            onClick={() => handleNavigation({ id: "top", label: "Back to Top", isRoute: false })}
             className="bg-accent-teal/90 backdrop-blur-sm text-background-start rounded-full w-12 h-12 flex items-center justify-center shadow-lg"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -123,32 +136,27 @@ const FloatingNav: React.FC = () => {
                 ease: [0.23, 1, 0.32, 1]
               }
             }}
+            onClick={(e) => e.stopPropagation()}
           >
             {/* Navigation items */}
             <div className="py-2 min-w-[180px]">
               {navItems.map((item, index) => (
                 <motion.div
-                  key={item.href}
+                  key={item.id}
                   initial={{ opacity: 0, x: -10 }}
-                  animate={{ 
-                    opacity: 1, 
-                    x: 0, 
-                    transition: { delay: 0.05 * index } 
+                  animate={{
+                    opacity: 1,
+                    x: 0,
+                    transition: { delay: 0.05 * index }
                   }}
                 >
-                  {item.href === "#top" ? (
-                    <FloatingNavLink 
-                      href={item.href} 
-                      label={item.label} 
-                      onClick={handleBackToTop} 
-                    />
-                  ) : (
-                    <FloatingNavLink 
-                      href={item.href} 
-                      label={item.label} 
-                      onClick={() => setIsOpen(false)} 
-                    />
-                  )}
+                  <button
+                    type="button"
+                    className="block w-full text-left py-3 px-4 text-muted-foreground hover:text-white transition-colors"
+                    onClick={() => handleNavigation(item)}
+                  >
+                    {item.label}
+                  </button>
                 </motion.div>
               ))}
             </div>

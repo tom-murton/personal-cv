@@ -23,7 +23,7 @@ const AnimateOnScroll = memo(({
   children,
   variants = fadeUp,
   threshold: propThreshold = 0.1,
-  rootMargin: propRootMargin = '-50px',
+  rootMargin: propRootMargin = '200px',
   className = '',
   style = {},
   delay = 0,

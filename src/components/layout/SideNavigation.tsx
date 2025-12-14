@@ -1,27 +1,44 @@
 
 import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const SideNavigation: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const navigationItems = [
-    { id: "hero", label: "Home", number: "01" },
-    { id: "about", label: "About", number: "02" },
-    { id: "experience", label: "Experience", number: "03" },
-    { id: "articles", label: "Articles", number: "04" },
-    { id: "talks", label: "Talks", number: "05" }
+    { id: "hero", label: "Home", number: "01", isRoute: false },
+    { id: "about", label: "About", number: "02", isRoute: false },
+    { id: "projects", label: "Projects", number: "03", isRoute: true },
+    { id: "experience", label: "Experience", number: "04", isRoute: false },
+    { id: "articles", label: "Articles", number: "05", isRoute: false },
+    { id: "talks", label: "Talks", number: "06", isRoute: false }
   ];
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      // Calculate position with offset to account for header
       const headerOffset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      
+
       window.scrollTo({
         top: offsetPosition,
         behavior: "smooth"
       });
+    }
+  };
+
+  const handleNavigation = (item: typeof navigationItems[0]) => {
+    if (item.isRoute) {
+      // Regular route navigation
+      navigate(`/${item.id}`);
+    } else if (location.pathname === '/') {
+      // On home page - scroll directly to section
+      scrollToSection(item.id);
+    } else {
+      // On other page - navigate to home with section state
+      navigate('/', { state: { scrollTo: item.id } });
     }
   };
 
@@ -30,7 +47,7 @@ const SideNavigation: React.FC = () => {
       {navigationItems.map((item) => (
         <button
           key={item.id}
-          onClick={() => scrollToSection(item.id)}
+          onClick={() => handleNavigation(item)}
           className="group flex flex-col items-start text-muted-foreground hover:text-white transition-colors"
         >
           <span className="text-accent-teal mb-1 font-mono text-xs">{item.number}</span>

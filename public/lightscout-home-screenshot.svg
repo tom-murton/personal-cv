@@ -1,0 +1,16 @@
+<svg width="1080" height="1920" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="1920" fill="#0a0e1a"/>
+  <text x="540" y="200" font-family="Arial" font-size="48" fill="white" text-anchor="middle" font-weight="bold">Discover Perfect Shots</text>
+  <text x="540" y="280" font-family="Arial" font-size="24" fill="#a0a0a0" text-anchor="middle">AI-powered photography location discovery</text>
+  <text x="540" y="400" font-family="Arial" font-size="32" fill="white" text-anchor="middle" font-weight="bold">Photography Styles</text>
+  <text x="540" y="450" font-family="Arial" font-size="20" fill="#a0a0a0" text-anchor="middle">Choose your preferred photography style</text>
+  <rect x="100" y="550" width="400" height="600" fill="#1a1f2e" rx="12"/>
+  <text x="300" y="700" font-family="Arial" font-size="36" fill="white" text-anchor="middle" font-weight="bold">Landscape</text>
+  <rect x="580" y="550" width="400" height="600" fill="#1a1f2e" rx="12"/>
+  <text x="780" y="700" font-family="Arial" font-size="36" fill="white" text-anchor="middle" font-weight="bold">Street &amp; Travel</text>
+  <rect x="100" y="1200" width="400" height="600" fill="#1a1f2e" rx="12"/>
+  <text x="300" y="1350" font-family="Arial" font-size="36" fill="white" text-anchor="middle" font-weight="bold">Architecture</text>
+  <rect x="580" y="1200" width="400" height="600" fill="#1a1f2e" rx="12"/>
+  <circle cx="780" cy="1500" r="60" fill="#2a2a2a"/>
+  <text x="780" y="1510" font-family="Arial" font-size="80" fill="white" text-anchor="middle">?</text>
+</svg>
