@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { ProjectArtwork } from "@/components/site/ProjectArtwork";
 import { usePortfolioContent } from "@/content/PortfolioContentContext";
 import type { Project, ProjectCardSize } from "@/content/types";
@@ -12,9 +13,10 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, size, index }: ProjectCardProps) {
   const reduceMotion = useReducedMotion();
-  const { site } = usePortfolioContent();
+  const { site, writing } = usePortfolioContent();
   const quietMotion = site.theme.motion === "quiet";
   const expressiveMotion = site.theme.motion === "expressive";
+  const projectStory = writing.find((item) => item.body?.length && item.projectId === project.id);
 
   return (
     <motion.article
@@ -36,13 +38,21 @@ export function ProjectCard({ project, size, index }: ProjectCardProps) {
         </div>
         <h3>{project.name}</h3>
         <p>{project.summary}</p>
-        {project.href ? (
-          <a href={project.href} target="_blank" rel="noreferrer">
-            {project.hrefLabel ?? "View project"}<ArrowUpRight aria-hidden="true" />
-          </a>
-        ) : (
+        <div className="pg-project-card__links">
+          {projectStory ? (
+            <Link className="pg-project-card__story-link" to={`/writing/${projectStory.id}`}>
+              Read the story<ArrowRight aria-hidden="true" />
+            </Link>
+          ) : null}
+          {project.href ? (
+            <a href={project.href} target="_blank" rel="noreferrer">
+              {project.hrefLabel ?? "View project"}<ArrowUpRight aria-hidden="true" />
+            </a>
+          ) : null}
+        </div>
+        {!project.href ? (
           <div className="pg-project-card__update"><span>Current note</span>{project.update}</div>
-        )}
+        ) : null}
       </div>
     </motion.article>
   );

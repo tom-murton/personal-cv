@@ -282,17 +282,12 @@
 .pg-project-card[data-size="third"] h3 { font-size: clamp(44px, 4.4vw, 68px); }
 .pg-project-card__copy > p { max-width: 560px; margin: 0; color: #bdc5c6; font-size: 15px; line-height: 1.48; }
 
-.pg-project-card__copy > a {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  margin-top: 24px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.pg-project-card__copy > a svg { width: 16px; transition: transform 180ms ease; }
-.pg-project-card__copy > a:hover svg { transform: translate(3px, -3px); }
+.pg-project-card__links { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 22px; margin-top: 24px; }
+.pg-project-card__links a { display: inline-flex; align-items: center; gap: 9px; font-size: 12px; font-weight: 600; }
+.pg-project-card__links a svg { width: 16px; transition: transform 180ms ease; }
+.pg-project-card__links a:hover svg { transform: translate(3px, -3px); }
+.pg-project-card__links .pg-project-card__story-link { color: var(--pg-accent); }
+.pg-project-card__links .pg-project-card__story-link svg { width: 15px; }
 .pg-project-card__update { max-width: 570px; margin-top: 22px; color: #c8cecf; font-size: 12px; line-height: 1.45; }
 .pg-project-card__update span { display: block; margin-bottom: 6px; color: #7f898b; font: 500 8px/1 "IBM Plex Mono", monospace; letter-spacing: .09em; text-transform: uppercase; }
 

@@ -66,6 +66,8 @@ The editor checks that each row contains the right number of projects for its pr
 
 Each collection has its own documents. Add, edit or archive entries there. **Collection pages** controls the introduction and the drag-and-drop order on `/projects`, `/writing`, `/talks` and `/cv`.
 
+When a hosted writing item has **Related portfolio project** set, its project card automatically shows a primary **Read the story** link. The project's own external link remains available as a secondary action.
+
 New projects can use an uploaded image with a focal point and accessibility description. The five initial projects retain their bespoke artwork presets.
 
 ### Appearance and navigation
