@@ -1,14 +1,14 @@
 import { CollectionIntro } from "@/components/site/CollectionIntro";
-import { ProjectGrid } from "@/components/site/ProjectGrid";
 import { SiteFrame } from "@/components/site/SiteFrame";
+import { WritingList } from "@/components/site/WritingList";
 import { usePortfolioContent } from "@/content/PortfolioContentContext";
 
-export default function Projects() {
+export default function Writing() {
   const { collections } = usePortfolioContent();
-  const page = collections.projects;
+  const page = collections.writing;
 
   return (
-    <SiteFrame title="Projects">
+    <SiteFrame title="Writing">
       <main className="pg-collection-page" id="main-content">
         <CollectionIntro
           eyebrow={page.eyebrow}
@@ -16,7 +16,9 @@ export default function Projects() {
           description={page.description}
           count={page.items.length}
         />
-        <ProjectGrid projects={page.items} />
+        <div className="pg-collection-body">
+          <WritingList items={page.items} />
+        </div>
       </main>
     </SiteFrame>
   );

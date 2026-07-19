@@ -1,0 +1,23 @@
+{
+  "name": "tom-murton-site-admin",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "sanity dev --host 127.0.0.1 --port 3333",
+    "build": "sanity build",
+    "deploy": "SANITY_STUDIO_PREVIEW_URL=https://tom-murton-site.vercel.app sanity deploy --schema-required"
+  },
+  "dependencies": {
+    "@sanity/color-input": "^6.0.16",
+    "@sanity/ui": "^3.3.5",
+    "@sanity/vision": "^6.5.0",
+    "react": "^19.2.2",
+    "react-dom": "^19.2.2",
+    "sanity": "^6.5.0",
+    "styled-components": "^6.1.19"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.10",
+    "typescript": "^5.9.3"
+  }
+}
