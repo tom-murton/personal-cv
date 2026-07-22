@@ -10,6 +10,8 @@ const Index = lazy(() => import("@/pages/Index"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 const InstagramFeed = lazy(() => import("@/pages/InstagramFeed"));
 const Projects = lazy(() => import("@/pages/Projects"));
+const ShipAGame = lazy(() => import("@/pages/ShipAGame"));
+const BenchmarkGame = lazy(() => import("@/pages/BenchmarkGame"));
 const Writing = lazy(() => import("@/pages/Writing"));
 const Article = lazy(() => import("@/pages/Article"));
 const Talks = lazy(() => import("@/pages/Talks"));
@@ -70,6 +72,8 @@ function App() {
             <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/projects/ship-a-game" element={<ShipAGame />} />
+            <Route path="/projects/ship-a-game/:game" element={<BenchmarkGame />} />
             <Route path="/writing" element={<Writing />} />
             <Route path="/writing/:slug" element={<Article />} />
             <Route path="/talks" element={<Talks />} />
