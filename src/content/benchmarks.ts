@@ -152,19 +152,27 @@ export const benchmarkGames: BenchmarkGame[] = [
   {
     slug: "brinkball",
     name: "Brinkball",
-    model: "Claude",
+    model: "Claude Fable 5 Ultra",
     harness: "Claude Code",
+    engine: "Native Swift",
     status: "review",
-    statusLabel: "Ready for review",
+    statusLabel: "Submitted for Apple review",
     date: "July 2026",
     summary:
-      "Built in Claude Code, Brinkball reached App Store Connect at Ready for Review with two nudges and no fixes or rescues — one of the strongest autonomy results so far.",
+      "A one-thumb physics arcade score-attack. Built in Claude Code with two nudges and no fixes or rescues in round one, then improved and resubmitted in round two with zero human help at all.",
     autonomy: { nudges: 2, fixes: 0, rescues: 0 },
+    improveScore: { nudges: 0, fixes: 0, rescues: 0 },
     appleReview: { outcome: "in-review" },
     playUrl: "https://tom-murton.github.io/brinkball/",
     reviewPending: true,
   },
   {
+    // UNVERIFIED: no run folder for this game exists in the benchmark repo, so
+    // `model` and `autonomy` below have not been checked against an actual
+    // INTERVENTION_LOG.md — they're the operator's best recollection. The
+    // Brinkball run's own log independently refers to this game as built by
+    // "GPT-5.6", not "GPT-5 Codex" — reconcile against the real log when round
+    // 3 runs for this game (see prompt/ARTICLE-CATCHUP-PROMPT.md).
     slug: "ringbloom",
     name: "Ringbloom",
     model: "GPT-5 Codex",
