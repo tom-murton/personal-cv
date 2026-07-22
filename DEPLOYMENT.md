@@ -1,113 +1,73 @@
-# Portfolio Deployment Guide
+# Deployment
 
-This document provides complete instructions for building and deploying your portfolio website.
+The public portfolio is a Vite site hosted on Vercel. Content and images live in Sanity, and the private editor is a separately built Sanity Studio.
 
-## Quick Start Deployment
+- Public site: `https://tom-murton-site.vercel.app`
+- Private editor: `https://tom-murton-site-admin.sanity.studio/admin`
 
-### Automated Deployment
+## Custom domain hand-off
 
-1. Run the consolidated deployment script:
-   ```bash
-   # Make the script executable (one-time setup)
-   chmod +x deploy.sh
-   
-   # Run the deployment
-   ./deploy.sh
-   ```
+`tommurton.com` and `www.tommurton.com` are attached to the Vercel project, but DNS still points to the previous LiteSpeed host. In the current Namecheap DNS account, replace the existing address records with:
 
-2. The script will:
-   - Clean and rebuild your project
-   - Verify the build output
-   - Upload to your hosting via FTP (requires lftp)
+```text
+A  @    76.76.21.21
+A  www  76.76.21.21
+```
 
-## Manual Deployment Process
+The old site remains live until those records are changed and DNS has propagated. Domain-account changes are deliberately left to the account owner.
 
-If you prefer a step-by-step approach:
+The Vercel project's GitHub integration also needs account approval for `tom-murton/personal-cv`. Manual production deployment works through `npm run deploy`; after GitHub access is granted, reconnect the repository with `vercel git connect https://github.com/tom-murton/personal-cv.git` for automatic deployments from `main`.
 
-1. **Build the project**:
-   ```bash
-   npm run build
-   ```
+## Public site on Vercel
 
-2. **Verify the build output**:
-   - Check that the `dist` folder contains:
-     - index.html
-     - assets folder with JS and CSS files
-     - All necessary images and resources
+Use these Vercel project settings:
 
-3. **Deploy using one of these methods**:
+- framework preset: **Vite**;
+- build command: `npm run build`;
+- output directory: `dist`;
+- install command: `npm install`.
 
-   a. **FTP Upload** (using any FTP client):
-   - Connect to your host (ftp.tommurton.com)
-   - Upload the contents of the `dist` folder to your website's root directory
+The checked-in `vercel.json` applies those build settings and the SPA rewrite needed for direct links such as `/projects` and `/cv`.
 
-   b. **Node-based deployment**:
-   ```bash
-   node deploy.js
-   ```
+Add these production environment variables in Vercel:
 
-## Troubleshooting Deployment Issues
+```text
+VITE_SANITY_PROJECT_ID=jbch6ec7
+VITE_SANITY_DATASET=production
+VITE_SANITY_STUDIO_URL=https://tom-murton-site-admin.sanity.studio/admin
+```
 
-### Build Problems
+`VITE_SANITY_ENABLED` normally stays unset. Set it to `false` only to force the checked-in fallback content.
 
-1. **Empty or incomplete dist folder**:
-   - Try cleaning node modules:
-     ```bash
-     rm -rf node_modules
-     npm install
-     npm run build
-     ```
+## Private editor
 
-2. **404 Errors on Page Refresh**:
-   - Ensure the `.htaccess` file is in your root directory with correct content
-   - Check that your hosting has URL rewriting enabled
+After signing in to Sanity locally, deploy the Studio once:
 
-### Server Configuration
+```sh
+npm --prefix studio run deploy
+```
 
-For proper SPA (Single Page Application) routing, your server needs:
+The chosen Studio hostname becomes the value of `VITE_SANITY_STUDIO_URL` in Vercel. The site's `/admin` route then sends you to that editor. Access is controlled by the members of the Sanity project; there is no public editing password in the portfolio code.
 
-1. **Apache** (.htaccess included in build):
-   ```apache
-   RewriteEngine On
-   RewriteBase /
-   RewriteRule ^index\.html$ - [L]
-   RewriteCond %{REQUEST_FILENAME} !-f
-   RewriteCond %{REQUEST_FILENAME} !-d
-   RewriteRule . /index.html [L]
-   ```
+## Content bootstrap
 
-2. **Nginx** (if using Nginx):
-   ```nginx
-   location / {
-     try_files $uri $uri/ /index.html;
-   }
-   ```
+The initial import is non-destructive and only creates missing records:
 
-## Performance Optimization Tips
+```sh
+npm run cms:seed
+npm run cms:seed:apply
+```
 
-1. **Verify optimal image sizes** before deployment
-2. **Enable compression** on your server
-3. **Set up appropriate caching headers**:
-   ```apache
-   <FilesMatch ".(js|css|jpg|jpeg|png|gif|webp|svg)$">
-     Header set Cache-Control "max-age=31536000, public"
-   </FilesMatch>
-   ```
+After the required settings documents have been published, the public site reads Sanity automatically. It continues to render the complete local fallback if the CMS is unavailable or incomplete.
 
-## Security Considerations
+## Release checks
 
-1. **Keep deployment credentials secure**:
-   - Never commit FTP credentials to source control
-   - Consider using environment variables for sensitive data
+Before deploying code:
 
-2. **Regular updates**:
-   - Keep dependencies updated with `npm update` or `npm audit fix`
+```sh
+npm run build:all
+npm run cms:verify
+npm run cms:verify:live
+```
 
-## Final Check
-
-Before considering deployment complete:
-
-1. **Test all site functionality**
-2. **Check mobile responsiveness**
-3. **Validate links**
-4. **Test performance** with Lighthouse or similar tools
+Then check `/`, `/projects`, `/writing`, `/talks`, `/cv` and `/admin` on desktop and mobile. A normal content publish in Sanity does not require a Vercel redeploy.

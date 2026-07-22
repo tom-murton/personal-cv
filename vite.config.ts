@@ -22,17 +22,17 @@ export default defineConfig(({ mode }) => ({
       open: false,
       gzipSize: true,
       brotliSize: true,
-      filename: 'stats.html',
+      filename: 'dist/stats.html',
     }),
     // Add PWA capabilities for better offline experience
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
-        name: 'Personal Portfolio',
-        short_name: 'Portfolio',
-        description: 'Professional portfolio website',
-        theme_color: '#1e293b',
+        name: 'Tom Murton — Projects, writing and talks',
+        short_name: 'Tom Murton',
+        description: 'Projects, writing and talks from product lead and solo builder Tom Murton.',
+        theme_color: '#0d0e12',
         icons: [
           {
             src: 'pwa-192x192.png',

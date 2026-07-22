@@ -1,14 +1,14 @@
 import { CollectionIntro } from "@/components/site/CollectionIntro";
-import { ProjectGrid } from "@/components/site/ProjectGrid";
 import { SiteFrame } from "@/components/site/SiteFrame";
+import { TalkList } from "@/components/site/TalkList";
 import { usePortfolioContent } from "@/content/PortfolioContentContext";
 
-export default function Projects() {
+export default function Talks() {
   const { collections } = usePortfolioContent();
-  const page = collections.projects;
+  const page = collections.talks;
 
   return (
-    <SiteFrame title="Projects">
+    <SiteFrame title="Talks">
       <main className="pg-collection-page" id="main-content">
         <CollectionIntro
           eyebrow={page.eyebrow}
@@ -16,7 +16,9 @@ export default function Projects() {
           description={page.description}
           count={page.items.length}
         />
-        <ProjectGrid projects={page.items} />
+        <div className="pg-collection-body">
+          <TalkList items={page.items} />
+        </div>
       </main>
     </SiteFrame>
   );

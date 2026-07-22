@@ -5,13 +5,22 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:studio": "npm --prefix studio run dev",
+    "dev:all": "concurrently --kill-others-on-fail --names site,admin --prefix-colors cyan,magenta \"npm run dev\" \"npm run dev:studio\"",
     "build": "vite build",
+    "build:studio": "npm --prefix studio run build",
+    "build:all": "npm run build && npm run build:studio",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "node deploy.js",
+    "deploy": "vercel --prod",
     "build:verbose": "vite build --debug",
-    "preview-build": "vite build && vite preview"
+    "preview-build": "vite build && vite preview",
+    "cms:login": "npm --prefix studio exec sanity login",
+    "cms:seed": "tsx scripts/seed-sanity.ts",
+    "cms:seed:apply": "tsx scripts/seed-sanity.ts --apply",
+    "cms:verify": "tsx scripts/verify-cms-mapping.ts",
+    "cms:verify:live": "tsx scripts/verify-live-cms.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -56,7 +65,6 @@
     "fs-extra": "^11.3.0",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.462.0",
-    "next": "^15.2.4",
     "next-themes": "^0.3.0",
     "react": "^18.3.1",
     "react-day-picker": "^8.10.1",
@@ -79,6 +87,7 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.20",
+    "concurrently": "^10.0.3",
     "eslint": "^9.9.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
@@ -88,8 +97,9 @@
     "rollup-plugin-visualizer": "^5.14.0",
     "tailwindcss": "^3.4.11",
     "terser": "^5.39.0",
+    "tsx": "^4.23.1",
     "typescript": "^5.5.3",
-    "typescript-eslint": "^8.0.1",
+    "typescript-eslint": "^8.64.0",
     "vite": "^5.4.1",
     "vite-plugin-pwa": "^0.21.2"
   }

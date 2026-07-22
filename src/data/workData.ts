@@ -159,37 +159,8 @@ export const experiences = [
   }
 ];
 
-// Articles data
-export const articles = [
-  {
-    id: 1,
-    title: "The Case for Becoming a More Product-Focused Engineering Leader",
-    description: "Explores the importance of engineering leaders adopting a product mindset to enhance team alignment, collaboration, and innovation, ultimately delivering greater value to the business.",
-    date: "January 23, 2024",
-    link: "https://www.linkedin.com/pulse/case-becoming-more-product-focused-engineering-leader-tom-murton"
-  },
-  {
-    id: 2,
-    title: "Bridging the Gap: How Engineering Leaders Can Foster Better Collaboration with Product",
-    description: "Discusses strategies for engineering leaders to involve their teams early in the product discovery process, fostering better collaboration with product managers and designers to create more effective solutions.",
-    date: "December 15, 2023",
-    link: "https://www.linkedin.com/pulse/bridging-gap-how-engineering-leaders-can-foster-better-tom-murton"
-  },
-  {
-    id: 3,
-    title: "In Defence of Estimates",
-    description: "Provides a balanced perspective on the role of estimation in software development, highlighting its benefits for project planning and team morale, while offering practical approaches to improve estimation practices.",
-    date: "November 30, 2023",
-    link: "https://www.linkedin.com/pulse/defence-estimates-tom-murton"
-  },
-  {
-    id: 4,
-    title: "Frictionless Internal Movement",
-    description: "Advocates for reducing barriers to internal team transitions within organisations, emphasising how facilitating such movements can support individual growth, enhance job satisfaction, and retain talent.",
-    date: "October 20, 2023",
-    link: "https://www.linkedin.com/pulse/frictionless-internal-movement-tom-murton"
-  }
-];
+// Kept as re-exports so older components and the new site share one content source.
+export { writing as articles, talks } from "@/content/writing";
 
 export const skills = {
   languages: ["JavaScript", "TypeScript", "HTML", "CSS", "Python", "Swift"],
@@ -226,16 +197,5 @@ export const books = [
     author: "Martin Fowler",
     image: "https://images.unsplash.com/photo-1532153975070-2e9ab71f1b14?q=80&w=3270&auto=format&fit=crop",
     link: "#",
-  }
-];
-
-export const talks = [
-  {
-    id: 1,
-    title: "Frictionless Movement",
-    event: "LeadDev London",
-    description: "A presentation on creating pathways for internal movement within organizations to improve retention and employee growth opportunities.",
-    date: "June 2025",
-    link: "https://leaddev.com/leaddev-london/agenda/",
   }
 ];

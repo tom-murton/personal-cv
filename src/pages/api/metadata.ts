@@ -1,6 +1,16 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
+
+interface ApiRequest {
+  method?: string;
+  query: Record<string, string | string[] | undefined>;
+}
+
+interface ApiResponse<T> {
+  status: (code: number) => ApiResponse<T>;
+  json: (body: T) => unknown;
+  setHeader: (name: string, value: string) => void;
+}
 
 type MetadataResponse = {
   title: string;
@@ -14,8 +24,8 @@ type MetadataResponse = {
  * This endpoint acts as a proxy to bypass CORS restrictions
  */
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<MetadataResponse | { error: string }>
+  req: ApiRequest,
+  res: ApiResponse<MetadataResponse | { error: string }>
 ) {
   // Only allow GET requests
   if (req.method !== 'GET') {
@@ -61,4 +71,4 @@ export default async function handler(
     console.error('Error fetching metadata:', error);
     return res.status(500).json({ error: 'Failed to fetch metadata' });
   }
-} 
+}
