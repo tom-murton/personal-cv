@@ -5,18 +5,11 @@ The public portfolio is a Vite site hosted on Vercel. Content and images live in
 - Public site: `https://tom-murton-site.vercel.app`
 - Private editor: `https://tom-murton-site-admin.sanity.studio/admin`
 
-## Custom domain hand-off
+## Production deployment
 
-`tommurton.com` and `www.tommurton.com` are attached to the Vercel project, but DNS still points to the previous LiteSpeed host. In the current Namecheap DNS account, replace the existing address records with:
+`tommurton.com` and `www.tommurton.com` are attached to the Vercel project and report a valid production configuration.
 
-```text
-A  @    76.76.21.21
-A  www  76.76.21.21
-```
-
-The old site remains live until those records are changed and DNS has propagated. Domain-account changes are deliberately left to the account owner.
-
-The Vercel project's GitHub integration also needs account approval for `tom-murton/personal-cv`. Manual production deployment works through `npm run deploy`; after GitHub access is granted, reconnect the repository with `vercel git connect https://github.com/tom-murton/personal-cv.git` for automatic deployments from `main`.
+The Vercel project is connected to `tom-murton/personal-cv`. Every push to `main` automatically creates a production deployment; pushes to other branches create preview deployments. `npm run deploy` remains available for an intentional manual production deployment, but it is not needed for normal releases.
 
 ## Public site on Vercel
 
