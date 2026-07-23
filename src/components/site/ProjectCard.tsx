@@ -17,6 +17,9 @@ export function ProjectCard({ project, size, index }: ProjectCardProps) {
   const quietMotion = site.theme.motion === "quiet";
   const expressiveMotion = site.theme.motion === "expressive";
   const projectStory = writing.find((item) => item.body?.length && item.projectId === project.id);
+  // Ship a Game has a whole living section (scoreboard + per-game pages), not just
+  // one article — send its card there instead of straight to the writing piece.
+  const isShipAGame = project.id === "gaming-benchmark";
 
   return (
     <motion.article
@@ -39,7 +42,11 @@ export function ProjectCard({ project, size, index }: ProjectCardProps) {
         <h3>{project.name}</h3>
         <p>{project.summary}</p>
         <div className="pg-project-card__links">
-          {projectStory ? (
+          {isShipAGame ? (
+            <Link className="pg-project-card__story-link" to="/projects/ship-a-game">
+              See the benchmark<ArrowRight aria-hidden="true" />
+            </Link>
+          ) : projectStory ? (
             <Link className="pg-project-card__story-link" to={`/writing/${projectStory.id}`}>
               Read the story<ArrowRight aria-hidden="true" />
             </Link>
