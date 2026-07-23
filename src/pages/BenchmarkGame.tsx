@@ -5,7 +5,9 @@ import { SiteFrame } from "@/components/site/SiteFrame";
 import { autonomyScore, benchmarkGameBySlug, type BenchmarkScore } from "@/content/benchmarks";
 
 function tally(score: BenchmarkScore) {
-  return `${score.nudges} nudges · ${score.fixes} fixes · ${score.rescues} rescues`;
+  const count = (value: number, singular: string, plural = `${singular}s`) =>
+    `${value} ${value === 1 ? singular : plural}`;
+  return `${count(score.nudges, "nudge")} · ${count(score.fixes, "fix", "fixes")} · ${count(score.rescues, "rescue")}`;
 }
 
 export default function BenchmarkGame() {
@@ -43,8 +45,8 @@ export default function BenchmarkGame() {
               {game.engine ? <div><dt>Engine</dt><dd>{game.engine}</dd></div> : null}
               <div><dt>Status</dt><dd>{game.statusLabel}</dd></div>
               <div><dt>Autonomy</dt><dd>{autonomyScore(game.autonomy)}/100 — {tally(game.autonomy)}</dd></div>
-              {game.improveScore ? <div><dt>Round 2</dt><dd>{tally(game.improveScore)}</dd></div> : null}
-              {game.articleScore ? <div><dt>Round 3</dt><dd>{tally(game.articleScore)}</dd></div> : null}
+              {game.improveScore ? <div><dt>Round 2</dt><dd>{autonomyScore(game.improveScore)}/100 — {tally(game.improveScore)}</dd></div> : null}
+              {game.articleScore ? <div><dt>Round 3</dt><dd>{autonomyScore(game.articleScore)}/100 — {tally(game.articleScore)}</dd></div> : null}
               {game.buildStats?.hours ? <div><dt>Build time</dt><dd>{game.buildStats.hours} hours</dd></div> : null}
               {game.buildStats?.costUsd ? <div><dt>Build cost</dt><dd>${game.buildStats.costUsd}</dd></div> : null}
               <div><dt>Quality</dt><dd>{game.quality ? `${game.quality.overall}/10 — judged by ${game.quality.judgedBy}` : "Not yet judged"}</dd></div>
@@ -84,7 +86,19 @@ export default function BenchmarkGame() {
           </aside>
 
           {game.review?.length ? (
-            <ArticleBody blocks={game.review} />
+            <div className="pg-benchmark-story">
+              {game.screenshots?.length ? (
+                <div className="pg-benchmark-gallery" aria-label={`${game.name} screenshots`}>
+                  {game.screenshots.map((screenshot) => (
+                    <figure key={screenshot.src}>
+                      <img src={screenshot.src} alt={screenshot.alt} loading="lazy" />
+                      <figcaption>{screenshot.caption}</figcaption>
+                    </figure>
+                  ))}
+                </div>
+              ) : null}
+              <ArticleBody blocks={game.review} />
+            </div>
           ) : (
             <div className="pg-article-prose">
               <p><em>The full write-up for {game.name} — the model's own first-person account of how it researched, built and shipped the game, and where it needed help — is coming soon.</em></p>
