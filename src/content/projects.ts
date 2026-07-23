@@ -20,10 +20,10 @@ export const projects: Project[] = [
     kind: "iOS app",
     year: "2026",
     summary: "An offline bleep test trainer for police, fire and forces fitness tests, with every official variant and real published pass standards.",
-    update: "Built and staged in App Store Connect, ready to submit for review.",
+    update: "Submitted to the App Store and in review. Free level charts and pass standards now live.",
     artwork: { type: "image", src: "/level-best-icon.png", alt: "Level Best app icon" },
-    href: "/apps/level-best/privacy/index.html",
-    hrefLabel: "Privacy policy",
+    href: "/apps/level-best/",
+    hrefLabel: "Bleep test charts",
   },
   {
     id: "warden",
