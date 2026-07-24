@@ -45,7 +45,7 @@ Import only missing portfolio records:
 npm run cms:seed:apply
 ```
 
-The import creates 23 deterministically named portfolio documents. It uses Sanity's `--missing` mode: existing documents are skipped, not replaced. After the three required settings documents exist, the public site automatically starts using Sanity. Until then, it continues to use the complete checked-in content.
+The import currently prepares 30 deterministically named portfolio documents. It uses Sanity's `--missing` mode: existing documents are skipped, not replaced. After the three required settings documents exist, the public site automatically starts using Sanity. Until then, it continues to use the complete checked-in content.
 
 ## What can be controlled in the admin
 
@@ -68,7 +68,7 @@ Each collection has its own documents. Add, edit or archive entries there. **Col
 
 When a hosted writing item has **Related portfolio project** set, its project card automatically shows a primary **Read the story** link. The project's own external link remains available as a secondary action.
 
-New projects can use an uploaded image with a focal point and accessibility description. The five initial projects retain their bespoke artwork presets.
+New projects can use an uploaded image with a focal point and accessibility description. The initial projects retain their bespoke artwork presets, including Level Best.
 
 ### Appearance and navigation
 
@@ -121,4 +121,6 @@ npm run cms:verify:live
 npx eslint src/App.tsx src/components/site src/content src/sanity src/pages/Admin.tsx src/pages/Index.tsx src/pages/Projects.tsx src/pages/Writing.tsx src/pages/Talks.tsx src/pages/Cv.tsx
 ```
 
-Then inspect `/`, `/projects`, `/writing`, `/talks` and `/cv` at desktop and mobile widths. The repository still contains older lint failures outside the Project Gallery; the targeted command checks the production redesign.
+Then inspect `/`, `/projects`, `/writing`, `/talks` and `/cv` at desktop and mobile widths.
+The full lint command currently completes without errors; it retains six non-blocking Fast
+Refresh warnings in shared UI component files.

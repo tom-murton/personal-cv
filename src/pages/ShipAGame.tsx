@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { ArticleBody } from "@/components/site/ArticleBody";
 import { SiteFrame } from "@/components/site/SiteFrame";
 import {
@@ -74,7 +74,7 @@ function GameFacts({ game }: { game: BenchmarkGame }) {
 
 export default function ShipAGame() {
   return (
-    <SiteFrame title="Ship a Game">
+    <SiteFrame title="Ship a Game" description={benchmarkMeta.standfirst}>
       <main id="main-content" className="pg-collection-page pg-bench-page">
         <header className="pg-collection-intro">
           <p className="pg-eyebrow">{benchmarkMeta.eyebrow}</p>

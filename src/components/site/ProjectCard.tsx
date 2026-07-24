@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { ProjectArtwork } from "@/components/site/ProjectArtwork";
 import { usePortfolioContent } from "@/content/PortfolioContentContext";
 import type { Project, ProjectCardSize } from "@/content/types";

@@ -1,14 +1,32 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useLocation } from "react-router";
 import { Menu, X } from "lucide-react";
 import { usePortfolioContent } from "@/content/PortfolioContentContext";
 
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const navigationRef = useRef<HTMLElement>(null);
   const location = useLocation();
   const { site } = usePortfolioContent();
 
   useEffect(() => setMenuOpen(false), [location.pathname, location.hash]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const firstLink = navigationRef.current?.querySelector<HTMLAnchorElement>("a");
+    firstLink?.focus();
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setMenuOpen(false);
+      menuButtonRef.current?.focus();
+    };
+
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [menuOpen]);
 
   return (
     <header className="pg-header">
@@ -18,6 +36,7 @@ export function SiteHeader() {
       </Link>
 
       <button
+        ref={menuButtonRef}
         className="pg-menu-button"
         type="button"
         aria-expanded={menuOpen}
@@ -29,6 +48,7 @@ export function SiteHeader() {
       </button>
 
       <nav
+        ref={navigationRef}
         className={`pg-navigation${menuOpen ? " is-open" : ""}`}
         id="primary-navigation"
         aria-label="Primary navigation"

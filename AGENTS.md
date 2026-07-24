@@ -91,10 +91,9 @@ npm run cms:verify:live
 npx eslint src/App.tsx src/components/site src/content src/sanity src/pages/Admin.tsx src/pages/Index.tsx src/pages/Projects.tsx src/pages/Writing.tsx src/pages/Talks.tsx src/pages/Cv.tsx
 ```
 
-The full `npm run lint` currently includes pre-existing failures in legacy UI utilities.
-Do not claim the repository is fully lint-clean and do not broaden a task to repair those
-legacy files unless asked. New or changed production files must pass the relevant targeted
-checks.
+The full `npm run lint` currently completes without errors and reports six non-blocking Fast
+Refresh warnings in shared UI component files. New or changed production files must pass the
+relevant targeted checks.
 
 For user-facing changes, also inspect the affected routes at desktop and mobile widths.
 Respect reduced-motion preferences, keyboard access, readable contrast and image alt text.
@@ -132,4 +131,3 @@ Before handing work back:
 2. Run checks proportional to the change and report exactly what passed or failed.
 3. State whether the change is local, pushed, previewed, deployed or published.
 4. Call out any remaining manual step, external approval or known limitation.
-

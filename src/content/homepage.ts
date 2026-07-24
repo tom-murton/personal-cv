@@ -13,8 +13,8 @@ export const homeSections: HomeSection[] = [
     title: "Products, games, tools and experiments.",
     rows: [
       { id: "lead-project", layout: "single", enabled: true, projectIds: ["lightscout"] },
-      { id: "games-and-wellbeing", layout: "two-equal", enabled: true, projectIds: ["warden", "rest-rise"] },
-      { id: "experiments-and-tools", layout: "two-equal", enabled: true, projectIds: ["gaming-benchmark", "marketing-engine"] },
+      { id: "current-apps", layout: "two-equal", enabled: true, projectIds: ["level-best", "rest-rise"] },
+      { id: "games-and-research", layout: "two-equal", enabled: true, projectIds: ["warden", "gaming-benchmark"] },
     ],
   },
   {

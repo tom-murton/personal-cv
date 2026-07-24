@@ -1,8 +1,9 @@
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router";
 import { ArticleBody } from "@/components/site/ArticleBody";
 import { SiteFrame } from "@/components/site/SiteFrame";
 import { autonomyScore, benchmarkGameBySlug, type BenchmarkScore } from "@/content/benchmarks";
+import NotFound from "@/pages/NotFound";
 
 function tally(score: BenchmarkScore) {
   const count = (value: number, singular: string, plural = `${singular}s`) =>
@@ -14,7 +15,7 @@ export default function BenchmarkGame() {
   const { game: slug } = useParams();
   const game = slug ? benchmarkGameBySlug.get(slug) : undefined;
 
-  if (!game) return <Navigate to="/projects/ship-a-game" replace />;
+  if (!game) return <NotFound />;
 
   const hasLinks = Boolean(game.appStoreUrl || game.playUrl || game.links?.length);
   const appleOutcomes: Record<string, string> = {
@@ -25,7 +26,7 @@ export default function BenchmarkGame() {
   };
 
   return (
-    <SiteFrame title={`${game.name} — Ship a Game`}>
+    <SiteFrame title={`${game.name} — Ship a Game`} description={game.summary}>
       <main id="main-content" className="pg-article-page">
         <header className="pg-article-hero">
           <span className="pg-article-hero__ghost" aria-hidden="true">{game.name}</span>

@@ -8,7 +8,7 @@ export default function Projects() {
   const page = collections.projects;
 
   return (
-    <SiteFrame title="Projects">
+    <SiteFrame title="Projects" description={page.description}>
       <main className="pg-collection-page" id="main-content">
         <CollectionIntro
           eyebrow={page.eyebrow}

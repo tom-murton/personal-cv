@@ -18,8 +18,34 @@ export function ProjectArtwork({ artwork }: ProjectArtworkProps) {
       <div className="pg-art pg-art--lightscout">
         <div className="pg-art__sun" aria-hidden="true" />
         <div className="pg-art__horizon" aria-hidden="true" />
-        <img src="/lightscout-home-screenshot.png" alt="LightScout app home screen" />
+        <img
+          src="/lightscout-home-screenshot.webp"
+          alt="LightScout app home screen"
+          width="700"
+          height="1448"
+          loading="lazy"
+          decoding="async"
+        />
         <span>Find the shot before the light changes</span>
+      </div>
+    );
+  }
+
+  if (artwork.preset === "level-best") {
+    return (
+      <div className="pg-art pg-art--level-best">
+        <div className="pg-level-best-track" aria-hidden="true">
+          <i /><i /><i /><i /><i />
+        </div>
+        <img
+          src="/level-best-icon.png"
+          alt="Level Best app icon"
+          width="1024"
+          height="1024"
+          loading="lazy"
+          decoding="async"
+        />
+        <span>Bleep test training, measured properly</span>
       </div>
     );
   }

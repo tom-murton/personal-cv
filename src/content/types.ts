@@ -2,6 +2,7 @@ export type ProjectStatus = "Shipped" | "Building" | "Testing" | "Running" | "In
 
 export type ProjectArtworkPreset =
   | "lightscout"
+  | "level-best"
   | "warden"
   | "rest-rise"
   | "gaming-benchmark"

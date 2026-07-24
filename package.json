@@ -19,6 +19,7 @@
     "cms:login": "npm --prefix studio exec sanity login",
     "cms:seed": "tsx scripts/seed-sanity.ts",
     "cms:seed:apply": "tsx scripts/seed-sanity.ts --apply",
+    "cms:publish:level-best": "cd studio && npm exec sanity -- exec scripts/publish-level-best.mjs --with-user-token",
     "cms:verify": "tsx scripts/verify-cms-mapping.ts",
     "cms:verify:live": "tsx scripts/verify-live-cms.ts"
   },
@@ -71,7 +72,7 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.0",
     "react-resizable-panels": "^2.1.3",
-    "react-router-dom": "^6.26.2",
+    "react-router": "^7.18.1",
     "recharts": "^2.12.7",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.5.2",
@@ -85,9 +86,9 @@
     "@types/node": "^22.5.5",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react-swc": "^3.5.0",
+    "@vitejs/plugin-react-swc": "^4.3.2",
     "autoprefixer": "^10.4.20",
-    "concurrently": "^10.0.3",
+    "concurrently": "^9.2.4",
     "eslint": "^9.9.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
@@ -100,7 +101,6 @@
     "tsx": "^4.23.1",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.64.0",
-    "vite": "^5.4.1",
-    "vite-plugin-pwa": "^0.21.2"
+    "vite": "^7.3.6"
   }
 }

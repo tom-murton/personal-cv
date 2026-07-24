@@ -28,7 +28,7 @@ export const useIntersectionObserver = ({
     if (!element) return;
 
     // Skip if already frozen
-    if (frozen.current && isVisible) return;
+    if (frozen.current) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -55,4 +55,4 @@ export const useIntersectionObserver = ({
   return [ref, isVisible];
 };
 
-export default useIntersectionObserver; 
+export default useIntersectionObserver;

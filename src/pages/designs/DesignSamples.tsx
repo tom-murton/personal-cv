@@ -1,5 +1,5 @@
-import { useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
+import { Link } from "react-router";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Move, Pause, Play, Search, Sparkles } from "lucide-react";
 import "./DesignSamples.css";
@@ -86,6 +86,19 @@ const sampleRoutes = [
 
 const statusClass = (status: ProjectStatus) => status.toLowerCase().replace(" ", "-");
 
+function useArchivedDesignMetadata(title: string) {
+  useEffect(() => {
+    document.title = `${title} — archived design study`;
+    let robots = document.head.querySelector<HTMLMetaElement>('meta[name="robots"]');
+    if (!robots) {
+      robots = document.createElement("meta");
+      robots.name = "robots";
+      document.head.appendChild(robots);
+    }
+    robots.content = "noindex,nofollow";
+  }, [title]);
+}
+
 const PrototypeNav = ({ inverse = false }: { inverse?: boolean }) => (
   <nav className={`prototype-nav${inverse ? " prototype-nav--inverse" : ""}`} aria-label="Prototype navigation">
     <a href="#sample-projects">Projects</a>
@@ -101,6 +114,7 @@ const DesignSwitcher = ({ active }: { active?: string }) => {
   const previousRoute = sampleRoutes[(activeIndex - 1 + sampleRoutes.length) % sampleRoutes.length];
   const nextRoute = sampleRoutes[(activeIndex + 1) % sampleRoutes.length];
   const creatorCount = sampleRoutes.filter((route) => route.creator === activeRoute.creator).length;
+  useArchivedDesignMetadata(activeRoute.name);
 
   return (
     <nav className="design-switcher" aria-label="Switch homepage design">
@@ -121,7 +135,7 @@ const ProjectArtwork = ({ projectId, compact = false }: { projectId: Project["id
     return (
       <div className={`project-art project-art--lightscout${compact ? " project-art--compact" : ""}`}>
         <div className="project-art__sky" aria-hidden="true" />
-        <img src="/lightscout-home-screenshot.png" alt="LightScout app home screen" />
+        <img src="/lightscout-home-screenshot.webp" alt="LightScout app home screen" />
         <span className="project-art__caption">Find the shot before the light changes</span>
       </div>
     );
@@ -184,6 +198,8 @@ const SampleFooter = ({ inverse = false }: { inverse?: boolean }) => (
 );
 
 export function DesignSampleIndex() {
+  useArchivedDesignMetadata("Homepage design study");
+
   return (
     <main className="design-samples-index">
       <header className="design-samples-index__header">
@@ -839,7 +855,7 @@ export function ClaudeAurora() {
       <section className="claude-aurora__projects" id="sample-projects">
         <article className="claude-aurora__spotlight">
           <div><span>Featured · shipped</span><h2>LightScout</h2><p>{projects[0].summary}</p><a href="#lightscout">Open project <ArrowUpRight /></a></div>
-          <img src="/lightscout-home-screenshot.png" alt="LightScout app home screen" />
+          <img src="/lightscout-home-screenshot.webp" alt="LightScout app home screen" />
         </article>
         <div className="claude-aurora__stack">
           {projects.slice(1, 4).map((project, index) => <article key={project.id}><div><strong>{project.name}</strong><Status status={project.status} /></div><p>{project.update}</p><i><span style={{ width: `${68 - index * 14}%` }} /></i></article>)}
@@ -892,7 +908,7 @@ export function ClaudeAfterglow() {
       <section className="claude-afterglow__hero" id="sample-top"><span>Product lead · builder of many things</span><h1>I build products for work —<br />and <em>for the joy of it.</em></h1></section>
       <section className="claude-afterglow__feature" id="sample-projects">
         <div><span><i /> Featured — live on the App Store</span><h2>LightScout</h2><p>{projects[0].summary} Designed, built and shipped solo.</p><div><a href="#lightscout">Read the story</a><a href="#lightscout">App Store ↗</a></div></div>
-        <div className="claude-afterglow__phones"><img src="/lightscout-home-screenshot.png" alt="LightScout app screen" /><img src="/lightscout-home-screenshot.png" alt="LightScout app detail" /></div>
+        <div className="claude-afterglow__phones"><img src="/lightscout-home-screenshot.webp" alt="LightScout app screen" /><img src="/lightscout-home-screenshot.webp" alt="LightScout app detail" /></div>
       </section>
       <section className="claude-afterglow__next" id="sample-notes"><span>Next: Gaming Benchmark</span><span>Rest + Rise — in build</span><a href="#sample-projects">All projects →</a></section>
       <SampleFooter inverse /><DesignSwitcher active="claude-afterglow" />
@@ -950,7 +966,7 @@ export function ClaudePlayground() {
       <header className="claude-playground__header"><a href="#sample-top">tom murton<span>.</span></a><ClaudeNav /></header>
       <section className="claude-playground__hero" id="sample-top"><h1>I make things.<br />Some of them even ship.</h1></section>
       <section className="claude-playground__bento" id="sample-projects">
-        <article className="claude-playground__lightscout"><span>Live on iOS</span><h2>LightScout</h2><p>Find the right light and location before leaving home.</p><img src="/lightscout-home-screenshot.png" alt="LightScout app home screen" /></article>
+        <article className="claude-playground__lightscout"><span>Live on iOS</span><h2>LightScout</h2><p>Find the right light and location before leaving home.</p><img src="/lightscout-home-screenshot.webp" alt="LightScout app home screen" /></article>
         <article><span>Now building</span><h2>Warden</h2><i><b /></i><small>Core loop in progress</small></article>
         <article><span>Experiment</span><h2>Can an AI ship a game?</h2><p>The Gaming Benchmark →</p></article>
         <article id="sample-notes"><span>Words</span><h2>“In Defence of Estimates”</h2><p>Essays and talks →</p></article>

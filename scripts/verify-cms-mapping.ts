@@ -3,7 +3,20 @@ import { localPortfolioContent } from "../src/content/localPortfolioContent";
 import { mapPortfolioContent, type RawPortfolioContent } from "../src/sanity/mapPortfolioContent";
 import { buildPortfolioDocuments } from "./seed-sanity";
 
-type SeedDocument = Record<string, any> & { _id: string; _type: string };
+type SeedReference = { _ref: string };
+type SeedCollection = Record<string, unknown> & { items: SeedReference[] };
+type SeedDocument = Record<string, unknown> & {
+  _id: string;
+  _type: string;
+  sections: SeedDocument[];
+  rows: SeedDocument[];
+  items: SeedReference[];
+  projects: SeedCollection;
+  writing: SeedCollection;
+  talks: SeedCollection;
+  cv: SeedCollection;
+  slug: { current: string };
+};
 
 const documents = buildPortfolioDocuments() as SeedDocument[];
 const one = (type: string) => documents.find((document) => document._type === type);

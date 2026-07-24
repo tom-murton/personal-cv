@@ -34,6 +34,7 @@ See [CONTENT_GUIDE.md](./CONTENT_GUIDE.md) for setup and editing instructions. T
 - `/cv` — career history
 - `/admin` — private content editor (redirects to the Studio)
 - `/designs` — archived design comparison
+- `/apps/level-best/` — standalone Level Best reference pages (preserved as public URLs)
 
 ## Checks
 
@@ -44,8 +45,5 @@ npm run cms:verify:live
 npm run lint
 ```
 
-The current repository has pre-existing lint failures in legacy UI utility files. The production gallery files can be checked separately with:
-
-```sh
-npx eslint src/App.tsx src/components/site src/content src/pages/Index.tsx src/pages/Projects.tsx src/pages/Writing.tsx src/pages/Talks.tsx src/pages/Cv.tsx
-```
+The lint check currently completes without errors. It reports six Fast Refresh warnings in
+shared UI component files; these do not affect production builds.

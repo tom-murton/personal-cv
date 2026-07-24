@@ -1,14 +1,12 @@
-import { Routes, Route, useLocation } from "react-router-dom";
-import { Toaster } from "@/components/ui/toaster";
-import { lazy, Suspense } from "react";
+import { Navigate, Routes, Route, useLocation } from "react-router";
+import { lazy, Suspense, useEffect } from "react";
 import PageTransition from "@/components/layout/PageTransition";
-import LoadingSkeleton from "@/components/ui/LoadingSkeleton";
 import { PortfolioContentProvider } from "@/content/PortfolioContentProvider";
+import "@/styles/GallerySite.css";
 
 // Lazy load pages for better performance
 const Index = lazy(() => import("@/pages/Index"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
-const InstagramFeed = lazy(() => import("@/pages/InstagramFeed"));
 const Projects = lazy(() => import("@/pages/Projects"));
 const ShipAGame = lazy(() => import("@/pages/ShipAGame"));
 const BenchmarkGame = lazy(() => import("@/pages/BenchmarkGame"));
@@ -36,37 +34,23 @@ const ClaudeIndex = lazy(() => import("@/pages/designs/DesignSamples").then((mod
 const ClaudePlayground = lazy(() => import("@/pages/designs/DesignSamples").then((module) => ({ default: module.ClaudePlayground })));
 const ClaudePoster = lazy(() => import("@/pages/designs/DesignSamples").then((module) => ({ default: module.ClaudePoster })));
 
-// Page loading component with enhanced skeleton
 const PageLoading = () => (
-  <div className="container max-w-5xl mx-auto px-4 py-8">
-    <LoadingSkeleton.Group>
-      {/* Hero section loading skeleton */}
-      <div className="space-y-6 py-8">
-        <LoadingSkeleton variant="text" height="3rem" width="70%" />
-        <LoadingSkeleton variant="text" height="2rem" width="40%" />
-        <LoadingSkeleton.Paragraph lines={2} className="mt-8" />
-      </div>
-      
-      {/* Content section loading skeleton */}
-      <div className="mt-12 space-y-8">
-        <LoadingSkeleton variant="text" height="2rem" width="30%" />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <LoadingSkeleton.Card />
-          <LoadingSkeleton.Card />
-          <LoadingSkeleton.Card />
-        </div>
-      </div>
-    </LoadingSkeleton.Group>
+  <div className="pg-page-loading" role="status" aria-live="polite">
+    <span>Loading the collection</span>
   </div>
 );
+
+function ExternalRedirect({ href }: { href: string }) {
+  useEffect(() => window.location.replace(href), [href]);
+  return <PageLoading />;
+}
 
 function App() {
   const location = useLocation();
   
   return (
     <PortfolioContentProvider>
-      <div className="App dark">
-        <Toaster />
+      <div className="App">
         <PageTransition location={location.pathname}>
           <Suspense fallback={<PageLoading />}>
             <Routes>
@@ -79,7 +63,12 @@ function App() {
             <Route path="/talks" element={<Talks />} />
             <Route path="/cv" element={<Cv />} />
             <Route path="/admin" element={<Admin />} />
-            <Route path="/instagram" element={<InstagramFeed />} />
+            <Route path="/home" element={<Navigate to="/" replace />} />
+            <Route path="/about" element={<Navigate to="/#about" replace />} />
+            <Route path="/work" element={<Navigate to="/cv" replace />} />
+            <Route path="/experience" element={<Navigate to="/cv" replace />} />
+            <Route path="/articles" element={<Navigate to="/writing" replace />} />
+            <Route path="/instagram" element={<ExternalRedirect href="https://www.instagram.com/tom.murton" />} />
             <Route path="/designs" element={<DesignSampleIndex />} />
             <Route path="/designs/workbench" element={<LivingWorkbench />} />
             <Route path="/designs/log" element={<BuildersLog />} />

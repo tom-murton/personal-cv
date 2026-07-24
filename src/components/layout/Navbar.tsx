@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, memo } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { Menu, X, Instagram } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Logo from "./Logo";

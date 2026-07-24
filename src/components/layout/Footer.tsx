@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 // Memoized Footer component to prevent unnecessary re-renders
 // This is especially useful since footer content rarely changes

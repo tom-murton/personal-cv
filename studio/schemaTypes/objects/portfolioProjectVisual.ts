@@ -49,6 +49,7 @@ export const portfolioProjectVisual = defineType({
       options: {
         list: [
           { title: "LightScout", value: "lightscout" },
+          { title: "Level Best", value: "level-best" },
           { title: "Warden", value: "warden" },
           { title: "Rest + Rise", value: "rest-rise" },
           { title: "Gaming Benchmark", value: "gaming-benchmark" },

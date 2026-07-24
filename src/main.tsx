@@ -1,12 +1,16 @@
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router'
 import App from './App.tsx'
 import './index.css'
-import { initCoreWebVitalsMonitoring } from './utils/performance'
 
-// Initialize performance monitoring in development
-if (process.env.NODE_ENV === 'development') {
-  initCoreWebVitalsMonitoring();
+// Remove registrations left by the previous PWA build so visitors cannot be
+// held on stale cached pages.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    void navigator.serviceWorker
+      .getRegistrations()
+      .then((registrations) => Promise.all(registrations.map((registration) => registration.unregister())));
+  });
 }
 
 createRoot(document.getElementById("root")!).render(

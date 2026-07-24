@@ -8,7 +8,7 @@ export default function Writing() {
   const page = collections.writing;
 
   return (
-    <SiteFrame title="Writing">
+    <SiteFrame title="Writing" description={page.description}>
       <main className="pg-collection-page" id="main-content">
         <CollectionIntro
           eyebrow={page.eyebrow}

@@ -1,10 +1,10 @@
-import { useEffect } from "react";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router";
 import { ArticleBody } from "@/components/site/ArticleBody";
 import { SiteFrame } from "@/components/site/SiteFrame";
 import { usePortfolioContent } from "@/content/PortfolioContentContext";
 import type { ArticleBlock } from "@/content/types";
+import NotFound from "@/pages/NotFound";
 
 function readingTime(body: ArticleBlock[]) {
   const words = body.flatMap((block) => block.children).reduce((total, span) => (
@@ -23,23 +23,13 @@ export default function Article() {
   const article = useArticle();
   const { projects } = usePortfolioContent();
 
-  useEffect(() => {
-    if (!article) return;
-    const meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
-    const previous = meta?.content;
-    if (meta) meta.content = article.description;
-    return () => {
-      if (meta && previous) meta.content = previous;
-    };
-  }, [article]);
-
-  if (!article?.body?.length) return <Navigate to="/writing" replace />;
+  if (!article?.body?.length) return <NotFound />;
 
   const project = article.projectId ? projects.find((item) => item.id === article.projectId) : undefined;
   const minutes = readingTime(article.body);
 
   return (
-    <SiteFrame title={article.title}>
+    <SiteFrame title={article.title} description={article.description}>
       <main id="main-content" className="pg-article-page">
         <header className="pg-article-hero">
           <span className="pg-article-hero__ghost" aria-hidden="true">{article.projectName ?? "Field notes"}</span>

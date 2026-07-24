@@ -8,7 +8,7 @@ export default function Cv() {
   const page = collections.cv;
 
   return (
-    <SiteFrame title="CV">
+    <SiteFrame title="CV" description={page.description}>
       <main className="pg-cv-page" id="main-content">
         <CollectionIntro
           eyebrow={page.eyebrow}

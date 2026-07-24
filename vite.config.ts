@@ -3,7 +3,6 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { visualizer } from "rollup-plugin-visualizer";
-import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -23,35 +22,6 @@ export default defineConfig(({ mode }) => ({
       gzipSize: true,
       brotliSize: true,
       filename: 'dist/stats.html',
-    }),
-    // Add PWA capabilities for better offline experience
-    VitePWA({
-      registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
-      manifest: {
-        name: 'Tom Murton — Projects, writing and talks',
-        short_name: 'Tom Murton',
-        description: 'Projects, writing and talks from product lead and solo builder Tom Murton.',
-        theme_color: '#0d0e12',
-        icons: [
-          {
-            src: 'pwa-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable',
-          }
-        ]
-      }
     })
   ].filter(Boolean),
   resolve: {
@@ -83,49 +53,12 @@ export default defineConfig(({ mode }) => ({
     cssCodeSplit: true,
     // Increase chunk size warning limit for larger dependencies
     chunkSizeWarningLimit: 1200,
-    // Optimize Rollup options
+    // Keep generated asset names cache-safe.
     rollupOptions: {
       output: {
-        // Ensure assets are hashed for better caching
         assetFileNames: 'assets/[name]-[hash][extname]',
         chunkFileNames: 'assets/[name]-[hash].js',
         entryFileNames: 'assets/[name]-[hash].js',
-        // Optimize chunking strategy
-        manualChunks: (id) => {
-          // Create chunking strategy based on common dependencies
-          if (id.includes('node_modules')) {
-            // Core React libraries
-            if (id.includes('react/') || id.includes('react-dom/')) {
-              return 'vendor-react';
-            }
-            
-            // Routing libraries
-            if (id.includes('react-router')) {
-              return 'vendor-router';
-            }
-            
-            // Animation libraries
-            if (id.includes('framer-motion')) {
-              return 'vendor-animation';
-            }
-            
-            // UI Components
-            if (id.includes('@radix-ui')) {
-              return 'vendor-ui';
-            }
-            
-            // Utility libraries
-            if (id.includes('lodash') || 
-                id.includes('date-fns') || 
-                id.includes('clsx') ||
-                id.includes('tailwind')) {
-              return 'vendor-utils';
-            }
-            
-            // All other node_modules
-            return 'vendor';
-          }
-        }
       }
     },
     // Copy assets properly
@@ -141,7 +74,7 @@ export default defineConfig(({ mode }) => ({
     include: [
       'react', 
       'react-dom', 
-      'react-router-dom',
+      'react-router',
       'framer-motion',
       'lucide-react'
     ],

@@ -2,12 +2,12 @@
 
 The public portfolio is a Vite site hosted on Vercel. Content and images live in Sanity, and the private editor is a separately built Sanity Studio.
 
-- Public site: `https://tom-murton-site.vercel.app`
+- Public site: `https://tommurton.com`
 - Private editor: `https://tom-murton-site-admin.sanity.studio/admin`
 
 ## Production deployment
 
-`tommurton.com` and `www.tommurton.com` are attached to the Vercel project and report a valid production configuration.
+`tommurton.com` is the canonical public domain. `www.tommurton.com` redirects to it.
 
 The Vercel project is connected to `tom-murton/personal-cv`. Every push to `main` automatically creates a production deployment; pushes to other branches create preview deployments. `npm run deploy` remains available for an intentional manual production deployment, but it is not needed for normal releases.
 
@@ -20,7 +20,7 @@ Use these Vercel project settings:
 - output directory: `dist`;
 - install command: `npm install`.
 
-The checked-in `vercel.json` applies those build settings and the SPA rewrite needed for direct links such as `/projects` and `/cv`.
+The checked-in `vercel.json` applies those build settings, explicit SPA rewrites for public React routes, legacy route redirects and security/cache headers. It deliberately does not use a universal rewrite: unknown top-level paths are served by `public/404.html` with a real 404 response.
 
 Add these production environment variables in Vercel:
 
@@ -52,6 +52,12 @@ npm run cms:seed:apply
 ```
 
 After the required settings documents have been published, the public site reads Sanity automatically. It continues to render the complete local fallback if the CMS is unavailable or incomplete.
+
+Level Best can be published or repaired without replacing unrelated CMS content:
+
+```sh
+npm run cms:publish:level-best
+```
 
 ## Release checks
 
