@@ -160,7 +160,7 @@ const projectArticleDrafts: WritingItem[] = [
     projectName: "LightScout",
     projectId: "lightscout",
     links: [
-      { label: "Visit LightScout", href: "https://lightscout.ai" },
+      { label: "Visit LightScout", href: "https://www.lightscout.app" },
       { label: "Read the original build story", href: "https://www.linkedin.com/pulse/how-i-shipped-ios-app-store-without-writing-single-line-tom-murton-msm9e/" },
       { label: "View on the App Store", href: "https://apple.co/4c3huFE" },
     ],

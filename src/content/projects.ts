@@ -10,7 +10,7 @@ export const projects: Project[] = [
     summary: "AI-assisted location intelligence for photographers planning their next shoot.",
     update: "Live on the App Store and evolving through real-world use.",
     artwork: { type: "preset", preset: "lightscout" },
-    href: "https://lightscout.ai",
+    href: "https://www.lightscout.app",
     hrefLabel: "Visit LightScout",
   },
   {
