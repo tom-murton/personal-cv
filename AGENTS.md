@@ -121,6 +121,8 @@ assuming the external action succeeded.
 - Do not replace Sanity with another CMS without an explicit architectural decision.
 - Do not edit generated `dist/`, `studio/dist/` or dependency folders.
 - Keep the archived `/designs` examples available.
+- Keep `public/sw.js` and `public/registerSW.js` during the legacy PWA retirement window;
+  returning browsers on both public origins need those exact paths to clear old caches.
 - Update the relevant guide when setup, content behaviour or deployment behaviour changes.
 
 ## Definition of done

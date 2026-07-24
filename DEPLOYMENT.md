@@ -7,7 +7,13 @@ The public portfolio is a Vite site hosted on Vercel. Content and images live in
 
 ## Production deployment
 
-`tommurton.com` is the canonical public domain. `www.tommurton.com` redirects to it.
+`tommurton.com` is the canonical public domain. `www.tommurton.com` temporarily serves
+the same deployment directly while the July 2026 retirement worker clears the former
+PWA from returning browsers. Canonical metadata still points to the apex domain.
+
+Do not delete `public/sw.js` or `public/registerSW.js`, or restore the Vercel domain-level
+`www` redirect, until the legacy service-worker migration window has passed. A redirected
+worker script cannot update a worker registered on the `www` origin.
 
 The Vercel project is connected to `tom-murton/personal-cv`. Every push to `main` automatically creates a production deployment; pushes to other branches create preview deployments. `npm run deploy` remains available for an intentional manual production deployment, but it is not needed for normal releases.
 
