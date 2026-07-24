@@ -12,3 +12,6 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://tommurton.com/sitemap.xml
+Sitemap: https://tommurton.com/apps/level-best/sitemap.xml
