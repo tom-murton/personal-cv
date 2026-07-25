@@ -20,7 +20,7 @@ const project = {
   status: "Testing",
   kind: "iOS app",
   year: "2026",
-  summary: "An offline bleep test trainer for police, fire and forces fitness tests, with every official variant and real published pass standards.",
+  summary: "An offline bleep test trainer for police, fire and forces fitness tests, with the main UK test variants and published pass standards.",
   currentNote: "Submitted to the App Store and in review. Free level charts and pass standards now live.",
   visual: {
     _type: "portfolioProjectVisual",

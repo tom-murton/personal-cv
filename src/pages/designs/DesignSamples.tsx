@@ -208,10 +208,10 @@ export function DesignSampleIndex() {
       </header>
 
       <section className="design-samples-index__intro">
-        <p className="design-kicker">Seventeen directions. Two design passes.</p>
-        <h1>Choose the way the work should feel.</h1>
+        <p className="design-kicker">Archived design studies · July 2026</p>
+        <h1>Seventeen routes explored before the production gallery.</h1>
         <p>
-          Eight directions from Codex and nine from Claude, all using the same body of work. Open each one at full size and decide which makes you most curious to explore a project.
+          Eight directions from Codex and nine from Claude, all using the same body of work. Project Gallery became the production direction; these routes remain as a record of the design process.
         </p>
       </section>
 

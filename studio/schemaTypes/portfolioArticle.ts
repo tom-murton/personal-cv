@@ -24,7 +24,7 @@ export const portfolioArticle = defineType({
     defineField({ name: "projectName", title: "Project name", type: "string", description: "Shown in the article header and details rail." }),
     defineField({ name: "relatedProject", title: "Related portfolio project", type: "reference", to: [{ type: "portfolioProject" }], description: "Optional. Connects the story to the project's live status." }),
     defineField({ name: "description", title: "Description", type: "text", rows: 4, validation: (rule) => rule.required() }),
-    defineField({ name: "dateLabel", title: "Published date", type: "string", description: "Shown exactly as entered, for example January 23, 2024.", validation: (rule) => rule.required() }),
+    defineField({ name: "dateLabel", title: "Published date", type: "string", description: "Shown exactly as entered, for example 23 January 2024.", validation: (rule) => rule.required() }),
     defineField({
       name: "body",
       title: "Article body",

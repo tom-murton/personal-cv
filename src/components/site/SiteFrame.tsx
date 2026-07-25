@@ -14,6 +14,7 @@ interface SiteFrameProps {
 
 const defaultDescription = "Projects, writing and talks from product lead and solo builder Tom Murton.";
 const canonicalOrigin = "https://tommurton.com";
+const socialImage = `${canonicalOrigin}/favicon.png`;
 
 function upsertMeta(selector: string, attributes: Record<string, string>) {
   let element = document.head.querySelector<HTMLMetaElement>(selector);
@@ -46,9 +47,12 @@ export function SiteFrame({
     upsertMeta('meta[property="og:description"]', { property: "og:description", content: description });
     upsertMeta('meta[property="og:type"]', { property: "og:type", content: "website" });
     upsertMeta('meta[property="og:url"]', { property: "og:url", content: canonicalUrl });
+    upsertMeta('meta[property="og:image"]', { property: "og:image", content: socialImage });
+    upsertMeta('meta[property="og:image:alt"]', { property: "og:image:alt", content: site.name });
     upsertMeta('meta[name="twitter:card"]', { name: "twitter:card", content: "summary" });
     upsertMeta('meta[name="twitter:title"]', { name: "twitter:title", content: documentTitle });
     upsertMeta('meta[name="twitter:description"]', { name: "twitter:description", content: description });
+    upsertMeta('meta[name="twitter:image"]', { name: "twitter:image", content: socialImage });
 
     let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!canonical) {

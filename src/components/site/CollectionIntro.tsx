@@ -12,9 +12,10 @@ export function CollectionIntro({ eyebrow, title, description, count }: Collecti
       <h1>{title}</h1>
       <div>
         <p>{description}</p>
-        {typeof count === "number" && <span>{String(count).padStart(2, "0")} entries</span>}
+        {typeof count === "number" && (
+          <span>{String(count).padStart(2, "0")} {count === 1 ? "entry" : "entries"}</span>
+        )}
       </div>
     </header>
   );
 }
-

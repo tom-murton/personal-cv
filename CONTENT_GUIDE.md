@@ -45,7 +45,7 @@ Import only missing portfolio records:
 npm run cms:seed:apply
 ```
 
-The import currently prepares 30 deterministically named portfolio documents. It uses Sanity's `--missing` mode: existing documents are skipped, not replaced. After the three required settings documents exist, the public site automatically starts using Sanity. Until then, it continues to use the complete checked-in content.
+The import currently prepares 31 deterministically named portfolio documents. It uses Sanity's `--missing` mode: existing documents are skipped, not replaced. After the three required settings documents exist, the public site automatically starts using Sanity. Until then, it continues to use the complete checked-in content.
 
 ## What can be controlled in the admin
 
@@ -65,6 +65,10 @@ The editor checks that each row contains the right number of projects for its pr
 ### Projects, writing, talks and CV
 
 Each collection has its own documents. Add, edit or archive entries there. **Collection pages** controls the introduction and the drag-and-drop order on `/projects`, `/writing`, `/talks` and `/cv`.
+
+Project statuses use a controlled set: **Shipped**, **Live**, **Launch-staged**, **Building**,
+**Testing**, **Running** and **Internal**. Use **Launch-staged** when the build and store
+material exist but account or submission work still prevents a public release.
 
 When a hosted writing item has **Related portfolio project** set, its project card automatically shows a primary **Read the story** link. The project's own external link remains available as a secondary action.
 
@@ -90,6 +94,9 @@ This is deliberately a controlled design system, not an unrestricted page builde
 ## Publishing behaviour
 
 Sanity keeps drafts until **Publish** is pressed. The public site reads published records and listens for changes, so a published edit should appear without a redeploy. The Studio's Presentation view shows the site alongside the editor, but the current Vite site does not show unpublished draft text inside that preview.
+
+The one-off `npm run cms:draft:copy-fixes` command prepares the July 2026 site-audit
+corrections as drafts and verifies their content. It does not publish them.
 
 ## Local fallback
 

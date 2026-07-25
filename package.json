@@ -7,7 +7,7 @@
     "dev": "vite",
     "dev:studio": "npm --prefix studio run dev",
     "dev:all": "concurrently --kill-others-on-fail --names site,admin --prefix-colors cyan,magenta \"npm run dev\" \"npm run dev:studio\"",
-    "build": "vite build",
+    "build": "vite build && tsx scripts/generate-route-html.ts",
     "build:studio": "npm --prefix studio run build",
     "build:all": "npm run build && npm run build:studio",
     "build:dev": "vite build --mode development",
@@ -19,6 +19,7 @@
     "cms:login": "npm --prefix studio exec sanity login",
     "cms:seed": "tsx scripts/seed-sanity.ts",
     "cms:seed:apply": "tsx scripts/seed-sanity.ts --apply",
+    "cms:draft:copy-fixes": "cd studio && npm exec sanity -- exec scripts/prepare-copy-fixes.mjs --with-user-token",
     "cms:publish:level-best": "cd studio && npm exec sanity -- exec scripts/publish-level-best.mjs --with-user-token",
     "cms:verify": "tsx scripts/verify-cms-mapping.ts",
     "cms:verify:live": "tsx scripts/verify-live-cms.ts"

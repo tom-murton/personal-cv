@@ -43,7 +43,7 @@ export const homeSections: HomeSection[] = [
     enabled: true,
     eyebrow: "About",
     title: "A product lead with an engineering background, and a persistent need to make things.",
-    body: "I have spent my career helping teams make better product decisions. Building my own products is how I keep those instincts honest — from native iOS apps and games to internal tools and structured experiments.",
+    body: "I have spent my career helping teams make better product decisions. Building native apps, games and small experiments gives me a direct view of what happens after the roadmap — when the idea meets the code, the store and a real user.",
   },
 ];
 

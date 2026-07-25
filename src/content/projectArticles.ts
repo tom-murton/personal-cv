@@ -27,7 +27,7 @@ const projectArticleDrafts: WritingItem[] = [
     description: "An experiment in using generative video to explain the apps I build without producing the glossy, generic content people have learnt to ignore.",
     date: "19 July 2026",
     articleType: "project-story",
-    projectName: "Social Marketing",
+    projectName: "Marketing Engine",
     projectId: "marketing-engine",
     body: body("social-marketing", [
       { kind: "paragraph", text: "Building an app and explaining why it exists are two different jobs. I enjoy the first one far more. Once LightScout and Rest+Rise became real products, though, I could not keep treating the second as something I would eventually get around to." },
@@ -119,7 +119,7 @@ const projectArticleDrafts: WritingItem[] = [
       { kind: "quote", text: "The product is not the itinerary text. It is the confidence that the day holds together." },
       { kind: "h2", text: "Why it is unfinished" },
       { kind: "paragraph", text: "Somewhere is not one of the projects I want to describe as done. The app has a substantial working foundation, but the positioning, discovery experience and operational shape still need attention. It also needs the simple test I care about most: would I repeatedly choose one of its plans over doing the research myself?" },
-      { kind: "paragraph", text: "That is why it remains on the list rather than in an archive. Unlike an idea that was only entertaining during a hackathon, I can picture opening Somewhere on a free Saturday morning and asking it to get me out of the house. The next useful phase is not adding a longer feature list. It is returning to the core journey, using it for real trips and tightening every point where the generated plan loses credibility." },
+      { kind: "paragraph", text: "That is why it remains active rather than moving into an archive. Unlike an idea that was only entertaining during a hackathon, I can picture opening Somewhere on a free Saturday morning and asking it to get me out of the house. The next useful phase is not adding a longer feature list. It is returning to the core journey, using it for real trips and tightening every point where the generated plan loses credibility." },
       { kind: "paragraph", text: "The hackathon proved the concept could exist. The more interesting job is making it dependable enough that I stop thinking of it as a hackathon project at all." },
     ]),
   },

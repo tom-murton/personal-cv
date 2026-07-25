@@ -18,7 +18,7 @@ export const portfolioProject = defineType({
       type: "string",
       group: "content",
       options: {
-        list: ["Shipped", "Building", "Testing", "Running", "Internal"],
+        list: ["Shipped", "Live", "Launch-staged", "Building", "Testing", "Running", "Internal"],
         layout: "radio",
       },
       validation: (rule) => rule.required(),

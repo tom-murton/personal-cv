@@ -16,16 +16,16 @@
     }
   ],
   "rewrites": [
-    { "source": "/projects", "destination": "/index.html" },
-    { "source": "/projects/ship-a-game", "destination": "/index.html" },
-    { "source": "/projects/ship-a-game/(.*)", "destination": "/index.html" },
-    { "source": "/writing", "destination": "/index.html" },
-    { "source": "/writing/(.*)", "destination": "/index.html" },
-    { "source": "/talks", "destination": "/index.html" },
-    { "source": "/cv", "destination": "/index.html" },
-    { "source": "/admin", "destination": "/index.html" },
-    { "source": "/designs", "destination": "/index.html" },
-    { "source": "/designs/(.*)", "destination": "/index.html" }
+    { "source": "/projects", "destination": "/projects/index.html" },
+    { "source": "/projects/ship-a-game", "destination": "/projects/ship-a-game/index.html" },
+    { "source": "/projects/ship-a-game/:game", "destination": "/projects/ship-a-game/:game/index.html" },
+    { "source": "/writing", "destination": "/writing/index.html" },
+    { "source": "/writing/:slug", "destination": "/writing/:slug/index.html" },
+    { "source": "/talks", "destination": "/talks/index.html" },
+    { "source": "/cv", "destination": "/cv/index.html" },
+    { "source": "/admin", "destination": "/admin/index.html" },
+    { "source": "/designs", "destination": "/designs/index.html" },
+    { "source": "/designs/:slug", "destination": "/designs/:slug/index.html" }
   ],
   "headers": [
     {

@@ -26,7 +26,7 @@ Use these Vercel project settings:
 - output directory: `dist`;
 - install command: `npm install`.
 
-The checked-in `vercel.json` applies those build settings, explicit SPA rewrites for public React routes, legacy route redirects and security/cache headers. It deliberately does not use a universal rewrite: unknown top-level paths are served by `public/404.html` with a real 404 response.
+The checked-in `vercel.json` applies those build settings, explicit rewrites for public React routes, legacy route redirects and security/cache headers. The build generates a small route-specific HTML shell for each portfolio route so crawlers and link previews receive the correct title, description, canonical URL and indexing directive before JavaScript runs. Unknown top-level paths still reach `public/404.html` with a real 404 response; there is no universal rewrite.
 
 Add these production environment variables in Vercel:
 

@@ -1,4 +1,11 @@
-export type ProjectStatus = "Shipped" | "Building" | "Testing" | "Running" | "Internal";
+export type ProjectStatus =
+  | "Shipped"
+  | "Live"
+  | "Launch-staged"
+  | "Building"
+  | "Testing"
+  | "Running"
+  | "Internal";
 
 export type ProjectArtworkPreset =
   | "lightscout"
