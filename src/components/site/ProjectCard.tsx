@@ -17,9 +17,6 @@ export function ProjectCard({ project, size, index }: ProjectCardProps) {
   const quietMotion = site.theme.motion === "quiet";
   const expressiveMotion = site.theme.motion === "expressive";
   const projectStory = writing.find((item) => item.body?.length && item.projectId === project.id);
-  // Ship a Game has its own canonical benchmark site; the personal editorial
-  // article remains here as Tom's perspective on the experiment.
-  const isShipAGame = project.id === "gaming-benchmark";
 
   return (
     <motion.article
@@ -42,11 +39,7 @@ export function ProjectCard({ project, size, index }: ProjectCardProps) {
         <h3>{project.name}</h3>
         <p>{project.summary}</p>
         <div className="pg-project-card__links">
-          {isShipAGame ? (
-            <a className="pg-project-card__story-link" href="https://shipagame.weevolve.app/" target="_blank" rel="noreferrer">
-              See the benchmark<ArrowRight aria-hidden="true" />
-            </a>
-          ) : projectStory ? (
+          {projectStory ? (
             <Link className="pg-project-card__story-link" to={`/writing/${projectStory.id}`}>
               Read the story<ArrowRight aria-hidden="true" />
             </Link>
