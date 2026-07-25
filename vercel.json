@@ -13,12 +13,20 @@
       "source": "/instagram",
       "destination": "https://www.instagram.com/tom.murton",
       "permanent": false
+    },
+    {
+      "source": "/projects/ship-a-game",
+      "destination": "https://shipagame.weevolve.app/",
+      "permanent": true
+    },
+    {
+      "source": "/projects/ship-a-game/:game",
+      "destination": "https://shipagame.weevolve.app/games/:game",
+      "permanent": true
     }
   ],
   "rewrites": [
     { "source": "/projects", "destination": "/projects/index.html" },
-    { "source": "/projects/ship-a-game", "destination": "/projects/ship-a-game/index.html" },
-    { "source": "/projects/ship-a-game/:game", "destination": "/projects/ship-a-game/:game/index.html" },
     { "source": "/writing", "destination": "/writing/index.html" },
     { "source": "/writing/:slug", "destination": "/writing/:slug/index.html" },
     { "source": "/talks", "destination": "/talks/index.html" },

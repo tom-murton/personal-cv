@@ -1,6 +1,5 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { benchmarkGames, benchmarkMeta } from "../src/content/benchmarks";
 import { collections } from "../src/content/collections";
 import { projectArticles } from "../src/content/projectArticles";
 
@@ -21,16 +20,6 @@ const publicRoutes: RouteMetadata[] = [
     title: "Projects",
     description: collections.projects.description,
   },
-  {
-    path: "/projects/ship-a-game",
-    title: "Ship a Game",
-    description: benchmarkMeta.standfirst,
-  },
-  ...benchmarkGames.map((game) => ({
-    path: `/projects/ship-a-game/${game.slug}`,
-    title: `${game.name} — Ship a Game`,
-    description: game.summary,
-  })),
   {
     path: "/writing",
     title: "Writing",

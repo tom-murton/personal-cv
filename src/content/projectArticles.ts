@@ -79,7 +79,11 @@ const projectArticleDrafts: WritingItem[] = [
     articleType: "project-story",
     projectName: "Ship a Game",
     projectId: "gaming-benchmark",
-    links: [{ label: "See Brinkball", href: "https://tom-murton.github.io/brinkball/" }],
+    links: [
+      { label: "Explore the live benchmark", href: "https://shipagame.weevolve.app/" },
+      { label: "Read the Brinkball report", href: "https://shipagame.weevolve.app/games/brinkball" },
+      { label: "Read the Ringbloom report", href: "https://shipagame.weevolve.app/games/ringbloom" },
+    ],
     body: body("gaming-benchmark", [
       { kind: "paragraph", text: "Every new frontier model arrives with a fresh set of benchmark scores. Soon afterwards, YouTube fills with people asking it to build a web game. The results are often impressive for a few minutes, but they leave out most of the difficult questions. Did the model research what makes the genre work? Is the game still interesting after the novelty wears off? Can it handle assets, testing, store requirements and the long tail of getting a real product ready to submit?" },
       { kind: "paragraph", text: "I wanted to test the whole journey. Ship a Game gives a model one challenge: research, design, build and prepare a paid iOS game for App Store Connect. The human only handles the account actions Apple requires from the account holder and the final submission tap." },
@@ -88,7 +92,7 @@ const projectArticleDrafts: WritingItem[] = [
       { kind: "paragraph", text: "I record nudges, fixes and rescues. A model that makes a good game after several targeted corrections has demonstrated something useful, but it has not demonstrated full autonomy. The log makes that distinction legible. It also makes failure interesting: the point is to see where the current boundary really is, not to manufacture a win for a preferred model." },
       { kind: "paragraph", text: "Each model runs in its own first-party coding environment on the same provisioned Mac, with the same broad capability surface and the same challenge. It can choose its engine and its approach. The benchmark therefore tests research, planning, taste, tool use, debugging and delivery together." },
       { kind: "h2", text: "The surprising answer so far" },
-      { kind: "paragraph", text: "The models can build the games. Ringbloom, built through Codex, shipped. Brinkball, built in Claude Code, reached Ready for Review with two nudges and no fixes or rescues. That is a much stronger result than generating a playable web prototype in a browser tab." },
+      { kind: "paragraph", text: "The models can build the games. Ringbloom, built through Codex, and Brinkball, started in Claude Code, are both live on the App Store. Brinkball reached its first submission with two nudges and no fixes or rescues; its later improvement round also exposed an important model-fallback complication that the full report documents. That is a much stronger—and messier—result than generating a playable web prototype in a browser tab." },
       { kind: "paragraph", text: "The more interesting question is whether the world finds the games fun. I do, but I am both the person running the experiment and someone unusually interested in the process. Store approval, purchases, play time and retention are harder tests than my own enthusiasm. Those results need to remain separate from the autonomy score: a model can ship efficiently and still make a mediocre game, or need help while making something people love." },
       { kind: "quote", text: "Shipping is one result. Making something strangers choose to keep playing is another." },
       { kind: "h2", text: "Why do the models keep making puzzle games?" },

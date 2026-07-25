@@ -38,7 +38,9 @@ another agent. Stage only the files that belong to the requested change.
 - `src/sanity/query.ts` and `src/sanity/mapPortfolioContent.ts` query and map Sanity.
 - `studio/schemaTypes/` defines the editable CMS documents and objects.
 - `studio/structure.ts` defines the editor navigation.
-- `src/content/benchmarks.ts` contains the code-backed Ship a Game benchmark.
+- `src/content/benchmarks.ts` preserves the former code-backed Ship a Game pages as a
+  compatibility snapshot. The canonical benchmark and all new reports live in the
+  separate `ship-a-game-site` repository at `https://shipagame.weevolve.app`.
 - `public/apps/` may contain standalone public pages for individual apps. Treat them as
   independent artefacts and do not delete or rewrite them incidentally.
 
@@ -121,6 +123,9 @@ assuming the external action succeeded.
 - Do not replace Sanity with another CMS without an explicit architectural decision.
 - Do not edit generated `dist/`, `studio/dist/` or dependency folders.
 - Keep the archived `/designs` examples available.
+- Keep Level Best at `/apps/level-best/`; it is a product hub within Tom's site.
+- Link Ship a Game project cards and editorial references to
+  `https://shipagame.weevolve.app`; do not publish new benchmark reports here.
 - Keep `public/sw.js` and `public/registerSW.js` during the legacy PWA retirement window;
   returning browsers on both public origins need those exact paths to clear old caches.
 - Update the relevant guide when setup, content behaviour or deployment behaviour changes.

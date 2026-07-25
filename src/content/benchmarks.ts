@@ -1,13 +1,12 @@
 import type { ArticleBlock } from "@/content/types";
 
 // ---------------------------------------------------------------------------
-// Ship a Game — benchmark data
+// Ship a Game — compatibility snapshot
 //
-// This is the source of truth for the /projects/ship-a-game hub and every
-// per-game page (/projects/ship-a-game/:slug). To PUBLISH a new game, append a
-// BenchmarkGame object to `benchmarkGames` below (round 3 of the benchmark —
-// the model writes its own `review` and fills the objective score fields from
-// the run logs). See the format notes at the bottom.
+// The canonical benchmark now lives at https://shipagame.weevolve.app and its
+// source is the separate ship-a-game-site repository. These entries preserve
+// the former TomMurton.com pages as a recovery snapshot. Production requests
+// for /projects/ship-a-game/* redirect to the canonical site.
 //
 // Every scoring field beyond `autonomy` is OPTIONAL: the pages render whatever
 // exists and show an em-dash for the rest, so entries can start minimal and
@@ -456,14 +455,9 @@ export const benchmarkGames: BenchmarkGame[] = [
 export const benchmarkGameBySlug = new Map(benchmarkGames.map((game) => [game.slug, game]));
 
 // ---------------------------------------------------------------------------
-// PUBLISHING A NEW GAME (round 3)
+// PUBLISHING A NEW GAME
 //
-// Append one BenchmarkGame object above. From the run logs, fill the OBJECTIVE
-// fields: autonomy (round 1 tallies), improveScore (round 2), articleScore
-// (round 3 — your own log), buildStats where the logs record time/cost, and
-// appleReview/appStoreUrl/price when known. Then write `review` with
-// reviewBody(slug, [...]) — the model's own first-person write-up — and remove
-// `reviewPending`. NEVER fill `quality` or `reception` yourself: quality is
-// judged independently after the run, reception comes from store/analytics
-// data later. Commit; Vercel redeploys.
+// Do not add it here. Add the completed MDX report and assets to
+// ship-a-game-site/content/games, then update WeEvolve's product link/status.
+// Keep missing quality, playtest and reception evidence explicit.
 // ---------------------------------------------------------------------------
