@@ -47,3 +47,10 @@ npm run lint
 
 The lint check currently completes without errors. It reports six Fast Refresh warnings in
 shared UI component files; these do not affect production builds.
+
+## Hosting
+
+The site is configured for Cloudflare Workers static assets in `wrangler.jsonc`. The build
+generates Cloudflare redirects alongside route-specific HTML, while `public/_headers`
+preserves cache and security headers. See [DEPLOYMENT.md](./DEPLOYMENT.md) for the live
+domain, Sanity CORS and rollback details.

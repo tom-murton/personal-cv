@@ -14,6 +14,20 @@ const origin = "https://tommurton.com";
 const outputDirectory = join(process.cwd(), "dist");
 const sourceHtml = await readFile(join(outputDirectory, "index.html"), "utf8");
 
+const legacyRedirects = [
+  "/home / 308",
+  "/about /#about 308",
+  "/work /cv 308",
+  "/experience /cv 308",
+  "/articles /writing 308",
+  "/instagram https://www.instagram.com/tom.murton 307",
+  "/projects/ship-a-game https://shipagame.weevolve.app/ 308",
+];
+
+const parameterisedRedirects = [
+  "/projects/ship-a-game/:game https://shipagame.weevolve.app/games/:game 308",
+];
+
 const publicRoutes: RouteMetadata[] = [
   {
     path: "/projects",
@@ -105,5 +119,15 @@ for (const route of [...publicRoutes, ...privateRoutes]) {
   await mkdir(routeDirectory, { recursive: true });
   await writeFile(join(routeDirectory, "index.html"), replaceMeta(sourceHtml, route));
 }
+
+const routeRewrites = [...publicRoutes, ...privateRoutes].flatMap((route) => [
+  `${route.path} ${route.path}/index.html 200`,
+  `${route.path}/ ${route.path}/index.html 200`,
+]);
+
+await writeFile(
+  join(outputDirectory, "_redirects"),
+  `${[...legacyRedirects, "/ /index.html 200", ...routeRewrites, ...parameterisedRedirects].join("\n")}\n`,
+);
 
 console.log(`Generated route metadata for ${publicRoutes.length} public and ${privateRoutes.length} private routes.`);

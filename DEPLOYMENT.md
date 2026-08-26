@@ -1,6 +1,6 @@
 # Deployment
 
-The public portfolio is a Vite site hosted on Vercel. Content and images live in Sanity, and the private editor is a separately built Sanity Studio.
+The public portfolio is a Vite site deployed as static assets on Cloudflare Workers. Content and images live in Sanity, and the private editor is a separately built Sanity Studio. The former Vercel deployment remains available as a short-term rollback target during the migration window.
 
 - Public site: `https://tommurton.com`
 - Private editor: `https://tom-murton-site-admin.sanity.studio/admin`
@@ -15,9 +15,15 @@ Do not delete `public/sw.js` or `public/registerSW.js`, or restore the Vercel do
 `www` redirect, until the legacy service-worker migration window has passed. A redirected
 worker script cannot update a worker registered on the `www` origin.
 
-The Vercel project is connected to `tom-murton/personal-cv`. Every push to `main` automatically creates a production deployment; pushes to other branches create preview deployments. `npm run deploy` remains available for an intentional manual production deployment, but it is not needed for normal releases.
+Cloudflare Worker: `tom-murton-site`. Build with `npm run build` and deploy the generated `dist` directory. `wrangler.jsonc` pins the static-assets configuration; `_headers` and the generated `_redirects` file preserve the former Vercel cache, security, redirect and clean-route behaviour.
 
-## Public site on Vercel
+The checked-in Cloudflare configuration deliberately uses `html_handling: "none"`. Route-specific 200 rewrites serve both `/route` and `/route/` without redirecting either form, matching the existing public contract. Unknown paths use `public/404.html` and return a real 404.
+
+The `workers.dev` preview origin must be present in the Sanity project's CORS origins so preview builds can load the same published content as production. Keep preview origins protected from indexing or disable them after validation.
+
+The Vercel project remains connected to `tom-murton/personal-cv` for rollback during the 48-hour post-cutover observation window. Do not remove its domains or project until that window has passed cleanly.
+
+## Legacy Vercel configuration
 
 Use these Vercel project settings:
 
@@ -28,7 +34,7 @@ Use these Vercel project settings:
 
 The checked-in `vercel.json` applies those build settings, explicit rewrites for public React routes, legacy route redirects and security/cache headers. The build generates a small route-specific HTML shell for each portfolio route so crawlers and link previews receive the correct title, description, canonical URL and indexing directive before JavaScript runs. Unknown top-level paths still reach `public/404.html` with a real 404 response; there is no universal rewrite.
 
-Add these production environment variables in Vercel:
+These public build variables were configured in Vercel:
 
 ```text
 VITE_SANITY_PROJECT_ID=jbch6ec7
@@ -36,7 +42,7 @@ VITE_SANITY_DATASET=production
 VITE_SANITY_STUDIO_URL=https://tom-murton-site-admin.sanity.studio/admin
 ```
 
-`VITE_SANITY_ENABLED` normally stays unset. Set it to `false` only to force the checked-in fallback content.
+The Cloudflare build does not require them: the public Sanity project, dataset and deployed Studio URL have production-safe code defaults. `VITE_SANITY_ENABLED` normally stays unset. Set it to `false` only to force the checked-in fallback content.
 
 ## Private editor
 

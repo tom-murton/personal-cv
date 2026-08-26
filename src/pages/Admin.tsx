@@ -3,7 +3,10 @@ import { ArrowUpRight } from "lucide-react";
 import { SiteFrame } from "@/components/site/SiteFrame";
 
 const configuredStudioUrl = import.meta.env.VITE_SANITY_STUDIO_URL as string | undefined;
-const studioUrl = configuredStudioUrl ?? (import.meta.env.DEV ? "http://127.0.0.1:3333/admin" : undefined);
+const studioUrl = configuredStudioUrl
+  ?? (import.meta.env.DEV
+    ? "http://127.0.0.1:3333/admin"
+    : "https://tom-murton-site-admin.sanity.studio/admin");
 
 export default function Admin() {
   useEffect(() => {
