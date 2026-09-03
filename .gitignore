@@ -24,3 +24,14 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+
+# Standard studio ignore rules (3 Sep 2026 audit)
+.env
+.env.*
+!.env.example
+!.env.sample
+excalidraw.log
+firebase-debug.log
+.claude/settings.local.json
+node_modules/
+dist/
