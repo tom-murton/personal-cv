@@ -3,7 +3,9 @@
 This is Tom Murton's public portfolio, built with React, TypeScript and Vite. The
 production Project Gallery is the primary experience; writing, talks and the CV are
 supporting collections. A private Sanity Studio in `studio/` manages published content
-and appearance.
+and appearance. The audience is prospective employers and collaborators assessing Tom
+through concrete work, outcomes and clear product judgement. Never invent experience or
+results to strengthen the story.
 
 Inspect `git status` before editing. Preserve unrelated or untracked work and stage only
 files belonging to the task.
@@ -75,10 +77,19 @@ configuration or deployments.
 
 ## Publishing and deployment
 
-Pushing `main` creates a production Vercel deployment; other branches create protected
-previews. Publishing a Sanity document can update the live site without a code deployment.
+Follow `DEPLOYMENT.md` and verify the destination: a generic `deploy` script is not proof
+that it targets the current production host. Pushing `main` creates a production Vercel
+deployment; other branches create protected previews. Publishing a Sanity document can update the live site without a code deployment.
 
 Push, preview or deploy when the requested task calls for it. Do not publish Sanity drafts,
 change Vercel, Sanity, DNS or account settings, or merge to `main` unless the task explicitly
 includes that action. Verify the resulting deployment or published content in the destination
 system and report whether the work is local, pushed, previewed, deployed or published.
+
+## Working agreements
+
+Use a task branch; reuse an existing branch/worktree only for the same task and preserve
+unrelated changes. Complete the requested scope and appropriate checks without routine
+approval pauses. Keep current work in the existing tracker; update an instruction only
+when this task changes its meaning or invalidates its references. Skills are optional
+sources of relevant expertise, not a mandatory sequence for every change.
