@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Level Best: Bleep Test Trainer Privacy Policy</title>
-<meta name="description" content="Privacy policy for Level Best, including its anonymous product analytics and privacy-preserving install attribution.">
+<meta name="description" content="Privacy policy for Level Best, including optional product analytics, crash diagnostics and install attribution.">
 <link rel="canonical" href="https://tommurton.com/apps/level-best/privacy/">
 <meta property="og:title" content="Level Best privacy policy">
-<meta property="og:description" content="Your scores stay on your device. Limited anonymous measurement can be turned off in the app.">
+<meta property="og:description" content="Your scores stay on your device. Product measurement and install attribution are optional.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tommurton.com/apps/level-best/privacy/">
 <meta name="robots" content="index,follow">
@@ -40,34 +40,40 @@
   <hr>
 
   <h2>Privacy Policy</h2>
-  <p class="date">Effective 1 September 2026</p>
+  <p class="date">Updated 15 September 2026 — the permission choice applies from build 32</p>
 
   <h2>The short version</h2>
-  <p>Your scores, goals, profile details and runner names stay on your device. Limited anonymous
-     product analytics and privacy-preserving install attribution start on and can each be turned
-     off at any time in Settings.</p>
+  <p>Your scores, goals, profile details and runner names stay on your device. Product analytics
+     and install attribution are optional, with separate choices in the app. From build 32,
+     each service starts after you allow it. Earlier builds enabled both by default;
+     you can turn either off in Settings.</p>
 
   <h2>Product analytics and attribution</h2>
   <p>Level Best sends limited product-usage events to PostHog, our analytics processor. We use them
      only to understand and improve Level Best and provide an easy opt-out in Settings. The events
      tell us things such as whether onboarding was completed,
      a run was started or finished, a result was saved, a paywall was viewed, and whether a purchase
-     or restore flow succeeded. They can also include the app version and build, operating-system
+     or restore flow succeeded, which app screens and features were opened, and whether audio
+     or saving failed. They can also include the app version and build, operating-system
      version, general device type, a random app-install identifier and broad product state such as
-     free or Pro access.</p>
+     free or Pro access. The random identifier links actions across visits on this installation
+     to measure journeys and returning use. This is pseudonymous usage data, not a named account.
+     We also receive crash types and technical stack information to diagnose faults; exception
+     messages and interaction breadcrumbs are excluded from build 32.</p>
   <p>AppsFlyer measures an install or app launch so we can understand which marketing activity led
      people to Level Best. AppsFlyer receives no Level Best scores,
      profile information, purchase events or other in-app product events. We use AppsFlyer’s strict
      SDK, disable collection of Apple’s advertising identifier and identifier for vendors, do not
      personalise advertising, and do not track you across other companies’ apps or websites.</p>
-  <p>Analytics events never include your score, time, distance, goals, test dates, age, sex, runner
+  <p>Analytics events never include your score, exercise time, distance, exact goals, test dates, age, sex, runner
      names, contacts, advertising identifiers or payment details. We do not create an analytics
-     profile for you, identify you, use session replay, record screen contents or track you across
+     person profile for you, associate your identifier with your name, use session replay, record screen contents or track you across
      other apps or websites. PostHog stores this data in its EU service, and Level Best instructs
      PostHog not to use or retain your IP address for location enrichment.</p>
   <p>You can turn product analytics and install attribution off separately at any time under Settings
      → Privacy. Turning either one off does not limit the app and stops that future measurement from
-     this installation.</p>
+     this installation. From build 32, permission is the basis for these optional services;
+     automatically enabled settings from older builds are not treated as permission.</p>
 
   <h2>What stays on your device</h2>
   <p>Your test scores, training history, goals, settings and any squad or runner names you enter
@@ -77,7 +83,7 @@
 
   <h2>Purchases</h2>
   <p>Level Best Pro is a one-off in-app purchase. Payment and purchase entitlement are handled by
-     Apple through the App Store. We never see your payment details. If you allowed analytics, we
+     Apple through the App Store. We never see your payment details. If analytics is enabled, we
      may receive only the product identifier and the outcome of a purchase or restore attempt.</p>
 
   <h2>Children</h2>
