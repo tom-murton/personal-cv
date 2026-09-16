@@ -19,6 +19,8 @@ Cloudflare Worker: `tom-murton-site`. Build with `npm run build` and deploy the 
 
 The checked-in Cloudflare configuration deliberately uses `html_handling: "none"`. Route-specific 200 rewrites serve both `/route` and `/route/` without redirecting either form, matching the existing public contract. Unknown paths use `public/404.html` and return a real 404.
 
+The Level Best app calls `GET /apps/level-best/measurement-region` to obtain Cloudflare's ISO country code (or `null` when unavailable) and policy version. Only this exact path runs the Worker before static assets. The response has no identifier, cookie or stored request data and is marked `private, no-store`; other paths retain static asset routing. Test the endpoint with `node --test worker/measurement-region.test.mjs` and include `wrangler deploy --dry-run` before deployment. Local `wrangler dev` may return `null` because it does not have Cloudflare's real visitor country metadata.
+
 The `workers.dev` preview origin must be present in the Sanity project's CORS origins so preview builds can load the same published content as production. Keep preview origins protected from indexing or disable them after validation.
 
 The Vercel project remains connected to `tom-murton/personal-cv` for rollback during the 48-hour post-cutover observation window. Do not remove its domains or project until that window has passed cleanly.
