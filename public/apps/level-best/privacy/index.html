@@ -30,7 +30,7 @@
      and install attribution are optional, with separate controls in Settings → Privacy.
      From build 33, both are enabled by default in the United States, Australia and New Zealand
      unless you have already opted out. In other countries we wait for your choice: a small in-app
-     card offers product analytics, and install attribution can be enabled separately in Settings.
+     card offers product analytics and a separate install-attribution option. Both can also be changed in Settings.
      If we cannot determine the country, neither starts automatically. Earlier builds enabled both
      by default. Build 32 was prepared with separate choices but was not released.</p>
 
@@ -71,7 +71,7 @@
      in-flight request is not recalled.</p>
 
   <h2>Country check</h2>
-  <p>From build 33, the app makes a short request to our website, hosted by Cloudflare, to determine
+  <p>From build 33, the app makes a short request to our country-check service, hosted by Cloudflare, to determine
      the connection's country from its IP address. The request contains no analytics installation ID,
      fitness information or GPS location. Our endpoint returns only a country code and policy version;
      it does not store the request or set cookies. Cloudflare necessarily processes connection data
