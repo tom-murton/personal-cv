@@ -23,16 +23,13 @@
 <body>
 <main>
   <h1>Level Best: Bleep Test Trainer — Privacy Policy</h1>
-  <p class="date">Updated 16 September 2026 — regional measurement applies from build 33</p>
+  <p class="date">Updated 19 September 2026 — these changes apply from build 33</p>
 
   <h2>The short version</h2>
   <p>Your scores, goals, profile details and runner names stay on your device. Product analytics
-     and install attribution are optional, with separate controls in Settings → Privacy.
-     From build 33, both are enabled by default in the United States, Australia and New Zealand
-     unless you have already opted out. In other countries we wait for your choice: a small in-app
-     card offers product analytics and a separate install-attribution option. Both can also be changed in Settings.
-     If we cannot determine the country, neither starts automatically. Earlier builds enabled both
-     by default. Build 32 was prepared with separate choices but was not released.</p>
+     and Apple's aggregate install attribution are enabled by default from build 33, with separate
+     controls under Settings → Privacy. You can turn either off without limiting the app, and an
+     existing opt-out stays off. Build 32 was prepared but never distributed.</p>
 
   <h2>Analytics and attribution</h2>
   <p>Level Best sends limited product-usage events to PostHog, our analytics processor. These events
@@ -44,18 +41,18 @@
      free or Pro access. The random identifier links actions across visits on this installation
      to measure journeys and returning use. This is pseudonymous usage data, not a named account.
      We also receive crash types and technical stack information to diagnose faults; exception
-     messages and interaction breadcrumbs are excluded in the prepared build 33.</p>
-  <p>AppsFlyer measures an install or app launch so we can understand which marketing activity led
-     people to Level Best. AppsFlyer receives no Level Best scores,
-     profile information, purchase events or other in-app product events. We use AppsFlyer’s strict
-     SDK, disable collection of Apple’s advertising identifier and identifier for vendors, do not
-     personalise advertising, and do not track you across other companies’ apps or websites.</p>
+     messages and interaction breadcrumbs are excluded from build 33.</p>
   <p>When install attribution is enabled, we also ask Apple's privacy-preserving attribution system
-     to register an install. Apple can send delayed, limited campaign reports to the advertising
-     network involved. We do not encode fitness results or purchase information in that signal,
-     or configure automatic copies to AppsFlyer. A report already registered with Apple may be
-     delivered after you turn attribution off. App Store campaign and sales reports are separate
-     Apple services and are not controlled by these app settings.</p>
+     to register three conversion milestones: install, completed first-run onboarding and a
+     successful purchase. These values contain no purchase amount or product, fitness result,
+     profile detail, advertising identifier or Level Best installation identifier. Apple can send
+     delayed aggregate campaign reports to a participating advertising network, which may forward
+     them to AppsFlyer so we can assess marketing. From build 33, Level Best has no AppsFlyer SDK,
+     sends no data directly to AppsFlyer and does not configure an automatic Apple postback copy.</p>
+  <p>Released builds before build 33 may instead send install and app-launch information directly
+     to AppsFlyer through its strict SDK. Those builds send no scores, profile information, purchase
+     events or other in-app product events to AppsFlyer; collection of Apple's advertising identifier
+     and identifier for vendors is disabled.</p>
   <p>Analytics events never include your score, exercise time, distance, exact goals, test dates, age, sex, runner
      names, contacts, advertising identifiers or payment details. We do not create an analytics
      person profile for you, associate your identifier with your name, use session replay, record screen contents or track you across
@@ -63,20 +60,15 @@
      PostHog not to use your IP address for location enrichment. This does not mean that
      network providers never process connection information to deliver or secure requests.</p>
   <p>You can turn product analytics or install attribution off at any time under Settings → Privacy.
-     Either choice can be changed later and does not limit the app. An existing opt-out is preserved
-     regardless of country. We rely on our legitimate interest in improving the product and assessing
-     our marketing for default-on measurement, and consent where we ask you to enable a service.
-     Automatically enabled settings from older builds are not treated as affirmative consent.
-     Turning a setting off stops new app usage and attribution events; data already sent or an
-     in-flight request is not recalled.</p>
-
-  <h2>Country check</h2>
-  <p>From build 33, the app makes a short request to our country-check service, hosted by Cloudflare, to determine
-     the connection's country from its IP address. The request contains no analytics installation ID,
-     fitness information or GPS location. Our endpoint returns only a country code and policy version;
-     it does not store the request or set cookies. Cloudflare necessarily processes connection data
-     to provide and secure the service. A VPN can affect the country detected. This check does not
-     block use of the app. Your device language and App Store country are not used to guess location.</p>
+     Either choice can be changed later and does not limit the app. Existing declines are preserved;
+     the default-on setting is not treated as an affirmative choice. Turning product analytics off
+     stops new app-usage and diagnostic data being sent. Turning install attribution off stops future
+     conversion-value updates, but an Apple postback already registered may still be delivered.
+     Data already sent or an in-flight request is not recalled.</p>
+  <p>We rely on our legitimate interests in improving Level Best and understanding its marketing as
+     the data-protection basis for this limited measurement where that basis applies. This does not
+     claim that product analytics or attribution qualifies for a consent exemption under every
+     country's separate device-storage or access rules.</p>
 
   <h2>What stays on your device</h2>
   <p>Your test scores, training history, goals, settings and any squad or runner names you enter
@@ -87,7 +79,9 @@
   <h2>Purchases</h2>
   <p>Level Best Pro is a one-off in-app purchase. Payment and purchase entitlement are handled by
      Apple through the App Store. We never see your payment details. If analytics is enabled, we
-     may receive only the product identifier and the outcome of a purchase or restore attempt.</p>
+     may receive only the product identifier and the outcome of a purchase or restore attempt.
+     If install attribution is enabled, a successful purchase can also advance Apple's aggregate
+     conversion value without identifying the product or amount.</p>
 
   <h2>Children</h2>
   <p>Level Best does not knowingly collect names, contact details or performance data from children.

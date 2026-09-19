@@ -1,15 +1,12 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "tom-murton-site",
-  "main": "./worker/measurement-region.mjs",
   "compatibility_date": "2026-08-26",
   "workers_dev": true,
   "preview_urls": true,
   "assets": {
     "directory": "./dist",
-    "binding": "ASSETS",
     "html_handling": "none",
-    "not_found_handling": "404-page",
-    "run_worker_first": ["/apps/level-best/measurement-region"]
+    "not_found_handling": "404-page"
   }
 }
