@@ -2,7 +2,7 @@
 
 A configurable portfolio for projects, writing, talks and career history. The live direction is the Project Gallery, backed by a private Sanity CMS. The alternative Codex and Claude prototypes remain available under `/designs`.
 
-AI development tools should start with [AGENTS.md](./AGENTS.md), the canonical guide to the architecture, sources of truth, validation and deployment boundaries. `CLAUDE.md` and `GEMINI.md` load the same instructions for their respective harnesses.
+AI development tools should start with [AGENTS.md](./AGENTS.md), the canonical guide to the architecture, sources of truth, validation and deployment boundaries. Codex and Claude Code read `AGENTS.md` directly; `GEMINI.md` loads the same instructions for Gemini.
 
 ## Local development
 
