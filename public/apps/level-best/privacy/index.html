@@ -23,15 +23,16 @@
 <body>
 <main>
   <h1>Level Best: Bleep Test Trainer — Privacy Policy</h1>
-  <p class="date">Updated 3 October 2026 — automatic interaction capture applies from version 1.4.3, currently being prepared</p>
+  <p class="date">Updated 9 October 2026 — Apple Health support applies from version 1.5</p>
 
   <h2>The short version</h2>
   <p>Your scores, goals, profile details and runner names stay on your device. Product analytics
      and Apple's aggregate install attribution are enabled by default from build 33, with separate
      controls under Settings → Privacy. You can turn either off without limiting the app, and an
      existing opt-out stays off. Level Best does not track you across other companies' apps or
-     websites and does not ask for Apple's tracking permission. Build 32 was prepared but never
-     distributed.</p>
+     websites and does not ask for Apple's tracking permission. From version 1.5 you can also choose
+     to save the runs you keep to Apple Health; Level Best only writes to Health and never reads it.
+     Build 32 was prepared but never distributed.</p>
 
   <h2>Analytics and attribution</h2>
   <p>Level Best sends limited product-usage events to PostHog, our analytics processor. These events
@@ -62,6 +63,13 @@
      to AppsFlyer through its strict SDK. Those builds send no scores, profile information, purchase
      events or other in-app product events to AppsFlyer; collection of Apple's advertising identifier
      and identifier for vendors is disabled.</p>
+  <p>From version 1.5, with the same setting, PostHog also receives events about Apple Health: whether
+     setup from the Home card or Settings was allowed, declined, postponed or failed; whether the
+     "Save runs to Apple Health" switch was turned on or off; when a workout session starts for a
+     home test or training run and when a run is saved to Apple Health, with only the test
+     type and whether it was a test or training run; and technical reasons when a workout session
+     fails, conflicts with another session or is recovered after an interruption, or when a save
+     fails or cannot be confirmed. These events carry no values from Health or from your runs.</p>
   <p>PostHog product analytics events never include your score, exercise time, distance, exact goals, test dates, age, sex, runner
      names, contacts, advertising identifiers or payment details. We do not create an analytics
      person profile for you, associate your PostHog identifier with your name, use session replay or record screen contents.
@@ -85,6 +93,28 @@
      are stored only on your device. If you delete the app, that data is deleted with it. When you
      share a score card or export squad results, the app hands that file to iOS so you can choose
      where it goes; the app itself transmits nothing.</p>
+
+  <h2>Apple Health</h2>
+  <p>Apple Health support is optional and off until you turn it on, from the one-time card on the Home
+     screen or from Settings → Apple Health. Level Best asks for permission to write workouts and
+     walking and running distance. It does not ask to read anything from Health and never reads
+     your Health data.</p>
+  <p>When Apple Health is on, each solo test or training run on iPhone (iOS 26 or later) runs as an
+     Apple Health workout session. This lets the Lock Screen and Dynamic Island card keep updating while
+     your phone is locked. The session is used only for that; it does not record heart rate or other
+     measurements and is discarded when the run ends.</p>
+  <p>Each test or training run you keep is saved to Apple Health as one indoor running workout with
+     its start and end time and its distance. No calories are saved. Runs you discard, squad runs
+     and pace checks are not saved.</p>
+  <p>Nothing from Apple Health is sent off your device, to analytics, to advertisers or to iCloud by
+     Level Best. Once a workout is in Apple Health, Apple manages it under your Health settings,
+     including Health sync with iCloud if you have turned that on, and other apps can see it only if
+     you give them access in Health. Level Best follows Apple's HealthKit requirements: Health data
+     is used only to provide health and fitness features, never for advertising, data mining or
+     sale.</p>
+  <p>To stop saving runs, turn off "Save runs to Apple Health" in Settings → Apple Health. To change
+     or remove Level Best's access, open Health › Profile › Apps › Level Best. Workouts already saved
+     stay in Apple Health until you delete them there.</p>
 
   <h2>Optional app feedback</h2>
   <p>The feedback form is available from Home, Settings, results and Support on the Level Best Pro
