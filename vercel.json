@@ -23,7 +23,13 @@
       "source": "/projects/ship-a-game/:game",
       "destination": "https://shipagame.weevolve.app/games/:game",
       "permanent": true
-    }
+    },
+    { "source": "/apps/foldlit/privacy", "destination": "https://weevolve.app/foldlit/privacy/", "permanent": true },
+    { "source": "/apps/foldlit/privacy/(.*)", "destination": "https://weevolve.app/foldlit/privacy/", "permanent": true },
+    { "source": "/apps/foldlit/support", "destination": "https://foldlit.weevolve.app/support/", "permanent": true },
+    { "source": "/apps/foldlit/support/(.*)", "destination": "https://foldlit.weevolve.app/support/", "permanent": true },
+    { "source": "/apps/foldlit", "destination": "https://foldlit.weevolve.app/", "permanent": true },
+    { "source": "/apps/foldlit/(.*)", "destination": "https://foldlit.weevolve.app/", "permanent": true }
   ],
   "rewrites": [
     { "source": "/projects", "destination": "/projects/index.html" },
