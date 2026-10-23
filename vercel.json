@@ -4,11 +4,31 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "redirects": [
-    { "source": "/home", "destination": "/", "permanent": true },
-    { "source": "/about", "destination": "/#about", "permanent": true },
-    { "source": "/work", "destination": "/cv", "permanent": true },
-    { "source": "/experience", "destination": "/cv", "permanent": true },
-    { "source": "/articles", "destination": "/writing", "permanent": true },
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/#about",
+      "permanent": true
+    },
+    {
+      "source": "/work",
+      "destination": "/cv",
+      "permanent": true
+    },
+    {
+      "source": "/experience",
+      "destination": "/cv",
+      "permanent": true
+    },
+    {
+      "source": "/articles",
+      "destination": "/writing",
+      "permanent": true
+    },
     {
       "source": "/instagram",
       "destination": "https://www.instagram.com/tom.murton",
@@ -24,22 +44,315 @@
       "destination": "https://shipagame.weevolve.app/games/:game",
       "permanent": true
     },
-    { "source": "/apps/foldlit/privacy", "destination": "https://weevolve.app/foldlit/privacy/", "permanent": true },
-    { "source": "/apps/foldlit/privacy/(.*)", "destination": "https://weevolve.app/foldlit/privacy/", "permanent": true },
-    { "source": "/apps/foldlit/support", "destination": "https://foldlit.weevolve.app/support/", "permanent": true },
-    { "source": "/apps/foldlit/support/(.*)", "destination": "https://foldlit.weevolve.app/support/", "permanent": true },
-    { "source": "/apps/foldlit", "destination": "https://foldlit.weevolve.app/", "permanent": true },
-    { "source": "/apps/foldlit/(.*)", "destination": "https://foldlit.weevolve.app/", "permanent": true }
+    {
+      "source": "/apps/foldlit/privacy",
+      "destination": "https://weevolve.app/foldlit/privacy/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/foldlit/privacy/(.*)",
+      "destination": "https://weevolve.app/foldlit/privacy/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/foldlit/support",
+      "destination": "https://foldlit.weevolve.app/support/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/foldlit/support/(.*)",
+      "destination": "https://foldlit.weevolve.app/support/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/foldlit",
+      "destination": "https://foldlit.weevolve.app/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/foldlit/(.*)",
+      "destination": "https://foldlit.weevolve.app/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best",
+      "destination": "https://levelbest.weevolve.app/reference/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/",
+      "destination": "https://levelbest.weevolve.app/reference/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/index.html",
+      "destination": "https://levelbest.weevolve.app/reference/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best.html",
+      "destination": "https://levelbest.weevolve.app/reference/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/15m-bleep-test-levels",
+      "destination": "https://levelbest.weevolve.app/reference/15m-bleep-test-levels/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/15m-bleep-test-levels/",
+      "destination": "https://levelbest.weevolve.app/reference/15m-bleep-test-levels/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/15m-bleep-test-levels/index.html",
+      "destination": "https://levelbest.weevolve.app/reference/15m-bleep-test-levels/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/15m-bleep-test-levels.html",
+      "destination": "https://levelbest.weevolve.app/reference/15m-bleep-test-levels/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/army-navy-raf-fitness-test",
+      "destination": "https://levelbest.weevolve.app/reference/army-navy-raf-fitness-test/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/army-navy-raf-fitness-test/",
+      "destination": "https://levelbest.weevolve.app/reference/army-navy-raf-fitness-test/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/army-navy-raf-fitness-test/index.html",
+      "destination": "https://levelbest.weevolve.app/reference/army-navy-raf-fitness-test/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/army-navy-raf-fitness-test.html",
+      "destination": "https://levelbest.weevolve.app/reference/army-navy-raf-fitness-test/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/bleep-test-by-age",
+      "destination": "https://levelbest.weevolve.app/reference/bleep-test-by-age/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/bleep-test-by-age/",
+      "destination": "https://levelbest.weevolve.app/reference/bleep-test-by-age/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/bleep-test-by-age/index.html",
+      "destination": "https://levelbest.weevolve.app/reference/bleep-test-by-age/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/bleep-test-by-age.html",
+      "destination": "https://levelbest.weevolve.app/reference/bleep-test-by-age/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/bleep-test-levels",
+      "destination": "https://levelbest.weevolve.app/reference/bleep-test-levels/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/bleep-test-levels/",
+      "destination": "https://levelbest.weevolve.app/reference/bleep-test-levels/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/bleep-test-levels/index.html",
+      "destination": "https://levelbest.weevolve.app/reference/bleep-test-levels/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/bleep-test-levels.html",
+      "destination": "https://levelbest.weevolve.app/reference/bleep-test-levels/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/bleep-test-vo2-max",
+      "destination": "https://levelbest.weevolve.app/reference/bleep-test-vo2-max/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/bleep-test-vo2-max/",
+      "destination": "https://levelbest.weevolve.app/reference/bleep-test-vo2-max/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/bleep-test-vo2-max/index.html",
+      "destination": "https://levelbest.weevolve.app/reference/bleep-test-vo2-max/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/bleep-test-vo2-max.html",
+      "destination": "https://levelbest.weevolve.app/reference/bleep-test-vo2-max/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/fire-service-bleep-test",
+      "destination": "https://levelbest.weevolve.app/reference/fire-service-bleep-test/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/fire-service-bleep-test/",
+      "destination": "https://levelbest.weevolve.app/reference/fire-service-bleep-test/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/fire-service-bleep-test/index.html",
+      "destination": "https://levelbest.weevolve.app/reference/fire-service-bleep-test/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/fire-service-bleep-test.html",
+      "destination": "https://levelbest.weevolve.app/reference/fire-service-bleep-test/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/police-bleep-test",
+      "destination": "https://levelbest.weevolve.app/reference/police-bleep-test/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/police-bleep-test/",
+      "destination": "https://levelbest.weevolve.app/reference/police-bleep-test/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/police-bleep-test/index.html",
+      "destination": "https://levelbest.weevolve.app/reference/police-bleep-test/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/police-bleep-test.html",
+      "destination": "https://levelbest.weevolve.app/reference/police-bleep-test/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/privacy",
+      "destination": "https://levelbest.weevolve.app/privacy/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/privacy/",
+      "destination": "https://levelbest.weevolve.app/privacy/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/privacy/index.html",
+      "destination": "https://levelbest.weevolve.app/privacy/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/privacy.html",
+      "destination": "https://levelbest.weevolve.app/privacy/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/support",
+      "destination": "https://levelbest.weevolve.app/support/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/support/",
+      "destination": "https://levelbest.weevolve.app/support/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/support/index.html",
+      "destination": "https://levelbest.weevolve.app/support/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/support.html",
+      "destination": "https://levelbest.weevolve.app/support/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/which-services-use-the-bleep-test",
+      "destination": "https://levelbest.weevolve.app/reference/which-services-use-the-bleep-test/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/which-services-use-the-bleep-test/",
+      "destination": "https://levelbest.weevolve.app/reference/which-services-use-the-bleep-test/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/which-services-use-the-bleep-test/index.html",
+      "destination": "https://levelbest.weevolve.app/reference/which-services-use-the-bleep-test/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/which-services-use-the-bleep-test.html",
+      "destination": "https://levelbest.weevolve.app/reference/which-services-use-the-bleep-test/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/yo-yo-test-levels",
+      "destination": "https://levelbest.weevolve.app/reference/yo-yo-test-levels/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/yo-yo-test-levels/",
+      "destination": "https://levelbest.weevolve.app/reference/yo-yo-test-levels/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/yo-yo-test-levels/index.html",
+      "destination": "https://levelbest.weevolve.app/reference/yo-yo-test-levels/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/yo-yo-test-levels.html",
+      "destination": "https://levelbest.weevolve.app/reference/yo-yo-test-levels/",
+      "permanent": true
+    },
+    {
+      "source": "/apps/level-best/sitemap.xml",
+      "destination": "https://levelbest.weevolve.app/sitemap.xml",
+      "permanent": true
+    }
   ],
   "rewrites": [
-    { "source": "/projects", "destination": "/projects/index.html" },
-    { "source": "/writing", "destination": "/writing/index.html" },
-    { "source": "/writing/:slug", "destination": "/writing/:slug/index.html" },
-    { "source": "/talks", "destination": "/talks/index.html" },
-    { "source": "/cv", "destination": "/cv/index.html" },
-    { "source": "/admin", "destination": "/admin/index.html" },
-    { "source": "/designs", "destination": "/designs/index.html" },
-    { "source": "/designs/:slug", "destination": "/designs/:slug/index.html" }
+    {
+      "source": "/projects",
+      "destination": "/projects/index.html"
+    },
+    {
+      "source": "/writing",
+      "destination": "/writing/index.html"
+    },
+    {
+      "source": "/writing/:slug",
+      "destination": "/writing/:slug/index.html"
+    },
+    {
+      "source": "/talks",
+      "destination": "/talks/index.html"
+    },
+    {
+      "source": "/cv",
+      "destination": "/cv/index.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin/index.html"
+    },
+    {
+      "source": "/designs",
+      "destination": "/designs/index.html"
+    },
+    {
+      "source": "/designs/:slug",
+      "destination": "/designs/:slug/index.html"
+    }
   ],
   "headers": [
     {
@@ -76,8 +389,14 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
         {
           "key": "Permissions-Policy",
           "value": "camera=(), microphone=(), geolocation=()"

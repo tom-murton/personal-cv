@@ -34,7 +34,7 @@ See [CONTENT_GUIDE.md](./CONTENT_GUIDE.md) for setup and editing instructions. T
 - `/cv` — career history
 - `/admin` — private content editor (redirects to the Studio)
 - `/designs` — archived design comparison
-- `/apps/level-best/` — standalone Level Best reference pages (preserved as public URLs)
+- `/apps/level-best/` — permanent redirects to Level Best reference, support and privacy pages on `levelbest.weevolve.app`
 
 ## Checks
 

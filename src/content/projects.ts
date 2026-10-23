@@ -22,7 +22,7 @@ export const projects: Project[] = [
     summary: "An offline bleep test trainer for police, fire and forces fitness tests, with the main UK test variants and published pass standards.",
     update: "Submitted to the App Store and in review. Free level charts and pass standards now live.",
     artwork: { type: "preset", preset: "level-best" },
-    href: "/apps/level-best/",
+    href: "https://levelbest.weevolve.app/",
     hrefLabel: "Bleep test charts",
   },
   {
