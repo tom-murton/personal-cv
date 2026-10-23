@@ -22,6 +22,10 @@ checks passed. Receiving site PR weevolve-site#50 merged at 02c7ec3; Cloudflare 
 94e8e334-e907-41c7-ab1c-84f7ffc454f2 succeeded. All 18 destination URLs returned 200
 on 23 October, including nine reference guides, privacy, support, the existing scheduled
 PACER article, sitemap and llms.txt; canonical and sitemap assertions passed. The
-production app → reference hub browser journey passed. Source redirects are ready
-for publication; their live verification follows this merge. This record owns the
+production app → reference hub browser journey passed. Source PR22 merged at 5b688bc; Vercel production deployment
+dpl_FbNj22KyeYH6eSv6oXBENXg9aGs4 is READY. All 49 legacy paths passed on apex
+and www (98 checks), preserving queries. The live browser verified .html redirect,
+query and #content preservation. Old privacy links resolve without loops and personal
+writing pages remain available. Final receipt: weevolve-site/editorial/levelbest/
+evidence/2026-10-23-reference-migration/verification.md. No pending migration deployment. This record owns the
 migration checkpoint.
