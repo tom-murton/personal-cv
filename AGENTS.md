@@ -37,8 +37,9 @@ or rewrite either area unless the task explicitly includes it.
 
 Ship a Game is a separate product at `https://shipagame.weevolve.app`. Keep the legacy
 benchmark fallback for compatibility, but publish new reports in the Ship a Game
-repository rather than recreating the benchmark here. Keep Level Best at
-`/apps/level-best/`.
+repository rather than recreating the benchmark here. Level Best product content, reference guides, support and privacy now belong at
+`https://levelbest.weevolve.app`; preserve the permanent redirects from `/apps/level-best/`.
+Personal portfolio/build stories remain here.
 
 ## Implementation rules
 

@@ -24,6 +24,58 @@ const legacyRedirects = [
   "/projects/ship-a-game https://shipagame.weevolve.app/ 308",
 ];
 
+const levelBestRedirects = [
+  "/apps/level-best https://levelbest.weevolve.app/reference/ 308",
+  "/apps/level-best/ https://levelbest.weevolve.app/reference/ 308",
+  "/apps/level-best/index.html https://levelbest.weevolve.app/reference/ 308",
+  "/apps/level-best.html https://levelbest.weevolve.app/reference/ 308",
+  "/apps/level-best/15m-bleep-test-levels https://levelbest.weevolve.app/reference/15m-bleep-test-levels/ 308",
+  "/apps/level-best/15m-bleep-test-levels/ https://levelbest.weevolve.app/reference/15m-bleep-test-levels/ 308",
+  "/apps/level-best/15m-bleep-test-levels/index.html https://levelbest.weevolve.app/reference/15m-bleep-test-levels/ 308",
+  "/apps/level-best/15m-bleep-test-levels.html https://levelbest.weevolve.app/reference/15m-bleep-test-levels/ 308",
+  "/apps/level-best/army-navy-raf-fitness-test https://levelbest.weevolve.app/reference/army-navy-raf-fitness-test/ 308",
+  "/apps/level-best/army-navy-raf-fitness-test/ https://levelbest.weevolve.app/reference/army-navy-raf-fitness-test/ 308",
+  "/apps/level-best/army-navy-raf-fitness-test/index.html https://levelbest.weevolve.app/reference/army-navy-raf-fitness-test/ 308",
+  "/apps/level-best/army-navy-raf-fitness-test.html https://levelbest.weevolve.app/reference/army-navy-raf-fitness-test/ 308",
+  "/apps/level-best/bleep-test-by-age https://levelbest.weevolve.app/reference/bleep-test-by-age/ 308",
+  "/apps/level-best/bleep-test-by-age/ https://levelbest.weevolve.app/reference/bleep-test-by-age/ 308",
+  "/apps/level-best/bleep-test-by-age/index.html https://levelbest.weevolve.app/reference/bleep-test-by-age/ 308",
+  "/apps/level-best/bleep-test-by-age.html https://levelbest.weevolve.app/reference/bleep-test-by-age/ 308",
+  "/apps/level-best/bleep-test-levels https://levelbest.weevolve.app/reference/bleep-test-levels/ 308",
+  "/apps/level-best/bleep-test-levels/ https://levelbest.weevolve.app/reference/bleep-test-levels/ 308",
+  "/apps/level-best/bleep-test-levels/index.html https://levelbest.weevolve.app/reference/bleep-test-levels/ 308",
+  "/apps/level-best/bleep-test-levels.html https://levelbest.weevolve.app/reference/bleep-test-levels/ 308",
+  "/apps/level-best/bleep-test-vo2-max https://levelbest.weevolve.app/reference/bleep-test-vo2-max/ 308",
+  "/apps/level-best/bleep-test-vo2-max/ https://levelbest.weevolve.app/reference/bleep-test-vo2-max/ 308",
+  "/apps/level-best/bleep-test-vo2-max/index.html https://levelbest.weevolve.app/reference/bleep-test-vo2-max/ 308",
+  "/apps/level-best/bleep-test-vo2-max.html https://levelbest.weevolve.app/reference/bleep-test-vo2-max/ 308",
+  "/apps/level-best/fire-service-bleep-test https://levelbest.weevolve.app/reference/fire-service-bleep-test/ 308",
+  "/apps/level-best/fire-service-bleep-test/ https://levelbest.weevolve.app/reference/fire-service-bleep-test/ 308",
+  "/apps/level-best/fire-service-bleep-test/index.html https://levelbest.weevolve.app/reference/fire-service-bleep-test/ 308",
+  "/apps/level-best/fire-service-bleep-test.html https://levelbest.weevolve.app/reference/fire-service-bleep-test/ 308",
+  "/apps/level-best/police-bleep-test https://levelbest.weevolve.app/reference/police-bleep-test/ 308",
+  "/apps/level-best/police-bleep-test/ https://levelbest.weevolve.app/reference/police-bleep-test/ 308",
+  "/apps/level-best/police-bleep-test/index.html https://levelbest.weevolve.app/reference/police-bleep-test/ 308",
+  "/apps/level-best/police-bleep-test.html https://levelbest.weevolve.app/reference/police-bleep-test/ 308",
+  "/apps/level-best/privacy https://levelbest.weevolve.app/privacy/ 308",
+  "/apps/level-best/privacy/ https://levelbest.weevolve.app/privacy/ 308",
+  "/apps/level-best/privacy/index.html https://levelbest.weevolve.app/privacy/ 308",
+  "/apps/level-best/privacy.html https://levelbest.weevolve.app/privacy/ 308",
+  "/apps/level-best/support https://levelbest.weevolve.app/support/ 308",
+  "/apps/level-best/support/ https://levelbest.weevolve.app/support/ 308",
+  "/apps/level-best/support/index.html https://levelbest.weevolve.app/support/ 308",
+  "/apps/level-best/support.html https://levelbest.weevolve.app/support/ 308",
+  "/apps/level-best/which-services-use-the-bleep-test https://levelbest.weevolve.app/reference/which-services-use-the-bleep-test/ 308",
+  "/apps/level-best/which-services-use-the-bleep-test/ https://levelbest.weevolve.app/reference/which-services-use-the-bleep-test/ 308",
+  "/apps/level-best/which-services-use-the-bleep-test/index.html https://levelbest.weevolve.app/reference/which-services-use-the-bleep-test/ 308",
+  "/apps/level-best/which-services-use-the-bleep-test.html https://levelbest.weevolve.app/reference/which-services-use-the-bleep-test/ 308",
+  "/apps/level-best/yo-yo-test-levels https://levelbest.weevolve.app/reference/yo-yo-test-levels/ 308",
+  "/apps/level-best/yo-yo-test-levels/ https://levelbest.weevolve.app/reference/yo-yo-test-levels/ 308",
+  "/apps/level-best/yo-yo-test-levels/index.html https://levelbest.weevolve.app/reference/yo-yo-test-levels/ 308",
+  "/apps/level-best/yo-yo-test-levels.html https://levelbest.weevolve.app/reference/yo-yo-test-levels/ 308",
+  "/apps/level-best/sitemap.xml https://levelbest.weevolve.app/sitemap.xml 308"
+];
+
 const parameterisedRedirects = [
   "/projects/ship-a-game/:game https://shipagame.weevolve.app/games/:game 308",
 ];
@@ -127,7 +179,7 @@ const routeRewrites = [...publicRoutes, ...privateRoutes].flatMap((route) => [
 
 await writeFile(
   join(outputDirectory, "_redirects"),
-  `${[...legacyRedirects, "/ /index.html 200", ...routeRewrites, ...parameterisedRedirects].join("\n")}\n`,
+  `${[...legacyRedirects, ...levelBestRedirects, "/ /index.html 200", ...routeRewrites, ...parameterisedRedirects].join("\n")}\n`,
 );
 
 console.log(`Generated route metadata for ${publicRoutes.length} public and ${privateRoutes.length} private routes.`);
