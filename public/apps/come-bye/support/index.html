@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Come Bye support</title>
-<meta name="description" content="Support and common questions for Come Bye: Sheepdog Trials.">
+<meta name="description" content="Support and common questions for Come Bye: A Sheepdog Year.">
 <link rel="canonical" href="https://tommurton.com/apps/come-bye/support/">
 <meta property="og:title" content="Come Bye support">
-<meta property="og:description" content="Email support and answers to common questions about Come Bye: Sheepdog Trials.">
+<meta property="og:description" content="Email support and answers to common questions about Come Bye: A Sheepdog Year.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tommurton.com/apps/come-bye/support/">
 <meta name="robots" content="index,follow">
@@ -28,6 +28,16 @@
   p { margin:.8em 0; }
   a { color:var(--hivis); }
   .date { color:var(--dim); font-size:.85rem; }
+  .shots { display:flex; gap:16px; margin:1.6em 0 .4em; }
+  .shots figure { flex:1; min-width:0; }
+  .shots img { width:100%; height:auto; border-radius:14px; display:block; border:1px solid #23262B; }
+  .shots figcaption { color:var(--dim); font-size:.85rem; margin-top:.5em; }
+  form.signup { display:flex; gap:10px; flex-wrap:wrap; margin:.8em 0; }
+  form.signup input[type=email] { flex:1 1 220px; padding:12px 14px; border-radius:10px; border:1px solid #2C3036;
+       background:#14161A; color:var(--fg); font:inherit; }
+  form.signup button { padding:12px 20px; border-radius:10px; border:0; background:var(--hivis); color:#0B0C0E;
+       font:inherit; font-weight:700; cursor:pointer; }
+  .small { color:var(--dim); font-size:.85rem; }
   hr { border:0; border-top:1px solid #23262B; margin:2em 0; }
 </style>
 </head>
@@ -35,9 +45,16 @@
 <main>
   <div class="head">
     <img src="/come-bye-icon.png" alt="Come Bye app icon">
-    <h1>Come Bye: Sheepdog Trials</h1>
+    <h1>Come Bye: A Sheepdog Year</h1>
   </div>
   <p class="lede">Support for Come Bye, the one-finger sheepdog game about a year on a Lakeland hill farm.</p>
+
+  <div class="shots">
+    <figure><img src="/apps/come-bye/img/come-bye-herd.jpg" width="640" height="1385"
+      alt="A border collie working a small flock of sheep on a green hillside field"><figcaption>One finger. One dog. A whole flock.</figcaption></figure>
+    <figure><img src="/apps/come-bye/img/come-bye-farm.jpg" width="640" height="1385"
+      alt="The Lakeland hill farm at sunset, with today's jobs listed beneath"><figcaption>A year on a Lakeland hill farm.</figcaption></figure>
+  </div>
   <hr>
 
   <h2>Come Bye support</h2>
@@ -97,6 +114,17 @@
   <p>Open Settings and turn off &ldquo;Share anonymous usage data&rdquo;. The choice stays off
      and gameplay is unchanged. The <a href="/apps/come-bye/privacy/">privacy policy</a> describes
      the defined events, installation identifier and reset behaviour.</p>
+
+  <h2>Hear when it launches</h2>
+  <p>One email on release day, and nothing else. Type your address and your mail app opens a message to the
+     developer; send it to join the list. The address is used only to tell you about Come Bye, and you can
+     ask to be removed at any time.</p>
+  <form class="signup" action="mailto:support@weevolve.app?subject=Come%20Bye%20launch%20list" method="post"
+        enctype="text/plain">
+    <input type="email" name="email" placeholder="you@example.com" required aria-label="Your email address">
+    <button type="submit">Tell me at launch</button>
+  </form>
+  <p class="small">No account, no tracking on this page.</p>
 
   <h2>Who makes it</h2>
   <p>Come Bye is made by Tom Murton, a solo developer in the United Kingdom.</p>
