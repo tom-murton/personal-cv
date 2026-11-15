@@ -1,7 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { collections } from "../src/content/collections";
-import { projectArticles } from "../src/content/projectArticles";
+import { renderPublicSite } from "./site/build";
 
 interface RouteMetadata {
   path: string;
@@ -80,34 +79,6 @@ const parameterisedRedirects = [
   "/projects/ship-a-game/:game https://shipagame.weevolve.app/games/:game 308",
 ];
 
-const publicRoutes: RouteMetadata[] = [
-  {
-    path: "/projects",
-    title: "Projects",
-    description: collections.projects.description,
-  },
-  {
-    path: "/writing",
-    title: "Writing",
-    description: collections.writing.description,
-  },
-  ...projectArticles.map((article) => ({
-    path: `/writing/${article.id}`,
-    title: article.title,
-    description: article.description,
-  })),
-  {
-    path: "/talks",
-    title: "Talks",
-    description: collections.talks.description,
-  },
-  {
-    path: "/cv",
-    title: "CV",
-    description: collections.cv.description,
-  },
-];
-
 const archivedDesignPaths = [
   "/admin",
   "/designs",
@@ -166,20 +137,32 @@ function replaceMeta(html: string, route: RouteMetadata) {
     .replace(/<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${description}" />`);
 }
 
-for (const route of [...publicRoutes, ...privateRoutes]) {
+for (const route of privateRoutes) {
   const routeDirectory = join(outputDirectory, route.path.slice(1));
   await mkdir(routeDirectory, { recursive: true });
   await writeFile(join(routeDirectory, "index.html"), replaceMeta(sourceHtml, route));
 }
 
-const routeRewrites = [...publicRoutes, ...privateRoutes].flatMap((route) => [
-  `${route.path} ${route.path}/index.html 200`,
-  `${route.path}/ ${route.path}/index.html 200`,
+// Every public URL is its own complete HTML document, rendered here from content fetched at build time.
+const publicPaths = await renderPublicSite(outputDirectory);
+
+const foldLitRedirects = [
+  "/apps/foldlit/privacy https://weevolve.app/foldlit/privacy/ 308",
+  "/apps/foldlit/privacy/* https://weevolve.app/foldlit/privacy/ 308",
+  "/apps/foldlit/support https://foldlit.weevolve.app/support/ 308",
+  "/apps/foldlit/support/* https://foldlit.weevolve.app/support/ 308",
+  "/apps/foldlit https://foldlit.weevolve.app/ 308",
+  "/apps/foldlit/* https://foldlit.weevolve.app/ 308",
+];
+
+const routeRewrites = [...publicPaths.filter((path) => path !== "/"), ...privateRoutes.map((route) => route.path)].flatMap((path) => [
+  `${path} ${path}/index.html 200`,
+  `${path}/ ${path}/index.html 200`,
 ]);
 
 await writeFile(
   join(outputDirectory, "_redirects"),
-  `${[...legacyRedirects, ...levelBestRedirects, "/ /index.html 200", ...routeRewrites, ...parameterisedRedirects].join("\n")}\n`,
+  `${[...legacyRedirects, ...parameterisedRedirects, ...foldLitRedirects, ...levelBestRedirects, "/ /index.html 200", ...routeRewrites].join("\n")}\n`,
 );
 
-console.log(`Generated route metadata for ${publicRoutes.length} public and ${privateRoutes.length} private routes.`);
+console.log(`Generated ${publicPaths.length} public pages and ${privateRoutes.length} private route shells.`);

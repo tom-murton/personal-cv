@@ -1,0 +1,42 @@
+/* The CV: plain, fast and printable. The site's dark canvas on screen; black on white in print. */
+@font-face{font-family:"Bricolage Grotesque";src:url("/stage/fonts/bricolage-grotesque-latin-opsz-normal.woff2") format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible Mono";src:url("/stage/fonts/ahm-latin-wght-normal.woff2") format("woff2");font-weight:200 800;font-display:swap}
+:root{--bg:#0d0e12;--fg:#f3f4f0;--dim:#9ca6a8;--accent:#b8e7f0;--line:rgba(243,244,240,.18);--pad:clamp(1rem,3.4vw,3rem);--mono:"Atkinson Hyperlegible Mono",ui-monospace,Menlo,monospace}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 1.0625rem/1.5 "Bricolage Grotesque",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-underline-offset:.2em;text-decoration-thickness:1px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,p,ol,ul{margin:0;padding:0}
+.cv-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.6rem 2rem;padding:1.1rem var(--pad);border-bottom:1px solid var(--line)}
+.name{font-weight:600;font-size:1.05rem;letter-spacing:-.02em;text-decoration:none}
+.name span{display:block;font:500 .64rem/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:.15rem}
+.cv-bar nav{display:flex;gap:1.3rem;font-weight:500}
+.cv-main{padding:clamp(2rem,6vw,4.5rem) var(--pad) 5rem;max-width:62rem}
+.eyebrow,.period,.skills{font:500 .74rem/1.45 var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--dim)}
+h1{font-weight:500;font-size:clamp(2.3rem,7vw,5rem);line-height:.92;letter-spacing:-.05em;margin-top:.8rem;text-wrap:balance}
+.lede{margin-top:1.4rem;max-width:40em;font-size:clamp(1.05rem,1.5vw,1.25rem);line-height:1.45}
+.contact{margin-top:1rem;font-weight:500}
+.roles{list-style:none;margin-top:2.6rem}
+.role{display:grid;grid-template-columns:11rem minmax(0,1fr);gap:.4rem 2rem;padding:1.4rem 0;border-top:1px solid var(--line)}
+.role h2{font-weight:500;font-size:1.35rem;line-height:1.15;letter-spacing:-.025em}
+.co{margin-top:.2rem;font-weight:500;color:var(--accent)}
+.role p:not(.period):not(.co):not(.skills){margin-top:.6rem;max-width:40em}
+.role ul{margin-top:.6rem;padding-left:1.1em;max-width:40em}
+.role li{margin-top:.25rem}
+.skills{margin-top:.8rem}
+.print-url{display:none}
+@media (max-width:46rem){.role{grid-template-columns:1fr}}
+@media print{
+  @page{margin:16mm 14mm}
+  :root{--bg:#fff;--fg:#000;--dim:#333;--accent:#000;--line:#bbb}
+  body{font-size:11pt;line-height:1.4}
+  .cv-bar nav{display:none}
+  .cv-bar,.cv-main{padding-left:0;padding-right:0}
+  .cv-main{padding-top:6mm;max-width:none}
+  h1{font-size:24pt}
+  .role{grid-template-columns:34mm minmax(0,1fr);padding:4mm 0;break-inside:avoid}
+  .role h2{font-size:13pt}
+  a{text-decoration:none}
+  .print-url{display:inline;font-weight:400}
+}

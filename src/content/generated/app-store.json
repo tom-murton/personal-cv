@@ -1,0 +1,77 @@
+{
+  "checked": "2026-11-15",
+  "apps": {
+    "6748341779": {
+      "id": "6748341779",
+      "name": "LightScout – Find Photo Spots",
+      "version": "2.7.5",
+      "versionDate": "2026-10-03",
+      "firstReleased": "2025-11-19",
+      "url": "https://apps.apple.com/gb/app/lightscout-find-photo-spots/id6748341779"
+    },
+    "6793469335": {
+      "id": "6793469335",
+      "name": "Level Best: Bleep Test Trainer",
+      "version": "1.7",
+      "versionDate": "2026-11-04",
+      "firstReleased": "2026-08-17",
+      "url": "https://apps.apple.com/gb/app/level-best-bleep-test-trainer/id6793469335"
+    },
+    "6789813322": {
+      "id": "6789813322",
+      "name": "Warden: Tactics Roguelite",
+      "version": "2.0",
+      "versionDate": "2026-08-02",
+      "firstReleased": "2026-07-13",
+      "url": "https://apps.apple.com/gb/app/warden-tactics-roguelite/id6789813322"
+    },
+    "6757304704": {
+      "id": "6757304704",
+      "name": "Rest+Rise Sleep & Wake Rituals",
+      "version": "1.3.5",
+      "versionDate": "2026-10-07",
+      "firstReleased": "2026-04-07",
+      "url": "https://apps.apple.com/gb/app/rest-rise-sleep-wake-rituals/id6757304704"
+    },
+    "6794922343": {
+      "id": "6794922343",
+      "name": "TachoClear: Drivers' Hours UK",
+      "version": "1.1.13",
+      "versionDate": "2026-11-09",
+      "firstReleased": "2026-08-05",
+      "url": "https://apps.apple.com/gb/app/tachoclear-drivers-hours-uk/id6794922343"
+    },
+    "6809116588": {
+      "id": "6809116588",
+      "name": "CutRoof: Roof Pitch Calculator",
+      "version": "1.3",
+      "versionDate": "2026-10-24",
+      "firstReleased": "2026-09-15",
+      "url": "https://apps.apple.com/gb/app/cutroof-roof-pitch-calculator/id6809116588"
+    },
+    "6807410738": {
+      "id": "6807410738",
+      "name": "PAT Testing Logbook & Reports",
+      "version": "1.0.3",
+      "versionDate": "2026-10-24",
+      "firstReleased": "2026-09-14",
+      "url": "https://apps.apple.com/gb/app/pat-testing-logbook-reports/id6807410738"
+    },
+    "6789952808": {
+      "id": "6789952808",
+      "name": "Ringbloom: The Garden Puzzle",
+      "version": "1.7",
+      "versionDate": "2026-10-10",
+      "firstReleased": "2026-07-20",
+      "url": "https://apps.apple.com/gb/app/ringbloom-the-garden-puzzle/id6789952808"
+    },
+    "6791686352": {
+      "id": "6791686352",
+      "name": "Brinkball",
+      "version": "1.1",
+      "versionDate": "2026-07-23",
+      "firstReleased": "2026-07-23",
+      "url": "https://apps.apple.com/gb/app/brinkball/id6791686352"
+    }
+  }
+}
