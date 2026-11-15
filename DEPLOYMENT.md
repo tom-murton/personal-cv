@@ -23,7 +23,7 @@ Do not delete `public/sw.js` or `public/registerSW.js`, or add a domain-level `w
 
 Pages are therefore as fresh as the last deploy, and a small script refreshes the index and story list from Sanity's CDN after load, so a published edit appears without a deploy. That refresh needs the page's origin in the Sanity project's CORS origins (`tommurton.com` already is; preview and local origins are not, so the refresh is skipped silently there). A brand-new story gets its own `/writing/<slug>` HTML at the next deploy; until then it opens as a sheet from the refreshed list.
 
-## Legacy Vercel configuration
+## Vercel project settings
 
 Use these Vercel project settings:
 
@@ -32,7 +32,7 @@ Use these Vercel project settings:
 - output directory: `dist`;
 - install command: `npm install`.
 
-The checked-in `vercel.json` applies those build settings, explicit rewrites for public React routes, legacy route redirects and security/cache headers. The build generates a small route-specific HTML shell for each portfolio route so crawlers and link previews receive the correct title, description, canonical URL and indexing directive before JavaScript runs. Unknown top-level paths still reach `public/404.html` with a real 404 response; there is no universal rewrite.
+The checked-in `vercel.json` applies those build settings, explicit rewrites for the pre-rendered public routes, legacy route redirects and security/cache headers. The build renders each public URL as complete HTML, so crawlers and link previews receive the correct title, description, canonical URL and indexing directive before JavaScript runs. Unknown top-level paths reach `public/404.html` with a real 404 response; there is no universal rewrite.
 
 These public build variables were configured in Vercel:
 
@@ -42,7 +42,7 @@ VITE_SANITY_DATASET=production
 VITE_SANITY_STUDIO_URL=https://tom-murton-site-admin.sanity.studio/admin
 ```
 
-The Cloudflare build does not require them: the public Sanity project, dataset and deployed Studio URL have production-safe code defaults. `VITE_SANITY_ENABLED` normally stays unset. Set it to `false` only to force the checked-in fallback content.
+The build does not require them: the public Sanity project, dataset and deployed Studio URL have production-safe code defaults. `VITE_SANITY_ENABLED` normally stays unset. Set it to `false` only to force the checked-in fallback content.
 
 ## Private editor
 
@@ -76,7 +76,9 @@ npm run cms:publish:level-best
 Before deploying code:
 
 ```sh
+npm run lint
 npm run build:all
+npm run test:site
 npm run cms:verify
 npm run cms:verify:live
 ```

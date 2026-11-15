@@ -12,7 +12,13 @@ npm --prefix studio install
 npm run dev:all
 ```
 
-The local site runs at `http://127.0.0.1:8080`; the admin runs at `http://127.0.0.1:3333/admin`.
+`npm run dev` serves only the Vite app (`/admin` and the archived `/designs` studies) at `http://127.0.0.1:8080`; the Studio runs at `http://127.0.0.1:3333/admin`. To see the real public site, build it and preview the output:
+
+```sh
+npm run build && node scripts/preview-server.mjs 4609
+```
+
+then open `http://127.0.0.1:4609`.
 
 ## Editing content
 
@@ -32,7 +38,7 @@ Since the November 2026 redesign the index order, world colours and type, and th
 - `/writing` — complete writing index
 - `/talks` — talks index
 - `/cv` — career history
-- `/admin` — private content editor (redirects to the Studio)
+- `/admin` — loads a small page that sends you to the Studio
 - `/designs` — archived design comparison
 - `/apps/level-best/` — permanent redirects to Level Best reference, support and privacy pages on `levelbest.weevolve.app`
 
@@ -43,6 +49,7 @@ npm run build:all
 npm run cms:verify
 npm run cms:verify:live
 npm run lint
+npm run test:site
 ```
 
 The lint check currently completes without errors. It reports six Fast Refresh warnings in

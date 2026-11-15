@@ -12,6 +12,7 @@
     "build:all": "npm run build && npm run build:studio",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
+    "test:site": "node scripts/verify-site.mjs",
     "preview": "vite preview",
     "deploy": "npm run build && wrangler deploy",
     "deploy:vercel": "vercel --prod",
