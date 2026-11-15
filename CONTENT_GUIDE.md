@@ -87,8 +87,8 @@ Of the Studio's other appearance controls (background, surface, text, accent and
 
 Sanity keeps drafts until **Publish** is pressed. A published edit to the project index or the story list appears after a reload, through the client refresh from Sanity's CDN (`src/stage/refresh.js`). Story bodies, talks, the CV and any brand-new `/writing/<slug>` page appear at the next deploy. The refresh also needs the page's origin in the Sanity project's CORS origins, so it does nothing on previews and local builds. The public site is static HTML, so the Studio's Presentation view does not show unpublished draft text.
 
-The one-off `npm run cms:draft:copy-fixes` command prepares the July 2026 site-audit
-corrections as drafts and verifies their content. It does not publish them.
+`npm run cms:publish:worlds` prints the changes that would bring the project records in line with
+the ten worlds; `npm run cms:publish:worlds:apply` publishes them (see `DEPLOYMENT.md`).
 
 ## Local fallback
 

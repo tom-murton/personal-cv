@@ -21,8 +21,8 @@
     "cms:login": "npm --prefix studio exec sanity login",
     "cms:seed": "tsx scripts/seed-sanity.ts",
     "cms:seed:apply": "tsx scripts/seed-sanity.ts --apply",
-    "cms:draft:copy-fixes": "cd studio && npm exec sanity -- exec scripts/prepare-copy-fixes.mjs --with-user-token",
-    "cms:publish:level-best": "cd studio && npm exec sanity -- exec scripts/publish-level-best.mjs --with-user-token",
+    "cms:publish:worlds": "cd studio && npm exec sanity -- exec scripts/publish-world-projects.mjs",
+    "cms:publish:worlds:apply": "cd studio && npm exec sanity -- exec scripts/publish-world-projects.mjs --with-user-token -- --apply",
     "cms:verify": "tsx scripts/verify-cms-mapping.ts",
     "cms:verify:live": "tsx scripts/verify-live-cms.ts"
   },
