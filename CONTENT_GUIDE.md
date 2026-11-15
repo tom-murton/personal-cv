@@ -25,9 +25,11 @@ Then start both applications:
 npm run dev:all
 ```
 
-- Site: `http://127.0.0.1:8080`
-- Admin: `http://127.0.0.1:3333/admin`
-- `http://127.0.0.1:8080/admin` redirects to the local admin.
+- Vite app (only `/admin` and the archived `/designs` studies): `http://127.0.0.1:8080`
+- Admin (the Studio): `http://127.0.0.1:3333/admin`
+- `http://127.0.0.1:8080/admin` loads a small page that sends you to the local admin.
+
+The Vite dev server does not render the public site: its public routes show a note. To see the real site, run `npm run build && node scripts/preview-server.mjs 4609` and open `http://127.0.0.1:4609`.
 
 The deployed equivalents are `https://tom-murton-site.vercel.app` and `https://tom-murton-site-admin.sanity.studio/admin`.
 
@@ -59,16 +61,7 @@ The import currently prepares 31 deterministically named portfolio documents. It
 
 ### Homepage
 
-Open **Homepage** to:
-
-- drag whole sections into a different order;
-- show or hide a section without deleting it;
-- add or remove featured projects, articles and talks;
-- drag featured items into a different order;
-- add, remove and drag whole project rows;
-- choose a row preset: single, two equal, three equal, feature left or feature right.
-
-The editor checks that each row contains the right number of projects for its preset. Rows collapse safely on smaller screens. The current arrangement is one single-project row followed by two two-project rows, but neither the number of rows nor their layouts are hard-coded.
+The homepage is the stage; its project order is set in `src/content/worlds.ts`, not in Sanity. In **Homepage** only the hero eyebrow, headline, accent and introduction, and the writing, talks and about titles and text still apply. Section order, visibility, featured items and project rows (with their row presets) no longer change the public site.
 
 ### Projects, writing, talks and CV
 
@@ -88,20 +81,11 @@ Open **Site settings & appearance** to edit:
 
 - name, descriptor and homepage hero copy;
 - primary navigation and social links, including their order;
-- background, surface, text, accent and divider colours;
-- typography scale: restrained, balanced or editorial;
-- page density: compact, balanced or airy;
-- project-card height: compact, balanced or cinematic;
-- corner style: square, soft or rounded;
-- grid gap: hairline, balanced or wide;
-- hero backdrop: rings, grid or minimal;
-- motion intensity: quiet, standard or expressive.
-
-This is deliberately a controlled design system, not an unrestricted page builder. The main creative choices are editable, while accessibility rules, responsive behaviour and the underlying layout system stay protected so routine changes cannot make the site unreadable or break mobile layouts.
+Of the Studio's other appearance controls (background, surface, text, accent and divider colours, type scale, density, card height, corners, grid gap, hero backdrop and motion intensity), none changes the public site any more. They are kept for the archived `/designs` studies and for recovery. Only name, descriptor, hero copy, navigation and social links apply.
 
 ## Publishing behaviour
 
-Sanity keeps drafts until **Publish** is pressed. The public site reads published records and listens for changes, so a published edit should appear without a redeploy. The Studio's Presentation view shows the site alongside the editor, but the current Vite site does not show unpublished draft text inside that preview.
+Sanity keeps drafts until **Publish** is pressed. A published edit to the project index or the story list appears after a reload, through the client refresh from Sanity's CDN (`src/stage/refresh.js`). Story bodies, talks, the CV and any brand-new `/writing/<slug>` page appear at the next deploy. The refresh also needs the page's origin in the Sanity project's CORS origins, so it does nothing on previews and local builds. The public site is static HTML, so the Studio's Presentation view does not show unpublished draft text.
 
 The one-off `npm run cms:draft:copy-fixes` command prepares the July 2026 site-audit
 corrections as drafts and verifies their content. It does not publish them.
@@ -125,17 +109,17 @@ Once Sanity is populated, editing those files does not override published CMS co
 
 Copy `.env.example` to `.env.local` only when overriding defaults. The Studio preview URL can likewise be set from `studio/.env.example`.
 
-The deployed editor is `https://tom-murton-site-admin.sanity.studio/admin`. The public site's `/admin` route redirects there. The public site is deployed through Vercel; the private editor uses Sanity's included Studio hosting.
+The deployed editor is `https://tom-murton-site-admin.sanity.studio/admin`. The public site's `/admin` route loads a small page that sends you there. The public site is deployed through Vercel; the private editor uses Sanity's included Studio hosting.
 
 ## Checks before publishing code
 
 ```sh
+npm run lint
 npm run build:all
 npm run cms:verify
 npm run cms:verify:live
-npx eslint src/App.tsx src/components/site src/content src/sanity src/pages/Admin.tsx src/pages/Index.tsx src/pages/Projects.tsx src/pages/Writing.tsx src/pages/Talks.tsx src/pages/Cv.tsx
+npm run test:site
 ```
 
-Then inspect `/`, `/projects`, `/writing`, `/talks` and `/cv` at desktop and mobile widths.
-The full lint command currently completes without errors; it retains six non-blocking Fast
-Refresh warnings in shared UI component files.
+`npm run test:site` checks the built `dist/` (see `AGENTS.md`). Then inspect `/`, `/projects`, `/writing`, `/talks` and `/cv` at desktop and mobile widths: `node scripts/preview-server.mjs 4609` serves `dist/` with the `vercel.json` rules applied.
+`npm run lint` completes without errors; it retains six non-blocking Fast Refresh warnings in shared UI component files.

@@ -135,9 +135,9 @@
       {
         "path": "public/landing.html (the .place links its homepage passes to mount())",
         "copiedTo": "places.json",
-        "sha256": "b3941ea14dcb4067e3001a9576fc8dba93782512afab5352ebc9321807095b30",
+        "sha256": "7db07469fa99a0589406cc4601381ecb13ee9e24385fae28466e012eb2c58f76",
         "lastChangedIn": "8a10f5cfdd7b61d62f0a07ffc2e2e2fd7be5bd56",
-        "derived": "data attributes extracted; relative URLs made absolute to https://www.lightscout.app"
+        "derived": "derived, not byte-identical: data attributes extracted; relative URLs made absolute to https://www.lightscout.app; sha256 is of this derived file"
       }
     ]
   },
