@@ -65,11 +65,14 @@ npm run cms:seed:apply
 
 After the required settings documents have been published, the public site reads Sanity automatically. It continues to render the complete local fallback if the CMS is unavailable or incomplete.
 
-Level Best can be published or repaired without replacing unrelated CMS content:
+`studio/scripts/publish-world-projects.mjs` brings the project records in line with the ten worlds in `src/content/worlds.ts`: it creates TachoClear, CutRoof, PAT Logbook and WeEvolve (with their icons or mark as image artwork), corrects stale status, link and note fields, and appends the new projects to the Projects collection. It patches fields under a revision guard and never replaces a document or the homepage rows. The dry run reads published content and needs no sign-in; applying needs `npx sanity login` in `studio/` first:
 
 ```sh
-npm run cms:publish:level-best
+npm run cms:publish:worlds        # prints the planned mutations
+npm run cms:publish:worlds:apply  # uploads the images and commits one transaction
 ```
+
+The earlier one-off scripts (`publish-level-best.mjs`, `prepare-copy-fixes.mjs`) were removed in November 2026: re-running either would have put back stale statuses and notes.
 
 ## Release checks
 
