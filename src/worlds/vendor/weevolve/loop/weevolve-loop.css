@@ -1,0 +1,153 @@
+/* WeEvolve world module: the family tree. Everything is scoped under `.wel`; tokens are custom
+   properties on the container so a host page can restyle it without reaching inside. It loads no
+   fonts: --wel-display and --wel-sans default to the host's own type. Geometry switches on the
+   container's width (stacked below 760 px, wide from 760 px), not the viewport's. */
+.wel {
+  --wel-paper: #f6f2e9;
+  --wel-card-bg: #fffdf7;
+  --wel-ink: #17332b;
+  --wel-ink-soft: #4a5f56;
+  --wel-work: #1e5f8a;
+  --wel-life: #27774a;
+  --wel-play: #bf4124;
+  /* real family lists, so the font shorthands below stay valid on a bare mount; hosts override */
+  --wel-display: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  --wel-sans: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  --wel-quiet: .26;
+  --wel-r-m: 14px;
+  --wel-icon-r: 22.5%;
+  --wel-ease-out: cubic-bezier(.22, 1, .36, 1);
+  --wel-ease-pop: cubic-bezier(.34, 1.56, .64, 1);
+  --wel-fg: var(--wel-ink);
+  --wel-bg: var(--wel-paper);
+  --wel-accent: var(--wel-ink);
+  container: wel / inline-size;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: var(--wel-fg);
+  background: var(--wel-paper);
+  transition: color .25s .12s;
+}
+.wel *, .wel *::before, .wel *::after { box-sizing: border-box; }
+.wel [data-branch="work"], .wel .wel-word[data-bough="work"] { --b: var(--wel-work); }
+.wel [data-branch="life"], .wel .wel-word[data-bough="life"] { --b: var(--wel-life); }
+.wel [data-branch="play"], .wel .wel-word[data-bough="play"] { --b: var(--wel-play); }
+.wel a:focus-visible, .wel button:focus-visible { outline: 3px solid var(--wel-focus, var(--wel-play)); outline-offset: 4px; border-radius: 4px; }
+
+.wel-flood { position: absolute; inset: 0; z-index: -1; background: var(--wel-paper); clip-path: circle(150% at 50% 100%); transition: clip-path .62s var(--wel-ease-out); }
+.wel--instant .wel-flood, .wel--instant, .wel--instant * { transition: none !important; }
+
+/* legend words: the bough controls */
+.wel-legend { margin: 0 0 .5rem; font: 500 min(1rem, 4.5cqw)/2.5 var(--wel-sans); white-space: nowrap; }
+.wel-word { display: inline-flex; align-items: center; min-height: 34px; padding: 0 .7em; margin: 0 -.02em 0 .1em; line-height: 1; border: 2px solid var(--b); border-radius: 999px; color: var(--b); font-weight: 700; text-decoration: none; transition: background .2s, color .2s, border-color .2s; }
+.wel-word:hover { background: var(--b); color: #fff; }
+.wel-word { position: relative; }
+.wel-word::before { content: ""; position: absolute; left: -2px; right: -2px; top: 50%; height: 46px; transform: translateY(-50%); } /* a 44 px hit target; the pill keeps its look */
+.wel .wel-hit { fill: transparent !important; stroke: none !important; pointer-events: all; } /* larger hit regions for pills and the seed */
+.wel[data-flooded] .wel-word { border-color: var(--wel-fg); color: var(--wel-fg); background: none; }
+.wel[data-flooded] .wel-word[aria-pressed="true"] { background: var(--wel-accent); border-color: var(--wel-accent); color: var(--wel-bg); }
+
+/* the tree */
+.wel-treebox { position: relative; container-type: inline-size; width: 100%; max-width: 440px; margin-inline: auto; padding-bottom: 4.5rem; }
+.wel-tree { position: relative; container-type: inline-size; aspect-ratio: var(--ar-s); }
+.wel-lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.wel-lines--wide { display: none; }
+.wel-lines path { fill: none; stroke-width: var(--sw); stroke-linecap: round; stroke-linejoin: round; }
+.wel-lines .wel-ring { stroke: currentColor; stroke-width: 1.5; opacity: .13; }
+.wel-trunk { stroke: var(--wel-fg); }
+.wel-bough { stroke: var(--b); }
+.wel-bud { fill: var(--b); }
+.wel-pill { cursor: pointer; }
+.wel-pill rect { fill: var(--b); }
+.wel-pill text { font-family: var(--wel-sans); font-weight: 700; letter-spacing: .09em; fill: #fff; }
+.wel-root { cursor: pointer; }
+.wel-root circle { fill: var(--wel-fg); }
+.wel-root path { fill: none; stroke: var(--wel-bg); stroke-width: 2.8; stroke-linecap: round; }
+.wel-tree [data-branch], .wel-trunk, .wel-root circle, .wel-root path { transition: opacity .22s, stroke .25s .12s, fill .25s .12s; }
+.wel-leaf { --x: var(--xs); --y: var(--ys); --s: var(--zs); --d: var(--ds); position: absolute; left: calc(var(--x) * 1%); top: calc(var(--y) * 1%); width: calc(var(--s) * 1%); color: inherit; text-decoration: none; z-index: 1; -webkit-tap-highlight-color: transparent; }
+.wel-leaf img { display: block; width: 100%; height: auto; border-radius: var(--wel-icon-r); outline: max(3px, .55cqw) solid var(--wel-bg); box-shadow: 0 0 0 1px rgb(23 51 43 / .14); transition: scale .28s var(--wel-ease-pop), outline-color .25s .12s; }
+.wel-leaf__name { position: absolute; top: 100%; left: 50%; translate: -50% 0; margin-top: .4em; padding: 0 .3em; border-radius: 4px; background: var(--wel-bg); font: 700 max(11px, 3.1cqw)/1.2 var(--wel-sans); white-space: nowrap; transition: background-color .25s .12s; }
+.wel-leaf:hover img, .wel-leaf:focus-visible img { scale: 1.08; }
+
+/* playable states, set by the script */
+.wel[data-flooded] .wel-bough { stroke: var(--wel-fg); }
+.wel[data-flooded] .wel-bud { fill: var(--wel-fg); stroke: none; }
+.wel[data-flooded] .wel-pill rect { fill: var(--wel-fg); }
+.wel[data-flooded] .wel-pill text { fill: var(--wel-bg); }
+.wel[data-bough="work"] .wel-tree [data-branch]:not([data-branch="work"]),
+.wel[data-bough="life"] .wel-tree [data-branch]:not([data-branch="life"]),
+.wel[data-bough="play"] .wel-tree [data-branch]:not([data-branch="play"]) { opacity: var(--wel-quiet); }
+.wel[data-bough="work"] .wel-bough[data-branch="work"], .wel[data-bough="life"] .wel-bough[data-branch="life"], .wel[data-bough="play"] .wel-bough[data-branch="play"] { stroke: var(--wel-accent); }
+.wel[data-bough="work"] .wel-bud[data-branch="work"], .wel[data-bough="life"] .wel-bud[data-branch="life"], .wel[data-bough="play"] .wel-bud[data-branch="play"],
+.wel[data-bough="work"] .wel-pill[data-branch="work"] rect, .wel[data-bough="life"] .wel-pill[data-branch="life"] rect, .wel[data-bough="play"] .wel-pill[data-branch="play"] rect { fill: var(--wel-accent); }
+.wel[data-bough="work"] .wel-leaf[data-branch="work"] img, .wel[data-bough="life"] .wel-leaf[data-branch="life"] img, .wel[data-bough="play"] .wel-leaf[data-branch="play"] img { scale: 1.12; }
+.wel .wel-leaf[aria-current="true"] img { scale: 1.24; box-shadow: 0 0 0 3px var(--wel-bg), 0 0 0 6px var(--wel-accent); }
+
+/* the seed opens into this card; its body is a product's index row */
+.wel-card { --seed: 50% calc(100% - 6rem); position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; color: var(--wel-ink); background: var(--wel-card-bg); border-radius: var(--wel-r-m); border-top: 5px solid var(--wel-accent); padding: .95rem 1rem .5rem; font-family: var(--wel-sans); line-height: 1.6; clip-path: circle(0 at var(--seed)); visibility: hidden; transition: clip-path .46s var(--wel-ease-out), visibility 0s .46s; }
+.wel-card.is-open { clip-path: circle(150% at var(--seed)); visibility: visible; transition: clip-path .46s var(--wel-ease-out), visibility 0s; }
+.wel:not([data-flooded]) .wel-card { box-shadow: 0 0 0 2px var(--wel-ink); }
+.wel-card:focus { outline: none; }
+.wel .wel-card { --wel-focus: var(--wel-ink); } /* the card is always paper: an ink focus ring */
+.wel-card__close { position: absolute; top: .2rem; right: .2rem; width: 44px; height: 44px; border: 0; background: none; color: var(--wel-ink); font: 400 1.5rem/1 var(--wel-sans); cursor: pointer; }
+.wel .wel-card p, .wel .wel-card h4 { margin: 0; }
+.wel .wel-card a { color: inherit; }
+.wel .wel-card h4 a { text-decoration: none; }
+.wel .wel-card .row__in { width: auto; margin: 0; display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: .2rem .85rem; padding: 0; color: var(--wel-ink); }
+.wel .wel-card .row__icon { grid-row: 1 / 3; align-self: start; }
+.wel .wel-card .row__icon img { display: block; width: 52px; height: auto; border-radius: var(--wel-icon-r); box-shadow: 0 0 0 1px rgb(23 51 43 / .14); }
+.wel .wel-card .row__name { padding-right: 2.4rem; }
+.wel .wel-card .kicker { display: block; font: 700 .69rem/1.4 var(--wel-sans); letter-spacing: .09em; text-transform: uppercase; color: var(--wel-ink-soft); }
+.wel .wel-card h4 { font: 700 1.3rem/1.1 var(--wel-display); letter-spacing: -.03em; }
+.wel .wel-card .row__summary { grid-column: 2; font-size: .9rem; line-height: 1.45; color: var(--wel-ink-soft); opacity: 1; }
+.wel .wel-card .row__meta { display: none; }
+.wel .wel-card .row__links { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 0 .35rem; margin: .1rem 0 0 -10px; }
+/* official artwork, unmodified: 40px tall with a quarter-height clear space */
+.wel .wel-card .store-badge { display: inline-flex; padding: 10px; flex: none; line-height: 0; }
+.wel .wel-card .store-badge img { display: block; height: 40px; width: auto; max-width: none; }
+.wel .wel-card .detail-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 .5rem; font-size: .88rem; font-weight: 700; text-decoration: none; }
+.wel .wel-card .detail-link:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+/* two badges fill the row on a phone; the name already links to the product site */
+.wel .wel-card .store-badge + .store-badge + .detail-link { display: none; }
+
+/* growth: every keyframe animates FROM hidden, so the resting state is the finished tree */
+@media (prefers-reduced-motion: no-preference) {
+  .wel-root { transform-box: fill-box; transform-origin: center; animation: wel-pop .38s var(--wel-ease-pop) 0ms backwards; }
+  .wel-draw { stroke-dasharray: 1; animation: wel-draw var(--dur) linear var(--d) backwards; }
+  .wel-bud { transform-box: fill-box; transform-origin: center; animation: wel-rise var(--dur) linear var(--d) backwards, wel-settle .3s var(--wel-ease-pop) calc(var(--d) + var(--dur)); }
+  .wel-pill { transform-box: fill-box; transform-origin: center; animation: wel-pop .34s var(--wel-ease-pop) var(--d) backwards; }
+  .wel-leaf { animation: wel-pop .42s var(--wel-ease-pop) var(--d) backwards; }
+  .wel--reset .wel-root, .wel--reset .wel-draw, .wel--reset .wel-bud, .wel--reset .wel-pill, .wel--reset .wel-leaf { animation: none; }
+  @keyframes wel-draw { 0% { stroke-dashoffset: 1; opacity: 0; } 1% { opacity: 1; } }
+  @keyframes wel-rise { 0% { transform: translateY(var(--from)); opacity: 0; } 1% { opacity: 1; } }
+  @keyframes wel-settle { 50% { transform: scale(1.55); } }
+  @keyframes wel-pop { from { opacity: 0; transform: scale(.3); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wel, .wel *, .wel *::before, .wel *::after { transition: none !important; animation: none !important; }
+}
+
+/* from 760 px of container width: the wide tree */
+@container wel (min-width: 760px) {
+  .wel-legend { font-size: clamp(1.15rem, 1.9cqw, 1.5rem); line-height: 1.5; }
+  .wel-word { min-height: 40px; padding: 0 1rem; }
+  .wel-treebox { max-width: none; width: var(--wel-tw, 100%); padding-bottom: 0; }
+  .wel-tree { aspect-ratio: var(--ar-w); }
+  .wel-lines--stacked { display: none; }
+  .wel-lines--wide { display: block; }
+  .wel-leaf { --x: var(--xw); --y: var(--yw); --s: var(--zw); --d: var(--dw); }
+  .wel-leaf__name { padding: 0; background: none; font-size: max(11.5px, 1.25cqw); }
+  .wel-card { --seed: 50% 50%; left: 50%; right: auto; translate: -50% 0; width: min(100%, 62rem); bottom: 1.2cqw; padding: 1rem 1.25rem .6rem; }
+  .wel .wel-card .row__in { grid-template-columns: 64px minmax(0, 1fr) auto; align-items: center; gap: .1rem 1.4rem; padding-right: 2.5rem; }
+  .wel .wel-card .row__icon img { width: 64px; }
+  .wel .wel-card .row__name { padding-right: 0; }
+  .wel .wel-card .store-badge + .store-badge + .detail-link { display: inline-flex; }
+  .wel .wel-card .row__links { grid-column: 3; grid-row: 1 / 3; margin: 0; justify-content: flex-end; max-width: 19rem; }
+}
+@container wel (min-width: 1200px) {
+  .wel .wel-card .row__in { grid-template-columns: 64px minmax(9rem, auto) minmax(0, 1fr) auto; }
+  .wel .wel-card .row__icon, .wel .wel-card .row__links { grid-row: auto; }
+  .wel .wel-card .row__summary, .wel .wel-card .row__links { grid-column: auto; }
+  .wel .wel-card .row__links { flex-wrap: nowrap; max-width: none; }
+}

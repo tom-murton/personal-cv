@@ -326,6 +326,10 @@
       "destination": "/projects/index.html"
     },
     {
+      "source": "/projects/:slug",
+      "destination": "/projects/:slug/index.html"
+    },
+    {
       "source": "/writing",
       "destination": "/writing/index.html"
     },

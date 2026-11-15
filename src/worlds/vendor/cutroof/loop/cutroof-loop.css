@@ -1,0 +1,132 @@
+/* CutRoof hero loop: the setting-out sheet. Every rule is scoped under .cutroof-loop.
+   Tokens are custom properties on that element; the host page may override them.
+   It loads no fonts: it names Routed Gothic and IBM Plex and falls back if the host has not loaded them.
+   The accent (--dim) is for dimension lines, their figures, the grip and the slider thumb. Nothing else. */
+
+.cutroof-loop {
+  --paper: #F5F0E5; --sheet: #FBF7EF; --ink: #2A251E; --ink-2: #5E5547; --line: #A89B84; --grid: #E7DFCF;
+  --dim: #9A4408; --timber: #DCC29C; --timber-2: #C9A679; --plate: #E9DDCA;
+  --f-letter: "Routed Gothic", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --f-text: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --crl-ready: 1;
+  container-type: inline-size;
+  position: relative;
+  min-width: 0;
+  background: var(--sheet);
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+  font: 400 1rem/1.5 var(--f-text);
+  text-align: left;
+}
+@media (prefers-color-scheme: dark) {
+  .cutroof-loop {
+    --paper: #1F150D; --sheet: #291B10; --ink: #F3EBDD; --ink-2: #C9BBA4; --line: #6B5844; --grid: #36261A;
+    --dim: #E8944A; --timber: #6A4A2B; --timber-2: #7E5A36; --plate: #3A2A1B;
+  }
+}
+.cutroof-loop[data-bare] { border: 0; background: transparent; }
+.cutroof-loop *, .cutroof-loop *::before, .cutroof-loop *::after { box-sizing: border-box; }
+.cutroof-loop p { margin: 0; }
+.cutroof-loop button:focus-visible, .cutroof-loop input:focus-visible, .cutroof-loop [tabindex]:focus-visible { outline: 3px solid var(--dim); outline-offset: 3px; }
+.cutroof-loop .crl-letter { font-family: var(--f-letter); text-transform: uppercase; letter-spacing: .08em; font-size: .76rem; line-height: 1.3; }
+.cutroof-loop .crl-n { font-family: var(--f-mono); letter-spacing: 0; font-weight: 500; }
+
+/* Bar, plot, pitch row, schedule, foot */
+.cutroof-loop .crl-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; border-bottom: 1px solid var(--ink); padding: 0 0 0 14px; min-height: 40px; }
+.cutroof-loop .crl-btn { font: 400 .72rem/1 var(--f-letter); text-transform: uppercase; letter-spacing: .08em; background: transparent; color: var(--ink); border: 0; border-left: 1px solid var(--ink); align-self: stretch; padding: 0 14px; min-height: 44px; min-width: 76px; cursor: pointer; border-radius: 0; margin: 0; }
+.cutroof-loop .crl-btn:hover { background: var(--paper); }
+.cutroof-loop .crl-btn[hidden] { display: none; }
+.cutroof-loop .crl-plot { background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 19px 19px; background-position: -1px -1px; padding: 6px; }
+.cutroof-loop .crl-pitch { display: flex; align-items: center; gap: 14px; border-top: 1px solid var(--ink); padding: 0 14px; min-height: 52px; }
+.cutroof-loop .crl-pitch label { color: var(--ink-2); font-size: .7rem; }
+.cutroof-loop .crl-pitch output { font: 500 1.5rem/1.2 var(--f-mono); font-variant-numeric: tabular-nums; min-width: 4.6ch; color: var(--ink); }
+.cutroof-loop .crl-pitch input[type=range] { flex: 1; min-width: 0; height: 44px; margin: 0; padding: 0; background: transparent; -webkit-appearance: none; appearance: none; cursor: ew-resize; }
+.cutroof-loop .crl-pitch input[type=range][hidden] { display: none; }
+.cutroof-loop .crl-pitch input[type=range]::-webkit-slider-runnable-track { height: 13px; background: linear-gradient(var(--ink), var(--ink)) center / 100% 1.5px no-repeat, repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 12.5%); }
+.cutroof-loop .crl-pitch input[type=range]::-moz-range-track { height: 13px; background: linear-gradient(var(--ink), var(--ink)) center / 100% 1.5px no-repeat; }
+.cutroof-loop .crl-pitch input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; margin-top: -4px; border-radius: 50%; background: var(--sheet); border: 2.5px solid var(--dim); }
+.cutroof-loop .crl-pitch input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--sheet); border: 2.5px solid var(--dim); }
+.cutroof-loop .crl-reset { font: 400 .68rem/1 var(--f-letter); text-transform: uppercase; letter-spacing: .08em; color: var(--dim); background: none; border: 0; padding: 0 2px; margin: 0; min-height: 44px; cursor: pointer; text-decoration: underline; text-underline-offset: .18em; white-space: nowrap; }
+.cutroof-loop .crl-reset[hidden] { display: none; }
+.cutroof-loop .crl-sched { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); margin: 0; border-top: 1px solid var(--ink); }
+.cutroof-loop .crl-sched > div { padding: 10px 12px 11px 14px; border-right: 1px solid var(--line); min-width: 0; min-height: 44px; cursor: default; transition: background .12s; }
+.cutroof-loop .crl-sched > div:last-child { border-right: 0; }
+.cutroof-loop .crl-sched > div:hover, .cutroof-loop .crl-sched > div:focus-visible { background: color-mix(in srgb, var(--dim) 10%, transparent); }
+.cutroof-loop .crl-sched dt { font-family: var(--f-letter); text-transform: uppercase; letter-spacing: .07em; font-size: .66rem; line-height: 1.3; color: var(--ink-2); white-space: nowrap; }
+.cutroof-loop .crl-sched dd { margin: 3px 0 0; font: 500 1.36rem/1.15 var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ink); }
+.cutroof-loop .crl-sched dd small { font: 400 .7rem var(--f-mono); color: var(--ink-2); margin-left: 2px; }
+.cutroof-loop .crl-foot { border-top: 1px solid var(--ink); padding: 9px 14px 10px; font-size: .68rem; line-height: 1.5; color: var(--ink-2); }
+
+/* The drawing language */
+.cutroof-loop .dwg { display: block; width: 100%; height: auto; font-family: var(--f-letter); overflow: visible; -webkit-user-select: none; user-select: none; }
+.cutroof-loop .dwg.dwg--phone { display: none; }
+.cutroof-loop .dwg .timber { fill: var(--timber); stroke: none; }
+.cutroof-loop .dwg .member { fill: none; stroke: var(--ink); stroke-width: 1.7; stroke-linejoin: round; }
+.cutroof-loop .dwg .plate { fill: var(--plate); stroke: var(--ink); stroke-width: 1.3; }
+.cutroof-loop .dwg .ridge { fill: var(--timber-2); stroke: var(--ink); stroke-width: 1.1; }
+.cutroof-loop .dwg .cl { stroke: var(--ink-2); stroke-width: .9; stroke-dasharray: 14 4 2 4; fill: none; }
+.cutroof-loop .dwg .datum, .cutroof-loop .dwg .ghost { stroke: var(--ink-2); stroke-width: .9; stroke-dasharray: 5 4; fill: none; }
+.cutroof-loop .dwg .dm { transition: opacity .12s; }
+.cutroof-loop .dwg .dl, .cutroof-loop .dwg .wit, .cutroof-loop .dwg .tk, .cutroof-loop .dwg .lead-l { stroke: var(--dim); stroke-width: 1; fill: none; transition: stroke-width .12s; }
+.cutroof-loop .dwg .tk { stroke-width: 1.5; stroke-linecap: round; }
+.cutroof-loop .dwg text { font-size: 13px; letter-spacing: .05em; fill: var(--dim); paint-order: stroke; stroke: var(--sheet); stroke-width: 4px; stroke-linejoin: round; }
+.cutroof-loop .dwg--phone text { font-size: 10.5px; stroke-width: 3px; }
+.cutroof-loop .dwg--detail text { font-size: 12px; }
+.cutroof-loop .dwg .note, .cutroof-loop .dwg .mark text { fill: var(--ink); }
+.cutroof-loop .dwg .n { font-family: var(--f-mono); font-weight: 500; letter-spacing: 0; font-size: .95em; }
+.cutroof-loop .dwg .lead path, .cutroof-loop .dwg .mark circle, .cutroof-loop .dwg .mark path { stroke: var(--ink); stroke-width: 1; fill: none; }
+.cutroof-loop .dwg .cut { stroke: var(--dim); stroke-width: 4; stroke-linecap: round; opacity: 0; transition: opacity .12s; }
+.cutroof-loop .dwg.probing .ink .dm { opacity: .22; }
+.cutroof-loop .dwg.probing .ink .dm.hot { opacity: 1; }
+.cutroof-loop .dwg .dm.hot .dl { stroke-width: 2.2; }
+.cutroof-loop .dwg .dm.hot text { fill: var(--ink); }
+.cutroof-loop .dwg .cut.hot { opacity: 1; }
+
+/* The loop. One number, --t, set on .cutroof-loop by the script; every inked mark is a function of it.
+   The rules apply only while the script has put .is-inking on the sheet; otherwise it is plain, finished line work. */
+.cutroof-loop.is-inking .dwg .ink .st { stroke-dasharray: 1; stroke-dashoffset: calc(clamp(0, 1 - (var(--t, 99999) - var(--d, 0)) / var(--u, 1), 1) * 1px); }
+.cutroof-loop.is-inking .dwg .ink .fd, .cutroof-loop.is-inking .dwg .ink .fl, .cutroof-loop.is-inking .dwg .ink .tx { opacity: clamp(0, (var(--t, 99999) - var(--d, 0)) / var(--u, 1), 1); }
+.cutroof-loop .dwg .pencil { opacity: .17; }
+.cutroof-loop .dwg .pencil .cut { display: none; }
+.cutroof-loop.is-inking .crl-sched dd[data-fig] { opacity: clamp(.3, (var(--t, 99999) - var(--d, 0)) / 340, 1); transform: translateY(calc(clamp(0, 1 - (var(--t, 99999) - var(--d, 0)) / 340, 1) * -9px)); }
+
+/* The grip on the ridge */
+.cutroof-loop .dwg .grip { cursor: ns-resize; }
+.cutroof-loop .dwg .grip * { touch-action: none; }
+.cutroof-loop .dwg .grip__dot { fill: var(--sheet); stroke: var(--dim); stroke-width: 2.5; transition: fill .12s; }
+.cutroof-loop .dwg .grip__arrows { fill: none; stroke: var(--dim); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.cutroof-loop .dwg .grip__hit { fill: transparent; stroke: none; }
+.cutroof-loop .dwg .grip__hint { fill: var(--dim); font-size: 11px; letter-spacing: .1em; }
+.cutroof-loop .dwg--phone .grip__hint { font-size: 9.5px; }
+.cutroof-loop .dwg .grip:hover .grip__dot, .cutroof-loop .dwg.is-held .grip__dot { fill: var(--dim); }
+.cutroof-loop .dwg.is-held .grip__hint { opacity: 0; }
+
+/* Narrow sheet: six figures in two rows */
+@container (max-width: 619px) {
+  .cutroof-loop .crl-sched { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cutroof-loop .crl-sched > div:nth-child(3n) { border-right: 0; }
+  .cutroof-loop .crl-sched > div:nth-child(-n+3) { border-bottom: 1px solid var(--line); }
+}
+/* Phone sheet: its own drawing, laid out for 358 px */
+@container (max-width: 560px) {
+  .cutroof-loop .dwg.dwg--desk { display: none; }
+  .cutroof-loop .dwg.dwg--phone { display: block; }
+  .cutroof-loop .crl-wide { display: none; }
+  .cutroof-loop .crl-bar { min-height: 34px; }
+  .cutroof-loop .crl-plot { padding: 2px; background-size: 15px 15px; }
+  .cutroof-loop .crl-pitch { min-height: 46px; padding: 0 10px; gap: 10px; }
+  .cutroof-loop .crl-pitch label { display: none; }
+  .cutroof-loop .crl-pitch output { font-size: 1.3rem; }
+  .cutroof-loop .crl-sched > div { padding: 7px 8px 8px 10px; }
+  .cutroof-loop .crl-sched dt { font-size: .6rem; letter-spacing: .05em; }
+  .cutroof-loop .crl-sched dd { font-size: 1.16rem; }
+  .cutroof-loop .crl-sched dd small { font-size: .64rem; }
+  .cutroof-loop .crl-foot { font-size: .6rem; padding: 7px 10px 8px; letter-spacing: .06em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cutroof-loop *, .cutroof-loop *::before, .cutroof-loop *::after { transition: none !important; }
+}
+@media print {
+  .cutroof-loop .crl-btn, .cutroof-loop .crl-pitch input, .cutroof-loop .crl-reset, .cutroof-loop .grip { display: none; }
+}

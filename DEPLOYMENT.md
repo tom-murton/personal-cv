@@ -1,30 +1,27 @@
 # Deployment
 
-The public portfolio is a Vite site deployed as static assets on Cloudflare Workers. Content and images live in Sanity, and the private editor is a separately built Sanity Studio. The former Vercel deployment remains available as a short-term rollback target during the migration window.
+The public portfolio is a Vite project deployed by **Vercel**. Content and images live in Sanity, and the private editor is a separately built Sanity Studio.
 
-- Public site: `https://tommurton.com`
+- Public site: `https://tommurton.com` (and `https://www.tommurton.com`, which serves rather than redirects)
 - Private editor: `https://tom-murton-site-admin.sanity.studio/admin`
 
-## Production deployment
+## Production deployment (verified 15 November 2026)
 
-`tommurton.com` is the canonical public domain. `www.tommurton.com` temporarily serves
-the same deployment directly while the July 2026 retirement worker clears the former
-PWA from returning browsers. Canonical metadata still points to the apex domain.
+Vercel's Git integration builds project `tom-murton-site` (team `tommurton`) on every push. A push to `main` is promoted to Production and serves both domains; any other branch gets a protected Preview. The repository has no GitHub Actions. Evidence: the single commit status "Vercel" on `main`, GitHub deployments by `vercel[bot]`, the `server: Vercel` response header and the apex A record.
 
-Do not delete `public/sw.js` or `public/registerSW.js`, or restore the Vercel domain-level
-`www` redirect, until the legacy service-worker migration window has passed. A redirected
-worker script cannot update a worker registered on the `www` origin.
+`npm run deploy` runs `wrangler deploy` to a Cloudflare Worker that the domain does not point at. It is not production; do not use it. `wrangler.jsonc` and the generated `dist/_redirects` remain only as a dormant alternative.
 
-Cloudflare Worker: `tom-murton-site`. Build with `npm run build` and deploy the generated `dist` directory. `wrangler.jsonc` pins the static-assets configuration; `_headers` and the generated `_redirects` file preserve the former Vercel cache, security, redirect and clean-route behaviour.
+Do not delete `public/sw.js` or `public/registerSW.js`, or add a domain-level `www` redirect, until the legacy service-worker migration window has passed. Every public page also unregisters any old worker.
 
-The checked-in Cloudflare configuration deliberately uses `html_handling: "none"`. Route-specific 200 rewrites serve both `/route` and `/route/` without redirecting either form, matching the existing public contract. Unknown paths use `public/404.html` and return a real 404.
+## What the build does
 
-This is an assets-only Worker deployment. No request path runs custom Worker code before the
-static assets.
+`npm run build` runs `vite build` (the `/admin` and `/designs` bundle), then `scripts/generate-route-html.ts`, which:
 
-The `workers.dev` preview origin must be present in the Sanity project's CORS origins so preview builds can load the same published content as production. Keep preview origins protected from indexing or disable them after validation.
+1. writes the Vite shell for `/admin` and each `/designs` study;
+2. fetches published content from Sanity (`jbch6ec7/production`, falling back to `src/content/` if Sanity is unreachable) and the App Store lookup (keeping `src/content/generated/app-store.json` if it fails);
+3. renders every public URL as complete HTML, copies `src/stage/` (minified) and the vendored world modules to `dist/stage/`, and writes `sitemap.xml`, `llms.txt` and `_redirects`.
 
-The Vercel project remains connected to `tom-murton/personal-cv` for rollback during the 48-hour post-cutover observation window. Do not remove its domains or project until that window has passed cleanly.
+Pages are therefore as fresh as the last deploy, and a small script refreshes the index and story list from Sanity's CDN after load, so a published edit appears without a deploy. That refresh needs the page's origin in the Sanity project's CORS origins (`tommurton.com` already is; preview and local origins are not, so the refresh is skipped silently there). A brand-new story gets its own `/writing/<slug>` HTML at the next deploy; until then it opens as a sheet from the refreshed list.
 
 ## Legacy Vercel configuration
 

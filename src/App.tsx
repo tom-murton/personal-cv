@@ -5,15 +5,7 @@ import { PortfolioContentProvider } from "@/content/PortfolioContentProvider";
 import "@/styles/GallerySite.css";
 
 // Lazy load pages for better performance
-const Index = lazy(() => import("@/pages/Index"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
-const Projects = lazy(() => import("@/pages/Projects"));
-const ShipAGame = lazy(() => import("@/pages/ShipAGame"));
-const BenchmarkGame = lazy(() => import("@/pages/BenchmarkGame"));
-const Writing = lazy(() => import("@/pages/Writing"));
-const Article = lazy(() => import("@/pages/Article"));
-const Talks = lazy(() => import("@/pages/Talks"));
-const Cv = lazy(() => import("@/pages/Cv"));
 const Admin = lazy(() => import("@/pages/Admin"));
 const DesignSampleIndex = lazy(() => import("@/pages/designs/DesignSamples").then((module) => ({ default: module.DesignSampleIndex })));
 const LivingWorkbench = lazy(() => import("@/pages/designs/DesignSamples").then((module) => ({ default: module.LivingWorkbench })));
@@ -40,6 +32,19 @@ const PageLoading = () => (
   </div>
 );
 
+// The public site is static HTML rendered at build (scripts/site/). If a link inside this app points at
+// one of its URLs, load that page from the server rather than rendering the retired gallery here.
+function ServerPage() {
+  const location = useLocation();
+  useEffect(() => {
+    if (!import.meta.env.DEV) window.location.replace(location.pathname + location.search + location.hash);
+  }, [location]);
+  if (import.meta.env.DEV) {
+    return <p style={{ padding: "2rem" }}>Public pages are static HTML. Run <code>npm run build</code> and <code>node scripts/preview-server.mjs 4609</code> to see them.</p>;
+  }
+  return <PageLoading />;
+}
+
 function ExternalRedirect({ href }: { href: string }) {
   useEffect(() => window.location.replace(href), [href]);
   return <PageLoading />;
@@ -54,14 +59,15 @@ function App() {
         <PageTransition location={location.pathname}>
           <Suspense fallback={<PageLoading />}>
             <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/projects/ship-a-game" element={<ShipAGame />} />
-            <Route path="/projects/ship-a-game/:game" element={<BenchmarkGame />} />
-            <Route path="/writing" element={<Writing />} />
-            <Route path="/writing/:slug" element={<Article />} />
-            <Route path="/talks" element={<Talks />} />
-            <Route path="/cv" element={<Cv />} />
+            <Route path="/" element={<ServerPage />} />
+            <Route path="/projects" element={<ServerPage />} />
+            <Route path="/projects/:slug" element={<ServerPage />} />
+            <Route path="/projects/ship-a-game" element={<ServerPage />} />
+            <Route path="/projects/ship-a-game/:game" element={<ServerPage />} />
+            <Route path="/writing" element={<ServerPage />} />
+            <Route path="/writing/:slug" element={<ServerPage />} />
+            <Route path="/talks" element={<ServerPage />} />
+            <Route path="/cv" element={<ServerPage />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/home" element={<Navigate to="/" replace />} />
             <Route path="/about" element={<Navigate to="/#about" replace />} />

@@ -1,0 +1,84 @@
+/* TachoClear shift ring: a self-contained world module (see tachoclear-loop.js).
+   Every rule is scoped under .tc-loop, and its colours, families and ring size are custom properties
+   on that container, so a host page can mount it anywhere from 320 px to 900 px wide. It loads no
+   fonts: the families fall back to the system when the host has not loaded Overpass and B612 Mono. */
+.tc-loop {
+  --tcl-navy: #0b1b2b; --tcl-well: #07131f; --tcl-raised: #112538; --tcl-line: #20394f; --tcl-line-2: #35546f;
+  --tcl-ink: #f4f7fa; --tcl-ink-2: #bccbd8; --tcl-ink-3: #93a7ba;
+  --tcl-drive: #38bdf8; --tcl-work: #f7b955; --tcl-break: #7ee2b8;
+  --tcl-sans: "Overpass", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --tcl-mono: "B612 Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --tcl-ease: cubic-bezier(.2, .7, .2, 1);
+  display: grid; gap: 1.1rem; min-width: 0; color: var(--tcl-ink); background: var(--tcl-navy);
+  font: 400 1rem/1.5 var(--tcl-sans); font-variant-numeric: tabular-nums; color-scheme: dark;
+}
+.tc-loop *, .tc-loop *::before, .tc-loop *::after { box-sizing: border-box; }
+.tc-loop .tcl-stage, .tc-loop .tcl-read { min-width: 0; }
+
+/* the ring: square, scaled to its container; a host may make it wider than its column with --tcl-ring-size */
+.tc-loop .tcl-ring { position: relative; container-type: inline-size; aspect-ratio: 1; width: min(var(--tcl-ring-size, 100%), 640px);
+  margin-inline: calc((100% - min(var(--tcl-ring-size, 100%), 640px)) / 2); }
+.tc-loop .tcl-ring svg { display: block; width: 100%; height: 100%; overflow: visible; touch-action: pan-y; }
+.tc-loop .tcl-scale text { font: 400 19px var(--tcl-mono); fill: var(--tcl-ink-3); text-anchor: middle; dominant-baseline: central; }
+.tc-loop .tcl-seg { fill: none; stroke-linecap: butt; stroke-width: 46; }
+.tc-loop .tcl-seg.drive { stroke: var(--tcl-drive); }
+.tc-loop .tcl-seg.work { stroke: var(--tcl-work); }
+.tc-loop .tcl-seg.break { stroke: var(--tcl-break); }
+.tc-loop .tcl-word { font: 800 15px var(--tcl-sans); letter-spacing: 1.2px; text-anchor: middle; fill: var(--tcl-navy); }
+.tc-loop .tcl-word.across { font-size: 13px; letter-spacing: .4px; dominant-baseline: central; }
+.tc-loop .tcl-knob { cursor: grab; touch-action: none; outline: none; }
+.tc-loop .tcl-knob:active { cursor: grabbing; }
+.tc-loop .tcl-knob:hover .tcl-knob-dot, .tc-loop .tcl-knob:focus-visible .tcl-knob-dot { stroke: var(--tcl-work); stroke-width: 7; }
+.tc-loop .tcl-readout { position: absolute; inset: 29% 24%; display: grid; place-content: center; justify-items: center; text-align: center; gap: 1.2cqw; pointer-events: none; }
+.tc-loop .tcl-readout b { font: 700 clamp(.6rem, 2.9cqw, .8rem) var(--tcl-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--tcl-ink-2); }
+.tc-loop .tcl-readout b[data-kind="drive"] { color: var(--tcl-drive); }
+.tc-loop .tcl-readout b[data-kind="work"] { color: var(--tcl-work); }
+.tc-loop .tcl-readout b[data-kind="break"] { color: var(--tcl-break); }
+.tc-loop .tcl-readout time { font: 700 17.5cqw/1 var(--tcl-mono); letter-spacing: -.04em; color: var(--tcl-ink); }
+.tc-loop .tcl-readout span { font-size: clamp(.78rem, 3.1cqw, 1rem); line-height: 1.25; color: var(--tcl-ink-2); max-width: 13em; }
+.tc-loop .tcl-c { font-style: normal; margin: 0 -.22em 0 -.05em; }
+
+/* rule chips: the two rules the example turns on, named as the guide cites them */
+.tc-loop .tcl-chips { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin: .2rem 0 0; padding: 0; }
+.tc-loop .tcl-chips li { margin: 0; }
+.tc-loop .tcl-chips a { display: inline-flex; align-items: center; gap: .5rem; min-height: 40px; padding: 0 .85rem; border-radius: 99px; box-shadow: inset 0 0 0 1px #ffffff1f; font: 400 .74rem var(--tcl-mono); letter-spacing: .02em; color: var(--tcl-ink-3); text-decoration: none; }
+.tc-loop .tcl-chips a::before { content: ""; width: 9px; height: 9px; border-radius: 50%; border: 2px solid currentColor; }
+.tc-loop .tcl-chips a:hover { color: var(--tcl-ink); }
+.tc-loop .tcl-chips a:focus-visible { outline: 3px solid var(--tcl-work); outline-offset: 3px; }
+.tc-loop .tcl-chips li.on a { color: var(--tcl-ink); background: var(--tcl-raised); }
+.tc-loop .tcl-chips li.on.wt a::before { background: var(--tcl-work); border-color: var(--tcl-work); }
+.tc-loop .tcl-chips li.on.dr a::before { background: var(--tcl-drive); border-color: var(--tcl-drive); }
+
+/* the verdict, the two break clocks and the totals: always the last published checkpoint passed */
+.tc-loop .tcl-verdict { margin: 0; padding-left: .85rem; border-left: 3px solid var(--tcl-ink-3); min-height: 8.4rem; }
+.tc-loop .tcl-verdict strong { display: block; font-size: 1.3rem; font-weight: 800; line-height: 1.12; letter-spacing: -.015em; }
+.tc-loop .tcl-verdict span { display: block; margin-top: .4rem; font-size: .93rem; line-height: 1.45; color: var(--tcl-ink-2); }
+.tc-loop .tcl-clocks { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; margin: .9rem 0 0; }
+.tc-loop .tcl-clock { background: var(--tcl-well); box-shadow: inset 0 0 0 1px #ffffff1f; border-radius: 10px; padding: .7rem .8rem .75rem; }
+.tc-loop .tcl-clock dt { font: 400 .66rem/1.3 var(--tcl-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--tcl-ink-3); }
+.tc-loop .tcl-clock dd { margin: .3rem 0 0; }
+.tc-loop .tcl-clock strong { display: block; font: 700 1.5rem/1 var(--tcl-mono); letter-spacing: -.04em; white-space: nowrap; }
+.tc-loop .tcl-clock.work strong { color: var(--tcl-work); }
+.tc-loop .tcl-clock.drive strong { color: var(--tcl-drive); }
+.tc-loop .tcl-gauge { height: 6px; margin: .55rem 0 .45rem; background: var(--tcl-line); border-radius: 1px; overflow: hidden; }
+.tc-loop .tcl-gauge i { display: block; height: 100%; width: 100%; transform-origin: left; transition: transform .3s var(--tcl-ease); }
+.tc-loop .tcl-clock.work .tcl-gauge i { background: var(--tcl-work); }
+.tc-loop .tcl-clock.drive .tcl-gauge i { background: var(--tcl-drive); }
+.tc-loop .tcl-clock small { display: block; font-size: .78rem; line-height: 1.3; color: var(--tcl-ink-2); }
+.tc-loop .tcl-totals { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; margin: .7rem 0 0; }
+.tc-loop .tcl-totals div { border-top: 1px solid var(--tcl-line); padding-top: .45rem; }
+.tc-loop .tcl-totals dt { font: 400 .62rem/1.3 var(--tcl-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--tcl-ink-3); }
+.tc-loop .tcl-totals dd { margin: .15rem 0 0; font: 700 .95rem var(--tcl-mono); }
+
+/* plain controls, added by the script: previous, pause or play, next (previous and next only under reduced motion) */
+.tc-loop .tcl-controls { display: grid; grid-template-columns: 1fr auto 1fr; gap: .4rem; margin-top: 1rem; }
+.tc-loop .tcl-controls[hidden] { display: none; }
+.tc-loop .tcl-controls.still { grid-template-columns: 1fr 1fr; }
+.tc-loop .tcl-controls button { appearance: none; font: 700 .86rem var(--tcl-sans); color: var(--tcl-ink); background: transparent; border: 1px solid var(--tcl-line-2); border-radius: 4px; min-height: 46px; padding: 0 1rem; cursor: pointer; }
+.tc-loop .tcl-controls button:hover:not(:disabled) { border-color: var(--tcl-ink-3); }
+.tc-loop .tcl-controls button:focus-visible { outline: 3px solid var(--tcl-work); outline-offset: 3px; }
+.tc-loop .tcl-controls button:disabled { opacity: .4; cursor: default; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tc-loop .tcl-gauge i { transition: none; }
+}

@@ -1,8 +1,10 @@
 # Personal site repository guide
 
-This is Tom Murton's public portfolio, built with React, TypeScript and Vite. The
-production Project Gallery is the primary experience; writing, talks and the CV are
-supporting collections. A private Sanity Studio in `studio/` manages published content
+This is Tom Murton's public portfolio. The public site is static HTML rendered at build
+time (`scripts/site/`) from published Sanity content, upgraded by a small framework-free
+script into the stage: one index of projects and one stage whose worlds are each product's
+own hero loop, joined by a travelling dot. Writing, talks and the CV are supporting
+collections. React and Vite now serve only `/admin` and the archived `/designs` studies. A private Sanity Studio in `studio/` manages published content
 and appearance. The audience is prospective employers and collaborators assessing Tom
 through concrete work, outcomes and clear product judgement. Never invent experience or
 results to strengthen the story.
@@ -27,8 +29,16 @@ Read only the guide relevant to the task. Do not duplicate these documents in th
 - Routine project, article, talk, CV, homepage-order and appearance changes normally
   belong in Sanity. Change schemas, mapping code or fallback content only for structural,
   recovery or seed work.
-- `src/App.tsx` owns routes and providers; `src/components/site/` and
-  `src/styles/GallerySite.css` own the production gallery implementation.
+- `scripts/site/` renders every public URL (`render.ts`, `build.ts`), fetches content
+  (`content.ts`) and App Store facts (`fetch-app-store.ts`, written to
+  `src/content/generated/app-store.json`). `src/content/worlds.ts` owns the index order,
+  world colours, captions and the copy for rows not yet in Sanity.
+- `src/stage/` is the browser code and stylesheet: `stage.js` (engine), `merge.js` (shared
+  content rules, also used by the build), `refresh.js` (client refresh from Sanity's CDN) and
+  `worlds/` (one module per world). Sibling sites' loops are vendored, unedited, in
+  `src/worlds/vendor/` with their sources in `SOURCES.json`.
+- `src/App.tsx` owns the `/admin` and `/designs` routes; the old gallery components under
+  `src/components/site/` are no longer rendered on public URLs.
 - `studio/schemaTypes/` and `studio/structure.ts` own the Studio schema and navigation.
 
 The `/designs` directory contains deliberately preserved design experiments. The
@@ -75,6 +85,9 @@ configuration or deployments.
 - Run `npm run cms:verify:live` when the task affects live CMS behaviour and live access
   is appropriate.
 - For visual changes, inspect the affected routes rather than relying on compilation alone.
+  `npm run build` then `node scripts/preview-server.mjs 4609` serves `dist/` with the
+  `vercel.json` redirects, rewrites and 404 applied. Review aids: `?w=<world>&t=<seconds>`
+  freezes a world, `?sheet=writing|talks|about` opens a sheet, `?static=1` skips the CMS refresh.
 
 ## Publishing and deployment
 

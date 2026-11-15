@@ -1,6 +1,14 @@
 # Site admin and content guide
 
-The production direction is the Project Gallery. Its normal editing interface is a private Sanity Studio, while the alternative Codex and Claude designs remain unchanged under `/designs`.
+The public site is one stage and one index (November 2026 redesign). Its normal editing interface is a private Sanity Studio, while the alternative Codex and Claude designs remain unchanged under `/designs`.
+
+## What the Studio still controls, and what it no longer does
+
+Still editable and used: project names, kinds, years and summaries (the index line), project links, the hero eyebrow, headline, accent and introduction, the homepage writing, talks and about section titles and the about text, stories and their bodies, articles, talks, the CV and collection order for writing, talks and the CV.
+
+No longer used by the public site: theme colours, type scale, density, card height, corners, grid gaps, hero backdrop, motion, homepage project rows and artwork presets. The index order, each world's colours and type, captions and links live in `src/content/worlds.ts`. A project's status and fact line come from the App Store lookup at build whenever the project has a listing, whatever the CMS says.
+
+TachoClear, CutRoof, PAT Logbook and WeEvolve are not yet Sanity records; their copy is in `src/content/worlds.ts` (`fallback`). Once a Sanity project with the same slug is published and added to the projects collection, Sanity's copy wins.
 
 ## Start the site and admin
 
