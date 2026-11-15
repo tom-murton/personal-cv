@@ -231,7 +231,8 @@ async function openSheet(id, opts = {}) {
 }
 function closeSheet(opts = {}) {
   if (!sheet) return;
-  sheetSeq++; seq++; inertBehind(false);
+  sheetSeq++; if (cur) seq++;       /* cancel a world still loading for this sheet, never the first one */
+  inertBehind(false);
   sheet.classList.remove('is-open'); sheet = null; root.classList.remove('sheet-open');
   if (cur) { trans = { from: pose, start: performance.now(), dur: 700 }; if (RM) { trans = null; redraw(); native(); } }
   if (opts.record !== false) record(true); else d.title = docTitle();
@@ -273,7 +274,7 @@ d.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') { took(); if (sheet) closeSheet(); else go('orbit'); return; }
   if (sheet) return;
   if (e.key === 'Home' || e.key === 'h' || e.key === 'H') { took(); go('orbit'); return; }
-  if (e.key === ' ' && (e.target === d.body || e.target === d.documentElement)) { e.preventDefault(); took(); paused = !paused; return; }
+  if (e.key === ' ' && (e.target === d.body || e.target === d.documentElement)) { e.preventDefault(); took(); setPaused(!paused); return; }
   if (!cur) return;
   if (e.shiftKey && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) { e.preventDefault(); took(); cur.owned = false; cur.f = clamp(cur.f + (e.key === 'ArrowRight' ? .05 : -.05), 0, .9999); paused = true; redraw(); return; }
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); took(); step(1); }
@@ -304,7 +305,9 @@ dotEl.addEventListener('pointermove', (e) => {
 });
 function endDrag() { if (dragging) { dragging = false; lastInput = performance.now(); } }
 dotEl.addEventListener('pointerup', endDrag); dotEl.addEventListener('pointercancel', endDrag);
-d.addEventListener('visibilitychange', () => { paused = d.hidden; });
+/* A module that owns its time (after a touch) pauses and resumes with the stage. */
+function setPaused(v) { paused = v; if (cur && cur.owned) { if (v) cur.handle.pause(); else cur.handle.play(); } }
+d.addEventListener('visibilitychange', () => setPaused(d.hidden));
 window.addEventListener('resize', redraw);
 
 /* ---------- live: London time, read from this device and sent nowhere ---------- */
