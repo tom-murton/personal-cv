@@ -1,0 +1,161 @@
+{
+  "cutroof": {
+    "repository": "git@github.com:tom-murton/cutroof.git",
+    "worktree": "redesign-cutroof",
+    "branch": "redesign/cutroof-2026-11",
+    "copied": "2026-11-15T01:54+00:00",
+    "files": [
+      {
+        "path": "site/loop/cutroof-loop.js",
+        "copiedTo": "loop/cutroof-loop.js",
+        "sha256": "c2b426398c473622265260c097635f7dcf6663a7741c957080e1edf65ad8e5f2",
+        "commit": "a268384b7fa767e52e6ddef47d224856206f1712",
+        "state": "committed"
+      },
+      {
+        "path": "site/loop/cutroof-loop.css",
+        "copiedTo": "loop/cutroof-loop.css",
+        "sha256": "9eb27a0c6ff7d3ba6496d3b394b7ffc7015f332b12eb1e614c0f03d53688b9c7",
+        "commit": "a268384b7fa767e52e6ddef47d224856206f1712",
+        "state": "committed"
+      }
+    ]
+  },
+  "patbook": {
+    "repository": "git@github.com:tom-murton/patbook-site.git",
+    "worktree": "redesign-patbook",
+    "branch": "redesign/patbook-2026-11",
+    "copied": "2026-11-15T01:54+00:00",
+    "files": [
+      {
+        "path": "site/loop/patbook-loop.js",
+        "copiedTo": "loop/patbook-loop.js",
+        "sha256": "ce626a1da5ef4619b1ac7bb290cc5f8442ed9c68dbfe6bdc5e8fd6e2754a1546",
+        "commit": "5734cc7c9d6395915408b071be8618dd78600b6c",
+        "state": "committed"
+      },
+      {
+        "path": "site/loop/patbook-loop.css",
+        "copiedTo": "loop/patbook-loop.css",
+        "sha256": "146c22484d548e30f2fa306e637f63dfdc6e3766c1a0916166a7bfa054fa9d13",
+        "commit": "3d886e5026b4a11982e5967dfec7bf4e3fded4d0",
+        "state": "committed"
+      },
+      {
+        "path": "site/assets/certificate-pb-0003.webp",
+        "copiedTo": "assets/certificate-pb-0003.webp",
+        "sha256": "31c0975fbfaaea781ecde72d3a0c04a69de6eca5fa89ede499c3712ffbfe77a4",
+        "commit": "3d886e5026b4a11982e5967dfec7bf4e3fded4d0",
+        "state": "committed"
+      }
+    ]
+  },
+  "restrise": {
+    "repository": "git@github.com:tom-murton/restrise-site.git",
+    "worktree": "redesign-restrise",
+    "branch": "redesign/restrise-2026-11",
+    "copied": "2026-11-15T01:54+00:00",
+    "files": [
+      {
+        "path": "public/loop/restrise-loop.js",
+        "copiedTo": "loop/restrise-loop.js",
+        "sha256": "65eca2d071e56ffdf233c017a3cd8e547f49b5670ffb1f1632562ddc2cfd97ea",
+        "commit": "21f579c9f7b7c351cc7982186a181a875b276903",
+        "state": "committed"
+      },
+      {
+        "path": "public/loop/restrise-loop.css",
+        "copiedTo": "loop/restrise-loop.css",
+        "sha256": "365e746178d9924c1c6d4635aedbdb3502d070b2dd4735ecd34a4787c2966757",
+        "commit": "21f579c9f7b7c351cc7982186a181a875b276903",
+        "state": "committed"
+      },
+      {
+        "path": "public/app/first-routine.webp",
+        "copiedTo": "app/first-routine.webp",
+        "sha256": "5d00e729ceb8bfbdfb0fe6ca3d1245ae1dd702a97204821634732e2df3314006",
+        "commit": "7eba084af21b3744edfbb2ebce8b2dcb6fd17ea1",
+        "state": "committed"
+      },
+      {
+        "path": "public/app/rest-checklist.webp",
+        "copiedTo": "app/rest-checklist.webp",
+        "sha256": "7b53669af7c6cbd123a277a5d9fa5be8284bf1a95a53928806aa6c2cc2ef6e00",
+        "commit": "7eba084af21b3744edfbb2ebce8b2dcb6fd17ea1",
+        "state": "committed"
+      },
+      {
+        "path": "public/app/session-summary.webp",
+        "copiedTo": "app/session-summary.webp",
+        "sha256": "ac708fa9e2508cf5eeb25113d59e1f961ea53a596c051c71dd12f39e5740f00e",
+        "commit": "7eba084af21b3744edfbb2ebce8b2dcb6fd17ea1",
+        "state": "committed"
+      },
+      {
+        "path": "public/app/guided.webp",
+        "copiedTo": "app/guided.webp",
+        "sha256": "a73a839b175bad38be02324707578ea3465e243502a5bdf18d49a659d8ec9c23",
+        "commit": "7eba084af21b3744edfbb2ebce8b2dcb6fd17ea1",
+        "state": "committed"
+      }
+    ]
+  },
+  "tachoclear": {
+    "repository": "https://github.com/tom-murton/TachoClear.git",
+    "worktree": "redesign-tachoclear",
+    "branch": "redesign/tachoclear-2026-11",
+    "copied": "2026-11-15T01:54+00:00",
+    "files": [
+      {
+        "path": "site/loop/tachoclear-loop.js",
+        "copiedTo": "loop/tachoclear-loop.js",
+        "sha256": "2be55ed5885d4b8fe59e451f692ee7d6e1fa80d9ca96f6af68dd281d7edd6b5b",
+        "commit": "754e7ff9eb163f2234a6f4a18b3af203e844d662",
+        "state": "committed"
+      },
+      {
+        "path": "site/loop/tachoclear-loop.css",
+        "copiedTo": "loop/tachoclear-loop.css",
+        "sha256": "2fcab24502838c7bb54f885dcdbd80f2bf9e5227f176933ffffa48c443353465",
+        "commit": "754e7ff9eb163f2234a6f4a18b3af203e844d662",
+        "state": "committed"
+      }
+    ]
+  },
+  "weevolve": {
+    "repository": "git@github.com:tom-murton/weevolve-site.git",
+    "worktree": "redesign-weevolve-publisher",
+    "branch": "wip/weevolve-publisher-2026-11",
+    "copied": "2026-11-15T01:54+00:00",
+    "files": [
+      {
+        "path": "src/loop/weevolve-loop.js",
+        "copiedTo": "loop/weevolve-loop.js",
+        "sha256": "44fd1ea389607a6670eaa17a3b978d4c3b5ffb4336bada8910e49e3085c420f2",
+        "commit": "185158d9a396eb12b46385e513cc18363a0f827e",
+        "state": "committed"
+      },
+      {
+        "path": "src/loop/weevolve-loop.css",
+        "copiedTo": "loop/weevolve-loop.css",
+        "sha256": "7b086e9a2cc4c2f83e3e9c78d3d466e1e5d093e0761e47cbf18a892e12873a54",
+        "commit": "185158d9a396eb12b46385e513cc18363a0f827e",
+        "state": "committed"
+      },
+      {
+        "path": "public/badges/app-store.svg",
+        "copiedTo": "badges/app-store.svg",
+        "sha256": "a26fc5b38380272c92e9019a2eb8b45542a66814b3e2b203772db8904b9fb99f",
+        "commit": "e8149fae570ac8c93fcf9b655b6a92895e848277",
+        "state": "committed"
+      },
+      {
+        "path": "public/badges/google-play.svg",
+        "copiedTo": "badges/google-play.svg",
+        "sha256": "4ffa4c7edd2f10b297ca4de2131eddaa00d03b2278d1e178fe512920d824ca34",
+        "commit": "e8149fae570ac8c93fcf9b655b6a92895e848277",
+        "state": "committed"
+      }
+    ]
+  }
+}

@@ -115,9 +115,11 @@ async function go(id, opts = {}) {
   let mod;
   try { mod = await load(id); } catch (e) { if (!opts.silent) location.assign(id === 'orbit' ? '/' : '/projects/' + id); return; }
   if (my !== seq) return;            // a later choice overtook this one
-  const old = cur, next = mountWorld(id, mod);
+  let next;
+  try { next = mountWorld(id, mod); } catch (e) { d.querySelectorAll('.stage > .world:not(:has(*))').forEach((x) => x.remove()); if (!opts.silent) location.assign(id === 'orbit' ? '/' : '/projects/' + id); return; }
+  const old = cur;
   cur = next;
-  chrome(id, Boolean(old), !old);
+  chrome(id, Boolean(old), !old && !titleEl.hasAttribute('data-sub'));
   if (!opts.silent) { record(opts.push !== false); if (announce) announce.textContent = id === 'orbit' ? 'Home' : (rowOf(id)?.querySelector('.nm').textContent || ''); }
   dotEl.classList.toggle('is-native', false);
   const instant = !old || RM || opts.instant || !pose;
@@ -202,20 +204,21 @@ async function openSheet(id, opts = {}) {
   if (!el) { location.assign(id.startsWith('story-') ? '/writing/' + id.slice(6) : '/' + id); return; }
   if (sheet && sheet !== el) sheet.classList.remove('is-open');
   if (!sheet) sheetOpener = d.activeElement;
+  if (opts.record === false && !sheet) { el.style.transition = 'none'; requestAnimationFrame(() => requestAnimationFrame(() => { el.style.transition = ''; })); }
   sheet = el; el.classList.add('is-open'); el.scrollTop = 0; root.classList.add('sheet-open');
   native();
   const project = el.dataset.project;
   if (project && rowOf(project) && (!cur || cur.id !== project)) go(project, { silent: true, instant: !cur });
   else if (id.startsWith('story-') && !project && cur && cur.id !== 'orbit') go('orbit', { silent: true });
-  if (opts.record !== false) record(opts.push !== false);
-  const c = el.querySelector('.sheet-close'); if (c) c.focus({ preventScroll: true });
-  if (RM) { pose = readerPose(); drawDot(pose); }
+  if (opts.record !== false) record(opts.push !== false); else d.title = docTitle();
+  if (opts.record !== false) { const c = el.querySelector('.sheet-close'); if (c) c.focus({ preventScroll: true }); }
+  if (RM || opts.record === false) { pose = readerPose(); drawDot(pose); }
 }
 function closeSheet(opts = {}) {
   if (!sheet) return;
   sheet.classList.remove('is-open'); sheet = null; root.classList.remove('sheet-open');
   if (cur) { trans = { from: pose, start: performance.now(), dur: 700 }; if (RM) { trans = null; redraw(); } }
-  if (opts.record !== false) record(true);
+  if (opts.record !== false) record(true); else d.title = docTitle();
   if (sheetOpener && sheetOpener.focus && d.contains(sheetOpener)) sheetOpener.focus({ preventScroll: true });
   sheetOpener = null;
 }

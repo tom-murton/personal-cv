@@ -62,3 +62,81 @@ export function svgWorld(def) {
     },
   };
 }
+
+/*
+ * Adapter for a sibling site's loop module (vendored under /stage/vendor/). None of the seven yet
+ * implements keyObject or object(), so the adapter supplies object() itself: it reads the key object's
+ * box from the module's own DOM each frame. The module keeps drawing and handling its key object, so its
+ * drag, tap and keyboard controls work untouched; the stage's dot travels to that box, then hands over
+ * (handle.native) and reappears from it when the visitor moves on.
+ *
+ * cfg: { module: () => import(...), css?: url, width: { desktop, phone } natural px width to lay the module
+ *        out at before it is scaled to fit the stage's scene box, key: [selectors], color?: fallback colour,
+ *        round?: true for a round key object, still?: fraction, trailer?, trailerFrom?, once?,
+ *        options?: (element) => mount options, fallback: () => import(the simplified loop) }
+ */
+export function moduleWorld(cfg) {
+  return {
+    async load() {
+      try { const m = await cfg.module(); if (typeof m.mount !== 'function') throw new Error('no mount'); return { real: m }; }
+      catch (e) { return { sketch: await cfg.fallback() }; }
+    },
+    mount(element, options, loaded) {
+      if (loaded.sketch) return loaded.sketch.mount(element, options);
+      const phone = window.matchMedia(PHONE).matches;
+      const box = document.createElement('div'); box.className = 'module-box';
+      const fit = document.createElement('div'); fit.className = 'module-fit';
+      const host = document.createElement('div'); host.className = 'module-root';
+      const W = phone ? cfg.width.phone : cfg.width.desktop;
+      fit.style.width = W + 'px';
+      let link = null;
+      if (cfg.css) { link = document.createElement('link'); link.rel = 'stylesheet'; link.href = cfg.css; fit.appendChild(link); }
+      fit.appendChild(host); box.appendChild(fit); element.appendChild(box);
+      let h;
+      try { h = loaded.real.mount(host, Object.assign({ autoplay: false, reducedMotion: options.reducedMotion }, cfg.options ? cfg.options(host, options) : {})); }
+      catch (e) { box.remove(); return null; }
+      // Scale the module's natural layout to fit the scene box. Measured again once its stylesheet has loaded.
+      const scale = () => {
+        const bw = box.clientWidth, bh = box.clientHeight, nh = Math.max(host.scrollHeight, host.offsetHeight) || 1;
+        const k = Math.min(bw / W, bh / nh, 1.4);
+        fit.style.transform = 'translate(-50%,-50%) scale(' + k + ')';
+      };
+      scale();
+      if (link) link.addEventListener('load', () => requestAnimationFrame(scale));
+      requestAnimationFrame(() => requestAnimationFrame(scale));
+      const ro = 'ResizeObserver' in window ? new ResizeObserver(scale) : null;
+      if (ro) { ro.observe(box); ro.observe(host); }
+      const keyEl = () => { for (const s of cfg.key) for (const el of host.querySelectorAll(s)) { const r = el.getBoundingClientRect(); if (r.width > 1 && r.height > 1) return [el, r]; } return null; };
+      let colour = cfg.color ? toRgb(cfg.color) : 'rgb(255,255,255)';
+      const dur = () => Number(h.duration) || 10000;
+      return {
+        native: true,
+        get duration() { return dur(); },
+        still: cfg.still || 0,
+        trailer: cfg.trailer,
+        trailerFrom: cfg.trailerFrom || 0,
+        once: Boolean(cfg.once),
+        play() { h.play && h.play(); },
+        pause() { h.pause && h.pause(); },
+        seek(f) { if (h.pause) h.pause(); h.seek && h.seek(clamp(f, 0, .9999)); },
+        object() {
+          const found = keyEl(); if (!found) return null;
+          const [el, r] = found, cs = getComputedStyle(el);
+          const c = el instanceof SVGElement ? cs.fill : cs.backgroundColor;
+          if (c && /^rgb/.test(c) && !/rgba\(.*,\s*0\)$/.test(c)) colour = c;
+          const s = Math.min(r.width, r.height);
+          return cfg.round === false
+            ? { x: r.left + r.width / 2, y: r.top + r.height / 2, w: r.width, h: r.height, br: .2, color: colour, rot: 0 }
+            : { x: r.left + r.width / 2, y: r.top + r.height / 2, w: s, h: s, br: 1, color: colour, rot: 0 };
+        },
+        destroy() { if (ro) ro.disconnect(); try { h.destroy(); } catch (e) { /* module failed to tidy up */ } box.remove(); },
+      };
+    },
+  };
+}
+
+/** Wrap moduleWorld as a world module the engine can import: loads the real module, or the simplified loop. */
+export async function worldFrom(cfg) {
+  const w = moduleWorld(cfg), loaded = await w.load();
+  return { mount: (el, opts) => { const h = w.mount(el, opts, loaded); if (!h) throw new Error('world failed to mount'); return h; }, real: Boolean(loaded.real) };
+}

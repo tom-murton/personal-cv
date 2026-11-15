@@ -1,0 +1,100 @@
+/* Rest+Rise orb world, the hero loop as a self-contained world.
+   Served at /loop/restrise-loop.css beside /loop/restrise-loop.js.
+   Everything is scoped under .orbworld and every colour and size is an --ow-* token on
+   the container. It loads no fonts (set --ow-serif to a family the host has loaded).
+   Sizes follow the container's own width (container queries), so it works anywhere
+   from 20rem (320 px) to about 56rem (900 px) wide, and across a full-width hero.
+   The values below are the still shown with no script: nightfall, step one. */
+
+.orbworld {
+  --ow-night-top: #1B2240; --ow-night-high: #232A52; --ow-night-mid: #2C3560; --ow-night-low: #4E4A78; --ow-plum: #6B5578; --ow-rose: #94687A;
+  --ow-moon: #E8DFC8; --ow-sun: #F5A94E; --ow-lamp: #F2D9A0; --ow-text: #F6F1E7; --ow-muted: #C9C3DA;
+  --ow-serif: "Fraunces", "Iowan Old Style", "New York", Georgia, serif;
+  --ow-settle: cubic-bezier(.22, 1, .36, 1); --ow-breathe: cubic-bezier(.45, 0, .2, 1);
+  --ow-glow-dusk-x: 30%; --ow-glow-dawn-x: 74%; --ow-glow-w: 95%;   /* where the horizon glows sit: under the stage, never under host text */
+  --ow-cx: .0766; --ow-cy: .468;          /* orb position on the arc box, 0 to 1 */
+  --ow-warm: 0; --ow-bite: 34%;          /* orb phase: 0 moon to 1 sun; 34% crescent to 112% full */
+  --ow-dusk: .209; --ow-dawn: 0; --ow-stars: .708;
+  --ow-s1: 1; --ow-s2: 0; --ow-s3: 0;    /* phone screens above the first */
+  --ow-spot-y: 30.1; --ow-spot-o: 1;     /* ring of lamplight on the checklist row */
+  position: relative; isolation: isolate; overflow-x: clip; color: var(--ow-text);
+  container: orbworld / inline-size;
+  background: linear-gradient(180deg, var(--ow-night-top) 0, var(--ow-night-high) 28%, var(--ow-night-mid) 50%, var(--ow-night-low) calc(100% - 17rem), var(--ow-plum) calc(100% - 8.5rem), var(--ow-rose) 100%);
+}
+/* stage sizes: wide default, then by the container's width */
+.ow-stage { --ow-phone-w: 18rem; --ow-arc-h: 14rem; --ow-orb: 3.5rem; --ow-lift: 3.75rem; --ow-arc-inset: 1%; }
+@container orbworld (min-width: 75rem) { .ow-stage { --ow-arc-inset: -4%; } }
+@container orbworld (min-width: 62.0625rem) and (max-width: 74.9375rem) { .ow-stage { --ow-phone-w: 15rem; --ow-orb: 3rem; --ow-lift: 4.5rem; } }
+@container orbworld (min-width: 40.0625rem) and (max-width: 62rem) { .ow-stage { --ow-phone-w: 16rem; --ow-lift: 4.25rem; } }
+@container orbworld (max-width: 40rem) { .ow-stage { --ow-phone-w: 13rem; --ow-arc-h: 8.75rem; --ow-orb: 2.5rem; --ow-lift: 2.6rem; --ow-arc-inset: 5%; } }
+@container orbworld (max-width: 22.5rem) { .ow-stage { --ow-phone-w: 11.5rem; } }
+
+.orbworld, .orbworld *, .orbworld *::before, .orbworld *::after { box-sizing: border-box; }
+.orbworld button { font: inherit; color: inherit; }
+.orbworld :focus-visible { outline: 3px solid var(--ow-sun); outline-offset: 4px; }
+.ow-sky { position: absolute; inset: 0; z-index: -1; overflow: clip; pointer-events: none; }
+.ow-sky::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 17rem at 68% 100%, rgb(240 170 125 / 55%), rgb(240 170 125 / 0) 72%); }
+.ow-glow { position: absolute; inset: 0; }
+.ow-glow--dusk { opacity: var(--ow-dusk); background: radial-gradient(var(--ow-glow-w) 70% at var(--ow-glow-dusk-x) 100%, rgb(248 190 122 / 86%) 0, rgb(226 150 126 / 58%) 34%, rgb(148 104 122 / 0) 74%); }
+.ow-glow--dawn { opacity: var(--ow-dawn); background: radial-gradient(var(--ow-glow-w) 70% at var(--ow-glow-dawn-x) 100%, rgb(251 214 150 / 92%) 0, rgb(240 172 128 / 60%) 34%, rgb(148 104 122 / 0) 74%); }
+.ow-stars { position: absolute; inset: 0 0 38%; opacity: var(--ow-stars); }
+.ow-stars::before, .ow-stars::after { content: ""; position: absolute; inset: 0; background-repeat: no-repeat; }
+.ow-stars::before { background-image:
+  radial-gradient(1.5px 1.5px at 6% 12%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 17% 31%, #fff 50%, transparent 52%),
+  radial-gradient(1px 1px at 29% 8%, #fff 50%, transparent 52%), radial-gradient(1.5px 1.5px at 41% 22%, #fff 50%, transparent 52%),
+  radial-gradient(1px 1px at 55% 14%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 63% 37%, #fff 50%, transparent 52%),
+  radial-gradient(1.5px 1.5px at 78% 9%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 91% 27%, #fff 50%, transparent 52%),
+  radial-gradient(1px 1px at 12% 58%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 86% 54%, #fff 50%, transparent 52%);
+  animation: ow-twinkle 7s ease-in-out infinite alternate; }
+.ow-stars::after { background-image:
+  radial-gradient(1px 1px at 10% 22%, #fff 50%, transparent 52%), radial-gradient(1.5px 1.5px at 23% 16%, #fff 50%, transparent 52%),
+  radial-gradient(1px 1px at 35% 34%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 48% 6%, #fff 50%, transparent 52%),
+  radial-gradient(1.5px 1.5px at 59% 27%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 70% 18%, #fff 50%, transparent 52%),
+  radial-gradient(1px 1px at 84% 36%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 96% 11%, #fff 50%, transparent 52%),
+  radial-gradient(1px 1px at 3% 44%, #fff 50%, transparent 52%), radial-gradient(1px 1px at 74% 62%, #fff 50%, transparent 52%);
+  animation: ow-twinkle 9s ease-in-out -4s infinite alternate-reverse; }
+.orbworld.is-paused .ow-stars::before, .orbworld.is-paused .ow-stars::after { animation-play-state: paused; }   /* a pause stops everything */
+@keyframes ow-twinkle { from { opacity: .28; } to { opacity: .85; } }
+
+.ow-stage { position: relative; width: 100%; max-width: 30rem; margin-inline: auto; }
+.ow-bar { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: .5rem 1rem; }
+.ow-caption { display: grid; gap: .15rem; min-height: 2.75rem; align-content: center; margin: 0; }
+.ow-caption__when { font-size: .75rem; font-weight: 650; letter-spacing: .14em; line-height: 1.3; text-transform: uppercase; color: var(--ow-lamp); }
+.ow-caption__what { font-family: var(--ow-serif); font-variation-settings: "SOFT" 100; font-size: 1.25rem; font-weight: 360; line-height: 1.15; letter-spacing: -.01em; }
+.ow-toggle { display: none; width: 2.75rem; height: 2.75rem; padding: 0; border: 1px solid rgb(239 234 244 / 28%); border-radius: 50%; background: rgb(20 24 48 / 35%); cursor: pointer; place-items: center; transition: background-color 200ms var(--ow-settle); }
+.ow-toggle:hover { background: rgb(20 24 48 / 60%); }
+.ow-toggle svg { width: 1rem; height: 1rem; }
+.ow-toggle .i-play, .ow-toggle[aria-pressed="true"] .i-pause { display: none; }
+.ow-toggle[aria-pressed="true"] .i-play { display: block; }
+.ow-beats { display: none; grid-template-columns: repeat(6, 1fr); gap: .375rem; }
+.ow-beats button { position: relative; height: 1.75rem; padding: 0; border: 0; background: none; cursor: pointer; }
+.ow-beats button::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 3px; margin-top: -1.5px; border-radius: 3px; background: rgb(239 234 244 / 24%); transition: background-color 500ms var(--ow-breathe); }
+.ow-beats button[aria-current="true"]::before { background: var(--ow-lamp); }
+.ow-hint { display: none; margin: 0; font-size: .8125rem; line-height: 1.3; color: var(--ow-text); opacity: .86; white-space: nowrap; text-align: right; }
+.orbworld.is-live .ow-toggle, .orbworld.is-live .ow-beats { display: grid; }
+.orbworld.is-live .ow-hint { display: block; }
+
+.ow-scene { position: relative; margin-top: calc(var(--ow-orb) * .5 + .9rem); padding-top: var(--ow-lift); display: grid; justify-items: center; }
+.ow-arc { position: absolute; left: var(--ow-arc-inset); right: var(--ow-arc-inset); top: 0; height: var(--ow-arc-h); }
+.ow-arc svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ow-arc path { fill: none; stroke: currentColor; stroke-width: 1.4; stroke-dasharray: 1.4 6; stroke-linecap: round; opacity: .42; vector-effect: non-scaling-stroke; }
+.ow-orb { position: absolute; z-index: 2; left: calc(var(--ow-cx) * 100%); top: calc(var(--ow-cy) * 100%); width: max(var(--ow-orb), 3rem); height: max(var(--ow-orb), 3rem); margin: calc(max(var(--ow-orb), 3rem) / -2) 0 0 calc(max(var(--ow-orb), 3rem) / -2); display: grid; place-items: center; border-radius: 50%; }
+.orbworld.is-live .ow-orb { cursor: grab; touch-action: none; }
+.orbworld.is-live .ow-orb.is-held { cursor: grabbing; }
+.orbworld.is-live .ow-orb::after { content: ""; position: absolute; inset: -.3rem; border-radius: 50%; border: 1px solid rgb(239 234 244 / 30%); opacity: 0; transition: opacity 300ms var(--ow-settle); }
+.orbworld.is-live .ow-orb:hover::after, .orbworld.is-live .ow-orb.is-held::after, .orbworld.is-live .ow-orb:focus-visible::after { opacity: 1; }
+.ow-disc { position: relative; display: block; width: var(--ow-orb); aspect-ratio: 1; }
+.ow-disc::before { content: ""; position: absolute; inset: -70%; border-radius: 50%; pointer-events: none; background: radial-gradient(closest-side, color-mix(in oklab, rgb(245 169 78 / 46%) calc(var(--ow-warm) * 100%), rgb(232 223 200 / 20%)), transparent); }
+.ow-disc::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: color-mix(in oklab, var(--ow-sun) calc(var(--ow-warm) * 100%), var(--ow-moon));
+  -webkit-mask: radial-gradient(50% 50% at calc(50% + var(--ow-bite)) calc(50% - var(--ow-bite) * .42), transparent 97%, #000 100%);
+          mask: radial-gradient(50% 50% at calc(50% + var(--ow-bite)) calc(50% - var(--ow-bite) * .42), transparent 97%, #000 100%); }
+.ow-phone { position: relative; z-index: 1; width: var(--ow-phone-w); max-width: 100%; margin: 0; padding: 7px; border-radius: calc(14% + 7px) / calc(6.5% + 4px); background: #0C0F22; box-shadow: 0 0 0 1px rgb(255 255 255 / 9%) inset, 0 34px 80px rgb(6 8 24 / 55%); }
+.ow-screens { position: relative; border-radius: 13.4% / 6.2%; overflow: hidden; }
+.ow-screens img { display: block; width: 100%; height: auto; aspect-ratio: 1320 / 2868; }
+.ow-screens img + img { position: absolute; inset: 0; }
+.ow-screens img:nth-child(2) { opacity: var(--ow-s1); }
+.ow-screens img:nth-child(3) { opacity: var(--ow-s2); }
+.ow-screens img:nth-child(4) { opacity: var(--ow-s3); }
+.ow-spot { position: absolute; left: 4.6%; right: 4.6%; top: calc(var(--ow-spot-y) * 1%); height: 6.4%; transform: translateY(-50%); border-radius: .75rem; background: rgb(242 217 160 / 9%); box-shadow: 0 0 0 1.5px rgb(242 217 160 / 80%), 0 0 1.5rem rgb(242 217 160 / 30%); opacity: var(--ow-spot-o); pointer-events: none; }
+@container orbworld (max-width: 40rem) { .ow-caption__what { font-size: 1.125rem; } }
+@media (prefers-reduced-motion: reduce) { .ow-stars::before, .ow-stars::after { animation: none; opacity: .6; } .orbworld *, .orbworld *::before, .orbworld *::after { transition: none; } }
