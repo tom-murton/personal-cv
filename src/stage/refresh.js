@@ -74,7 +74,7 @@ export async function refresh(data) {
       setText(li.querySelector('a'), s.title); setText(li.querySelector('span'), s.description);
       return li;
     });
-    if (fresh.length) list.replaceChildren(...fresh, ...external);
+    list.replaceChildren(...fresh, ...external);
   }
 }
 

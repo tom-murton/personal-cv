@@ -39,7 +39,7 @@ function load(id) {
 }
 const rowOf = (id) => d.querySelector('.index ol .row[data-world="' + id + '"]');
 
-let cur = null, pose = null, trans = null, dragging = false, paused = false, sheet = null, sheetOpener = null, seq = 0;
+let cur = null, pose = null, trans = null, dragging = false, paused = false, sheet = null, sheetOpener = null, seq = 0, sheetSeq = 0;
 let touring = !RM && !Q.get('w') && !Q.get('sheet') && location.pathname === '/' && !location.hash;
 /* Only the home URL tours. Elsewhere (a world, a sheet, a review link) the stage waits for the visitor. */
 const canTour = touring;
@@ -115,7 +115,8 @@ function record(push) {
 }
 
 async function go(id, opts = {}) {
-  const my = opts.token != null ? opts.token : ++seq;   // the newest choice wins, whether it is a world or a sheet
+  const my = ++seq;                  // the newest world choice wins
+  if (!opts.silent) sheetSeq++;      // and a world the visitor chose cancels a sheet still loading
   if (cur && cur.id === id) { if (!opts.silent) record(opts.push !== false); return; }
   let mod;
   try { mod = await load(id); } catch (e) { if (my === seq && !opts.silent) location.assign(id === 'orbit' ? '/' : '/projects/' + id); return; }
@@ -208,10 +209,10 @@ async function storySheet(id) {
   return null;
 }
 async function openSheet(id, opts = {}) {
-  const my = ++seq;
+  const my = ++sheetSeq;
   let el = d.getElementById(id);
   if (!el && id.startsWith('story-')) el = await storySheet(id);
-  if (my !== seq) return;            // the visitor moved on while the story was loading
+  if (my !== sheetSeq) return;       // the visitor moved on while the story was loading
   if (!el) { location.assign(id.startsWith('story-') ? '/writing/' + id.slice(6) : '/' + id); return; }
   if (sheet && sheet !== el) sheet.classList.remove('is-open');
   if (!sheet) sheetOpener = d.activeElement;
@@ -219,8 +220,8 @@ async function openSheet(id, opts = {}) {
   sheet = el; el.classList.add('is-open'); el.scrollTop = 0; root.classList.add('sheet-open');
   native();
   const project = el.dataset.project;
-  if (project && rowOf(project) && (!cur || cur.id !== project)) go(project, { silent: true, instant: !cur, token: my });
-  else if (id.startsWith('story-') && !project && cur && cur.id !== 'orbit') go('orbit', { silent: true, token: my });
+  if (project && rowOf(project) && (!cur || cur.id !== project)) go(project, { silent: true, instant: !cur });
+  else if (id.startsWith('story-') && !project && cur && cur.id !== 'orbit') go('orbit', { silent: true });
   inertBehind(true);
   if (opts.record !== false) record(opts.push !== false); else d.title = docTitle();
   if (opts.record !== false) { const c = el.querySelector('.sheet-close'); if (c) c.focus({ preventScroll: true }); }
@@ -229,7 +230,7 @@ async function openSheet(id, opts = {}) {
 }
 function closeSheet(opts = {}) {
   if (!sheet) return;
-  seq++; inertBehind(false);
+  sheetSeq++; inertBehind(false);
   sheet.classList.remove('is-open'); sheet = null; root.classList.remove('sheet-open');
   if (cur) { trans = { from: pose, start: performance.now(), dur: 700 }; if (RM) { trans = null; redraw(); } }
   if (opts.record !== false) record(true); else d.title = docTitle();

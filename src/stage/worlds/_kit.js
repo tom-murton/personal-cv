@@ -109,7 +109,8 @@ export function moduleWorld(cfg) {
       if (ro) { ro.observe(box); ro.observe(host); }
       const keyEl = () => { for (const s of cfg.key) for (const el of host.querySelectorAll(s)) { const r = el.getBoundingClientRect(); if (r.width > 1 && r.height > 1) return [el, r]; } return null; };
       let colour = cfg.color ? toRgb(cfg.color) : 'rgb(255,255,255)';
-      const dur = () => Number(h.duration) || 10000;
+      // The contract does not name a unit: five modules report milliseconds, LightScout and Level Best seconds.
+      const dur = () => { const v = Number(h.duration) || 10; return v < 200 ? v * 1000 : v; };
       return {
         native: true,
         get duration() { return dur(); },
