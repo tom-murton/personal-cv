@@ -157,5 +157,56 @@
         "state": "committed"
       }
     ]
+  },
+  "lightscout": {
+    "repository": "git@github.com:tom-murton/Lightscout-site.git",
+    "worktree": "redesign-lightscout",
+    "branch": "redesign/lightscout-2026-11",
+    "copied": "2026-11-15T02:04+00:00",
+    "files": [
+      {
+        "path": "public/loop/lightscout-loop.js",
+        "copiedTo": "loop/lightscout-loop.js",
+        "sha256": "d7a3091a2b8237e3ea0aca0e6c08166ade460c5a4fd69c53975af5c5cdc36f76",
+        "commit": "9c9be76edbed45639826cfafd8ff1e4671e3025d",
+        "state": "committed"
+      },
+      {
+        "path": "public/loop/lightscout-loop.css",
+        "copiedTo": "loop/lightscout-loop.css",
+        "sha256": "dddab03da50348f2fa94b9c1b51aa10acdcf9518408a3de3ac7b767ea3cd5bc9",
+        "commit": "9c9be76edbed45639826cfafd8ff1e4671e3025d",
+        "state": "committed"
+      },
+      {
+        "path": "public/landing.html (the .place links passed to mount())",
+        "copiedTo": "places.json",
+        "sha256": "56d7824183cb97d81e18fb8dfe2e538fb37d8b9fb79fa0f5311be1157d25a6e1",
+        "commit": "9c9be76edbed45639826cfafd8ff1e4671e3025d",
+        "state": "derived: data attributes extracted, relative URLs made absolute to https://www.lightscout.app"
+      }
+    ]
+  },
+  "levelbest": {
+    "repository": "git@github.com:tom-murton/weevolve-site.git",
+    "worktree": "redesign-weevolve-site",
+    "branch": "redesign/levelbest-2026-11",
+    "copied": "2026-11-15T02:04+00:00",
+    "files": [
+      {
+        "path": "src/loop/levelbest-loop.js",
+        "copiedTo": "loop/levelbest-loop.js",
+        "sha256": "e0b09e734b3cb2d5ffaee1ae4b718d0871de9c01d58d8436b2edef7717d7272e",
+        "commit": null,
+        "state": "untracked working copy"
+      },
+      {
+        "path": "src/loop/levelbest-loop.css",
+        "copiedTo": "loop/levelbest-loop.css",
+        "sha256": "de5cc9ce076a211e6c4632638a98a4f4a53c270a092f1a434396790a8dbb6ffc",
+        "commit": null,
+        "state": "untracked working copy"
+      }
+    ]
   }
 }

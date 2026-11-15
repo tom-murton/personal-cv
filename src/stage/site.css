@@ -97,7 +97,7 @@ html.js .title .still{display:none}
 /* Host sizing for sibling modules that take their size from the page around them (see build-report.md). */
 .module-root .tcl-ring{position:relative;width:100%;aspect-ratio:1}
 .module-root .tcl-read{display:none}
-html.js .dot{position:fixed;left:0;top:0;z-index:4;display:grid;place-items:center;will-change:transform;cursor:grab;touch-action:none;color:#fff;font:800 12px/1 var(--sans);letter-spacing:.06em;white-space:nowrap;overflow:visible;user-select:none;-webkit-user-select:none;transition:opacity .2s linear}
+html.js .dot{position:fixed;left:0;top:0;z-index:4;display:grid;place-items:center;will-change:transform;cursor:grab;touch-action:none;color:#fff;font:800 12px/1 var(--sans);letter-spacing:.06em;white-space:nowrap;overflow:visible;user-select:none;-webkit-user-select:none}
 .dot::after{content:"";position:absolute;inset:-14px;border-radius:50%}
 .dot:active{cursor:grabbing}
 html.js .dot.is-native{pointer-events:none;opacity:0}
@@ -176,6 +176,7 @@ html.js.sheet-open .dot{z-index:9;cursor:default}
   html.js .title .h1{font-size:clamp(2.6rem,min(6.4vw,10vh),5.6rem)}
   html.js .title .eyebrow{margin-bottom:.4rem}
 }
+@media (max-width:46rem){.stories li{grid-template-columns:1fr;gap:.15rem}}
 /* Plain list on a phone (no script): the kind sits under the name */
 @media (max-width:46rem){
   html:not(.js) .row{grid-template-columns:2.2rem minmax(0,1fr) auto}

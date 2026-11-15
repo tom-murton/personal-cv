@@ -72,7 +72,7 @@ export function svgWorld(def) {
  *
  * cfg: { module: () => import(...), css?: url, width: { desktop, phone } natural px width to lay the module
  *        out at before it is scaled to fit the stage's scene box, key: [selectors], color?: fallback colour,
- *        round?: true for a round key object, still?: fraction, trailer?, trailerFrom?, once?,
+ *        height?: { desktop, phone } for a module that fills its host's height, round?: true for a round key object, still?: fraction, trailer?, trailerFrom?, once?,
  *        options?: (element) => mount options, fallback: () => import(the simplified loop) }
  */
 export function moduleWorld(cfg) {
@@ -89,6 +89,7 @@ export function moduleWorld(cfg) {
       const host = document.createElement('div'); host.className = 'module-root';
       const W = phone ? cfg.width.phone : cfg.width.desktop;
       fit.style.width = W + 'px';
+      if (cfg.height) host.style.height = (phone ? cfg.height.phone : cfg.height.desktop) + 'px';
       let link = null;
       if (cfg.css) { link = document.createElement('link'); link.rel = 'stylesheet'; link.href = cfg.css; fit.appendChild(link); }
       fit.appendChild(host); box.appendChild(fit); element.appendChild(box);

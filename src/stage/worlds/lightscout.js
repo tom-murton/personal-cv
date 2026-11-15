@@ -1,78 +1,14 @@
-import { svgWorld, TAU, clamp, lerp, seg, io, spring, mixc, q } from './_kit.js';
-let def;
-/* ---- LightScout: the golden-hour line. A band of low sun crosses a strip of the world in real time and the
-   45 guide places light as it reaches them. Golden hour is the site's published definition: the sun between
-   the horizon (-0.833 deg) and 6 deg above it. The dot is the light on the place it has reached. ---- */
-(function () {
-  var G = [{"s":"amalfi-coast","n":"Amalfi Coast","c":"Italy","lat":40.6333,"lon":14.6029,"p":"Maria Gavrilova"},{"s":"amsterdam","n":"Amsterdam","c":"Netherlands","lat":52.3676,"lon":4.9041,"p":"Hen Kaznelson"},{"s":"athens","n":"Athens","c":"Greece","lat":37.9838,"lon":23.7275,"p":"Julio Hernández"},{"s":"bali","n":"Bali","c":"Indonesia","lat":-8.6705,"lon":115.2126,"p":"Marisca Kadharmestan"},{"s":"banff","n":"Banff","c":"Canada","lat":51.1788,"lon":-115.5708,"p":"Sergey Kondratiuk"},{"s":"bangkok","n":"Bangkok","c":"Thailand","lat":13.7563,"lon":100.5018,"p":"Tom De Decker"},{"s":"barcelona","n":"Barcelona","c":"Spain","lat":41.3874,"lon":2.1686,"p":"Linh Phạm"},{"s":"budapest","n":"Budapest","c":"Hungary","lat":47.4979,"lon":19.0402,"p":"XAVIER PHOTOGRAPHY"},{"s":"burgos","n":"Burgos","c":"Spain","lat":42.341,"lon":-3.7018,"p":"Zack Smith"},{"s":"cape-town","n":"Cape Town","c":"South Africa","lat":-33.9249,"lon":18.4241,"p":"George Swanepoel"},{"s":"cartagena","n":"Cartagena","c":"Colombia","lat":10.3897,"lon":-75.514,"p":"Shelby Murphy Figueroa"},{"s":"dolomites","n":"Dolomites","c":"Italy","lat":46.4128,"lon":12.0015,"p":"NIR HIMI"},{"s":"dubai","n":"Dubai","c":"United Arab Emirates","lat":25.2048,"lon":55.2708,"p":"Kirtesh Mahant"},{"s":"dubrovnik","n":"Dubrovnik","c":"Croatia","lat":42.6426,"lon":18.1084,"p":"Taisha Ellison"},{"s":"edinburgh","n":"Edinburgh","c":"United Kingdom","lat":55.9533,"lon":-3.1883,"p":"George McVeigh"},{"s":"grand-canyon","n":"Grand Canyon","c":"United States","lat":36.0726,"lon":-112.1129,"p":"Valentin Wechsler"},{"s":"hanoi","n":"Hanoi","c":"Vietnam","lat":21.0285,"lon":105.8542,"p":"Phong Phạm"},{"s":"havana","n":"Havana","c":"Cuba","lat":23.1136,"lon":-82.3666,"p":"Ricardo IV Tamayo"},{"s":"hong-kong","n":"Hong Kong","c":"China","lat":22.3193,"lon":114.1694,"p":"yimin ma"},{"s":"iceland","n":"Iceland","c":"Iceland","lat":64.1466,"lon":-21.9426,"p":"Ivan Jenic"},{"s":"istanbul","n":"Istanbul","c":"Turkey","lat":41.0082,"lon":28.9784,"p":"Kyle Petzer"},{"s":"kyoto","n":"Kyoto","c":"Japan","lat":35.0116,"lon":135.7681,"p":"Amy Tran"},{"s":"leon","n":"León","c":"Spain","lat":42.6,"lon":-5.5703,"p":"Dmitry Romanoff"},{"s":"lisbon","n":"Lisbon","c":"Portugal","lat":38.7223,"lon":-9.1393,"p":"Freguesia de Estrela"},{"s":"london","n":"London","c":"United Kingdom","lat":51.5074,"lon":-0.1278,"p":"Oswaldo Martinez"},{"s":"los-angeles","n":"Los Angeles","c":"United States","lat":34.0522,"lon":-118.2437,"p":"Jun Yu"},{"s":"machu-picchu","n":"Machu Picchu","c":"Peru","lat":-13.1631,"lon":-72.545,"p":"Amelia Cui"},{"s":"mallorca","n":"Mallorca","c":"Spain","lat":39.57,"lon":2.65,"p":"John McFetridge"},{"s":"marrakech","n":"Marrakech","c":"Morocco","lat":31.6295,"lon":-8.0088,"p":"Riccardo Monteleone"},{"s":"mexico-city","n":"Mexico City","c":"Mexico","lat":19.4326,"lon":-99.1332,"p":"Kyle Petzer"},{"s":"new-york-city","n":"New York City","c":"United States","lat":40.7128,"lon":-74.006,"p":"Martin Zenker"},{"s":"oviedo","n":"Oviedo","c":"Spain","lat":43.3603,"lon":-5.8448,"p":"Hayffield L"},{"s":"paris","n":"Paris","c":"France","lat":48.8566,"lon":2.3522,"p":"Deniz Demirci"},{"s":"patagonia","n":"Patagonia","c":"Argentina/Chile","lat":-50.3504,"lon":-72.3102,"p":"Florian Delée"},{"s":"prague","n":"Prague","c":"Czech Republic","lat":50.0755,"lon":14.4378,"p":"Navia Gruber"},{"s":"rome","n":"Rome","c":"Italy","lat":41.9028,"lon":12.4964,"p":"Paolo Bici"},{"s":"santorini","n":"Santorini","c":"Greece","lat":36.3932,"lon":25.4615,"p":"XAVIER PHOTOGRAPHY"},{"s":"scottish-highlands","n":"Scottish Highlands","c":"United Kingdom","lat":57.2802,"lon":-4.4192,"p":"Click and Learn Photography"},{"s":"seoul","n":"Seoul","c":"South Korea","lat":37.5665,"lon":126.978,"p":"Nik V"},{"s":"singapore","n":"Singapore","c":"Singapore","lat":1.3521,"lon":103.8198,"p":"Chris Johnson"},{"s":"swiss-alps","n":"Swiss Alps","c":"Switzerland","lat":46.5519,"lon":8.0919,"p":"Ilia Bronskiy"},{"s":"sydney","n":"Sydney","c":"Australia","lat":-33.8688,"lon":151.2093,"p":"Halley Tian"},{"s":"tokyo","n":"Tokyo","c":"Japan","lat":35.6762,"lon":139.6503,"p":"Jackie Alexander"},{"s":"yosemite","n":"Yosemite","c":"United States","lat":37.8651,"lon":-119.5383,"p":"Annie Spratt"},{"s":"zaragoza","n":"Zaragoza","c":"Spain","lat":41.6561,"lon":-0.8773,"p":"Pedro Sanz"}], LAND = 'M112,122 115,122.5 111,123.5 105.5,121 111.5,121 112,122ZM353,109 353,112 349.5,114.5 346.5,114 353,108.5 353,109ZM354.5,104 358.5,105.5 355,109.5 352.5,102.5 354.5,103.5 354.5,104ZM230,81.5 227,93 224,92.5 224.5,84 230,81 230,81.5ZM323.5,82 333.5,96 330,105.5 326.5,107 320.5,106 318,102.5 317,103.5 318,101 316,103 311.5,99.5 296.5,103 295,102 293.5,92.5 294,90 301,87.5 305.5,82 309.5,83 312,79.5 316.5,80 315.5,83 320,85.5 322,79 323.5,81.5 323.5,82ZM288.5,75 295.5,76.5 286.5,75.5 286,74 288.5,74.5 288.5,75ZM314,69 315.5,71.5 318.5,69.5 324.5,72 331,78.5 324.5,75.5 322.5,77.5 317.5,76.5 318,73.5 313,72 312,71 313.5,70 310.5,69 314,69ZM305,66.5 300,68 301,69.5 303.5,68.5 301.5,70 303,73.5 301,70.5 299.5,73.5 300,67.5 305,66.5ZM286,74 282.5,72 275.5,62.5 282.5,66.5 286,72.5 286,74ZM298,66 299,67 295,72 290,71 289,66.5 296.5,61 299,62.5 298,65.5 298,66ZM306.5,59.5 305.5,62.5 303.5,60 302,61 306.5,59 306.5,59.5ZM301.5,49.5 301.5,53.5 304,55.5 300.5,54 300.5,49.5 301.5,49.5ZM107.5,48 111.5,49.5 108.5,50.5 105.5,49.5 107.5,49.5 107,48 107.5,48ZM100.5,45 105,48 98,45.5 95,46 99.5,45 100.5,45ZM321,31 316,34.5 311,34 310.5,37 309.5,34.5 319.5,30 320.5,27 322,28 321,30 321,31ZM324,24 325.5,24.5 320,26.5 322,22.5 323,23.5 324,24ZM124,17.5 127,21.5 120.5,20.5 124.5,16.5 124,17.5ZM323.5,17.5 324.5,19 323,18.5 323.5,22 322,22 321.5,14.5 322.5,13.5 323,16 323.5,17.5ZM173,15.5 170,16 170.5,14 173.5,13 174,15 173,15.5ZM177,9.5 177,12 181.5,16.5 175,18 177,14 174,11 176,9.5 177,9.5ZM95,2.5 100,4.5 94.5,5 93,4.5 94,2.5 95,2.5ZM165.5,1.5 166.5,3 161.5,4.5 155.5,2.5 164,1.5 165.5,1.5ZM0,0 10,2 7,3.5 1.5,2 360,3 357.5,3.5 359,5.5 343.5,8 342,13 337,17 336,11 344.5,5.5 340,7.5 336.5,6.5 335,9 322,9 315,13.5 320,14 321.5,16 318,21.5 307.5,28 309,33 306.5,33.5 305.5,28.5 301,29 301.5,27 298,29 299,30.5 302.5,30.5 299,33 302,36.5 301.5,40 296,45 286,48 289.5,54.5 285,59.5 280,54.5 279,59 284,66.5 278.5,60 277,51 274,52 271.5,45 267,46.5 260.5,52 260,57.5 257.5,60 252.5,46.5 250.5,47 246.5,42.5 237.5,42.5 228,38 232,44 236.5,41.5 240,45.5 235.5,51 223.5,55.5 215,38.5 214,40.5 212.5,38 222.5,56.5 224.5,57.5 231,56 231,57.5 227.5,64 219,72.5 221,82.5 215,88 215.5,92 208,101 199.5,103 192,86 193.5,78.5 189,69 189.5,64.5 184.5,61.5 171,63 163.5,56 163,46 174,32 189.5,30.5 191,31 190.5,34 199,37.5 201.5,35 214,37 216,31.5 207.5,31.5 206,28.5 213.5,26 221.5,26 216.5,23 219,20.5 214,23.5 210.5,21.5 207.5,25.5 209,27 202.5,27.5 204,30.5 202.5,31.5 199.5,26.5 193,22.5 192.5,24 198.5,28 197,27.5 196,30 189,23.5 183,25 178,31.5 171,31 170.5,25 178.5,24 179,22 175.5,19.5 188,14.5 188.5,11 190.5,10.5 191,14 199.5,13.5 201.5,10.5 204,11 203.5,9 209,8 201.5,7.5 201.5,5 205.5,3 202,2.5 198,5.5 199,8 196,12 193,12.5 190.5,8.5 185.5,9.5 186,5.5 204.5,0 220.5,0 220,1.5 213,1.5 217,4 224,2 223.5,0 226.5,0 226.5,1.5 233.5,0 240,0 240.5,0 248.5,0 246.5,0 252.5,0 252.5,2 255,0 253,0 254.5,0 256.5,0 261.5,0 260.5,0 284.5,0 294,0 289.5,0 307,0 311.5,0 320.5,0 341,0 358.5,0 0,0ZM89.5,0 92.5,1 94.5,0 97.5,0 98.5,0.5 87,6 85.5,9 87.5,11 97.5,13 100,17 101.5,15.5 100,13.5 103.5,11.5 101.5,9 102,5.5 106,5.5 110.5,7 112.5,10 115.5,7.5 124.5,16 113.5,18 109,21 115,19 115.5,22 120,22 114.5,24.5 115.5,22.5 113,23 109.5,25 110,26.5 104.5,28.5 104,31 103.5,29 104.5,32.5 98.5,36.5 99.5,43 96,38 83.5,39.5 82,45.5 83.5,48.5 88,49.5 93,46.5 91,52 96.5,52.5 96,57 98.5,59 103,59.5 108,55.5 108.5,59 110,56 112,57.5 118,57.5 123,62 128.5,64 129.5,68 140,71 145.5,75.5 141.5,81 139,90 132.5,93 126,102.5 121.5,102 123,105 115,109 116.5,110.5 112.5,113.5 114,116 111,118.5 112,120.5 108.5,122 105,120.5 106,115 104.5,114.5 107.5,110.5 105.5,111 110,88 104,82.5 98.5,74 100,70.5 99,69 103,64 102,59.5 99,61 92.5,54.5 76.5,49.5 66,36.5 65.5,38 70.5,44.5 68,43.5 55.5,27.5 55.5,20 57.5,21 57,19 52.5,17 46,10 33,7 28.5,9 29.5,6.5 21.5,12 15,13.5 23,9 18,9.5 14,6.5 19,3 12,2.5 18.5,2 13,0 23.5,0 43.5,0 52,0 71,0.5 74,0 84,0.5 86,0 83.5,0 85,0 87.5,0 89.5,0ZM66,0 72,0 73.5,0 79,0 66.5,0 62.5,0 67.5,0 60.5,0 65,0 66,0ZM93.5,0 97.5,0 99,0 112,0 113,0 111,0 118,1 116,3 112,1.5 115,5.5 101.5,3.5 106,2.5 107,0.5 101,0 90.5,0 94,0 93.5,0ZM79.5,0 82.5,0 83.5,0 78.5,0 79.5,0ZM59.5,0 54,0 55,0 58.5,0 64.5,0 59.5,0ZM72,0 73.5,0 62.5,0 71.5,0 72,0ZM237.5,0 231.5,0 235.5,0 248,0 238.5,0 235.5,0 237.5,0ZM85.5,0 100,0 92,0 83.5,0 85.5,0ZM198.5,0 201.5,0 196,0 190.5,0 197,0 198.5,0ZM93,0 89,0 83.5,0 92,0 93,0ZM111.5,0 118,0 103,0 104.5,0 100,0 102,0 94,0 90.5,0 95,0 92,0 95,0 93,0 98,0 88.5,0 109.5,0 111.5,0ZM153,0 159,0 148.5,0 168,0 160,0 162.5,0 160.5,0 161.5,0 158.5,0 160.5,0 155,0 158,0 153.5,0 157.5,0 140,2.5 135,8 128.5,4.5 126,1 129,0 125.5,0 128.5,0 124,0 125.5,0 122.5,0 107,0 114.5,0 112,0 117.5,0 135.5,0 133,0 145,0 153,0Z';
-  var RAD = Math.PI / 180, SX = 100, SY = 372, SW = 800, SH = 190;
-  var Q = new URLSearchParams(location.search), NOW = Q.get('now') ? new Date(Q.get('now')) : new Date();
-  function sun(tau) {
-    var dt = new Date(NOW.getTime() + tau * 36e5), n = Math.floor((dt - Date.UTC(dt.getUTCFullYear(), 0, 0)) / 864e5), h = dt.getUTCHours() + dt.getUTCMinutes() / 60 + dt.getUTCSeconds() / 3600, g = TAU / 365 * (n - 1 + (h - 12) / 24);
-    var eq = 229.18 * (0.000075 + 0.001868 * Math.cos(g) - 0.032077 * Math.sin(g) - 0.014615 * Math.cos(2 * g) - 0.040849 * Math.sin(2 * g));
-    var dec = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.00148 * Math.sin(3 * g);
-    return { dec: dec, lon: ((-15 * (h - 12 + eq / 60) + 540) % 360 + 360) % 360 - 180 };
-  }
-  function alt(p, s) { var f = p.lat * RAD; return Math.asin(Math.sin(f) * Math.sin(s.dec) + Math.cos(f) * Math.cos(s.dec) * Math.cos((p.lon - s.lon) * RAD)) / RAD; }
-  function px(lon) { return SX + (lon + 180) / 360 * SW; }
-  function py(lat) { return SY + (68 - lat) / 124 * SH; }
-  function band(s, a1, a2, side) {
-    var A = [], B = [];
-    for (var lat = 68; lat >= -56; lat -= 4) {
-      var f = lat * RAD, den = Math.cos(f) * Math.cos(s.dec), c1 = (Math.sin(a1 * RAD) - Math.sin(f) * Math.sin(s.dec)) / den, c2 = (Math.sin(a2 * RAD) - Math.sin(f) * Math.sin(s.dec)) / den;
-      if (Math.abs(c1) > 1 || Math.abs(c2) > 1) continue;
-      A.push([s.lon + side * Math.acos(c1) / RAD, lat]); B.push([s.lon + side * Math.acos(c2) / RAD, lat]);
-    }
-    if (A.length < 2) return '';
-    var pts = A.concat(B.reverse()), d = '';
-    [-360, 0, 360].forEach(function (o) { d += 'M' + pts.map(function (q) { return (SX + (q[0] + 180 + o) / 360 * SW).toFixed(1) + ' ' + py(q[1]).toFixed(1); }).join('L') + 'Z'; });
-    return d;
-  }
-  function lit(s) { var best = -1, bd = 99; G.forEach(function (p, i) { var a = alt(p, s); if (a >= -4 && a <= 6 && Math.abs(a - 1) < bd) { bd = Math.abs(a - 2.6); best = i; } }); return best; }
-  /* The viewfinder may only hold a photograph verified as low sun and of the named place (lead ruling,
-     15 Nov): today that is the Dolomites sunset (Lenny Welvaert, CC BY 2.0, cropped). So the slot says when
-     golden hour next reaches the Dolomites; the sweep still lights every guide place it reaches. */
-  var nowI = G.findIndex(function (p) { return p.s === 'dolomites'; }), due = 0;
-  function goldAt(m) { var a = alt(G[nowI], sun(m / 60)); return a >= -4 && a <= 6; }
-  if (!goldAt(0)) { for (var m = 3; m <= 1440; m += 3) if (goldAt(m)) { due = m; break; } }
-  var SEQ = [[0, nowI]];
-  for (var k = 1; k <= 236; k++) { var li = lit(sun(k / 10)); if (li >= 0 && li !== SEQ[SEQ.length - 1][1]) SEQ.push([k / 10, li]); }
-  if (SEQ[SEQ.length - 1][1] !== nowI) SEQ.push([23.55, nowI]);
-  function ioInv(k) { return k < .5 ? Math.cbrt(k / 4) : 1 - Math.cbrt(2 * (1 - k)) / 2; }
-  def = ({
-    id: 'lightscout', tokens: { bg: '#0c0a08', fg: '#f3f4ec', dim: '#b9b4a8', accent: '#f59e0b', font: '"Instrument Serif"', titleStyle: 'font-style:italic;font-weight:400;letter-spacing:-.02em' },
-    dur: 12, still: 0, trailer: 2.2, trailerFrom: 3.5,
-    scene: function () {
-      var P = G[nowI], c = function (x, y, dx, dy) { return 'M' + (x + dx * 26) + ' ' + y + ' L' + x + ' ' + y + ' L' + x + ' ' + (y + dy * 26); };
-      var s = '<clipPath id="ls-clip"><rect x="380" y="34" width="240" height="296"/></clipPath><image href="/stage/img/shots/lightscout-hero-dolomites-1200.webp" x="380" y="34" width="240" height="296" preserveAspectRatio="xMidYMid slice" clip-path="url(#ls-clip)"/>' +
-        '<path d="' + c(368, 22, 1, 1) + c(632, 22, -1, 1) + c(368, 342, 1, -1) + c(632, 342, -1, -1) + '" fill="none" stroke="#f59e0b" stroke-width="3"/>' +
-        '<text x="340" y="150" text-anchor="end" font-size="15" letter-spacing="2" fill="#f59e0b">' + (due ? 'NEXT GOLDEN HOUR' : 'GOLDEN HOUR NOW') + '</text>' +
-        (due ? '<text x="340" y="174" text-anchor="end" font-size="13" letter-spacing="1.5" fill="#f3f4ec" fill-opacity=".75">IN ABOUT ' + (due < 60 ? Math.max(5, Math.round(due / 5) * 5) + ' MIN' : (function (r) { return Math.floor(r / 60) + ' H' + (r % 60 ? ' ' + r % 60 + ' MIN' : ''); })(Math.round(due / 10) * 10)) + '</text>' : '') +
-        '<text x="660" y="160" font-size="46" fill="#f3f4ec" style="font-family:\'Instrument Serif\';font-style:italic">' + P.n + '</text><text x="662" y="188" font-size="14" letter-spacing="2" fill="#f3f4ec" fill-opacity=".75">' + P.c.toUpperCase() + '</text>' +
-        '<text x="662" y="300" font-size="11.5" letter-spacing="1" fill="#f3f4ec" fill-opacity=".65">DOLOMITES, ITALY · SUNSET</text><text x="662" y="318" font-size="11.5" letter-spacing="1" fill="#f3f4ec" fill-opacity=".65">PHOTO LENNY WELVAERT, CC BY 2.0, CROPPED</text>' +
-        '<clipPath id="ls-strip"><rect x="' + SX + '" y="' + SY + '" width="' + SW + '" height="' + SH + '"/></clipPath><rect x="' + SX + '" y="' + SY + '" width="' + SW + '" height="' + SH + '" fill="#f3f4ec" fill-opacity=".04"/>' +
-        '<g clip-path="url(#ls-strip)"><path d="' + LAND + '" transform="translate(' + SX + ' ' + SY + ') scale(' + (SW / 360) + ' ' + (SH / 124) + ')" fill="#f3f4ec" fill-opacity=".1"/>' +
-        '<path id="ls-b1" fill="#8fb0e0" fill-opacity=".34"/><path id="ls-b2" fill="#8fb0e0" fill-opacity=".34"/><path id="ls-g1" fill="#f59e0b" fill-opacity=".52"/><path id="ls-g2" fill="#f59e0b" fill-opacity=".52"/>';
-      G.forEach(function (p) { s += '<circle class="ls-p" cx="' + px(p.lon).toFixed(1) + '" cy="' + py(p.lat).toFixed(1) + '" r="3"/>'; });
-      return s + '</g><text id="ls-count" x="' + (SX + SW) + '" y="' + (SY - 10) + '" text-anchor="end" font-size="14" letter-spacing="2" fill="#f3f4ec">NOW</text><text x="' + SX + '" y="' + (SY - 10) + '" font-size="14" letter-spacing="2" fill="#f3f4ec" fill-opacity=".7">45 GUIDES · DRAG THE LIGHT</text>' +
-        '<text id="ls-tag" x="0" y="0" font-size="13" letter-spacing="1.5" fill="#ffd489"></text>';
-    },
-    init: function (svg) { return { b: ['ls-g1', 'ls-g2', 'ls-b1', 'ls-b2'].map(function (i) { return q(svg, i); }), ps: [].slice.call(svg.querySelectorAll('.ls-p')), count: q(svg, 'ls-count'), tag: q(svg, 'ls-tag') }; },
-    tau: function (t) { return t < 3 ? 0 : t < 9.5 ? 24 * io((t - 3) / 6.5) : 24; },
-    seek: function (r, t) {
-      var tau = this.tau(t), s = sun(tau);
-      r.b[0].setAttribute('d', band(s, 6, -4, 1)); r.b[1].setAttribute('d', band(s, 6, -4, -1)); r.b[2].setAttribute('d', band(s, -4, -6, 1)); r.b[3].setAttribute('d', band(s, -4, -6, -1));
-      r.ps.forEach(function (el, i) { var a = alt(G[i], s), gold = a >= -4 && a <= 6, blue = a < -4 && a >= -6; el.setAttribute('r', gold ? 6 : blue ? 4.5 : a > 6 ? 3.2 : 2.8); el.setAttribute('fill', gold ? '#ffd489' : blue ? '#8fb0e0' : '#f3f4ec'); el.setAttribute('fill-opacity', gold || blue || a > 6 ? 1 : .34); });
-      var mins = Math.round(tau * 6) * 10, c = mins < 10 || tau >= 24 ? 'NOW' : '+ ' + Math.floor(mins / 60) + ' H ' + (mins % 60 ? (mins % 60) + ' MIN' : '');
-      if (r.count.textContent !== c) r.count.textContent = c;
-      var j = 0; for (var i = 0; i < SEQ.length; i++) if (SEQ[i][0] <= tau) j = i;
-      var cur = G[SEQ[j][1]], prev = G[SEQ[j ? j - 1 : 0][1]], k2 = io(seg(tau, SEQ[j][0], SEQ[j][0] + .45)), x = lerp(px(prev.lon), px(cur.lon), k2), y = lerp(py(prev.lat), py(cur.lat), k2);
-      var moving = tau > 0 && tau < 24, name = moving && k2 >= 1 ? cur.n.toUpperCase() : '';
-      if (r.tag.textContent !== name) r.tag.textContent = name;
-      r.tag.setAttribute('x', x > 780 ? x - 18 : x + 18); r.tag.setAttribute('y', y + 4); r.tag.setAttribute('text-anchor', x > 780 ? 'end' : 'start');
-      return { x: x, y: y, w: 26, h: 26, br: 1, color: '#f59e0b' };
-    },
-    drag: function (r, x) { return 3 + 6.5 * ioInv(clamp(1 - seg(x, SX, SX + SW), .001, .999)); }
-  });
-})();
-export const { mount } = svgWorld(def);
+// LightScout's own golden-hour line (lightscout.app), vendored with the 45 guide places its homepage
+// passes to mount(). The dot is the light on the place it has reached.
+import { worldFrom } from './_kit.js';
+const places = await fetch('/stage/vendor/lightscout/places.json').then((r) => r.json()).catch(() => null);
+const Q = new URLSearchParams(location.search);
+export const { mount, real } = await worldFrom({
+  module: () => places ? import('/stage/vendor/lightscout/loop/lightscout-loop.js') : Promise.reject(new Error('no places')),
+  css: '/stage/vendor/lightscout/loop/lightscout-loop.css',
+  width: { desktop: 900, phone: 400 }, height: { desktop: 640, phone: 620 },
+  key: ['.ll-reticle'], color: '#f59e0b',
+  still: 0, trailer: 2.2, trailerFrom: .29,
+  options: () => Object.assign({ places, autoplay: false }, Q.get('now') ? { now: Date.parse(Q.get('now')) } : {}),
+  fallback: () => import('./lightscout-sketch.js'),
+});

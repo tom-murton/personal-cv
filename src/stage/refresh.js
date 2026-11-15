@@ -51,23 +51,30 @@ export async function refresh(data) {
     setText(a.parentNode.querySelector('.line'), r.line);
     if (data.rows[r.slug]) Object.assign(data.rows[r.slug], { fact: r.fact, note: r.note, site: r.site, story: r.story });
   }
-  // Writing: add any story published since the build. Its own URL arrives with the next deploy; until then it opens from here.
+  // Headline (home only: other pages keep their own title block until the visitor goes home).
+  const title = d.getElementById('title');
+  const tpl = d.getElementById('home-title');
+  const showingHome = title && !title.hasAttribute('data-sub') && (!d.body.dataset.world || d.body.dataset.world === 'orbit') && location.pathname === '/';
+  for (const scope of [tpl ? tpl.content : null, showingHome ? title : null]) {
+    if (!scope) continue;
+    setText(scope.querySelector('.eyebrow'), m.hero.eyebrow); setText(scope.querySelector('.lede'), m.hero.intro);
+    const h = scope.querySelector('.h1'); if (h && m.hero.title) { const em = h.querySelector('em'); h.firstChild.textContent = m.hero.title + ' '; if (em) setText(em, m.hero.accent); }
+  }
+  // Writing: reconcile the stories with the fresh list, in its order, keeping the external articles after them.
+  // A story published since the build gets its own URL at the next deploy; until then it opens from here.
   const list = d.querySelector('#writing [data-stories]');
   if (list) {
-    const have = new Set([...list.querySelectorAll('a[data-sheet^="story-"]')].map((a) => a.dataset.sheet.slice(6)));
-    let after = null;
-    for (const s of m.stories) {
-      const existing = list.querySelector('a[data-sheet="story-' + s.slug + '"]');
-      if (existing) { setText(existing, s.title); setText(existing.nextElementSibling, s.description); after = existing.closest('li'); continue; }
-      if (have.has(s.slug)) continue;
-      const li = d.createElement('li');
-      li.innerHTML = '<time></time><div><a></a><span></span></div>';
-      li.querySelector('time').dateTime = isoDate(s.date); li.querySelector('time').textContent = shortDate(s.date);
-      const link = li.querySelector('a'); link.href = '/writing/' + s.slug; link.dataset.sheet = 'story-' + s.slug; link.textContent = s.title;
-      li.querySelector('span').textContent = s.description;
-      if (after) after.after(li); else list.prepend(li);
-      after = li;
-    }
+    const items = [...list.children];
+    const bySlug = new Map(items.filter((li) => li.querySelector('a[data-sheet^="story-"]')).map((li) => [li.querySelector('a[data-sheet]').dataset.sheet.slice(6), li]));
+    const external = items.filter((li) => !li.querySelector('a[data-sheet^="story-"]'));
+    const fresh = m.stories.map((s) => {
+      let li = bySlug.get(s.slug);
+      if (!li) { li = d.createElement('li'); li.innerHTML = '<time></time><div><a></a><span></span></div>'; const a = li.querySelector('a'); a.href = '/writing/' + s.slug; a.dataset.sheet = 'story-' + s.slug; }
+      const t = li.querySelector('time'); t.dateTime = isoDate(s.date); setText(t, shortDate(s.date));
+      setText(li.querySelector('a'), s.title); setText(li.querySelector('span'), s.description);
+      return li;
+    });
+    if (fresh.length) list.replaceChildren(...fresh, ...external);
   }
 }
 

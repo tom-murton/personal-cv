@@ -251,7 +251,7 @@ ${bar(c)}
 <main id="main">
   ${own}
   ${title}
-  ${page.title === "home" && !page.sheet ? "" : `<template id="home-title">${homeTitle(c).replace(/^<section[^>]*>|<\/section>$/g, "")}</template>`}
+  ${`<template id="home-title">${homeTitle(c).replace(/^<section[^>]*>|<\/section>$/g, "")}</template>`}
   ${index(c)}
   <p class="made mono">${esc(madeLine)}</p>
   ${others}

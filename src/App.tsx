@@ -36,7 +36,12 @@ const PageLoading = () => (
 // one of its URLs, load that page from the server rather than rendering the retired gallery here.
 function ServerPage() {
   const location = useLocation();
-  useEffect(() => window.location.replace(location.pathname + location.search + location.hash), [location]);
+  useEffect(() => {
+    if (!import.meta.env.DEV) window.location.replace(location.pathname + location.search + location.hash);
+  }, [location]);
+  if (import.meta.env.DEV) {
+    return <p style={{ padding: "2rem" }}>Public pages are static HTML. Run <code>npm run build</code> and <code>node scripts/preview-server.mjs 4609</code> to see them.</p>;
+  }
   return <PageLoading />;
 }
 

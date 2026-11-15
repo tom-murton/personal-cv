@@ -1,0 +1,118 @@
+/* LightScout: the golden-hour line. Every rule is scoped under .lightline; tokens are custom
+   properties on the container, so a host page can override them. No fonts are loaded here:
+   the host's --ll-serif and --ll-sans stacks are used, with system fallbacks. */
+.lightline {
+  --ll-ground: #0C0A08;
+  --ll-paper: #F3F4EC;
+  --ll-cream: #D6CFC2;
+  --ll-amber: #F59E0B;
+  --ll-gold-dot: #FFD489;
+  --ll-bluehour: #8FB0E0;
+  --ll-serif: 'Instrument Serif', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --ll-sans: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+  --ll-ease: cubic-bezier(.16, 1, .3, 1);
+  --ll-spring: cubic-bezier(.3, 1.28, .5, 1);
+  --ll-strip-h: 108px;
+  container: lightline / inline-size;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 420px;
+  background: #120f0c;
+  color: var(--ll-paper);
+  font-family: var(--ll-sans);
+}
+.lightline *, .lightline *::before, .lightline *::after { box-sizing: border-box; }
+
+/* The photograph is never graded, filtered, blurred or tinted. */
+.lightline .ll-photo { position: absolute; inset: 0; z-index: -3; }
+.lightline .ll-photo img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 50% 30%; }
+.lightline .ll-photo img:not([src]) { visibility: hidden; }
+/* The next place's photograph wipes in from the east, the way the light travels. Never a cross-fade. */
+.lightline .ll-next { clip-path: inset(0 0 0 100%); }
+.lightline .ll-next.is-in { clip-path: inset(0 0 0 0); transition: clip-path 900ms var(--ll-ease); }
+/* Fixed scrims, only so type and the strip stay legible over any photograph. */
+.lightline .ll-grad { position: absolute; inset: 0; z-index: -2; pointer-events: none; background:
+  linear-gradient(to bottom, rgba(10,8,6,.82) 0%, rgba(10,8,6,.6) 20%, rgba(10,8,6,.32) 36%, rgba(10,8,6,0) 50%),
+  linear-gradient(to top, rgba(12,10,8,1) 0%, rgba(12,10,8,.94) 24%, rgba(12,10,8,.6) 38%, rgba(12,10,8,.18) 52%, rgba(12,10,8,0) 62%); }
+
+.lightline .ll-frame { position: relative; flex: 1 1 auto; display: flex; flex-direction: column; padding: 18px 14px 6px; }
+/* Viewfinder corners: loose while a photograph changes, locked and amber when it lands. */
+.lightline .ll-finder { position: absolute; inset: 0; pointer-events: none; transform: scale(1.035); transition: transform 520ms var(--ll-spring); }
+.lightline .ll-finder i { position: absolute; width: 22px; height: 22px; border: 0 solid rgba(243,244,236,.6); transition: border-color 520ms var(--ll-spring); }
+.lightline .ll-finder i:nth-child(1) { top: 0; left: 0; border-top-width: 1.5px; border-left-width: 1.5px; }
+.lightline .ll-finder i:nth-child(2) { top: 0; right: 0; border-top-width: 1.5px; border-right-width: 1.5px; }
+.lightline .ll-finder i:nth-child(3) { bottom: 0; left: 0; border-bottom-width: 1.5px; border-left-width: 1.5px; }
+.lightline .ll-finder i:nth-child(4) { bottom: 0; right: 0; border-bottom-width: 1.5px; border-right-width: 1.5px; }
+.lightline.is-locked .ll-finder { transform: none; }
+.lightline.is-locked .ll-finder i { border-color: var(--ll-amber); }
+.lightline .ll-view { position: relative; flex: 1 1 auto; min-height: 70px; }
+.lightline .ll-reticle { position: absolute; left: 62%; top: 50%; width: 50px; height: 50px; margin: -25px 0 0 -25px; pointer-events: none; opacity: 0; transform: scale(1.5); transition: opacity 520ms var(--ll-spring), transform 520ms var(--ll-spring); }
+.lightline .ll-reticle::before, .lightline .ll-reticle::after { content: ''; position: absolute; inset: 0; border: 1.5px solid var(--ll-amber); }
+.lightline .ll-reticle::before { clip-path: polygon(0 0, 30% 0, 30% 100%, 0 100%); }
+.lightline .ll-reticle::after { clip-path: polygon(70% 0, 100% 0, 100% 100%, 70% 100%); }
+.lightline.is-locked .ll-reticle { opacity: 1; transform: none; }
+
+/* The live line */
+.lightline .ll-live { position: relative; z-index: 0; margin-bottom: 10px; }
+.lightline .ll-live::before { content: ''; position: absolute; inset: -22px -30px -12px -40px; z-index: -1; pointer-events: none; background: radial-gradient(ellipse 62% 78% at 30% 55%, rgba(10,8,6,.58) 0%, rgba(10,8,6,.3) 45%, rgba(10,8,6,0) 74%); }
+.lightline .ll-when { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 9px; margin: 0; font: 600 11.5px/1.5 var(--ll-sans); letter-spacing: .16em; text-transform: uppercase; color: var(--ll-amber); text-shadow: 0 1px 2px rgba(10,8,6,.9), 0 1px 14px rgba(10,8,6,.9); }
+.lightline .ll-when b { display: none; font-weight: 600; color: var(--ll-paper); }
+.lightline .ll-when::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--ll-amber); box-shadow: 0 0 0 0 rgba(245,158,11,.25); transition: box-shadow 520ms var(--ll-spring); }
+.lightline.is-locked .ll-when::before { box-shadow: 0 0 0 4px rgba(245,158,11,.25); }
+.lightline .ll-city-link { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin-top: 2px; font-family: var(--ll-serif); font-style: italic; font-weight: 400; font-size: clamp(34px, 9.6cqi, 44px); line-height: 1.05; color: var(--ll-paper); text-decoration: none; text-shadow: 0 1px 2px rgba(10,8,6,.6), 0 2px 26px rgba(10,8,6,.85); }
+.lightline .ll-go { font: 500 14.5px/1.2 var(--ll-sans); font-style: normal; color: var(--ll-paper); border-bottom: 1px solid rgba(243,244,236,.55); padding-bottom: 2px; text-shadow: 0 1px 10px rgba(10,8,6,.9); transition: color 160ms ease, border-color 160ms ease; }
+.lightline .ll-city-link:hover .ll-go { color: var(--ll-amber); border-color: var(--ll-amber); }
+.lightline a:focus-visible, .lightline .ll-strip:focus-visible { outline: 2px solid var(--ll-amber); outline-offset: 3px; }
+
+/* The strip of the world */
+.lightline .ll-strip { position: relative; height: var(--ll-strip-h); margin: 0 -6px; background: rgba(10,8,6,.66); border-top: 1px solid rgba(243,244,236,.2); border-bottom: 1px solid rgba(243,244,236,.2); overflow: hidden; touch-action: pan-y; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+.lightline.is-live .ll-strip { cursor: grab; }
+.lightline.is-live .ll-strip:active { cursor: grabbing; }
+.lightline .ll-strip svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; }
+.lightline .ll-strip path { vector-effect: non-scaling-stroke; }
+.lightline .ll-land { fill: rgba(243,244,236,.085); stroke: rgba(243,244,236,.2); stroke-width: .75; }
+.lightline .ll-dayside { fill: rgba(243,244,236,.055); }
+.lightline .ll-band-gold { fill: rgba(245,158,11,.52); }
+.lightline .ll-band-blue { fill: rgba(143,176,224,.34); }
+.lightline .ll-city { fill: none; stroke: rgba(243,244,236,.62); stroke-width: 3.5; stroke-linecap: round; }
+.lightline .ll-city.is-night { stroke: rgba(243,244,236,.34); stroke-width: 3; }
+.lightline .ll-city.is-day { stroke: var(--ll-paper); }
+.lightline .ll-city.is-blue { stroke: var(--ll-bluehour); stroke-width: 5; }
+.lightline .ll-city.is-gold { stroke: var(--ll-gold-dot); stroke-width: 7; }
+.lightline .ll-pick { fill: none; stroke: rgba(245,158,11,.34); stroke-width: 22; stroke-linecap: round; opacity: 0; }
+.lightline .ll-pick.is-on { opacity: 1; }
+.lightline .ll-tag { position: absolute; left: 0; top: 0; transform: translate(-50%, -100%); padding-bottom: 12px; white-space: nowrap; font: 600 11px/1 var(--ll-sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ll-paper); text-shadow: 0 1px 6px rgba(10,8,6,1), 0 0 2px rgba(10,8,6,1); pointer-events: none; opacity: 0; }
+.lightline .ll-tag.is-on { opacity: 1; }
+.lightline .ll-tag.is-low { transform: translate(-50%, 0); padding: 12px 0 0; }
+/* Fixed width so the counter does not jitter whether or not the face has tabular figures. */
+.lightline .ll-clock { position: absolute; right: 8px; top: 7px; min-width: 10.5ch; text-align: right; font: 600 11px/1 var(--ll-sans); letter-spacing: .1em; text-transform: uppercase; font-variant-numeric: tabular-nums; color: var(--ll-amber); pointer-events: none; }
+.lightline .ll-hint { position: absolute; left: 8px; bottom: 6px; font: 500 11px/1 var(--ll-sans); letter-spacing: .04em; color: var(--ll-cream); pointer-events: none; }
+.lightline:not(.is-live) .ll-clock, .lightline:not(.is-live) .ll-hint { display: none; }
+
+.lightline .ll-caption { margin: 16px 0 0; font: 500 11px/1.75 var(--ll-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--ll-cream); text-shadow: 0 1px 2px rgba(10,8,6,.75), 0 1px 18px rgba(10,8,6,.85); }
+.lightline .ll-caption strong { font-weight: 600; color: var(--ll-paper); letter-spacing: .14em; }
+.lightline .ll-caption a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(243,244,236,.4); }
+.lightline .ll-caption a:hover { color: var(--ll-amber); border-color: var(--ll-amber); }
+
+@container lightline (min-width: 720px) {
+  .lightline .ll-frame { padding: clamp(28px, 5cqh, 52px) clamp(24px, 4.4cqi, 60px) 10px; }
+  .lightline .ll-photo img { object-position: 50% 38%; }
+  .lightline .ll-grad { background:
+    radial-gradient(ellipse 70% 50% at 22% 22%, rgba(10,8,6,.66) 0%, rgba(10,8,6,.36) 48%, rgba(10,8,6,0) 80%),
+    linear-gradient(to bottom, rgba(10,8,6,.78) 0%, rgba(10,8,6,.44) 18%, rgba(10,8,6,.08) 38%, rgba(10,8,6,0) 48%),
+    linear-gradient(to top, rgba(12,10,8,1) 0%, rgba(12,10,8,.9) 22%, rgba(12,10,8,.5) 38%, rgba(12,10,8,.14) 52%, rgba(12,10,8,0) 62%); }
+  .lightline .ll-finder i { width: 28px; height: 28px; }
+  .lightline .ll-view { min-height: 40px; }
+  .lightline .ll-reticle { left: 72%; top: 30%; width: 68px; height: 68px; margin: -34px 0 0 -34px; }
+  .lightline .ll-city-link { font-size: clamp(44px, 4.6cqi, 68px); }
+  .lightline .ll-when b { display: inline; }
+  .lightline .ll-strip { --ll-strip-h: 140px; margin: 0; }
+  .lightline .ll-tag { font-size: 11.5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightline *, .lightline *::before, .lightline *::after, .lightline .ll-finder { transition-duration: .01ms !important; animation: none !important; }
+}

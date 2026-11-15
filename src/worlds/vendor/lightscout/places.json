@@ -1,0 +1,814 @@
+[
+ {
+  "slug": "amalfi-coast",
+  "name": "Amalfi Coast",
+  "country": "Italy",
+  "lat": 40.6333,
+  "lon": 14.6029,
+  "href": "https://www.lightscout.app/locations/amalfi-coast",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1723380726946-6c0c8e9c06db?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxBbWFsZmklMjBDb2FzdCUyMEl0YWx5JTIwbGFuZHNjYXBlJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc3NTI4NzY2MHww&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1723380726946-6c0c8e9c06db?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxBbWFsZmklMjBDb2FzdCUyMEl0YWx5JTIwbGFuZHNjYXBlJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc3NTI4NzY2MHww&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Amalfi Coast, Italy",
+   "credit": "Maria Gavrilova",
+   "creditUrl": "https://unsplash.com/@mashyllya?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "amsterdam",
+  "name": "Amsterdam",
+  "country": "Netherlands",
+  "lat": 52.3676,
+  "lon": 4.9041,
+  "href": "https://www.lightscout.app/locations/amsterdam",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1664693809310-956e8bf684e9?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxBbXN0ZXJkYW0lMjBOZXRoZXJsYW5kcyUyMGxhbmRzY2FwZSUyMHBob3RvZ3JhcGh5fGVufDB8MHx8fDE3NzUyODc2NjF8MA&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1664693809310-956e8bf684e9?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxBbXN0ZXJkYW0lMjBOZXRoZXJsYW5kcyUyMGxhbmRzY2FwZSUyMHBob3RvZ3JhcGh5fGVufDB8MHx8fDE3NzUyODc2NjF8MA&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Amsterdam, Netherlands",
+   "credit": "Hen Kaznelson",
+   "creditUrl": "https://unsplash.com/@catchafilm?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "athens",
+  "name": "Athens",
+  "country": "Greece",
+  "lat": 37.9838,
+  "lon": 23.7275,
+  "href": "https://www.lightscout.app/locations/athens",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1666192180595-1e73bb3fb282?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxBdGhlbnMlMjBHcmVlY2UlMjBsYW5kc2NhcGUlMjBwaG90b2dyYXBoeXxlbnwwfDB8fHwxNzc1Mjg3NjYxfDA&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1666192180595-1e73bb3fb282?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxBdGhlbnMlMjBHcmVlY2UlMjBsYW5kc2NhcGUlMjBwaG90b2dyYXBoeXxlbnwwfDB8fHwxNzc1Mjg3NjYxfDA&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Athens, Greece",
+   "credit": "Julio Hernández",
+   "creditUrl": "https://unsplash.com/@juliofhernandez?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "barcelona",
+  "name": "Barcelona",
+  "country": "Spain",
+  "lat": 41.3874,
+  "lon": 2.1686,
+  "href": "https://www.lightscout.app/locations/barcelona",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1746036317071-b193cfc05167?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxCYXJjZWxvbmElMjBTcGFpbiUyMGxhbmRzY2FwZSUyMHBob3RvZ3JhcGh5fGVufDB8MHx8fDE3NzUyODc2NjR8MA&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1746036317071-b193cfc05167?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxCYXJjZWxvbmElMjBTcGFpbiUyMGxhbmRzY2FwZSUyMHBob3RvZ3JhcGh5fGVufDB8MHx8fDE3NzUyODc2NjR8MA&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Barcelona, Spain",
+   "credit": "Linh Phạm",
+   "creditUrl": "https://unsplash.com/@slidedo?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "budapest",
+  "name": "Budapest",
+  "country": "Hungary",
+  "lat": 47.4979,
+  "lon": 19.0402,
+  "href": "https://www.lightscout.app/locations/budapest",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1661602592745-25f05dd89ea2?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxCdWRhcGVzdCUyMEh1bmdhcnklMjBsYW5kc2NhcGUlMjBwaG90b2dyYXBoeXxlbnwwfDB8fHwxNzc1Mjg3NjY1fDA&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1661602592745-25f05dd89ea2?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxCdWRhcGVzdCUyMEh1bmdhcnklMjBsYW5kc2NhcGUlMjBwaG90b2dyYXBoeXxlbnwwfDB8fHwxNzc1Mjg3NjY1fDA&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Budapest, Hungary",
+   "credit": "XAVIER PHOTOGRAPHY",
+   "creditUrl": "https://unsplash.com/@xavierqu?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "burgos",
+  "name": "Burgos",
+  "country": "Spain",
+  "lat": 42.341,
+  "lon": -3.7018,
+  "href": "https://www.lightscout.app/locations/burgos",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1554765475-59f08b25eca5?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxCdXJnb3MlMjBjYXRoZWRyYWwlMjBTcGFpbiUyMGdvdGhpYyUyMHNwaXJlc3xlbnwxfDB8fHwxNzg0NTM3MDczfDA&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&fit=crop&h=1250",
+   "tall": "https://images.unsplash.com/photo-1554765475-59f08b25eca5?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxCdXJnb3MlMjBjYXRoZWRyYWwlMjBTcGFpbiUyMGdvdGhpYyUyMHNwaXJlc3xlbnwxfDB8fHwxNzg0NTM3MDczfDA&ixlib=rb-4.1.0&w=900&q=70&fm=webp&fit=crop&h=1600",
+   "alt": "Photograph from the LightScout guide to Burgos, Spain",
+   "credit": "Zack Smith",
+   "creditUrl": "https://unsplash.com/@zacksmith?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "dolomites",
+  "name": "Dolomites",
+  "country": "Italy",
+  "lat": 46.4128,
+  "lon": 12.0015,
+  "href": "https://www.lightscout.app/locations/dolomites",
+  "lowSun": true,
+  "light": "sunset",
+  "photo": {
+   "wide": "https://www.lightscout.app/assets/hero/dolomites-2000.webp",
+   "tall": "https://www.lightscout.app/assets/hero/dolomites-portrait-900.webp",
+   "alt": "Sunset light on pale rock faces above low cloud and dark spruce forest.",
+   "credit": "Lenny Welvaert",
+   "creditUrl": "https://commons.wikimedia.org/wiki/File:Sunset_mountains_Dolomites_-_Flickr_-_@len.wel.jpg",
+   "licence": "CC BY 2.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+   "tail": ", cropped"
+  }
+ },
+ {
+  "slug": "dubrovnik",
+  "name": "Dubrovnik",
+  "country": "Croatia",
+  "lat": 42.6426,
+  "lon": 18.1084,
+  "href": "https://www.lightscout.app/locations/dubrovnik",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1699424495025-a7df0d7075ff?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxEdWJyb3ZuaWslMjBDcm9hdGlhJTIwbGFuZHNjYXBlJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc3NTI4NzY2OHww&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1699424495025-a7df0d7075ff?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxEdWJyb3ZuaWslMjBDcm9hdGlhJTIwbGFuZHNjYXBlJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc3NTI4NzY2OHww&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Dubrovnik, Croatia",
+   "credit": "Taisha Ellison",
+   "creditUrl": "https://unsplash.com/@taishaephoto?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "edinburgh",
+  "name": "Edinburgh",
+  "country": "United Kingdom",
+  "lat": 55.9533,
+  "lon": -3.1883,
+  "href": "https://www.lightscout.app/locations/edinburgh",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1637449536946-22ba04e457a9?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxFZGluYnVyZ2glMjBVbml0ZWQlMjBLaW5nZG9tJTIwbGFuZHNjYXBlJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc3NTI4NzY2OXww&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1637449536946-22ba04e457a9?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxFZGluYnVyZ2glMjBVbml0ZWQlMjBLaW5nZG9tJTIwbGFuZHNjYXBlJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc3NTI4NzY2OXww&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Edinburgh, United Kingdom",
+   "credit": "George McVeigh",
+   "creditUrl": "https://unsplash.com/@georgemcveigh?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "iceland",
+  "name": "Iceland",
+  "country": "Iceland",
+  "lat": 64.1466,
+  "lon": -21.9426,
+  "href": "https://www.lightscout.app/locations/iceland",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1667094798735-fa03f82e764c?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxJY2VsYW5kJTIwSWNlbGFuZCUyMGxhbmRzY2FwZSUyMHBob3RvZ3JhcGh5fGVufDB8MHx8fDE3NzUyODc2NzJ8MA&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1667094798735-fa03f82e764c?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxJY2VsYW5kJTIwSWNlbGFuZCUyMGxhbmRzY2FwZSUyMHBob3RvZ3JhcGh5fGVufDB8MHx8fDE3NzUyODc2NzJ8MA&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Iceland, Iceland",
+   "credit": "Ivan Jenic",
+   "creditUrl": "https://unsplash.com/@ijxxvii?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "leon",
+  "name": "León",
+  "country": "Spain",
+  "lat": 42.6,
+  "lon": -5.5703,
+  "href": "https://www.lightscout.app/locations/leon",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1710361668540-01be68319571?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxMZW9uJTIwU3BhaW4lMjBjYXRoZWRyYWwlMjBDYXN0aWxsYXxlbnwxfDB8fHwxNzg0NTM3MDc0fDA&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&fit=crop&h=1250",
+   "tall": "https://images.unsplash.com/photo-1710361668540-01be68319571?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxMZW9uJTIwU3BhaW4lMjBjYXRoZWRyYWwlMjBDYXN0aWxsYXxlbnwxfDB8fHwxNzg0NTM3MDc0fDA&ixlib=rb-4.1.0&w=900&q=70&fm=webp&fit=crop&h=1600",
+   "alt": "Photograph from the LightScout guide to León, Spain",
+   "credit": "Dmitry Romanoff",
+   "creditUrl": "https://unsplash.com/@dm8ryphotos?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "lisbon",
+  "name": "Lisbon",
+  "country": "Portugal",
+  "lat": 38.7223,
+  "lon": -9.1393,
+  "href": "https://www.lightscout.app/locations/lisbon",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1636370248086-c5164734f2dc?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxMaXNib24lMjBQb3J0dWdhbCUyMGxhbmRzY2FwZSUyMHBob3RvZ3JhcGh5fGVufDB8MHx8fDE3NzUyODc2NzV8MA&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1636370248086-c5164734f2dc?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxMaXNib24lMjBQb3J0dWdhbCUyMGxhbmRzY2FwZSUyMHBob3RvZ3JhcGh5fGVufDB8MHx8fDE3NzUyODc2NzV8MA&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Lisbon, Portugal",
+   "credit": "Freguesia de Estrela",
+   "creditUrl": "https://unsplash.com/@freguesiadeestrela?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "london",
+  "name": "London",
+  "country": "United Kingdom",
+  "lat": 51.5074,
+  "lon": -0.1278,
+  "href": "https://www.lightscout.app/locations/london",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1650910693731-27d30c28685f?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxMb25kb24lMjBVbml0ZWQlMjBLaW5nZG9tJTIwbGFuZHNjYXBlJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc3NTI4NzY3NXww&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1650910693731-27d30c28685f?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxMb25kb24lMjBVbml0ZWQlMjBLaW5nZG9tJTIwbGFuZHNjYXBlJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc3NTI4NzY3NXww&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to London, United Kingdom",
+   "credit": "Oswaldo Martinez",
+   "creditUrl": "https://unsplash.com/@oemartinez?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "mallorca",
+  "name": "Mallorca",
+  "country": "Spain",
+  "lat": 39.57,
+  "lon": 2.65,
+  "href": "https://www.lightscout.app/locations/mallorca",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1612369915490-c2c931754535?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxNYWxsb3JjYSUyMFNlcnJhJTIwZGUlMjBUcmFtdW50YW5hJTIwY29hc3QlMjBjbGlmZnN8ZW58MXwwfHx8MTc4NDUzODE3N3ww&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&fit=crop&h=1250",
+   "tall": "https://images.unsplash.com/photo-1612369915490-c2c931754535?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxNYWxsb3JjYSUyMFNlcnJhJTIwZGUlMjBUcmFtdW50YW5hJTIwY29hc3QlMjBjbGlmZnN8ZW58MXwwfHx8MTc4NDUzODE3N3ww&ixlib=rb-4.1.0&w=900&q=70&fm=webp&fit=crop&h=1600",
+   "alt": "Photograph from the LightScout guide to Mallorca, Spain",
+   "credit": "John McFetridge",
+   "creditUrl": "https://unsplash.com/@mallorcanrelish?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "oviedo",
+  "name": "Oviedo",
+  "country": "Spain",
+  "lat": 43.3603,
+  "lon": -5.8448,
+  "href": "https://www.lightscout.app/locations/oviedo",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1691087701995-6325b3023aca?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxPdmllZG8lMjBTcGFpbnxlbnwxfDB8fHwxNzg0NTM4MTc2fDA&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&fit=crop&h=1250",
+   "tall": "https://images.unsplash.com/photo-1691087701995-6325b3023aca?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxPdmllZG8lMjBTcGFpbnxlbnwxfDB8fHwxNzg0NTM4MTc2fDA&ixlib=rb-4.1.0&w=900&q=70&fm=webp&fit=crop&h=1600",
+   "alt": "Photograph from the LightScout guide to Oviedo, Spain",
+   "credit": "Hayffield L",
+   "creditUrl": "https://unsplash.com/@hayffield?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "paris",
+  "name": "Paris",
+  "country": "France",
+  "lat": 48.8566,
+  "lon": 2.3522,
+  "href": "https://www.lightscout.app/locations/paris",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1632747821946-3744fc664f6d?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxQYXJpcyUyMEZyYW5jZSUyMGxhbmRzY2FwZSUyMHBob3RvZ3JhcGh5fGVufDB8MHx8fDE3NzUyODc2ODB8MA&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1632747821946-3744fc664f6d?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxQYXJpcyUyMEZyYW5jZSUyMGxhbmRzY2FwZSUyMHBob3RvZ3JhcGh5fGVufDB8MHx8fDE3NzUyODc2ODB8MA&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Paris, France",
+   "credit": "Deniz Demirci",
+   "creditUrl": "https://unsplash.com/@ddography?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "prague",
+  "name": "Prague",
+  "country": "Czech Republic",
+  "lat": 50.0755,
+  "lon": 14.4378,
+  "href": "https://www.lightscout.app/locations/prague",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1604121948587-58e0c6a3efdf?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxQcmFndWUlMjBDemVjaCUyMFJlcHVibGljJTIwbGFuZHNjYXBlJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc3NTI4NzY4MXww&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1604121948587-58e0c6a3efdf?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxQcmFndWUlMjBDemVjaCUyMFJlcHVibGljJTIwbGFuZHNjYXBlJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc3NTI4NzY4MXww&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Prague, Czech Republic",
+   "credit": "Navia Gruber",
+   "creditUrl": "https://unsplash.com/@naviagruber?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "rome",
+  "name": "Rome",
+  "country": "Italy",
+  "lat": 41.9028,
+  "lon": 12.4964,
+  "href": "https://www.lightscout.app/locations/rome",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1743075070883-840ab9ebb3a2?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxSb21lJTIwSXRhbHklMjBsYW5kc2NhcGUlMjBwaG90b2dyYXBoeXxlbnwwfDB8fHwxNzc1Mjg3NjgyfDA&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1743075070883-840ab9ebb3a2?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxSb21lJTIwSXRhbHklMjBsYW5kc2NhcGUlMjBwaG90b2dyYXBoeXxlbnwwfDB8fHwxNzc1Mjg3NjgyfDA&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Rome, Italy",
+   "credit": "Paolo Bici",
+   "creditUrl": "https://unsplash.com/@paolobici?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "santorini",
+  "name": "Santorini",
+  "country": "Greece",
+  "lat": 36.3932,
+  "lon": 25.4615,
+  "href": "https://www.lightscout.app/locations/santorini",
+  "lowSun": true,
+  "light": "dusk",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1661602715735-d401dafd3615?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxTYW50b3JpbmklMjBHcmVlY2UlMjBsYW5kc2NhcGUlMjBwaG90b2dyYXBoeXxlbnwwfDB8fHwxNzc1Mjg3NjgzfDA&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1661602715735-d401dafd3615?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxTYW50b3JpbmklMjBHcmVlY2UlMjBsYW5kc2NhcGUlMjBwaG90b2dyYXBoeXxlbnwwfDB8fHwxNzc1Mjg3NjgzfDA&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Whitewashed cliff-top houses above the caldera in soft pink dusk light.",
+   "credit": "XAVIER PHOTOGRAPHY",
+   "creditUrl": "https://unsplash.com/@xavierqu?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "scottish-highlands",
+  "name": "Scottish Highlands",
+  "country": "United Kingdom",
+  "lat": 57.2802,
+  "lon": -4.4192,
+  "href": "https://www.lightscout.app/locations/scottish-highlands",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1519902423808-2fcb2914e250?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxTY290dGlzaCUyMEhpZ2hsYW5kcyUyMFVuaXRlZCUyMEtpbmdkb20lMjBsYW5kc2NhcGUlMjBwaG90b2dyYXBoeXxlbnwwfDB8fHwxNzc1Mjg3NjgzfDA&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1519902423808-2fcb2914e250?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxTY290dGlzaCUyMEhpZ2hsYW5kcyUyMFVuaXRlZCUyMEtpbmdkb20lMjBsYW5kc2NhcGUlMjBwaG90b2dyYXBoeXxlbnwwfDB8fHwxNzc1Mjg3NjgzfDA&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Scottish Highlands, United Kingdom",
+   "credit": "Click and Learn Photography",
+   "creditUrl": "https://unsplash.com/@clickandlearnphotography?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "swiss-alps",
+  "name": "Swiss Alps",
+  "country": "Switzerland",
+  "lat": 46.5519,
+  "lon": 8.0919,
+  "href": "https://www.lightscout.app/locations/swiss-alps",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1666253496832-ea0fc142f8e9?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxTd2lzcyUyMEFscHMlMjBTd2l0emVybGFuZCUyMGxhbmRzY2FwZSUyMHBob3RvZ3JhcGh5fGVufDB8MHx8fDE3NzUyODc2ODV8MA&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1666253496832-ea0fc142f8e9?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxTd2lzcyUyMEFscHMlMjBTd2l0emVybGFuZCUyMGxhbmRzY2FwZSUyMHBob3RvZ3JhcGh5fGVufDB8MHx8fDE3NzUyODc2ODV8MA&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Swiss Alps, Switzerland",
+   "credit": "Ilia Bronskiy",
+   "creditUrl": "https://unsplash.com/@idbronskiy?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "zaragoza",
+  "name": "Zaragoza",
+  "country": "Spain",
+  "lat": 41.6561,
+  "lon": -0.8773,
+  "href": "https://www.lightscout.app/locations/zaragoza",
+  "lowSun": true,
+  "light": "sunset",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1612072451833-bb858853aaf5?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxaYXJhZ296YSUyMEJhc2lsaWNhJTIwZGVsJTIwUGlsYXIlMjBFYnJvJTIwcml2ZXJ8ZW58MXwwfHx8MTc4NDUzNzA3NXww&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&fit=crop&h=1250",
+   "tall": "https://images.unsplash.com/photo-1612072451833-bb858853aaf5?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxaYXJhZ296YSUyMEJhc2lsaWNhJTIwZGVsJTIwUGlsYXIlMjBFYnJvJTIwcml2ZXJ8ZW58MXwwfHx8MTc4NDUzNzA3NXww&ixlib=rb-4.1.0&w=900&q=70&fm=webp&fit=crop&h=1600",
+   "alt": "Basílica del Pilar and the Ebro with the sun low behind a tower and warm light on the façade.",
+   "credit": "Pedro Sanz",
+   "creditUrl": "https://unsplash.com/@pedrosanz?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "bali",
+  "name": "Bali",
+  "country": "Indonesia",
+  "lat": -8.6705,
+  "lon": 115.2126,
+  "href": "https://www.lightscout.app/locations/bali",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1702564492831-cbd0e8dc775e?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxCYWxpJTIwSW5kb25lc2lhJTIwbGFuZHNjYXBlJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc3NTI4NzY2Mnww&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1702564492831-cbd0e8dc775e?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxCYWxpJTIwSW5kb25lc2lhJTIwbGFuZHNjYXBlJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc3NTI4NzY2Mnww&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Bali, Indonesia",
+   "credit": "Marisca Kadharmestan",
+   "creditUrl": "https://unsplash.com/@marisca_kadharmestan?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "bangkok",
+  "name": "Bangkok",
+  "country": "Thailand",
+  "lat": 13.7563,
+  "lon": 100.5018,
+  "href": "https://www.lightscout.app/locations/bangkok",
+  "lowSun": true,
+  "light": "blue hour",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1643104096077-bbe81b973779?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5OTB8&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&fit=crop&h=1250",
+   "tall": "https://images.unsplash.com/photo-1643104096077-bbe81b973779?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5OTB8&ixlib=rb-4.1.0&w=900&q=70&fm=webp&fit=crop&h=1600",
+   "alt": "Bangkok towers and lit streets under a purple and orange sky shortly after sunset.",
+   "credit": "Chris Thomassen",
+   "creditUrl": "https://unsplash.com/@wereldreizigers?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash"
+  }
+ },
+ {
+  "slug": "dubai",
+  "name": "Dubai",
+  "country": "United Arab Emirates",
+  "lat": 25.2048,
+  "lon": 55.2708,
+  "href": "https://www.lightscout.app/locations/dubai",
+  "lowSun": true,
+  "light": "sunrise",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5ODl8&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&fit=crop&h=1250",
+   "tall": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5ODl8&ixlib=rb-4.1.0&w=900&q=70&fm=webp&fit=crop&h=1600",
+   "alt": "Downtown Dubai and the Burj Khalifa from above in a pink-orange sunrise haze over the interchanges.",
+   "credit": "David Rodrigo",
+   "creditUrl": "https://unsplash.com/@david__r?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash"
+  }
+ },
+ {
+  "slug": "hanoi",
+  "name": "Hanoi",
+  "country": "Vietnam",
+  "lat": 21.0285,
+  "lon": 105.8542,
+  "href": "https://www.lightscout.app/locations/hanoi",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1644122602630-4928a2af66cc?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxIYW5vaSUyMFZpZXRuYW0lMjBsYW5kc2NhcGUlMjBwaG90b2dyYXBoeXxlbnwwfDB8fHwxNzc1Mjg3NjcwfDA&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1644122602630-4928a2af66cc?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxIYW5vaSUyMFZpZXRuYW0lMjBsYW5kc2NhcGUlMjBwaG90b2dyYXBoeXxlbnwwfDB8fHwxNzc1Mjg3NjcwfDA&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Hanoi, Vietnam",
+   "credit": "Phong Phạm",
+   "creditUrl": "https://unsplash.com/@pp202?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "hong-kong",
+  "name": "Hong Kong",
+  "country": "China",
+  "lat": 22.3193,
+  "lon": 114.1694,
+  "href": "https://www.lightscout.app/locations/hong-kong",
+  "lowSun": true,
+  "light": "dusk",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1604888651227-eff3f9e5c601?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5ODh8&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&fit=crop&h=1250",
+   "tall": "https://images.unsplash.com/photo-1604888651227-eff3f9e5c601?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5ODh8&ixlib=rb-4.1.0&w=900&q=70&fm=webp&fit=crop&h=1600",
+   "alt": "Victoria Harbour at sunset: the Hong Kong Island skyline against a sky with the sun on the horizon at right.",
+   "credit": "Christoph Burgdorfer",
+   "creditUrl": "https://unsplash.com/@cburgdorfer?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash"
+  }
+ },
+ {
+  "slug": "istanbul",
+  "name": "Istanbul",
+  "country": "Turkey",
+  "lat": 41.0082,
+  "lon": 28.9784,
+  "href": "https://www.lightscout.app/locations/istanbul",
+  "lowSun": true,
+  "light": "sunset",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1563046835-b9e165ce9b27?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5OTB8&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&fit=crop&h=1250",
+   "tall": "https://images.unsplash.com/photo-1563046835-b9e165ce9b27?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5OTB8&ixlib=rb-4.1.0&w=900&q=70&fm=webp&fit=crop&h=1600",
+   "alt": "Eminönü waterfront and mosques from the water under an orange evening sky.",
+   "credit": "Meriç Dağlı",
+   "creditUrl": "https://unsplash.com/@meric?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash"
+  }
+ },
+ {
+  "slug": "kyoto",
+  "name": "Kyoto",
+  "country": "Japan",
+  "lat": 35.0116,
+  "lon": 135.7681,
+  "href": "https://www.lightscout.app/locations/kyoto",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1624756958703-dd6e631536e1?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxLeW90byUyMEphcGFuJTIwbGFuZHNjYXBlJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc3NTI4NzY3NHww&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1624756958703-dd6e631536e1?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxLeW90byUyMEphcGFuJTIwbGFuZHNjYXBlJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc3NTI4NzY3NHww&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Kyoto, Japan",
+   "credit": "Amy Tran",
+   "creditUrl": "https://unsplash.com/@minhanh258?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "seoul",
+  "name": "Seoul",
+  "country": "South Korea",
+  "lat": 37.5665,
+  "lon": 126.978,
+  "href": "https://www.lightscout.app/locations/seoul",
+  "lowSun": true,
+  "light": "low sun",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1742736137211-eaffbf2eac36?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxTZW91bCUyMFNvdXRoJTIwS29yZWElMjBsYW5kc2NhcGUlMjBwaG90b2dyYXBoeXxlbnwwfDB8fHwxNzc1Mjg3Njg0fDA&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1742736137211-eaffbf2eac36?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxTZW91bCUyMFNvdXRoJTIwS29yZWElMjBsYW5kc2NhcGUlMjBwaG90b2dyYXBoeXxlbnwwfDB8fHwxNzc1Mjg3Njg0fDA&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Seoul apartment towers and the Han river lit warm and low from the side, long shadows in the trees.",
+   "credit": "Nik V",
+   "creditUrl": "https://unsplash.com/@nickverm?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "singapore",
+  "name": "Singapore",
+  "country": "Singapore",
+  "lat": 1.3521,
+  "lon": 103.8198,
+  "href": "https://www.lightscout.app/locations/singapore",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1717363522833-a9b0bc9c5554?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxTaW5nYXBvcmUlMjBTaW5nYXBvcmUlMjBsYW5kc2NhcGUlMjBwaG90b2dyYXBoeXxlbnwwfDB8fHwxNzc1Mjg3Njg1fDA&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1717363522833-a9b0bc9c5554?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxTaW5nYXBvcmUlMjBTaW5nYXBvcmUlMjBsYW5kc2NhcGUlMjBwaG90b2dyYXBoeXxlbnwwfDB8fHwxNzc1Mjg3Njg1fDA&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Singapore, Singapore",
+   "credit": "Chris Johnson",
+   "creditUrl": "https://unsplash.com/@cj580?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "tokyo",
+  "name": "Tokyo",
+  "country": "Japan",
+  "lat": 35.6762,
+  "lon": 139.6503,
+  "href": "https://www.lightscout.app/locations/tokyo",
+  "lowSun": true,
+  "light": "sunset",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1580920459139-68dcb30f70fe?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5ODh8&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&fit=crop&h=1250",
+   "tall": "https://images.unsplash.com/photo-1580920459139-68dcb30f70fe?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5ODh8&ixlib=rb-4.1.0&w=900&q=70&fm=webp&fit=crop&h=1600",
+   "alt": "Tokyo Tower and the city from above, low sun warming the façades, orange band of sky behind cloud.",
+   "credit": "ALEXANDRE LALLEMAND",
+   "creditUrl": "https://unsplash.com/@alexandrelallemand?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash"
+  }
+ },
+ {
+  "slug": "banff",
+  "name": "Banff",
+  "country": "Canada",
+  "lat": 51.1788,
+  "lon": -115.5708,
+  "href": "https://www.lightscout.app/locations/banff",
+  "lowSun": true,
+  "light": "sunrise",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1680725950666-92d1dd713513?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5ODd8&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&fit=crop&h=1250",
+   "tall": "https://images.unsplash.com/photo-1680725950666-92d1dd713513?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5ODd8&ixlib=rb-4.1.0&w=900&q=70&fm=webp&fit=crop&h=1600",
+   "alt": "Vermilion Lakes at sunrise: pink and violet cloud above Mount Rundle, reflected in still water.",
+   "credit": "Nunzio Guerrera",
+   "creditUrl": "https://unsplash.com/@nunzg?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash"
+  }
+ },
+ {
+  "slug": "grand-canyon",
+  "name": "Grand Canyon",
+  "country": "United States",
+  "lat": 36.0726,
+  "lon": -112.1129,
+  "href": "https://www.lightscout.app/locations/grand-canyon",
+  "lowSun": true,
+  "light": "sunset",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1596433853251-12aa68b860f0?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5ODd8&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&fit=crop&h=1250",
+   "tall": "https://images.unsplash.com/photo-1596433853251-12aa68b860f0?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5ODd8&ixlib=rb-4.1.0&w=900&q=70&fm=webp&fit=crop&h=1600",
+   "alt": "Canyon buttes lit red-orange by the last direct sun while the inner canyon is already in blue shadow.",
+   "credit": "Jenn Wood",
+   "creditUrl": "https://unsplash.com/@the_jenn_wood?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash"
+  }
+ },
+ {
+  "slug": "havana",
+  "name": "Havana",
+  "country": "Cuba",
+  "lat": 23.1136,
+  "lon": -82.3666,
+  "href": "https://www.lightscout.app/locations/havana",
+  "lowSun": true,
+  "light": "sunset",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1653764910945-ec6eb0ac7aa7?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5ODZ8&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&fit=crop&h=1250",
+   "tall": "https://images.unsplash.com/photo-1653764910945-ec6eb0ac7aa7?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5ODZ8&ixlib=rb-4.1.0&w=900&q=70&fm=webp&fit=crop&h=1600",
+   "alt": "The Malecón sea wall running towards the sun on the horizon, the waterfront blocks in silhouette.",
+   "credit": "Max Letek",
+   "creditUrl": "https://unsplash.com/@blackprojection?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash"
+  }
+ },
+ {
+  "slug": "los-angeles",
+  "name": "Los Angeles",
+  "country": "United States",
+  "lat": 34.0522,
+  "lon": -118.2437,
+  "href": "https://www.lightscout.app/locations/los-angeles",
+  "lowSun": true,
+  "light": "sunset",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1737438335008-b872da156ffe?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxMb3MlMjBBbmdlbGVzJTIwVW5pdGVkJTIwU3RhdGVzJTIwbGFuZHNjYXBlJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc3NTI4NzY3Nnww&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1737438335008-b872da156ffe?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxMb3MlMjBBbmdlbGVzJTIwVW5pdGVkJTIwU3RhdGVzJTIwbGFuZHNjYXBlJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc3NTI4NzY3Nnww&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Downtown Los Angeles skyline in haze under a pink sunset sky, seen from a hillside.",
+   "credit": "Jun Yu",
+   "creditUrl": "https://unsplash.com/@junxy?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "mexico-city",
+  "name": "Mexico City",
+  "country": "Mexico",
+  "lat": 19.4326,
+  "lon": -99.1332,
+  "href": "https://www.lightscout.app/locations/mexico-city",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1603751913947-dff3923241cb?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxNZXhpY28lMjBDaXR5JTIwTWV4aWNvJTIwbGFuZHNjYXBlJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc3NTI4NzY3OHww&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1603751913947-dff3923241cb?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxNZXhpY28lMjBDaXR5JTIwTWV4aWNvJTIwbGFuZHNjYXBlJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc3NTI4NzY3OHww&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Mexico City, Mexico",
+   "credit": "Kyle Petzer",
+   "creditUrl": "https://unsplash.com/@kylepetzer?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "new-york-city",
+  "name": "New York City",
+  "country": "United States",
+  "lat": 40.7128,
+  "lon": -74.006,
+  "href": "https://www.lightscout.app/locations/new-york-city",
+  "lowSun": true,
+  "light": "sunset",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1767749505538-23e71d1af2c5?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5ODZ8&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&fit=crop&h=1250",
+   "tall": "https://images.unsplash.com/photo-1767749505538-23e71d1af2c5?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5ODZ8&ixlib=rb-4.1.0&w=900&q=70&fm=webp&fit=crop&h=1600",
+   "alt": "Midtown Manhattan from above in low evening sun: the Empire State Building against an orange sky, the light raking the towers.",
+   "credit": "Yilei (Jerry) Bao",
+   "creditUrl": "https://unsplash.com/@yileijerrybao?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash"
+  }
+ },
+ {
+  "slug": "yosemite",
+  "name": "Yosemite",
+  "country": "United States",
+  "lat": 37.8651,
+  "lon": -119.5383,
+  "href": "https://www.lightscout.app/locations/yosemite",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1711197134121-3cd066a1569b?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxZb3NlbWl0ZSUyMFVuaXRlZCUyMFN0YXRlcyUyMGxhbmRzY2FwZSUyMHBob3RvZ3JhcGh5fGVufDB8MHx8fDE3NzUyODc2ODd8MA&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1711197134121-3cd066a1569b?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxZb3NlbWl0ZSUyMFVuaXRlZCUyMFN0YXRlcyUyMGxhbmRzY2FwZSUyMHBob3RvZ3JhcGh5fGVufDB8MHx8fDE3NzUyODc2ODd8MA&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Yosemite, United States",
+   "credit": "Annie Spratt",
+   "creditUrl": "https://unsplash.com/@anniespratt?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "cartagena",
+  "name": "Cartagena",
+  "country": "Colombia",
+  "lat": 10.3897,
+  "lon": -75.514,
+  "href": "https://www.lightscout.app/locations/cartagena",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1705966555847-3418bf1f2851?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxDYXJ0YWdlbmElMjBDb2xvbWJpYSUyMGxhbmRzY2FwZSUyMHBob3RvZ3JhcGh5fGVufDB8MHx8fDE3NzUyODc2NjZ8MA&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1705966555847-3418bf1f2851?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxDYXJ0YWdlbmElMjBDb2xvbWJpYSUyMGxhbmRzY2FwZSUyMHBob3RvZ3JhcGh5fGVufDB8MHx8fDE3NzUyODc2NjZ8MA&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Cartagena, Colombia",
+   "credit": "Shelby Murphy Figueroa",
+   "creditUrl": "https://unsplash.com/@shelbyfigueroa?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "machu-picchu",
+  "name": "Machu Picchu",
+  "country": "Peru",
+  "lat": -13.1631,
+  "lon": -72.545,
+  "href": "https://www.lightscout.app/locations/machu-picchu",
+  "lowSun": true,
+  "light": "sunrise",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1723134084358-20a2dc177ff1?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5ODh8&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&fit=crop&h=1250",
+   "tall": "https://images.unsplash.com/photo-1723134084358-20a2dc177ff1?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5ODh8&ixlib=rb-4.1.0&w=900&q=70&fm=webp&fit=crop&h=1600",
+   "alt": "First sun raking across the terraces and ruins below Huayna Picchu, long shadows, mist in the valley.",
+   "credit": "Ed Wingate",
+   "creditUrl": "https://unsplash.com/@ed_wingate?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash"
+  }
+ },
+ {
+  "slug": "patagonia",
+  "name": "Patagonia",
+  "country": "Argentina/Chile",
+  "lat": -50.3504,
+  "lon": -72.3102,
+  "href": "https://www.lightscout.app/locations/patagonia",
+  "lowSun": true,
+  "light": "sunrise",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1723476068476-b19f5d0f647b?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5OTB8&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&fit=crop&h=1250",
+   "tall": "https://images.unsplash.com/photo-1723476068476-b19f5d0f647b?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5OTB8&ixlib=rb-4.1.0&w=900&q=70&fm=webp&fit=crop&h=1600",
+   "alt": "The Torres del Paine granite towers lit orange by sunrise above the glacial lake.",
+   "credit": "Carter Obasohan",
+   "creditUrl": "https://unsplash.com/@carter_obasohan?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash"
+  }
+ },
+ {
+  "slug": "cape-town",
+  "name": "Cape Town",
+  "country": "South Africa",
+  "lat": -33.9249,
+  "lon": 18.4241,
+  "href": "https://www.lightscout.app/locations/cape-town",
+  "lowSun": true,
+  "light": "sunrise",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1530187589563-1ff5b061d4f9?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5ODl8&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&fit=crop&h=1250",
+   "tall": "https://images.unsplash.com/photo-1530187589563-1ff5b061d4f9?ixid=M3w5MTUyMTB8MHwxfGFsbHx8fHx8fHx8fDE3OTQ3MDU5ODl8&ixlib=rb-4.1.0&w=900&q=70&fm=webp&fit=crop&h=1600",
+   "alt": "Table Mountain from Lion's Head in first light, street lights still on along the road below.",
+   "credit": "Ashley Jurius",
+   "creditUrl": "https://unsplash.com/@ashleyjurius?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash"
+  }
+ },
+ {
+  "slug": "marrakech",
+  "name": "Marrakech",
+  "country": "Morocco",
+  "lat": 31.6295,
+  "lon": -8.0088,
+  "href": "https://www.lightscout.app/locations/marrakech",
+  "lowSun": false,
+  "light": "",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1758621709944-24d07999927d?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxNYXJyYWtlY2glMjBNb3JvY2NvJTIwbGFuZHNjYXBlJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc3NTI4NzY3N3ww&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1758621709944-24d07999927d?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxNYXJyYWtlY2glMjBNb3JvY2NvJTIwbGFuZHNjYXBlJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc3NTI4NzY3N3ww&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Photograph from the LightScout guide to Marrakech, Morocco",
+   "credit": "Riccardo Monteleone",
+   "creditUrl": "https://unsplash.com/@rx_lion?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ },
+ {
+  "slug": "sydney",
+  "name": "Sydney",
+  "country": "Australia",
+  "lat": -33.8688,
+  "lon": 151.2093,
+  "href": "https://www.lightscout.app/locations/sydney",
+  "lowSun": true,
+  "light": "sunset",
+  "photo": {
+   "wide": "https://images.unsplash.com/photo-1659398377031-a542c1948f97?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxTeWRuZXklMjBBdXN0cmFsaWElMjBsYW5kc2NhcGUlMjBwaG90b2dyYXBoeXxlbnwwfDB8fHwxNzc1Mjg3Njg2fDA&ixlib=rb-4.1.0&w=2000&q=70&fm=webp&h=1250&fit=crop",
+   "tall": "https://images.unsplash.com/photo-1659398377031-a542c1948f97?ixid=M3w5MTUyMTB8MHwxfHNlYXJjaHwxfHxTeWRuZXklMjBBdXN0cmFsaWElMjBsYW5kc2NhcGUlMjBwaG90b2dyYXBoeXxlbnwwfDB8fHwxNzc1Mjg3Njg2fDA&ixlib=rb-4.1.0&w=900&q=70&fm=webp&h=1600&fit=crop",
+   "alt": "Sydney Opera House sails and the Harbour Bridge in silhouette against an orange sunset sky.",
+   "credit": "Halley Tian",
+   "creditUrl": "https://unsplash.com/@stia004?utm_source=lightscout&utm_medium=referral",
+   "tail": " / Unsplash, from the guide"
+  }
+ }
+]

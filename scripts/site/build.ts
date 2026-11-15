@@ -52,8 +52,8 @@ export async function renderPublicSite(out: string): Promise<string[]> {
     { meta: { path: "/writing", title: "Writing", description: c.content.collections.writing.description }, world: "orbit", sheet: "writing" as const },
     { meta: { path: "/talks", title: "Talks", description: c.content.collections.talks.description }, world: "orbit", sheet: "talks" as const },
   ];
-  for (const s of c.merged.stories) {
-    const story = c.content.writing.find((w) => w.id === s.slug);
+  // Every published story with a body keeps its URL, whether or not the writing collection lists it.
+  for (const story of c.content.writing) {
     if (!story?.body?.length) continue;
     const ld = { "@context": "https://schema.org", "@type": "BlogPosting", headline: story.title, description: storyDescription(story), author: { "@type": "Person", name: "Tom Murton", url: `${origin}/` }, url: `${origin}/writing/${story.id}`, mainEntityOfPage: `${origin}/writing/${story.id}` };
     pages.push({ meta: { path: `/writing/${story.id}`, title: story.title, description: storyDescription(story), jsonLd: [ld] }, world: story.projectId && c.merged.rows.some((r) => r.slug === story.projectId) ? story.projectId : "orbit", sheet: "story", story });

@@ -16,7 +16,9 @@ const DATA = JSON.parse((d.getElementById('stage-data') || {}).textContent || '{
 const stage = d.querySelector('.stage'), dotEl = d.getElementById('dot'), titleEl = d.getElementById('title');
 const announce = d.getElementById('announce'), main = d.querySelector('main');
 const homeTpl = d.getElementById('home-title');
-const homeTitle = homeTpl ? homeTpl.innerHTML : titleEl.innerHTML;
+const bootHome = homeTpl ? homeTpl.innerHTML : titleEl.innerHTML;
+/* The home title block; refresh.js may have updated it from Sanity since load. */
+const homeTitle = () => { const t = d.getElementById('home-title'); return t ? t.innerHTML : bootHome; };
 const HOME_DOC_TITLE = 'Tom Murton — Products, tools and experiments';
 
 // Retire registrations left by the old PWA build so nobody is held on a stale cached page.
@@ -39,7 +41,9 @@ const rowOf = (id) => d.querySelector('.index ol .row[data-world="' + id + '"]')
 
 let cur = null, pose = null, trans = null, dragging = false, paused = false, sheet = null, sheetOpener = null, seq = 0;
 let touring = !RM && !Q.get('w') && !Q.get('sheet') && location.pathname === '/' && !location.hash;
-let firstLap = true, lastInput = -1e9, lastNow = 0, taken = false;
+/* Only the home URL tours. Elsewhere (a world, a sheet, a review link) the stage waits for the visitor. */
+const canTour = touring;
+let firstLap = true, lastInput = performance.now(), lastNow = 0, taken = false;
 let firstVisit = true;
 try { firstVisit = !sessionStorage.getItem('tm-seen'); sessionStorage.setItem('tm-seen', '1'); } catch (e) { /* private mode: treat as a first visit */ }
 
@@ -56,7 +60,8 @@ function mountWorld(id, mod) {
 const dur = (w) => (w.handle.duration || 10000) / 1000;
 
 function drawDot(p) {
-  const w = Math.max(2, p.w), h = Math.max(2, p.h);
+  const w = Math.max(2, Math.min(p.w, innerWidth)), h = Math.max(2, Math.min(p.h, innerHeight));
+  p.x = clamp(p.x, w / 2, innerWidth - w / 2); p.y = clamp(p.y, h / 2, innerHeight - h / 2);
   dotEl.style.width = w + 'px'; dotEl.style.height = h + 'px';
   dotEl.style.transform = 'translate3d(' + (p.x - w / 2) + 'px,' + (p.y - h / 2) + 'px,0) rotate(' + (p.rot || 0) + 'deg)';
   dotEl.style.borderRadius = ((p.br == null ? 1 : p.br) * Math.min(w, h) / 2) + 'px';
@@ -90,12 +95,12 @@ function chrome(id, animate, boot) {
     if (info.site) links += '<a href="' + esc(info.site.href) + '">' + esc(info.site.label) + ' ↗</a>';
     if (info.story) links += '<a href="/writing/' + esc(info.story) + '" data-sheet="story-' + esc(info.story) + '">Read the story →</a>';
     titleEl.innerHTML = '<p class="eyebrow mono">' + esc(g('n')) + ' / ' + esc(g('kd')) + ' · ' + esc(g('yr')) + '</p><h1 class="h1"' + (k.titleStyle ? ' style="' + esc(k.titleStyle) + '"' : '') + '>' + esc(g('nm')) + '</h1><p class="lede">' + esc(row.parentNode.querySelector('.line').textContent) + '</p><p class="facts mono">' + esc(info.fact || '') + '</p>' + (info.note ? '<p class="note">' + esc(info.note) + '</p>' : '') + '<p class="links">' + links + '</p>';
-  } else titleEl.innerHTML = homeTitle;
+  } else titleEl.innerHTML = homeTitle();
   if (animate && !RM && titleEl.animate) titleEl.animate([{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'none' }], { duration: 380, delay: 240, fill: 'backwards', easing: 'cubic-bezier(.2,.7,.2,1)' });
 }
 function docTitle() {
   if (sheet) { const h = sheet.querySelector('h1,h2'); return (h ? h.textContent : '') + ' — Tom Murton'; }
-  if (!cur || cur.id === 'orbit') return HOME_DOC_TITLE;
+  if (!cur || cur.id === 'orbit') return location.pathname.replace(/\/$/, '') === '/projects' ? 'Projects — Tom Murton' : HOME_DOC_TITLE;
   const row = rowOf(cur.id); return (row ? row.querySelector('.nm').textContent : cur.id) + ' — Tom Murton';
 }
 function pathFor() {
@@ -105,15 +110,15 @@ function pathFor() {
 function record(push) {
   d.title = docTitle();
   const path = pathFor();
-  if (path === location.pathname + location.hash) return;
+  if (path === location.pathname + location.hash || (path === '/' && location.pathname.replace(/\/$/, '') === '/projects')) return;
   try { history[push ? 'pushState' : 'replaceState'](null, '', path); } catch (e) { /* file:// or sandboxed */ }
 }
 
 async function go(id, opts = {}) {
+  const my = opts.token != null ? opts.token : ++seq;   // the newest choice wins, whether it is a world or a sheet
   if (cur && cur.id === id) { if (!opts.silent) record(opts.push !== false); return; }
-  const my = ++seq;
   let mod;
-  try { mod = await load(id); } catch (e) { if (!opts.silent) location.assign(id === 'orbit' ? '/' : '/projects/' + id); return; }
+  try { mod = await load(id); } catch (e) { if (my === seq && !opts.silent) location.assign(id === 'orbit' ? '/' : '/projects/' + id); return; }
   if (my !== seq) return;            // a later choice overtook this one
   let next;
   try { next = mountWorld(id, mod); } catch (e) { d.querySelectorAll('.stage > .world:not(:has(*))').forEach((x) => x.remove()); if (!opts.silent) location.assign(id === 'orbit' ? '/' : '/projects/' + id); return; }
@@ -170,7 +175,7 @@ function frame(now) {
       if (touring && !dragging && !paused && cur.lap >= dwell(cur)) {
         const i = ORDER.indexOf(cur.id);
         if (i === ORDER.length - 1) { firstLap = false; go('orbit', { silent: true }); } else go(ORDER[i + 1], { silent: true });
-      } else if (!touring && !sheet && now - lastInput > 30000) { touring = true; cur.lap = 0; cur.owned = false; }
+      } else if (canTour && !touring && !sheet && now - lastInput > 30000) { touring = true; cur.lap = 0; cur.owned = false; }
       if (touring && cur.lap > 1) { const i = ORDER.indexOf(cur.id); load(ORDER[(i + 1) % ORDER.length]).catch(() => {}); }
     }
     if (pose) drawDot(pose);
@@ -178,10 +183,14 @@ function frame(now) {
   }
   if (!RM) requestAnimationFrame(frame);
 }
-function redraw() { if (!cur) return; cur.handle.seek(cur.f); pose = sheet ? readerPose() : onScreen(sample(cur)) || pose; if (pose) drawDot(pose); }
+function redraw() { if (!cur) return; if (trans) trans.from = onScreen({ ...trans.from }); cur.handle.seek(cur.f); pose = sheet ? readerPose() : onScreen(sample(cur)) || pose; if (pose) drawDot(pose); }
 function took() { touring = false; lastInput = performance.now(); taken = true; }
 
 /* ---------- sheets: writing, a story, talks, about ---------- */
+function inertBehind(on) {
+  d.querySelectorAll('.bar, .index, #title, .made, .skip').forEach((el) => { el.inert = on; });
+  d.querySelectorAll('.sheet').forEach((el) => { if (el !== sheet) el.inert = on; else el.inert = false; });
+}
 async function storySheet(id) {
   let el = d.getElementById(id); if (el) return el;
   const slug = id.slice(6);
@@ -199,8 +208,10 @@ async function storySheet(id) {
   return null;
 }
 async function openSheet(id, opts = {}) {
+  const my = ++seq;
   let el = d.getElementById(id);
   if (!el && id.startsWith('story-')) el = await storySheet(id);
+  if (my !== seq) return;            // the visitor moved on while the story was loading
   if (!el) { location.assign(id.startsWith('story-') ? '/writing/' + id.slice(6) : '/' + id); return; }
   if (sheet && sheet !== el) sheet.classList.remove('is-open');
   if (!sheet) sheetOpener = d.activeElement;
@@ -208,18 +219,22 @@ async function openSheet(id, opts = {}) {
   sheet = el; el.classList.add('is-open'); el.scrollTop = 0; root.classList.add('sheet-open');
   native();
   const project = el.dataset.project;
-  if (project && rowOf(project) && (!cur || cur.id !== project)) go(project, { silent: true, instant: !cur });
-  else if (id.startsWith('story-') && !project && cur && cur.id !== 'orbit') go('orbit', { silent: true });
+  if (project && rowOf(project) && (!cur || cur.id !== project)) go(project, { silent: true, instant: !cur, token: my });
+  else if (id.startsWith('story-') && !project && cur && cur.id !== 'orbit') go('orbit', { silent: true, token: my });
+  inertBehind(true);
   if (opts.record !== false) record(opts.push !== false); else d.title = docTitle();
   if (opts.record !== false) { const c = el.querySelector('.sheet-close'); if (c) c.focus({ preventScroll: true }); }
+  else el.focus({ preventScroll: true });       // arriving on a story's own URL: start reading inside it
   if (RM || opts.record === false) { pose = readerPose(); drawDot(pose); }
 }
 function closeSheet(opts = {}) {
   if (!sheet) return;
+  seq++; inertBehind(false);
   sheet.classList.remove('is-open'); sheet = null; root.classList.remove('sheet-open');
   if (cur) { trans = { from: pose, start: performance.now(), dur: 700 }; if (RM) { trans = null; redraw(); } }
   if (opts.record !== false) record(true); else d.title = docTitle();
-  if (sheetOpener && sheetOpener.focus && d.contains(sheetOpener)) sheetOpener.focus({ preventScroll: true });
+  const back = sheetOpener && d.contains(sheetOpener) && sheetOpener.getClientRects().length ? sheetOpener : d.querySelector('.index .row[aria-current="true"]');
+  if (back && back.focus) back.focus({ preventScroll: true });
   sheetOpener = null;
 }
 d.addEventListener('scroll', (e) => { if (RM && sheet && e.target === sheet) { pose = readerPose(); drawDot(pose); } }, { passive: true, capture: true });
@@ -237,7 +252,7 @@ function route() {
 window.addEventListener('popstate', () => {
   const r = route();
   if (r.sheet) openSheet(r.sheet, { record: false });
-  else { closeSheet({ record: false }); go(r.world, { push: false, silent: true }); d.title = docTitle(); }
+  else { closeSheet({ record: false }); go(r.world, { push: false, silent: true }).then(() => { d.title = docTitle(); }); }
 });
 
 /* ---------- input: rows, keys, swipe, drag ---------- */
