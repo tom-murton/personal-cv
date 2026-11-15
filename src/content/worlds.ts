@@ -40,7 +40,7 @@ export const orbitTokens: WorldTokens = {
 export const worlds: WorldRecord[] = [
   {
     slug: "lightscout", no: "01", appStoreId: "6748341779", factPrefix: "Live on the App Store",
-    note: "Golden hour is the sun between 4° below the horizon and 6° above it, as the LightScout app defines it, worked out for each guide’s coordinates. Photographs are never graded.",
+    note: "Golden hour is worked out for each guide’s coordinates. Photographs are never graded.",
     site: { href: "https://www.lightscout.app", label: "Visit LightScout" },
     still: { src: "/stage/img/icons/lightscout.png", alt: "LightScout app icon" },
     tokens: { bg: "#0c0a08", fg: "#f3f4ec", dim: "#b9b4a8", accent: "#f59e0b", font: '"Instrument Serif"', titleStyle: "font-style:italic;font-weight:400;letter-spacing:-.02em" },

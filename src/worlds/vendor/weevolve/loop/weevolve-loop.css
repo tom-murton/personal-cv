@@ -10,8 +10,9 @@
   --wel-work: #1e5f8a;
   --wel-life: #27774a;
   --wel-play: #bf4124;
-  --wel-display: inherit;
-  --wel-sans: inherit;
+  /* real family lists, so the font shorthands below stay valid on a bare mount; hosts override */
+  --wel-display: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  --wel-sans: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
   --wel-quiet: .26;
   --wel-r-m: 14px;
   --wel-icon-r: 22.5%;
@@ -41,6 +42,9 @@
 .wel-legend { margin: 0 0 .5rem; font: 500 min(1rem, 4.5cqw)/2.5 var(--wel-sans); white-space: nowrap; }
 .wel-word { display: inline-flex; align-items: center; min-height: 34px; padding: 0 .7em; margin: 0 -.02em 0 .1em; line-height: 1; border: 2px solid var(--b); border-radius: 999px; color: var(--b); font-weight: 700; text-decoration: none; transition: background .2s, color .2s, border-color .2s; }
 .wel-word:hover { background: var(--b); color: #fff; }
+.wel-word { position: relative; }
+.wel-word::before { content: ""; position: absolute; left: -2px; right: -2px; top: 50%; height: 46px; transform: translateY(-50%); } /* a 44 px hit target; the pill keeps its look */
+.wel .wel-hit { fill: transparent !important; stroke: none !important; pointer-events: all; } /* larger hit regions for pills and the seed */
 .wel[data-flooded] .wel-word { border-color: var(--wel-fg); color: var(--wel-fg); background: none; }
 .wel[data-flooded] .wel-word[aria-pressed="true"] { background: var(--wel-accent); border-color: var(--wel-accent); color: var(--wel-bg); }
 

@@ -681,10 +681,15 @@ export function mount(element, options = {}) {
   function settle() {
     win.clearTimeout(settleTimer); win.cancelAnimationFrame(walk);
     if (reduced) { pitch = PITCH.rest; render(false); return; }
-    const from = pitch, t0 = win.performance.now();
+    const from = pitch;
+    let elapsed = 0, prev = win.performance.now();
+    // The walk back keeps to the same rules as the loop: it stops while paused (play() resumes it
+    // from wherever it is) and waits, without advancing, while the sheet is off screen or hidden.
     const step = (now) => {
-      if (mode !== 'drive') return;
-      const k = Math.min((now - t0) / WALK_MS, 1), eased = 1 - (1 - k) ** 3;
+      if (mode !== 'drive' || paused) return;
+      if (!onScreen || doc.hidden) { prev = now; walk = win.requestAnimationFrame(step); return; }
+      elapsed += Math.min(now - prev, 100); prev = now;
+      const k = Math.min(elapsed / WALK_MS, 1), eased = 1 - (1 - k) ** 3;
       const next = Math.round((from + (PITCH.rest - from) * eased) * 2) / 2;
       if (next !== pitch) { pitch = next; render(false); }
       if (k < 1) walk = win.requestAnimationFrame(step); else if (!paused) startLoop(LOOP.drawn); else render(false);
@@ -700,6 +705,7 @@ export function mount(element, options = {}) {
       if (!e.target.closest('[data-grip]')) return;
       e.preventDefault();
       svg.setPointerCapture(e.pointerId);
+      sheet.pointer = e.pointerId;
       offset = yOf(e) - sheet.ridge[pitches.indexOf(pitch)][1];   // keep the ridge under the finger where it was taken hold of
       svg.classList.add('is-held');
       drive(pitch);
@@ -710,16 +716,22 @@ export function mount(element, options = {}) {
       let best = 0; for (let i = 1; i < pitches.length; i += 1) if (Math.abs(sheet.ridge[i][1] - y) < Math.abs(sheet.ridge[best][1] - y)) best = i;
       drive(pitches[best]);
     }, { signal });
-    const end = () => { if (offset === null) return; offset = null; svg.classList.remove('is-held'); release(); };
+    const end = () => { if (offset === null) return; offset = null; sheet.pointer = null; svg.classList.remove('is-held'); release(); };
     svg.addEventListener('pointerup', end, { signal });
     svg.addEventListener('pointercancel', end, { signal });
+    svg.addEventListener('lostpointercapture', end, { signal });
     svg.addEventListener('touchstart', (e) => { if (e.target.closest('[data-grip]')) e.preventDefault(); }, { passive: false, signal });
   }
   slider.hidden = false;
   slider.addEventListener('input', () => { drive(Number(slider.value)); release(); }, { signal });
   slider.addEventListener('focus', () => win.clearTimeout(settleTimer), { signal });
   slider.addEventListener('blur', () => { if (mode === 'drive') release(); }, { signal });
-  reset.addEventListener('click', settle, { signal });
+  // "Back to 35°" always works: while paused it jumps to the worked example and stays paused.
+  reset.addEventListener('click', () => {
+    if (!paused) { settle(); return; }
+    win.clearTimeout(settleTimer); win.cancelAnimationFrame(walk);
+    pitch = PITCH.rest; render(false);
+  }, { signal });
 
   // Hover and focus only: point at a figure and its dimension lights on the drawing.
   function probe(key, on) {
@@ -753,14 +765,20 @@ export function mount(element, options = {}) {
       const k = Math.min(1, Math.max(0, Number(fraction) || 0));
       win.clearTimeout(settleTimer); win.cancelAnimationFrame(walk);
       if (mode !== 'loop') { mode = 'loop'; pitch = PITCH.rest; render(true); }
-      tau = k * LOOP.cycle; setT(progress(tau)); ensureClock();
+      tau = k * LOOP.cycle; setT(progress(tau));
+      if (!reduced) ensureClock();           // under reduced motion the frame is set once and nothing runs
     },
     /** Light one dimension (run, rise, trueLength, overallLength, plumbCut, seatCut, span, pitch). */
     probe,
     destroy() {
       listen.abort(); observer.disconnect();
       win.cancelAnimationFrame(raf); win.cancelAnimationFrame(walk); win.clearTimeout(settleTimer); raf = 0;
-      for (const sheet of sheets) sheet.grip.remove();
+      probe(null, false);
+      for (const sheet of sheets) {
+        if (sheet.pointer != null && sheet.svg.hasPointerCapture?.(sheet.pointer)) sheet.svg.releasePointerCapture(sheet.pointer);
+        sheet.svg.classList.remove('is-held');
+        sheet.grip.remove();
+      }
       clearT(); link?.remove();
       pauseBtn.hidden = true; slider.hidden = true; reset.hidden = true;
     },

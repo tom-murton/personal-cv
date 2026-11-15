@@ -1,211 +1,199 @@
 {
-  "cutroof": {
-    "repository": "git@github.com:tom-murton/cutroof.git",
-    "worktree": "redesign-cutroof",
-    "branch": "redesign/cutroof-2026-11",
-    "copied": "2026-11-15T01:54+00:00",
-    "files": [
-      {
-        "path": "site/loop/cutroof-loop.js",
-        "copiedTo": "loop/cutroof-loop.js",
-        "sha256": "c2b426398c473622265260c097635f7dcf6663a7741c957080e1edf65ad8e5f2",
-        "commit": "a268384b7fa767e52e6ddef47d224856206f1712",
-        "state": "committed"
-      },
-      {
-        "path": "site/loop/cutroof-loop.css",
-        "copiedTo": "loop/cutroof-loop.css",
-        "sha256": "9eb27a0c6ff7d3ba6496d3b394b7ffc7015f332b12eb1e614c0f03d53688b9c7",
-        "commit": "a268384b7fa767e52e6ddef47d224856206f1712",
-        "state": "committed"
-      }
-    ]
-  },
-  "patbook": {
-    "repository": "git@github.com:tom-murton/patbook-site.git",
-    "worktree": "redesign-patbook",
-    "branch": "redesign/patbook-2026-11",
-    "copied": "2026-11-15T01:54+00:00",
-    "files": [
-      {
-        "path": "site/loop/patbook-loop.js",
-        "copiedTo": "loop/patbook-loop.js",
-        "sha256": "ce626a1da5ef4619b1ac7bb290cc5f8442ed9c68dbfe6bdc5e8fd6e2754a1546",
-        "commit": "5734cc7c9d6395915408b071be8618dd78600b6c",
-        "state": "committed"
-      },
-      {
-        "path": "site/loop/patbook-loop.css",
-        "copiedTo": "loop/patbook-loop.css",
-        "sha256": "146c22484d548e30f2fa306e637f63dfdc6e3766c1a0916166a7bfa054fa9d13",
-        "commit": "3d886e5026b4a11982e5967dfec7bf4e3fded4d0",
-        "state": "committed"
-      },
-      {
-        "path": "site/assets/certificate-pb-0003.webp",
-        "copiedTo": "assets/certificate-pb-0003.webp",
-        "sha256": "31c0975fbfaaea781ecde72d3a0c04a69de6eca5fa89ede499c3712ffbfe77a4",
-        "commit": "3d886e5026b4a11982e5967dfec7bf4e3fded4d0",
-        "state": "committed"
-      }
-    ]
-  },
-  "restrise": {
-    "repository": "git@github.com:tom-murton/restrise-site.git",
-    "worktree": "redesign-restrise",
-    "branch": "redesign/restrise-2026-11",
-    "copied": "2026-11-15T01:54+00:00",
-    "files": [
-      {
-        "path": "public/loop/restrise-loop.js",
-        "copiedTo": "loop/restrise-loop.js",
-        "sha256": "65eca2d071e56ffdf233c017a3cd8e547f49b5670ffb1f1632562ddc2cfd97ea",
-        "commit": "21f579c9f7b7c351cc7982186a181a875b276903",
-        "state": "committed"
-      },
-      {
-        "path": "public/loop/restrise-loop.css",
-        "copiedTo": "loop/restrise-loop.css",
-        "sha256": "365e746178d9924c1c6d4635aedbdb3502d070b2dd4735ecd34a4787c2966757",
-        "commit": "21f579c9f7b7c351cc7982186a181a875b276903",
-        "state": "committed"
-      },
-      {
-        "path": "public/app/first-routine.webp",
-        "copiedTo": "app/first-routine.webp",
-        "sha256": "5d00e729ceb8bfbdfb0fe6ca3d1245ae1dd702a97204821634732e2df3314006",
-        "commit": "7eba084af21b3744edfbb2ebce8b2dcb6fd17ea1",
-        "state": "committed"
-      },
-      {
-        "path": "public/app/rest-checklist.webp",
-        "copiedTo": "app/rest-checklist.webp",
-        "sha256": "7b53669af7c6cbd123a277a5d9fa5be8284bf1a95a53928806aa6c2cc2ef6e00",
-        "commit": "7eba084af21b3744edfbb2ebce8b2dcb6fd17ea1",
-        "state": "committed"
-      },
-      {
-        "path": "public/app/session-summary.webp",
-        "copiedTo": "app/session-summary.webp",
-        "sha256": "ac708fa9e2508cf5eeb25113d59e1f961ea53a596c051c71dd12f39e5740f00e",
-        "commit": "7eba084af21b3744edfbb2ebce8b2dcb6fd17ea1",
-        "state": "committed"
-      },
-      {
-        "path": "public/app/guided.webp",
-        "copiedTo": "app/guided.webp",
-        "sha256": "a73a839b175bad38be02324707578ea3465e243502a5bdf18d49a659d8ec9c23",
-        "commit": "7eba084af21b3744edfbb2ebce8b2dcb6fd17ea1",
-        "state": "committed"
-      }
-    ]
-  },
   "tachoclear": {
     "repository": "https://github.com/tom-murton/TachoClear.git",
-    "worktree": "redesign-tachoclear",
-    "branch": "redesign/tachoclear-2026-11",
-    "copied": "2026-11-15T01:54+00:00",
+    "ref": "main",
+    "commit": "ca185c0477f5730a01b6349ccf2a2168e08f8f4a",
+    "copied": "2026-11-15T02:51+00:00",
+    "method": "git show <commit>:<path>",
     "files": [
       {
         "path": "site/loop/tachoclear-loop.js",
         "copiedTo": "loop/tachoclear-loop.js",
         "sha256": "2be55ed5885d4b8fe59e451f692ee7d6e1fa80d9ca96f6af68dd281d7edd6b5b",
-        "commit": "754e7ff9eb163f2234a6f4a18b3af203e844d662",
-        "state": "committed"
+        "lastChangedIn": "754e7ff9eb163f2234a6f4a18b3af203e844d662"
       },
       {
         "path": "site/loop/tachoclear-loop.css",
         "copiedTo": "loop/tachoclear-loop.css",
         "sha256": "2fcab24502838c7bb54f885dcdbd80f2bf9e5227f176933ffffa48c443353465",
-        "commit": "754e7ff9eb163f2234a6f4a18b3af203e844d662",
-        "state": "committed"
+        "lastChangedIn": "754e7ff9eb163f2234a6f4a18b3af203e844d662"
       }
     ]
   },
-  "weevolve": {
-    "repository": "git@github.com:tom-murton/weevolve-site.git",
-    "worktree": "redesign-weevolve-publisher",
-    "branch": "wip/weevolve-publisher-2026-11",
-    "copied": "2026-11-15T01:54+00:00",
+  "cutroof": {
+    "repository": "git@github.com:tom-murton/cutroof.git",
+    "ref": "main",
+    "commit": "bf1d87fe5f981c1a3b84b16b7db149113c0b43bc",
+    "copied": "2026-11-15T02:51+00:00",
+    "method": "git show <commit>:<path>",
     "files": [
       {
-        "path": "src/loop/weevolve-loop.js",
-        "copiedTo": "loop/weevolve-loop.js",
-        "sha256": "44fd1ea389607a6670eaa17a3b978d4c3b5ffb4336bada8910e49e3085c420f2",
-        "commit": "185158d9a396eb12b46385e513cc18363a0f827e",
-        "state": "committed"
+        "path": "site/loop/cutroof-loop.js",
+        "copiedTo": "loop/cutroof-loop.js",
+        "sha256": "9ac8261effc94478ebebdddae791139aba0d4d69f34f34d5c49cb72f424da738",
+        "lastChangedIn": "8de5e1e8a0a7125d6f7f031880fbf839de4ec230"
       },
       {
-        "path": "src/loop/weevolve-loop.css",
-        "copiedTo": "loop/weevolve-loop.css",
-        "sha256": "7b086e9a2cc4c2f83e3e9c78d3d466e1e5d093e0761e47cbf18a892e12873a54",
-        "commit": "185158d9a396eb12b46385e513cc18363a0f827e",
-        "state": "committed"
+        "path": "site/loop/cutroof-loop.css",
+        "copiedTo": "loop/cutroof-loop.css",
+        "sha256": "9eb27a0c6ff7d3ba6496d3b394b7ffc7015f332b12eb1e614c0f03d53688b9c7",
+        "lastChangedIn": "a268384b7fa767e52e6ddef47d224856206f1712"
+      }
+    ]
+  },
+  "patbook": {
+    "repository": "git@github.com:tom-murton/patbook-site.git",
+    "ref": "main",
+    "commit": "6b9b3393c4f451717db4d453b2b546fa2a4876ce",
+    "copied": "2026-11-15T02:51+00:00",
+    "method": "git show <commit>:<path>",
+    "files": [
+      {
+        "path": "site/loop/patbook-loop.js",
+        "copiedTo": "loop/patbook-loop.js",
+        "sha256": "4835a281721db9196289c38bd813ac1f3a06639947a4afabfc37d892ee86cd9b",
+        "lastChangedIn": "34dbfa07c113141728ca4cdec3387dda8537dc4e"
       },
       {
-        "path": "public/badges/app-store.svg",
-        "copiedTo": "badges/app-store.svg",
-        "sha256": "a26fc5b38380272c92e9019a2eb8b45542a66814b3e2b203772db8904b9fb99f",
-        "commit": "e8149fae570ac8c93fcf9b655b6a92895e848277",
-        "state": "committed"
+        "path": "site/loop/patbook-loop.css",
+        "copiedTo": "loop/patbook-loop.css",
+        "sha256": "e8338788d7b87b52345548d8e085fb6a54f6d7e1a7ac24e2d084e3829a952782",
+        "lastChangedIn": "34dbfa07c113141728ca4cdec3387dda8537dc4e"
       },
       {
-        "path": "public/badges/google-play.svg",
-        "copiedTo": "badges/google-play.svg",
-        "sha256": "4ffa4c7edd2f10b297ca4de2131eddaa00d03b2278d1e178fe512920d824ca34",
-        "commit": "e8149fae570ac8c93fcf9b655b6a92895e848277",
-        "state": "committed"
+        "path": "site/assets/certificate-pb-0003.webp",
+        "copiedTo": "assets/certificate-pb-0003.webp",
+        "sha256": "31c0975fbfaaea781ecde72d3a0c04a69de6eca5fa89ede499c3712ffbfe77a4",
+        "lastChangedIn": "3d886e5026b4a11982e5967dfec7bf4e3fded4d0"
+      }
+    ]
+  },
+  "restrise": {
+    "repository": "git@github.com:tom-murton/restrise-site.git",
+    "ref": "main",
+    "commit": "a2482583f43372539571e95d3fa7487892f45deb",
+    "copied": "2026-11-15T02:51+00:00",
+    "method": "git show <commit>:<path>",
+    "files": [
+      {
+        "path": "public/loop/restrise-loop.js",
+        "copiedTo": "loop/restrise-loop.js",
+        "sha256": "65eca2d071e56ffdf233c017a3cd8e547f49b5670ffb1f1632562ddc2cfd97ea",
+        "lastChangedIn": "21f579c9f7b7c351cc7982186a181a875b276903"
+      },
+      {
+        "path": "public/loop/restrise-loop.css",
+        "copiedTo": "loop/restrise-loop.css",
+        "sha256": "365e746178d9924c1c6d4635aedbdb3502d070b2dd4735ecd34a4787c2966757",
+        "lastChangedIn": "21f579c9f7b7c351cc7982186a181a875b276903"
+      },
+      {
+        "path": "public/app/first-routine.webp",
+        "copiedTo": "app/first-routine.webp",
+        "sha256": "5d00e729ceb8bfbdfb0fe6ca3d1245ae1dd702a97204821634732e2df3314006",
+        "lastChangedIn": "7eba084af21b3744edfbb2ebce8b2dcb6fd17ea1"
+      },
+      {
+        "path": "public/app/rest-checklist.webp",
+        "copiedTo": "app/rest-checklist.webp",
+        "sha256": "7b53669af7c6cbd123a277a5d9fa5be8284bf1a95a53928806aa6c2cc2ef6e00",
+        "lastChangedIn": "7eba084af21b3744edfbb2ebce8b2dcb6fd17ea1"
+      },
+      {
+        "path": "public/app/session-summary.webp",
+        "copiedTo": "app/session-summary.webp",
+        "sha256": "ac708fa9e2508cf5eeb25113d59e1f961ea53a596c051c71dd12f39e5740f00e",
+        "lastChangedIn": "7eba084af21b3744edfbb2ebce8b2dcb6fd17ea1"
+      },
+      {
+        "path": "public/app/guided.webp",
+        "copiedTo": "app/guided.webp",
+        "sha256": "a73a839b175bad38be02324707578ea3465e243502a5bdf18d49a659d8ec9c23",
+        "lastChangedIn": "7eba084af21b3744edfbb2ebce8b2dcb6fd17ea1"
       }
     ]
   },
   "lightscout": {
     "repository": "git@github.com:tom-murton/Lightscout-site.git",
-    "worktree": "redesign-lightscout",
-    "branch": "redesign/lightscout-2026-11",
-    "copied": "2026-11-15T02:04+00:00",
+    "ref": "main",
+    "commit": "c3d889077a9628898ae7b481ebdae762ea63687b",
+    "copied": "2026-11-15T02:51+00:00",
+    "method": "git show <commit>:<path>",
     "files": [
       {
         "path": "public/loop/lightscout-loop.js",
         "copiedTo": "loop/lightscout-loop.js",
-        "sha256": "d7a3091a2b8237e3ea0aca0e6c08166ade460c5a4fd69c53975af5c5cdc36f76",
-        "commit": "9c9be76edbed45639826cfafd8ff1e4671e3025d",
-        "state": "committed"
+        "sha256": "c87396a628b6c13c703d12554c9698afe19dda1b039b5ba59bb1926ebf43cae5",
+        "lastChangedIn": "b62c20206712288b286ad1dfc930428817943dd4"
       },
       {
         "path": "public/loop/lightscout-loop.css",
         "copiedTo": "loop/lightscout-loop.css",
         "sha256": "dddab03da50348f2fa94b9c1b51aa10acdcf9518408a3de3ac7b767ea3cd5bc9",
-        "commit": "9c9be76edbed45639826cfafd8ff1e4671e3025d",
-        "state": "committed"
+        "lastChangedIn": "9c9be76edbed45639826cfafd8ff1e4671e3025d"
       },
       {
-        "path": "public/landing.html (the .place links passed to mount())",
+        "path": "public/landing.html (the .place links its homepage passes to mount())",
         "copiedTo": "places.json",
-        "sha256": "56d7824183cb97d81e18fb8dfe2e538fb37d8b9fb79fa0f5311be1157d25a6e1",
-        "commit": "9c9be76edbed45639826cfafd8ff1e4671e3025d",
-        "state": "derived: data attributes extracted, relative URLs made absolute to https://www.lightscout.app"
+        "sha256": "b3941ea14dcb4067e3001a9576fc8dba93782512afab5352ebc9321807095b30",
+        "lastChangedIn": "8a10f5cfdd7b61d62f0a07ffc2e2e2fd7be5bd56",
+        "derived": "data attributes extracted; relative URLs made absolute to https://www.lightscout.app"
       }
     ]
   },
   "levelbest": {
     "repository": "git@github.com:tom-murton/weevolve-site.git",
-    "worktree": "redesign-weevolve-site",
-    "branch": "redesign/levelbest-2026-11",
-    "copied": "2026-11-15T02:04+00:00",
+    "ref": "redesign/levelbest-2026-11",
+    "commit": "a38c174fbfa4f786a6651b6b59229e34802a0493",
+    "pullRequest": "tom-murton/weevolve-site#76",
+    "copied": "2026-11-15T02:51+00:00",
+    "method": "git show <commit>:<path>",
     "files": [
       {
         "path": "src/loop/levelbest-loop.js",
         "copiedTo": "loop/levelbest-loop.js",
-        "sha256": "e0b09e734b3cb2d5ffaee1ae4b718d0871de9c01d58d8436b2edef7717d7272e",
-        "commit": null,
-        "state": "untracked working copy"
+        "sha256": "d6892263d3920739975f30bb34a83278d02a4cb11c4bed67d7f672e220e71a3e",
+        "lastChangedIn": "a38c174fbfa4f786a6651b6b59229e34802a0493"
       },
       {
         "path": "src/loop/levelbest-loop.css",
         "copiedTo": "loop/levelbest-loop.css",
-        "sha256": "de5cc9ce076a211e6c4632638a98a4f4a53c270a092f1a434396790a8dbb6ffc",
-        "commit": null,
-        "state": "untracked working copy"
+        "sha256": "31465c6f1540504c2538a61b6df47f2f15c464f4a5a3c6a3c9a3808ba2f41d7b",
+        "lastChangedIn": "9f75c9d7b47f3da4c7c36503148d3389c66b78e2"
+      }
+    ]
+  },
+  "weevolve": {
+    "repository": "git@github.com:tom-murton/weevolve-site.git",
+    "ref": "redesign/weevolve-2026-11",
+    "commit": "3ebe4c09e7ef92d302931b3a1a1de03d9738d8d8",
+    "pullRequest": "tom-murton/weevolve-site#77",
+    "copied": "2026-11-15T02:51+00:00",
+    "method": "git show <commit>:<path>",
+    "files": [
+      {
+        "path": "src/loop/weevolve-loop.js",
+        "copiedTo": "loop/weevolve-loop.js",
+        "sha256": "0c11208fadbd25f52d1e70ac5fffa7dad5be1a56696dc3786279123c16470334",
+        "lastChangedIn": "3ebe4c09e7ef92d302931b3a1a1de03d9738d8d8"
+      },
+      {
+        "path": "src/loop/weevolve-loop.css",
+        "copiedTo": "loop/weevolve-loop.css",
+        "sha256": "df85f9ac099258f4b2b4ff3fbcb699997f4f9f010de9d125b0f2767c4c91faba",
+        "lastChangedIn": "3ebe4c09e7ef92d302931b3a1a1de03d9738d8d8"
+      },
+      {
+        "path": "public/badges/app-store.svg",
+        "copiedTo": "badges/app-store.svg",
+        "sha256": "a26fc5b38380272c92e9019a2eb8b45542a66814b3e2b203772db8904b9fb99f",
+        "lastChangedIn": "e8149fae570ac8c93fcf9b655b6a92895e848277"
+      },
+      {
+        "path": "public/badges/google-play.svg",
+        "copiedTo": "badges/google-play.svg",
+        "sha256": "4ffa4c7edd2f10b297ca4de2131eddaa00d03b2278d1e178fe512920d824ca34",
+        "lastChangedIn": "e8149fae570ac8c93fcf9b655b6a92895e848277"
       }
     ]
   }

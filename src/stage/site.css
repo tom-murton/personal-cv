@@ -99,8 +99,7 @@ html.js .title .still{display:none}
 .module-box{position:absolute;left:42%;top:calc(var(--bar) + 2%);width:55%;height:calc(71% - var(--bar));overflow:hidden}
 .module-fit{position:absolute;left:50%;top:50%;transform-origin:50% 50%}
 /* Host sizing for sibling modules that take their size from the page around them (see build-report.md). */
-.module-root .tcl-ring{position:relative;width:100%;aspect-ratio:1}
-.module-root .tcl-verdict,.module-root .tcl-clocks{display:none}
+.module-root.tc-loop .tcl-verdict,.module-root.tc-loop .tcl-clocks{display:none}
 html.js .dot{position:fixed;left:0;top:0;z-index:4;display:grid;place-items:center;will-change:transform;cursor:grab;touch-action:none;color:#fff;font:800 12px/1 var(--sans);letter-spacing:.06em;white-space:nowrap;overflow:visible;user-select:none;-webkit-user-select:none}
 .dot::after{content:"";position:absolute;inset:-14px;border-radius:50%}
 .dot:active{cursor:grabbing}

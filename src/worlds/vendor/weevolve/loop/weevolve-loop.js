@@ -124,8 +124,12 @@ function treeSvg(t, branchWorlds) {
   const twigs = t.leaves.filter((l) => l.twig).map((l) => `<path class="wel-draw wel-bough" data-branch="${l.branch}" pathLength="1" d="${l.twig}" style="--d:${l.delay - 40}ms;--dur:200ms"/>`).join("");
   const boughs = t.boughs.map((b) => `<path class="wel-draw wel-bough" data-branch="${b.id}" pathLength="1" d="${b.d}" style="--d:${b.delay}ms;--dur:${b.dur}ms"/>`).join("");
   const buds = t.boughs.map((b) => `<circle class="wel-bud" data-branch="${b.id}" cx="${b.bud.x}" cy="${b.bud.y}" r="${b.bud.r}" style="--from:${b.bud.from}px;--d:${b.bud.delay}ms;--dur:${b.bud.dur}ms"/>`).join("");
-  const pills = t.boughs.map((b) => `<g class="wel-pill" data-branch="${b.id}" ${branchWorlds[b.id] ? worldAttrs(branchWorlds[b.id]) : ""} style="--d:${b.pill.delay}ms"><rect x="${b.pill.x - b.pill.w / 2}" y="${b.pill.y - b.pill.h / 2}" width="${b.pill.w}" height="${b.pill.h}" rx="${b.pill.h / 2}"/><text x="${b.pill.x}" y="${b.pill.y}" dy=".36em" text-anchor="middle" font-size="${t.pillFont}">${esc(b.label.toUpperCase())}</text></g>`).join("");
-  const root = `<g class="wel-root"><circle cx="${t.root.x}" cy="${t.root.y}" r="${t.root.r}"/><g transform="translate(${t.root.x - 18 * k} ${t.root.y - 18 * k}) scale(${0.9 * k})"><path d="${GLYPH}"/></g></g>`;
+  // Hit regions are in view-box units; size them for the narrowest width each geometry renders at
+  // (wide: 700 px for 1200 units; stacked: 280 px for 358 units, a 320 px phone less its gutters) so they stay at least 44 px.
+  const hitScale = t.mode === "wide" ? 700 / t.W : 280 / t.W;
+  const hitH = Math.ceil(44 / hitScale), hitR = Math.ceil(22 / hitScale);
+  const pills = t.boughs.map((b) => `<g class="wel-pill" data-branch="${b.id}" ${branchWorlds[b.id] ? worldAttrs(branchWorlds[b.id]) : ""} style="--d:${b.pill.delay}ms"><rect class="wel-hit" x="${b.pill.x - b.pill.w / 2 - 8}" y="${b.pill.y - hitH / 2}" width="${b.pill.w + 16}" height="${hitH}"/><rect x="${b.pill.x - b.pill.w / 2}" y="${b.pill.y - b.pill.h / 2}" width="${b.pill.w}" height="${b.pill.h}" rx="${b.pill.h / 2}"/><text x="${b.pill.x}" y="${b.pill.y}" dy=".36em" text-anchor="middle" font-size="${t.pillFont}">${esc(b.label.toUpperCase())}</text></g>`).join("");
+  const root = `<g class="wel-root"><circle class="wel-hit" cx="${t.root.x}" cy="${t.root.y}" r="${Math.max(t.root.r, hitR)}"/><circle cx="${t.root.x}" cy="${t.root.y}" r="${t.root.r}"/><g transform="translate(${t.root.x - 18 * k} ${t.root.y - 18 * k}) scale(${0.9 * k})"><path d="${GLYPH}"/></g></g>`;
   return `<svg class="wel-lines wel-lines--${t.mode}" viewBox="0 0 ${t.W} ${t.H}" style="--sw:${t.stroke}" aria-hidden="true" focusable="false">${rings}<path class="wel-draw wel-trunk" pathLength="1" d="${t.trunk.d}" style="--d:${t.trunk.delay}ms;--dur:${t.trunk.dur}ms"/>${boughs}${twigs}${buds}${pills}${root}</svg>`;
 }
 
@@ -212,7 +216,8 @@ export function mount(root, options = {}) {
   const still = matchMedia("(prefers-reduced-motion: reduce)");
   const supported = "clipPath" in root.style;
   let state = { bough: null, leaf: null };
-  let pinned = false, lastLeaf = null, hoverTimer = 0, top = 0;
+  let pinned = false, lastLeaf = null, hoverTimer = 0, top = 0, restoring = false;
+  const restore = (el) => { restoring = true; el.focus(); restoring = false; }; // closing returns to paper, not a preview
   let sweeping = options.autoplay !== false && !still.matches; // the timeline drives the boughs until someone takes over
   let playing = true, raf = 0, t = 0, clockAt = 0, visible = true, wasPlaying = false;
   const cleanups = [];
@@ -278,6 +283,15 @@ export function mount(root, options = {}) {
       anims.forEach((a) => { a.pause(); a.currentTime = t; });
       if (playing) anims.forEach(resume);
     }
+  }
+  /** Bring every growth animation (including ones just created when the other geometry is
+   * displayed) to the current time and play state, so a resize never regrows the tree. */
+  function sync() {
+    const known = new Set(anims);
+    const now = root.getAnimations({ subtree: true }).filter((a) => "animationName" in a);
+    if (playing && raf) t = Math.min(time.duration, performance.now() - clockAt);
+    now.filter((a) => !known.has(a)).forEach((a) => { a.currentTime = t; if (playing) resume(a); else a.pause(); });
+    anims = [...anims.filter((a) => a.playState !== "idle"), ...now.filter((a) => !known.has(a))];
   }
   function resume(a) {
     const end = a.effect?.getComputedTiming().endTime ?? 0;
@@ -357,7 +371,7 @@ export function mount(root, options = {}) {
       } else if (e.target.closest(".wel-card__close") || e.target.closest(".wel-root") || !e.target.closest("a,button,.wel-card")) {
         const back = state.leaf && lastLeaf;
         rest();
-        if (back && e.target.closest(".wel-card__close")) back.focus();
+        if (back && e.target.closest(".wel-card__close")) restore(back);
       }
     });
     on(root, "keydown", (e) => {
@@ -365,8 +379,11 @@ export function mount(root, options = {}) {
         const back = state.leaf && lastLeaf;
         interrupt();
         rest();
-        if (back) back.focus();
+        if (back) restore(back);
       }
+      // the legend words are buttons: Space activates them, as Enter does, instead of scrolling
+      const word = e.target.closest(".wel-word");
+      if (word && (e.key === " " || e.key === "Spacebar")) { e.preventDefault(); if (!e.repeat) word.click(); }
     });
     // pointer preview: resting on a leaf, a pill or a legend word brings that bough forward
     on(root, "pointerover", (e) => {
@@ -383,7 +400,7 @@ export function mount(root, options = {}) {
     });
     on(root, "focusin", (e) => {
       const el = e.target.closest(".wel-leaf,.wel-word");
-      if (state.leaf) return;
+      if (state.leaf || restoring) return;
       interrupt();
       if (el) set(el.dataset.bough || el.dataset.branch, null, centre(el)); // keyboard focus previews, and replaces a pinned bough
       else if (!e.target.closest(".wel-card")) rest();
@@ -396,6 +413,17 @@ export function mount(root, options = {}) {
     });
     words.forEach((w) => { w.setAttribute("role", "button"); w.setAttribute("aria-pressed", "false"); });
     leafEls.forEach((l) => l.setAttribute("aria-controls", card.id));
+  }
+
+  // crossing 760 px of container width displays the other line layer, whose animations are new
+  if ("ResizeObserver" in window) {
+    let wide = getComputedStyle(root.querySelector(".wel-lines--wide")).display !== "none";
+    const ro = new ResizeObserver(() => {
+      const now = getComputedStyle(root.querySelector(".wel-lines--wide")).display !== "none";
+      if (now !== wide) { wide = now; sync(); }
+    });
+    ro.observe(root);
+    cleanups.push(() => ro.disconnect());
   }
 
   // paused when off screen

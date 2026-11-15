@@ -1,8 +1,10 @@
 # Fonts
 
-All self-hosted, all SIL Open Font License 1.1. Licence texts sit beside the files where the design
-mocks supplied them; the three marked * were copied from the LightScout and TachoClear mocks without a
-licence file and still need theirs added from the upstream repositories.
+All self-hosted, all SIL Open Font License 1.1, each with its licence text beside it. The three marked *
+came from the LightScout and TachoClear mocks; their licences were taken from the upstream repositories:
+`InstrumentSerif-OFL.txt` (Instrument/instrument-serif), `InstrumentSans-OFL.txt` (Instrument/instrument-sans),
+`Overpass-OFL.txt` (RedHatOfficial/Overpass) and
+`B612-OFL.txt` (polarsys/b612).
 
 | File | Family | Use |
 |---|---|---|

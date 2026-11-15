@@ -20,13 +20,13 @@
 .lb-pace,.lb-pace *,.lb-pace *::before,.lb-pace *::after{box-sizing:border-box}
 .lb-pace :where(dl,dt,dd,p,h1,h2,figure){margin:0;padding:0}
 .lb-pace .lb-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;margin:0}
-.lb-pace-in{
+.lb-pace > .lb-pace-in{
   display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"dial stats" "lane lane" "strip strip" "slot slot" "ctrl ctrl";
   column-gap:1rem;align-items:center;padding-block:1rem 1.3rem;
 }
-.lb-pace-in > *{margin-inline:var(--pc-gutter)}
-.lb-pace-in > .lb-dial{margin-right:0}
-.lb-pace-in > .lb-stats{margin-left:0}
+.lb-pace > .lb-pace-in > *{margin-inline:var(--pc-gutter)}
+.lb-pace > .lb-pace-in > .lb-dial{margin-right:0}
+.lb-pace > .lb-pace-in > .lb-stats{margin-left:0}
 /* dial: ring = time to the next beep; numeral = level */
 .lb-pace .lb-dial{grid-area:dial;position:relative;width:clamp(150px,50cqw,214px);aspect-ratio:1;display:grid;place-items:center}
 .lb-pace .lb-dial svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
@@ -34,17 +34,15 @@
 .lb-pace .lb-ring-rail{stroke:var(--pc-rule)}
 .lb-pace .lb-ring-live{stroke:var(--pc-live);stroke-dasharray:calc(var(--q)*1px) 1px;stroke-linecap:butt}
 .lb-pace .lb-dial-label{position:absolute;top:14%;left:0;right:0;text-align:center;font:600 .68rem/1 var(--pc-text);letter-spacing:.3em;text-transform:uppercase;color:var(--pc-dim)}
-.lb-pace .lb-num{font:900 clamp(6.4rem,36cqw,9rem)/.8 var(--pc-display);font-variation-settings:"opsz" 72;font-variant-numeric:tabular-nums;color:var(--pc-live);letter-spacing:-.01em;padding-top:.12em}
+.lb-pace .lb-num{font:900 clamp(6.4rem,36cqw,9rem)/.8 var(--pc-display);font-variant-numeric:tabular-nums;color:var(--pc-live);letter-spacing:-.01em;padding-top:.12em}
 .lb-pace .lb-num.is-two{font-size:clamp(5.6rem,31cqw,7.8rem)}
-.lb-pace .lb-num.is-up{animation:lb-pc-up var(--pc-turn) var(--pc-snap)}
-@keyframes lb-pc-up{0%{transform:translateY(30%) scaleY(.72);opacity:.25}60%{transform:translateY(-3%) scaleY(1.03);opacity:1}100%{transform:none}}
 .lb-pace .lb-stats{grid-area:stats;display:grid;gap:.7rem}
 .lb-pace .lb-stat{display:flex;flex-direction:column-reverse}
-.lb-pace .lb-stat dd{font:800 clamp(1.55rem,8.4cqw,2.5rem)/.9 var(--pc-display);font-variation-settings:"opsz" 72;font-variant-numeric:tabular-nums;letter-spacing:.01em;text-transform:uppercase}
+.lb-pace .lb-stat dd{font:800 clamp(1.55rem,8.4cqw,2.5rem)/.9 var(--pc-display);font-variant-numeric:tabular-nums;letter-spacing:.01em;text-transform:uppercase}
 .lb-pace .lb-stat dd small{font-size:.46em;font-weight:700;color:var(--pc-dim);margin-left:.2em;letter-spacing:.06em}
 .lb-pace .lb-stat dt{font:600 .66rem/1.25 var(--pc-text);letter-spacing:.14em;text-transform:uppercase;color:var(--pc-dim);margin-top:.3rem}
 /* lane: edge to edge */
-.lb-pace-in > .lb-lane{grid-area:lane;position:relative;height:clamp(64px,8cqw,104px);margin:2.4rem clamp(10px,2cqw,28px) 0;border-block:2px solid #f4f5f038}
+.lb-pace > .lb-pace-in > .lb-lane{grid-area:lane;position:relative;height:clamp(64px,8cqw,104px);margin:2.4rem clamp(10px,2cqw,28px) 0;border-block:2px solid #f4f5f038}
 .lb-pace .lb-lane::before{content:"";position:absolute;inset:50% 0 auto 0;border-top:1px dashed #ffffff1c}
 .lb-pace .lb-track{position:absolute;inset:0 auto 0 0;width:calc(var(--len)*100%);transition:width var(--pc-enter) var(--pc-push)}
 .lb-pace .lb-end{position:absolute;top:-9px;bottom:-9px;width:6px;background:var(--pc-live);border-radius:2px;transform:scaleX(calc(1 + 2.4*var(--k)));transform-origin:var(--o)}
@@ -85,13 +83,13 @@
 .lb-pace .lb-indep{font-size:.78rem;color:var(--pc-dim);max-width:46rem;line-height:1.5}
 
 @container (min-width:760px){
-  .lb-pace-in{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"dial slot slot" "lane lane lane" "strip strip stats" "ctrl ctrl ctrl";column-gap:clamp(2rem,5cqw,4.5rem);padding-block:1.6rem 2rem}
-  .lb-pace-in > *{margin-inline:max(var(--pc-gutter),calc((100% - var(--pc-max))/2))}
-  .lb-pace-in > .lb-dial{margin-right:0}
-  .lb-pace-in > .lb-stats{margin-left:0;align-self:start}
-  .lb-pace-in > .lb-strip{margin-right:0}
-  .lb-pace-in > .lb-slot{margin-left:0;margin-top:0}
-  .lb-pace-in > .lb-lane{margin-inline:clamp(10px,2cqw,28px)}
+  .lb-pace > .lb-pace-in{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"dial slot slot" "lane lane lane" "strip strip stats" "ctrl ctrl ctrl";column-gap:clamp(2rem,5cqw,4.5rem);padding-block:1.6rem 2rem}
+  .lb-pace > .lb-pace-in > *{margin-inline:max(var(--pc-gutter),calc((100% - var(--pc-max))/2))}
+  .lb-pace > .lb-pace-in > .lb-dial{margin-right:0}
+  .lb-pace > .lb-pace-in > .lb-stats{margin-left:0;align-self:start}
+  .lb-pace > .lb-pace-in > .lb-strip{margin-right:0}
+  .lb-pace > .lb-pace-in > .lb-slot{margin-left:0;margin-top:0}
+  .lb-pace > .lb-pace-in > .lb-lane{margin-inline:clamp(10px,2cqw,28px)}
   .lb-pace .lb-dial{width:clamp(250px,30cqw,380px)}
   .lb-pace .lb-num{font-size:clamp(11rem,22cqw,17rem)}
   .lb-pace .lb-num.is-two{font-size:clamp(9.4rem,18.6cqw,14.4rem)}

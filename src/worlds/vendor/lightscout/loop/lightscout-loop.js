@@ -245,8 +245,9 @@ export function mount(el, options = {}) {
   const instantAll = reduce || !!options.still
   const narrow = options.narrow || 720
 
+  const lightClass = new Map() /* per-mount cache of each dot's class */
   let tau = 0, featured = null, wipe = 0, gliding = null, raf = 0, alive = true
-  let loopT0 = 0, idleAt = 0, dragging = false, touched = false, seen = true
+  let loopT0 = 0, idleAt = 0, dragging = false, touched = false, seen = true, paused = false
   const timers = new Set()
   const later = (fn, ms) => { const id = win.setTimeout(() => { timers.delete(id); fn() }, ms); timers.add(id); return id }
 
@@ -266,8 +267,8 @@ export function mount(el, options = {}) {
     for (const p of places) {
       const a = altitude(s, p.lat, p.lon)
       const k = 'is-' + lightOf(a)
-      if (p._k !== k) {
-        p._k = k
+      if (lightClass.get(p.slug) !== k) {
+        lightClass.set(p.slug, k)
         const dot = dots.get(p.slug)
         if (dot) dot.setAttribute('class', 'll-city ' + k)
       }
@@ -290,6 +291,8 @@ export function mount(el, options = {}) {
     const mins = Math.round(tau * 6) * 10
     clock.textContent = mins === 0 || mins === 1440 ? 'Now' : '+ ' + formatSpan(mins)
     strip.setAttribute('aria-valuenow', tau.toFixed(1))
+    if (featured && Math.abs(tau - featured.tau) < 0.02) strip.setAttribute('aria-valuetext', featured.text + ': ' + featured.place.name)
+    else strip.setAttribute('aria-valuetext', (clock.textContent === 'Now' ? 'Now' : clock.textContent.replace('+ ', 'In ')) + (lead ? ', in golden hour: ' + lead.name : ''))
   }
 
   const link = (text, url) => { const a = doc.createElement('a'); a.textContent = text; a.href = url; return a }
@@ -299,14 +302,14 @@ export function mount(el, options = {}) {
   function feature(p, minsFromNow, instant) {
     const text = whenText(minsFromNow, p.lowSun)
     const id = ++wipe
-    featured = { place: p, tau }
+    featured = { place: p, tau, text }
     const src = photoSrc(p)
     function words() {
       whenEl.textContent = text
       whereEl.textContent = p.country && p.country !== p.name ? '· ' + p.country : ''
       nameEl.textContent = p.name
       cityLink.href = p.href
-      strip.setAttribute('aria-valuetext', text + ': ' + p.name)
+      if (featured && featured.place === p && Math.abs(tau - featured.tau) < 0.02) strip.setAttribute('aria-valuetext', text + ': ' + p.name)
       capPlace.textContent = (p.country && p.country !== p.name ? p.name + ', ' + p.country : p.name) + (p.lowSun && p.light ? ' · ' + p.light : '')
       capCredit.textContent = 'Photo '
       capCredit.appendChild(p.photo.creditUrl ? link(p.photo.credit, p.photo.creditUrl) : doc.createTextNode(p.photo.credit))
@@ -316,20 +319,21 @@ export function mount(el, options = {}) {
       }
       capCredit.appendChild(doc.createTextNode(p.photo.tail || ''))
     }
-    if (img.getAttribute('data-slug') === p.slug) { words(); setLock(true); return }
+    if (img.getAttribute('data-slug') === p.slug) { next.classList.remove('is-in'); words(); setLock(true); return } /* a wipe in flight is cancelled */
     const fast = instant || instantAll
     const pre = new win.Image()
     pre.onerror = () => {} /* no photograph: keep the one on screen, with its own words and lock */
     pre.onload = () => {
       if (id !== wipe || !alive) return
       const land = () => {
+        if (id !== wipe || !alive) return
         for (const n of [...(img.parentNode.querySelectorAll('source') || [])]) n.remove()
         img.removeAttribute('srcset')
         img.removeAttribute('sizes')
         img.src = src
         img.alt = p.photo.alt
         img.setAttribute('data-slug', p.slug)
-        const done = () => { if (id !== wipe) return; next.classList.remove('is-in'); setLock(true) }
+        const done = () => { if (id !== wipe || !alive) return; next.classList.remove('is-in'); setLock(true) }
         if (img.decode) img.decode().then(done, done)
         else done()
       }
@@ -384,7 +388,9 @@ export function mount(el, options = {}) {
   function frame(now) {
     raf = 0
     if (!alive) return
-    if (gliding) gliding(now)
+    const showing = seen && !doc.hidden
+    if (gliding && showing && !paused) gliding(now)
+    else if (gliding) { /* hold the glide while off screen or paused; it resumes when shown */ }
     else if (autoplay && !dragging && seen && !doc.hidden) {
       if (touched && now > idleAt) { touched = false; glide(24, () => { home(false); loopT0 = win.performance.now() }) }
       else if (!touched) {
@@ -393,7 +399,7 @@ export function mount(el, options = {}) {
         render(tauAt((now - loopT0) / 1000))
       }
     }
-    if (gliding || (autoplay && seen && !doc.hidden)) raf = win.requestAnimationFrame(frame)
+    if ((gliding && showing && !paused) || (autoplay && showing)) raf = win.requestAnimationFrame(frame)
   }
   const kick = () => { if (!raf && alive) raf = win.requestAnimationFrame(frame) }
   function take(h) { touched = true; idleAt = win.performance.now() + 9000; gliding = null; render(h); kick() }
@@ -468,8 +474,8 @@ export function mount(el, options = {}) {
 
   return {
     duration: LOOP,
-    play() { autoplay = true; touched = false; loopT0 = 0; kick() },
-    pause() { autoplay = false },
+    play() { autoplay = true; paused = false; touched = false; loopT0 = 0; kick() },
+    pause() { autoplay = false; paused = true },
     seek(fraction) {
       const f = Math.min(1, Math.max(0, +fraction || 0))
       loopT0 = win.performance.now() - f * LOOP * 1000

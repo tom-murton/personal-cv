@@ -2,7 +2,7 @@
 // Published unchanged at https://levelbest.weevolve.app/loop/levelbest-loop.js (and .css).
 //
 //   import { mount } from './levelbest-loop.js';
-//   const pace = mount(element, options);   // { play, pause, seek(0..1), destroy, duration, pick, climb }
+//   const pace = mount(element, options);   // { play, pause, seek(0..1), destroy, duration (ms), pick, climb }
 //
 // It renders into `element` (or enhances markup already rendered by `markup()`), scopes every
 // query to that element, loads no fonts and touches nothing outside it. Silent: no audio.
@@ -24,6 +24,7 @@ export const PROTOCOLS = {
 const K = 12;      // climb: 12x time-lapse, one length per level
 const REST = 1.1;  // hold on level 21 after the climb, seconds
 const DONE = 1.2;  // pause after a picked level finishes, seconds
+const TURN = .32;  // numeral arrival, seconds
 const C = PROTOCOLS[20];
 const T0 = [];
 let T = 0;
@@ -73,16 +74,16 @@ const triple = since => since < .45 && Math.floor(since / .09) % 2 === 0 ? 1 : 0
 function climbAt(t) {
   const flip = Math.abs(Math.floor(t / DURATION)) % 2 === 1;  // 21 lengths is odd: each pass starts from the line the last one ended on
   t = ((t % DURATION) + DURATION) % DURATION;
-  if (t >= T) { const k = triple(t - T); return { pr: 20, i: 20, x: 1, out: !flip, a: k, b: k, done: 21 }; }
+  if (t >= T) { const k = triple(t - T); return { pr: 20, i: 20, x: 1, out: !flip, a: k, b: k, done: 21, since: t - T0[20] }; }
   let i = 20; while (t < T0[i]) i--;
   const x = (t - T0[i]) / (C.s[i] / K), out = (i % 2 === 0) !== flip, k = i ? tick(t - T0[i]) : 0;
-  return { pr: 20, i, x, out, a: out ? k : 0, b: out ? 0 : k, done: i };
+  return { pr: 20, i, x, out, a: out ? k : 0, b: out ? 0 : k, done: i, since: t - T0[i] };
 }
 function holdAt(pr, i, t) {  // real time, one level, every shuttle of it
   const d = PROTOCOLS[pr].s[i], n = PROTOCOLS[pr].n[i], end = n * d;
-  if (t >= end) { const k = triple(t - end); return { pr, i, x: 1, out: n % 2 === 1, a: k, b: k, done: n, over: t - end }; }
+  if (t >= end) { const k = triple(t - end); return { pr, i, x: 1, out: n % 2 === 1, a: k, b: k, done: n, over: t - end, since: t }; }
   const m = Math.floor(t / d), x = (t - m * d) / d, out = m % 2 === 0, k = m ? tick(t - m * d) : 0;
-  return { pr, i, x, out, a: out ? k : 0, b: out ? 0 : k, done: m };
+  return { pr, i, x, out, a: out ? k : 0, b: out ? 0 : k, done: m, since: t };
 }
 
 /**
@@ -105,10 +106,20 @@ export function mount(el, options = {}) {
   const frame = () => mode === 'hold' ? holdAt(pr, lvl, clock) : climbAt(clock);
   const link = (href, text) => `<a href="${esc(href)}">${esc(text)}</a>`;
 
+  // The numeral's arrival, also a pure function of time: 320 ms from each level change.
+  let turned = true;
+  function turn(since) {
+    if (since >= TURN) { if (!turned) { num.style.transform = ''; num.style.opacity = ''; turned = true; } return; }
+    turned = false;
+    const u = Math.max(0, since) / TURN, a = u < .6 ? u / .6 : (u - .6) / .4, e = 1 - (1 - a) ** 3;
+    const [y, sy, o] = u < .6 ? [30 + (-3 - 30) * e, .72 + (1.03 - .72) * e, .25 + .75 * e] : [-3 + 3 * e, 1.03 - .03 * e, 1];
+    num.style.transform = `translateY(${y.toFixed(2)}%) scaleY(${sy.toFixed(3)})`; num.style.opacity = o.toFixed(3);
+  }
   function paint(f) {
     const p = f.out ? ease(f.x) : 1 - ease(f.x), s = lane.style, D = PROTOCOLS[f.pr];
     s.setProperty('--p', p.toFixed(4)); s.setProperty('--dir', f.out ? 1 : -1);
     s.setProperty('--tr', Math.min(1, f.x * 3).toFixed(3));
+    turn(still ? 1 : f.since);
     el.style.setProperty('--q', f.x.toFixed(4)); el.style.setProperty('--a', f.a.toFixed(2)); el.style.setProperty('--b', f.b.toFixed(2));
     cur = f.i;
     const head = [mode, f.pr, f.i].join(), k = head + ',' + f.done;
@@ -126,18 +137,18 @@ export function mount(el, options = {}) {
     [...bars.children].forEach((c, j) => { c.classList.toggle('is-on', j === f.i); c.classList.toggle('is-done', j < f.i); });
     range.max = D.s.length; range.value = f.i + 1; $('capmax').textContent = D.s.length;
     range.setAttribute('aria-valuetext', `Level ${f.i + 1} on ${D.m} m: ${D.v[f.i].toFixed(1)} km/h, ${D.s[f.i].toFixed(2)} seconds per shuttle`);
-    if (running) { num.classList.remove('is-up'); void num.offsetWidth; num.classList.add('is-up'); }
   }
   function talk(preset) {
     const D = PROTOCOLS[pr], s = D.s[lvl].toFixed(2), n = D.n[lvl], chart = D.m === 15 ? links.chart15 : links.chart20;
+    const line = text => esc(still ? text.replace(/^Real time\. /, '') : text);  // a still does not run in real time
     sayEl.innerHTML = mode === 'climb'
       ? `${esc(say.climb())} ${link(links.chart20, say.chartLink(20))}`
       : preset === 'police'
-        ? `${esc(say.police({ s }))} ${link(links.police, say.policeLink)}`
-        : `${esc(say.level({ level: lvl + 1, m: D.m, s, n }))} ${link(chart, say.chartLink(D.m))}`;
+        ? `${line(say.police({ s }))} ${link(links.police, say.policeLink)}`
+        : `${line(say.level({ level: lvl + 1, m: D.m, s, n }))} ${link(chart, say.chartLink(D.m))}`;
     $('climb').setAttribute('aria-pressed', String(mode === 'climb'));
     $('police').setAttribute('aria-pressed', String(preset === 'police'));
-    $('cap').textContent = mode === 'climb' ? (still ? 'Pick a level' : 'Drag to pick a level') : `${D.m} m · real time`;
+    $('cap').textContent = mode === 'climb' ? (still ? 'Pick a level' : 'Drag to pick a level') : (still ? `${D.m} m` : `${D.m} m · real time`);
   }
   function pick(proto, level, shuttle = 0, preset) {  // direct manipulation lands here
     mode = 'hold'; pr = PROTOCOLS[proto] ? proto : 20;
@@ -147,7 +158,7 @@ export function mount(el, options = {}) {
   function climb() { mode = 'climb'; pr = 20; lvl = 0; flag = 0; clock = 0; key = ''; talk(); paint(frame()); }
   function loop(now) {
     if (!running) return;
-    clock += Math.min(.1, (now - last) / 1000); last = now;
+    clock += Math.max(0, (now - last) / 1000); last = now;  // real elapsed time; a resume resets `last`
     const f = frame();
     if (f.over > DONE) climb(); else paint(f);  // one full level in real time, then back to the climb
     raf = requestAnimationFrame(loop);
@@ -202,7 +213,8 @@ export function mount(el, options = {}) {
   }
 
   const handle = {
-    duration: DURATION,
+    /** One pass of the climb in milliseconds (11 000), matching the publisher world module. */
+    duration: Math.round(DURATION * 1000),
     play() { paused = false; toggle.textContent = 'Pause'; toggle.setAttribute('aria-pressed', 'false'); sync(); },
     pause() { paused = true; toggle.textContent = 'Play'; toggle.setAttribute('aria-pressed', 'true'); sync(); },
     /** Jump the climb to a fraction (0 to 1) of one pass. */

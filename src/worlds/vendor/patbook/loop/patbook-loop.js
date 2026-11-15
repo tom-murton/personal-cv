@@ -57,14 +57,14 @@ export function markup(options) {
     '<li><button type="button" data-seek="4900">Pass</button></li>' +
     '<li><button type="button" data-seek="6280">Row</button></li>' +
     '<li><button type="button" data-seek="8700">Certificate</button></li>' +
+    '<li><button type="button" class="pl-pause">Pause</button></li>' +
     '</ol>' +
     '<p class="pl-hint"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 16V3M3.5 8.5L9 3l5.5 5.5" fill="none" stroke="currentColor" stroke-width="2"/></svg><span class="pl-hint-text">Press the label to stamp it</span></p>' +
     '</div>' +
     '<p class="pl-vh" id="' + say + '" role="status" aria-live="polite"></p>';
 }
 
-export function mount(element, options) {
-  options = options || {};
+function build(element, options) {
   var injected = false, original = element.innerHTML, hadClass = element.classList.contains("patloop");
   element.classList.add("patloop");
   if (!element.querySelector(".pl-stage")) { element.innerHTML = markup(options); injected = true; }
@@ -75,7 +75,8 @@ export function mount(element, options) {
       die = q(".pl-die"), cert = q(".pl-cert"), certImg = cert.querySelector("img"),
       hl = q(".pl-hl"), roll = q(".pl-roll"), scan = q(".pl-scan"), say = q("[role=status]"),
       ui = q(".pl-ui"), steps = q(".pl-steps"), hint = q(".pl-hint-text"),
-      stepBtns = [].slice.call(element.querySelectorAll(".pl-steps button")),
+      pauseBtn = q(".pl-pause"),
+      stepBtns = [].slice.call(element.querySelectorAll(".pl-steps button[data-seek]")),
       prints = [].slice.call(stage.querySelectorAll("[data-p]")).map(function (el) {
         var p = el.getAttribute("data-p").split(","); return { el: el, a: +p[0], b: +p[1], n: el.textContent.length };
       });
@@ -112,6 +113,14 @@ export function mount(element, options) {
 
   var t = 0, last = 0, raf = 0, onScreen = true, holdUntil = 0, driven = false, pressing = false;
   var frozen = freezeAt != null || options.autoplay === false, W = 1, dead = false;
+  /* Pause / Play: pausing holds the current frame; steps still seek (and stay paused); pressing the label stamps and plays on. */
+  function setPaused(p) {
+    frozen = p;
+    if (p && raf) { cancelAnimationFrame(raf); raf = 0; }
+    pauseBtn.textContent = p ? "Play" : "Pause";
+    pauseBtn.setAttribute("aria-label", p ? "Play the label loop" : "Pause the label loop");
+    if (!p) wake();
+  }
   var STEP_STARTS = [0, 1000, 2300, 3900, 5100, 6300];
   function c01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
   function seg(a, b) { return c01((t - a) / (b - a)); }
@@ -191,7 +200,7 @@ export function mount(element, options) {
   function stamp() {
     if (t < 3900) { t = 3900; driven = true; say.textContent = "Label BW-002 stamped PASS and added to certificate PB-0003."; if (options.onStamp) options.onStamp(); }
     else { t = 0; driven = false; say.textContent = "Next label: BW-002, ready to scan."; }
-    holdUntil = 0; frozen = false; render(); wake();
+    holdUntil = 0; render(); setPaused(false);
   }
 
   /* Mouse: the stamp follows the button (down = stamp, held = stays down). Touch and keyboard stamp on
@@ -203,7 +212,8 @@ export function mount(element, options) {
   on(label, "pointerleave", function () { pressing = false; });
   on(label, "pointercancel", function () { pressing = false; viaMouse = false; });
   on(label, "click", function () { if (viaMouse) { viaMouse = false; return; } stamp(); });
-  stepBtns.forEach(function (b) { on(b, "click", function () { frozen = false; seekMs(+b.getAttribute("data-seek"), 2600); }); });
+  on(pauseBtn, "click", function () { setPaused(!frozen); });
+  stepBtns.forEach(function (b) { on(b, "click", function () { seekMs(+b.getAttribute("data-seek"), frozen ? 0 : 2600); }); });
 
   var io = null, ro = null;
   if ("IntersectionObserver" in window) {
@@ -228,14 +238,37 @@ export function mount(element, options) {
 
   if (freezeAt != null) t = ((freezeAt % T) + T) % T;
   render();
-  if (!frozen) wake();
+  setPaused(frozen);
 
   return {
     duration: T,
-    play: function () { frozen = false; wake(); },
-    pause: function () { frozen = true; if (raf) { cancelAnimationFrame(raf); raf = 0; } },
+    play: function () { setPaused(false); },
+    pause: function () { setPaused(true); },
     /* fraction 0 to 1 through the loop: the frame is drawn at once; a playing loop carries on from there, a paused one stays put */
     seek: function (fraction) { t = c01(fraction) * (T - 1); driven = false; holdUntil = 0; render(); wake(); },
     destroy: teardown
+  };
+}
+
+/* mount(element, options): the public entry. When options.reducedMotion is not given, the page's
+   prefers-reduced-motion setting is followed live: switching it on settles on the composed still,
+   switching it off starts the loop again. */
+export function mount(element, options) {
+  options = options || {};
+  var inner = build(element, options), mql = null, onChange = null;
+  if (options.reducedMotion == null && window.matchMedia) {
+    mql = matchMedia("(prefers-reduced-motion: reduce)");
+    onChange = function () { inner.destroy(); inner = build(element, options); };
+    if (mql.addEventListener) mql.addEventListener("change", onChange); else mql.addListener(onChange);
+  }
+  return {
+    get duration() { return inner.duration; },
+    play: function () { inner.play(); },
+    pause: function () { inner.pause(); },
+    seek: function (f) { inner.seek(f); },
+    destroy: function () {
+      if (mql) { if (mql.removeEventListener) mql.removeEventListener("change", onChange); else mql.removeListener(onChange); mql = null; }
+      inner.destroy();
+    }
   };
 }

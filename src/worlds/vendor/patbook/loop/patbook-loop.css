@@ -61,9 +61,10 @@
 /* the ticker and hint under the stage (shown only when the script runs) */
 .patloop .pl-ui { display: none; margin-top: .7em; }
 .patloop .pl-ui.pl-on { display: block; }
-.patloop .pl-steps { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(6, auto); justify-content: space-between; border-block: 1px solid var(--pl-ink); }
+.patloop .pl-steps { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(7, auto); justify-content: space-between; border-block: 1px solid var(--pl-ink); }
 .patloop .pl-steps[hidden] { display: none; }
 .patloop .pl-steps button { all: unset; box-sizing: border-box; cursor: pointer; min-height: 30px; padding: .2em .35em; display: inline-flex; align-items: center; font: 500 .625em/1 var(--pl-mono); font-stretch: 80%; letter-spacing: .05em; text-transform: uppercase; color: var(--pl-mute); }
+.patloop .pl-steps li:last-child { border-left: 1px solid var(--pl-ink); }
 .patloop .pl-steps button:hover { color: var(--pl-ink); text-decoration: underline; }
 .patloop .pl-steps button:focus-visible { outline: 3px solid var(--pl-ink); outline-offset: -3px; }
 .patloop .pl-steps button[aria-current="step"] { background: var(--pl-ink); color: #fff; }
