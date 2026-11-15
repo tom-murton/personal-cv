@@ -16,3 +16,5 @@ licence file and still need theirs added from the upstream repositories.
 | routed-gothic.ttf | Routed Gothic | CutRoof |
 | archivo-var.woff2 | Archivo | PAT Logbook |
 | martian-mono-var.woff2 | Martian Mono | PAT Logbook |
+| InstrumentSerif-normal-400.woff2 *, InstrumentSans-normal-400-700.woff2 * | Instrument Serif and Sans | LightScout module text |
+| ibm-plex-mono-latin-400/500.woff2 | IBM Plex Mono (IBM-PLEX-OFL.txt) | CutRoof module labels |

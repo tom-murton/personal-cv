@@ -61,7 +61,8 @@ const dur = (w) => (w.handle.duration || 10000) / 1000;
 
 function drawDot(p) {
   const w = Math.max(2, Math.min(p.w, innerWidth)), h = Math.max(2, Math.min(p.h, innerHeight));
-  p.x = clamp(p.x, w / 2, innerWidth - w / 2); p.y = clamp(p.y, h / 2, innerHeight - h / 2);
+  const a = (p.rot || 0) * Math.PI / 180, ex = (Math.abs(w * Math.cos(a)) + Math.abs(h * Math.sin(a))) / 2, ey = (Math.abs(w * Math.sin(a)) + Math.abs(h * Math.cos(a))) / 2;
+  p.x = clamp(p.x, Math.min(ex, innerWidth / 2), Math.max(innerWidth - ex, innerWidth / 2)); p.y = clamp(p.y, Math.min(ey, innerHeight / 2), Math.max(innerHeight - ey, innerHeight / 2));
   dotEl.style.width = w + 'px'; dotEl.style.height = h + 'px';
   dotEl.style.transform = 'translate3d(' + (p.x - w / 2) + 'px,' + (p.y - h / 2) + 'px,0) rotate(' + (p.rot || 0) + 'deg)';
   dotEl.style.borderRadius = ((p.br == null ? 1 : p.br) * Math.min(w, h) / 2) + 'px';
@@ -176,7 +177,7 @@ function frame(now) {
       if (touring && !dragging && !paused && cur.lap >= dwell(cur)) {
         const i = ORDER.indexOf(cur.id);
         if (i === ORDER.length - 1) { firstLap = false; go('orbit', { silent: true }); } else go(ORDER[i + 1], { silent: true });
-      } else if (canTour && !touring && !sheet && now - lastInput > 30000) { touring = true; cur.lap = 0; cur.owned = false; }
+      } else if (canTour && !touring && !sheet && now - lastInput > 30000) { touring = true; cur.lap = 0; if (cur.owned) { cur.owned = false; cur.handle.pause(); } }
       if (touring && cur.lap > 1) { const i = ORDER.indexOf(cur.id); load(ORDER[(i + 1) % ORDER.length]).catch(() => {}); }
     }
     if (pose) drawDot(pose);
@@ -189,7 +190,7 @@ function took() { touring = false; lastInput = performance.now(); taken = true; 
 
 /* ---------- sheets: writing, a story, talks, about ---------- */
 function inertBehind(on) {
-  d.querySelectorAll('.bar, .index, #title, .made, .skip').forEach((el) => { el.inert = on; });
+  d.querySelectorAll('.bar, .index, #title, .made, .skip, .stage').forEach((el) => { el.inert = on; });
   d.querySelectorAll('.sheet').forEach((el) => { if (el !== sheet) el.inert = on; else el.inert = false; });
 }
 async function storySheet(id) {
@@ -230,9 +231,9 @@ async function openSheet(id, opts = {}) {
 }
 function closeSheet(opts = {}) {
   if (!sheet) return;
-  sheetSeq++; inertBehind(false);
+  sheetSeq++; seq++; inertBehind(false);
   sheet.classList.remove('is-open'); sheet = null; root.classList.remove('sheet-open');
-  if (cur) { trans = { from: pose, start: performance.now(), dur: 700 }; if (RM) { trans = null; redraw(); } }
+  if (cur) { trans = { from: pose, start: performance.now(), dur: 700 }; if (RM) { trans = null; redraw(); native(); } }
   if (opts.record !== false) record(true); else d.title = docTitle();
   const back = sheetOpener && d.contains(sheetOpener) && sheetOpener.getClientRects().length ? sheetOpener : d.querySelector('.index .row[aria-current="true"]');
   if (back && back.focus) back.focus({ preventScroll: true });
@@ -281,13 +282,14 @@ d.addEventListener('keydown', (e) => {
 });
 let sw = null;
 stage.addEventListener('pointerdown', (e) => {
-  sw = { x: e.clientX, y: e.clientY };
-  // Touching a sibling module hands its time to the visitor: the stage stops seeking it until the tour resumes.
-  if (cur && cur.handle.native && cur.layer.contains(e.target)) { took(); cur.owned = true; }
+  const inModule = Boolean(e.target.closest && e.target.closest('.module-root'));
+  sw = { x: e.clientX, y: e.clientY, inModule };
+  // Touching a sibling module hands its time to the visitor: the stage stops seeking it and lets it run itself.
+  if (cur && cur.handle.native && inModule) { took(); if (!cur.owned) { cur.owned = true; cur.handle.play(); } }
 });
 stage.addEventListener('pointerup', (e) => {
-  if (!sw) return; const dx = e.clientX - sw.x, dy = e.clientY - sw.y; sw = null;
-  if (cur && cur.owned) return;
+  if (!sw) return; const dx = e.clientX - sw.x, dy = e.clientY - sw.y, inModule = sw.inModule; sw = null;
+  if (inModule) return;              // a drag on a module's own control is not a swipe
   if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.4) { took(); step(dx < 0 ? 1 : -1); }
 });
 dotEl.addEventListener('pointerdown', (e) => {

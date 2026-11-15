@@ -54,7 +54,8 @@ export async function refresh(data) {
   // Headline (home only: other pages keep their own title block until the visitor goes home).
   const title = d.getElementById('title');
   const tpl = d.getElementById('home-title');
-  const showingHome = title && !title.hasAttribute('data-sub') && (!d.body.dataset.world || d.body.dataset.world === 'orbit') && location.pathname === '/';
+  // The visible title block is the home one when it carries the headline's accent and the stage is at home.
+  const showingHome = title && title.querySelector('.h1 em') && (!d.body.dataset.world || d.body.dataset.world === 'orbit');
   for (const scope of [tpl ? tpl.content : null, showingHome ? title : null]) {
     if (!scope) continue;
     setText(scope.querySelector('.eyebrow'), m.hero.eyebrow); setText(scope.querySelector('.lede'), m.hero.intro);

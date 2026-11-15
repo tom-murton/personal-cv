@@ -255,7 +255,7 @@ ${bar(c)}
   ${index(c)}
   <p class="made mono">${esc(madeLine)}</p>
   ${others}
-  <div class="stage" aria-hidden="true" style="background:${tokens.bg}"></div>
+  <div class="stage" style="background:${tokens.bg}"></div>
   <div class="dot" id="dot" aria-hidden="true"></div>
   <p class="vh" id="announce" aria-live="polite"></p>
 </main>
